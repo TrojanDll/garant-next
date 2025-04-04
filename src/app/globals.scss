@@ -1,0 +1,63 @@
+:root {
+  --font-family: "Geometria", sans-serif;
+  --second-family: "SONGER SemiExpanded", sans-serif;
+
+  --blue: #3233f3;
+  --dark-grey: #1c1c1f;
+  --light-grey: #eaedf1;
+  --grey: #828181;
+  --red: #f90d0d;
+  --fpink: #ffdcdc;
+  --fred2: #ff4343;
+  --green: #26b719;
+  --orange: #e3ab1a;
+  --medium-grey: #828181;
+  --light-pink: #ffeded;
+  --white: #fff;
+  --dark-blue: #2323b0;
+  --light-grey-2: #dcdcdc;
+  --grey-3: #666;
+  --dark-green: #19b75b;
+  --light-blue: #98a7fa;
+  --light-pink: #ff4375;
+  --prozrachnyy-grey: rgba(130, 129, 129, 0.7);
+}
+
+@font-face {
+  font-family: "Geometria";
+  src: url("/fonts/Geometria-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geometria";
+  src: url("/fonts/Geometria-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geometria";
+  src: url("/fonts/Geometria-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SONGER SemiExpanded";
+  src: url("/fonts/SONGER_SE_Medium.otf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SONGER SemiExpanded";
+  src: url("/fonts/SONGER_SE_Regular.otf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+body {
+  font-family: var(--font-family);
+}
