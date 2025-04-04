@@ -18,11 +18,11 @@ const Header = () => {
       <ContentContainer>
         <Substrate>
           <div className={styles.wrapper}>
-            <Link href={PAGES.HOME}>
-              <SvgSelector id={ESvgName.LOGO} />
-            </Link>
+            <div className={styles.headerLeft}>
+              <Link href={PAGES.HOME}>
+                <SvgSelector id={ESvgName.LOGO} />
+              </Link>
 
-            <div className={styles.linksWrapper}>
               <ul className={styles.links}>
                 <li>
                   <CustomLink href={PAGES.CALCULATOR} className={styles.link}>
@@ -40,7 +40,9 @@ const Header = () => {
                   </CustomLink>
                 </li>
               </ul>
+            </div>
 
+            <div className={styles.headerRight}>
               <ul className={styles.links}>
                 <li>
                   <CustomLink href={PAGES.CONTACTS} className={styles.link}>
@@ -53,12 +55,12 @@ const Header = () => {
                   </CustomLink>
                 </li>
               </ul>
-            </div>
 
-            <Button type="dashboard" isLink={true} href={PAGES.DASHBOARD}>
-              <SvgSelector id={ESvgName.PROFILE} />
-              Личный кабинет
-            </Button>
+              <Button type="dashboard" isLink={true} href={PAGES.DASHBOARD}>
+                <SvgSelector id={ESvgName.PROFILE} />
+                Личный кабинет
+              </Button>
+            </div>
           </div>
         </Substrate>
       </ContentContainer>
