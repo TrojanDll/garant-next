@@ -1,5 +1,18 @@
 .header {
   margin-top: 45px;
+  position: relative;
+  overflow-y: hidden;
+  z-index: 101;
+}
+
+.root {
+  position: relative;
+  z-index: 101;
+}
+
+.substrate {
+  position: relative;
+  z-index: 101;
 }
 
 .wrapper {
@@ -7,6 +20,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  overflow-y: hidden;
+  z-index: 101;
 }
 
 .headerLeft,
@@ -28,8 +43,39 @@
   column-gap: 32px;
 }
 
+@media (max-width: 1349px) {
+  .dashboardText {
+    display: none;
+  }
+}
+
 @media (max-width: 1149px) {
   .header {
     margin-top: 25px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .links {
+    column-gap: 16px;
+  }
+}
+
+@media (max-width: 1149px) {
+  .dashboardButtonDesktop {
+    display: none;
+  }
+
+  .links {
+    display: none;
+  }
+
+  .logo {
+    width: 150px;
+    height: 31px;
+  }
+
+  .wrapper {
+    padding: 20px 30px;
   }
 }

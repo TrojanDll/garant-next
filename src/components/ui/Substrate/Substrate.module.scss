@@ -11,3 +11,9 @@
 .full {
   width: 100%;
 }
+
+@media (max-width: 1149px) {
+  .substrate {
+    border-radius: 15px;
+  }
+}

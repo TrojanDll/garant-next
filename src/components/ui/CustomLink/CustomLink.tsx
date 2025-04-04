@@ -5,11 +5,12 @@ import styles from "./CustomLink.module.scss";
 interface IProps {
   href: string;
   className?: string;
+  onClick?: () => void
 }
 
-const CustomLink = ({ children, href, className }: PropsWithChildren<IProps>) => {
+const CustomLink = ({ children, href, className, onClick}: PropsWithChildren<IProps>) => {
   return (
-    <Link className={`${className ? className : ""} ${styles.link}`} href={href}>
+    <Link onClick={onClick} className={`${className ? className : ""} ${styles.link}`} href={href}>
       {children}
     </Link>
   );

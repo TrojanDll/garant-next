@@ -11,6 +11,7 @@ interface IProps {
   onClickEvent?: () => void;
   isLink?: boolean;
   href?: string;
+  className?: string
 }
 
 const Button = ({
@@ -21,16 +22,17 @@ const Button = ({
   onClickEvent,
   isLink,
   href,
+  className
 }: PropsWithChildren<IProps>) => {
   const classNames = `${styles.button} ${style ? styles[style] : ""} ${type ? styles[type] : ""}`;
 
   const content =
     isLink && href ? (
-      <Link className={classNames} href={href}>
+      <Link className={`${classNames} ${className}`} href={href}>
         {children}
       </Link>
     ) : (
-      <button className={classNames} onClick={onClickEvent ? onClickEvent : () => {}}>
+      <button className={`${classNames} ${className}`} onClick={onClickEvent ? onClickEvent : () => {}}>
         {children}
       </button>
     );

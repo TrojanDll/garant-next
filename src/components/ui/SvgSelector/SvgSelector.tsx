@@ -7,9 +7,10 @@ interface IProps {
   id: ESvgName;
   width?: string;
   height?: string;
+  className?: string;
 }
 
-const SvgSelector = ({ id, width, height }: IProps) => {
+const SvgSelector = ({ id, width, height, className }: IProps) => {
   switch (id) {
     case ESvgName.LOGO:
       return (
@@ -19,6 +20,7 @@ const SvgSelector = ({ id, width, height }: IProps) => {
           viewBox="0 0 196 41"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          className={`${className ? className : ""}`}
         >
           <path
             d="M33.785 5.99711H43.2237V3.80921H31.5876V19.7039H33.785V5.99711Z"
@@ -141,6 +143,7 @@ const SvgSelector = ({ id, width, height }: IProps) => {
           viewBox="0 0 20 21"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          className={`${className ? className : ""}`}
         >
           <path
             fillRule="evenodd"
