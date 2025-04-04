@@ -1,4 +1,5 @@
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
+import CalculatorPromo from "@/components/widgets/CalculatorPromo/CalculatorPromo";
 import DiscountBanner from "@/components/widgets/DiscountBanner/DiscountBanner";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <div>
       <ContentContainer>
         <DiscountBanner />
+        <CalculatorPromo />
       </ContentContainer>
     </div>
   );
