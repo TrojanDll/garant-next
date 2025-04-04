@@ -83,3 +83,71 @@
   right: 331px;
   top: -39px;
 }
+
+@media (max-width: 1349px) {
+  .title {
+    font-weight: 400;
+    font-size: 26px;
+  }
+
+  .subTitle {
+    font-size: 17px;
+  }
+
+  .descr {
+    font-size: 14px;
+  }
+
+  .promocode {
+    font-size: 17px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 7px;
+  }
+}
+
+@media (max-width: 1149px) {
+  .wrapper {
+    margin-top: 20px;
+  }
+
+  .substrate {
+    display: block;
+    padding: 29px 23px;
+  }
+
+  .descr {
+    max-width: 154px;
+    margin-top: 21px;
+  }
+
+  .discountValue {
+    right: 17px;
+    top: unset;
+    bottom: -33px;
+    width: 90px;
+    height: 90px;
+    font-weight: 400;
+    font-size: 27px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.13), 0 3px 14px 0 rgba(0, 0, 0, 0.04),
+      0 8px 32px 0 rgba(0, 0, 0, 0.05), 0 30px 84px 0 rgba(0, 0, 0, 0.07);
+  }
+}
+
+@media (max-width: 680px) {
+  .bgImage {
+    transform: translateY(-50px);
+  }
+}
+
+@media (max-width: 680px) {
+  .bgImage {
+    transform: translateY(-50px);
+  }
+}
+
+@media (max-width: 360px) {
+  .bgImage {
+    transform: translateY(0);
+  }
+}
