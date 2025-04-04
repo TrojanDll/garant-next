@@ -1,0 +1,25 @@
+.button,
+.default {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 13px;
+  border-radius: 22px;
+  padding: 20px 35px;
+  background-color: var(--blue);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 128%;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: var(--white);
+  width: fit-content;
+
+  &:hover {
+    background-color: var(--dark-blue);
+  }
+}
+
+.dashboard {
+  padding: 18px 25px;
+}

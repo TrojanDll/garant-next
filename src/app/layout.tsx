@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.scss";
 import { SITE_NAME } from "@/constants/seo.constants";
-import Header from "@/components/widgets/Header";
+import Header from "@/components/widgets/Header/Header";
 
 export const metadata: Metadata = {
   title: {

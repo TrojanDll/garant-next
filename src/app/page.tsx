@@ -1,4 +1,4 @@
-import ContentContainer from "@/components/ui/ContentContainer";
+import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
 
 export default function Home() {
   return <div>

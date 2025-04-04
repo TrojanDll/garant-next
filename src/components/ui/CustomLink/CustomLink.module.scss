@@ -1,0 +1,12 @@
+.link {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 125%;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: var(--dark-grey);
+
+  &:hover {
+    color: var(--blue);
+  }
+}
