@@ -1,18 +1,18 @@
 .header {
   margin-top: 45px;
   position: relative;
-  overflow-y: hidden;
-  z-index: 101;
+  // overflow: hidden;
+  z-index: 10;
 }
 
 .root {
   position: relative;
-  z-index: 101;
+  z-index: 10;
 }
 
 .substrate {
   position: relative;
-  z-index: 101;
+  z-index: 10;
 }
 
 .wrapper {
@@ -20,8 +20,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  overflow-y: hidden;
-  z-index: 101;
+  z-index: 10;
 }
 
 .headerLeft,

@@ -1,0 +1,13 @@
+.hamburger {
+  width: 30px;
+  height: 30px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 1149px) {
+  .hamburger {
+    display: flex;
+  }
+}

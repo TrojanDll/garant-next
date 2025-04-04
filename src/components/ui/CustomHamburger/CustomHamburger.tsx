@@ -2,14 +2,29 @@
 
 import { useSidebarStore } from "@/components/entities/DropdownHeader/store";
 import React from "react";
+import SvgSelector from "../SvgSelector/SvgSelector";
+import { ESvgName } from "@/config/svg-ids.config";
 
+import styles from "./CustomHamburger.module.scss"
 
+interface IProps {
+  className?: string;
+}
 
-const CustomHamburger = () => {
+const CustomHamburger = ({ className }: IProps) => {
   const setIsDropdownOpened = useSidebarStore((state) => state.toggleIsOpened);
   const isDropdownOpened = useSidebarStore((state) => state.isOpened);
-  
-  return <button onClick={() => setIsDropdownOpened(!isDropdownOpened)}>ыловмпы</button>;
+
+  return (
+    <button className={`${className} ${styles.hamburger} ${isDropdownOpened ? styles.opened : ""}`} onClick={() => setIsDropdownOpened(!isDropdownOpened)}>
+      {isDropdownOpened ? (
+        <SvgSelector id={ESvgName.CLOSE} />
+      ) : (
+        <SvgSelector id={ESvgName.HAMBURGER} />
+      )}
+      
+    </button>
+  );
 };
 
 export default CustomHamburger;

@@ -17,66 +17,64 @@ import DropdownHeader from "@/components/entities/DropdownHeader/DropdownHeader"
 const Header = () => {
   return (
     <ContentContainer>
-      <div className={styles.root}>
-        <header className={styles.header}>
-          <Substrate className={styles.substrate}>
-            <div className={styles.wrapper}>
-              <div className={styles.headerLeft}>
-                <Link href={PAGES.HOME}>
-                  <SvgSelector className={styles.logo} id={ESvgName.LOGO} />
-                </Link>
+      <header className={styles.header}>
+        <Substrate className={styles.substrate}>
+          <div className={styles.wrapper}>
+            <div className={styles.headerLeft}>
+              <Link href={PAGES.HOME}>
+                <SvgSelector className={styles.logo} id={ESvgName.LOGO} />
+              </Link>
 
-                <ul className={styles.links}>
-                  <li>
-                    <CustomLink href={PAGES.CALCULATOR} className={styles.link}>
-                      Калькулятор стоимости
-                    </CustomLink>
-                  </li>
-                  <li>
-                    <CustomLink href={PAGES.OSAGO} className={styles.link}>
-                      ОСАГО
-                    </CustomLink>
-                  </li>
-                  <li>
-                    <CustomLink href={PAGES.NS} className={styles.link}>
-                      НС
-                    </CustomLink>
-                  </li>
-                </ul>
-              </div>
-
-              <div className={styles.headerRight}>
-                <ul className={styles.links}>
-                  <li>
-                    <CustomLink href={PAGES.CONTACTS} className={styles.link}>
-                      Контакты
-                    </CustomLink>
-                  </li>
-                  <li>
-                    <CustomLink href={PAGES.HELP} className={styles.link}>
-                      Помощь
-                    </CustomLink>
-                  </li>
-                </ul>
-
-                <Button
-                  className={styles.dashboardButtonDesktop}
-                  type="dashboard"
-                  isLink={true}
-                  href={PAGES.DASHBOARD}
-                >
-                  <SvgSelector id={ESvgName.PROFILE} />
-
-                  <div className={styles.dashboardText}>Личный кабинет</div>
-                </Button>
-
-                <CustomHamburger />
-              </div>
+              <ul className={styles.links}>
+                <li>
+                  <CustomLink href={PAGES.CALCULATOR} className={styles.link}>
+                    Калькулятор стоимости
+                  </CustomLink>
+                </li>
+                <li>
+                  <CustomLink href={PAGES.OSAGO} className={styles.link}>
+                    ОСАГО
+                  </CustomLink>
+                </li>
+                <li>
+                  <CustomLink href={PAGES.NS} className={styles.link}>
+                    НС
+                  </CustomLink>
+                </li>
+              </ul>
             </div>
-          </Substrate>
-        </header>
+
+            <div className={styles.headerRight}>
+              <ul className={styles.links}>
+                <li>
+                  <CustomLink href={PAGES.CONTACTS} className={styles.link}>
+                    Контакты
+                  </CustomLink>
+                </li>
+                <li>
+                  <CustomLink href={PAGES.HELP} className={styles.link}>
+                    Помощь
+                  </CustomLink>
+                </li>
+              </ul>
+
+              <Button
+                className={styles.dashboardButtonDesktop}
+                type="dashboard"
+                isLink={true}
+                href={PAGES.DASHBOARD}
+              >
+                <SvgSelector id={ESvgName.PROFILE} />
+
+                <div className={styles.dashboardText}>Личный кабинет</div>
+              </Button>
+
+              <CustomHamburger />
+            </div>
+          </div>
+        </Substrate>
         <DropdownHeader />
-      </div>
+      </header>
     </ContentContainer>
   );
 };

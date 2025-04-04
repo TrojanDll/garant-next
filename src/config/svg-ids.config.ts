@@ -1,4 +1,6 @@
 export enum ESvgName {
   LOGO = "logo",
-  PROFILE = "profile"
+  PROFILE = "profile",
+  HAMBURGER = "hamburger",
+  CLOSE = "close"
 }

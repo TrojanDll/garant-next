@@ -154,6 +154,43 @@ const SvgSelector = ({ id, width, height, className }: IProps) => {
         </svg>
       );
 
+    case ESvgName.HAMBURGER:
+      return (
+        <svg
+          width={width ? width : "30"}
+          height={height ? height : "31"}
+          viewBox="0 0 30 31"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M5.625 8.4668H24.375M5.625 15.3418H24.375M5.625 22.2168H24.375"
+            stroke="black"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
+
+    case ESvgName.CLOSE:
+      return (
+        <svg
+          width={width ? width : "21"}
+          height={height ? height : "21"}
+          viewBox="0 0 21 21"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M19.3128 0.865331C19.714 0.485801 20.3469 0.503382 20.7265 0.904599C21.106 1.30582 21.0884 1.93874 20.6872 2.31827L12.2052 10.3418L20.6872 18.3653C21.0884 18.7449 21.106 19.3778 20.7265 19.779C20.3469 20.1802 19.714 20.1978 19.3128 19.8183L10.75 11.7183L2.1872 19.8183C1.78598 20.1978 1.15306 20.1802 0.773534 19.779C0.394004 19.3778 0.411586 18.7449 0.812802 18.3653L9.29482 10.3418L0.812803 2.31827C0.411586 1.93874 0.394005 1.30582 0.773535 0.904599C1.15306 0.503382 1.78599 0.485801 2.1872 0.865331L10.75 8.96528L19.3128 0.865331Z"
+            fill="black"
+          />
+        </svg>
+      );
+
     default:
       return <svg></svg>;
   }

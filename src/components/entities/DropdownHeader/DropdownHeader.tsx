@@ -7,7 +7,9 @@ import { useSidebarStore } from "./store";
 import styles from "./DropdownHeader.module.scss";
 import CustomLink from "@/components/ui/CustomLink/CustomLink";
 import { PAGES } from "@/config/pages-url.config";
-import { text } from "stream/consumers";
+import Button from "@/components/ui/Button/Button";
+import SvgSelector from "@/components/ui/SvgSelector/SvgSelector";
+import { ESvgName } from "@/config/svg-ids.config";
 
 type TDropdownLinks = {
   href: string;
@@ -54,6 +56,18 @@ const DropdownHeader = () => {
             {dropdownLink.text}
           </CustomLink>
         ))}
+
+        <Button
+          className={styles.dropdownDasboard}
+          type="dashboard"
+          isLink={true}
+          href={PAGES.DASHBOARD}
+          onClickEvent={() => setIsDropdownOpened(false)}
+        >
+          <SvgSelector id={ESvgName.PROFILE} />
+
+          <div>Личный кабинет</div>
+        </Button>
       </div>
     </Substrate>
   );

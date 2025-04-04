@@ -28,7 +28,7 @@ const Button = ({
 
   const content =
     isLink && href ? (
-      <Link className={`${classNames} ${className}`} href={href}>
+      <Link onClick={onClickEvent} className={`${classNames} ${className}`} href={href}>
         {children}
       </Link>
     ) : (
