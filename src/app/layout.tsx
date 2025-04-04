@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import "./globals.scss";
 import { SITE_NAME } from "@/constants/seo.constants";
 import Header from "@/components/widgets/Header/Header";
+
+// import "antd/dist/antd.css";
+import "./globals.scss";
 
 export const metadata: Metadata = {
   title: {
@@ -19,8 +21,9 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body>
-        <Header/>
-        {children}</body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

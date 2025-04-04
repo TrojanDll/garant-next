@@ -1,0 +1,85 @@
+.wrapper {
+  margin-top: 64px;
+  // overflow: hidden;
+  position: relative;
+  border-radius: 25px;
+}
+
+.substrate {
+  position: relative;
+  overflow: hidden;
+  padding: 46px 68px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.bgWrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 25px;
+}
+
+.bgImage {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  transform: translateY(-307px);
+  z-index: -1;
+}
+
+.textWrapper {
+  width: fit-content;
+}
+
+.title {
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 55px;
+  color: var(--blue);
+}
+
+.subTitle {
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 55px;
+  font-size: 36px;
+  color: var(--blue);
+}
+
+.promocode {
+  font-family: var(--second-family);
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 131%;
+  color: var(--white);
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: var(--blue);
+}
+
+.descr {
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--blue);
+  max-width: 242px;
+}
+
+.discountValue {
+  width: 211px;
+  height: 211px;
+  background-color: var(--blue);
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--second-family);
+  font-weight: 400;
+  font-size: 65px;
+  color: var(--white);
+  transform: rotate(-10deg);
+  position: absolute;
+  right: 331px;
+  top: -39px;
+}

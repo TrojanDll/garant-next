@@ -1,4 +1,5 @@
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
+import DiscountBanner from "@/components/widgets/DiscountBanner/DiscountBanner";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
 export default function CalculatorPage() {
   return (
     <ContentContainer>
-      <div>Calculator</div>
+      <DiscountBanner />
     </ContentContainer>
   );
 }

@@ -1,9 +1,12 @@
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
+import DiscountBanner from "@/components/widgets/DiscountBanner/DiscountBanner";
 
 export default function Home() {
-  return <div>
-    <ContentContainer>
-      <h1>Hello world!</h1>
-    </ContentContainer>
-  </div>;
+  return (
+    <div>
+      <ContentContainer>
+        <DiscountBanner />
+      </ContentContainer>
+    </div>
+  );
 }
