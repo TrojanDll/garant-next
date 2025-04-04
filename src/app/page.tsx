@@ -1,6 +1,9 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import ContentContainer from "@/components/ui/ContentContainer";
 
 export default function Home() {
-  return <div>qwerty</div>;
+  return <div>
+    <ContentContainer>
+      <h1>Hello world!</h1>
+    </ContentContainer>
+  </div>;
 }
