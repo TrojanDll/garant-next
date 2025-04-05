@@ -1,16 +1,61 @@
 .tabs {
   :global {
+    .ant-tabs-nav {
+      margin-bottom: 0;
+    }
+
+    .ant-tabs-nav-wrap {
+      border-radius: 22px;
+      padding: 7px;
+      box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.13);
+      background: var(--white);
+      width: fit-content !important;
+      flex: none;
+      height: auto;
+    }
+
     .ant-tabs-ink-bar {
-      height: 20px !important;
+      height: 59px !important;
       z-index: -1;
       background: var(--white);
-      top: 50%;
+      top: 0;
       bottom: unset;
+      border-radius: 17px;
+      background: var(--light-grey);
       // transform: translateY(-50%);
+    }
+
+    .ant-tabs-tab {
+      margin-left: 25px;
+      width: 155px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 59px;
+
+      &:first-child {
+        margin-left: 0;
+      }
     }
 
     .ant-tabs-nav::before {
       display: none;
+    }
+
+    .ant-tabs-tab-btn {
+      font-family: var(--font-family);
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 125%;
+      letter-spacing: 0.01em;
+      text-align: center;
+      color: var(--dark-grey);
+    }
+
+    .ant-tabs-tab-active {
+      & .ant-tabs-tab-btn {
+        color: var(--blue) !important;
+      }
     }
   }
 }
