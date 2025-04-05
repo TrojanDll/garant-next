@@ -7,7 +7,7 @@ import styles from "./Button.module.scss";
 interface IProps {
   backgroundColor?: string;
   style?: "filled" | "outlined";
-  type?: "default" | "wide" | "dashboard";
+  type?: "button" | "submit" | "reset";
   onClickEvent?: () => void;
   isLink?: boolean;
   href?: string;
@@ -24,7 +24,7 @@ const Button = ({
   href,
   className
 }: PropsWithChildren<IProps>) => {
-  const classNames = `${styles.button} ${style ? styles[style] : ""} ${type ? styles[type] : ""}`;
+  const classNames = `${styles.button} ${style ? styles[style] : ""}`;
 
   const content =
     isLink && href ? (
@@ -32,7 +32,7 @@ const Button = ({
         {children}
       </Link>
     ) : (
-      <button className={`${classNames} ${className}`} onClick={onClickEvent ? onClickEvent : () => {}}>
+      <button type={type} className={`${classNames} ${className}`} onClick={onClickEvent ? onClickEvent : () => {}}>
         {children}
       </button>
     );

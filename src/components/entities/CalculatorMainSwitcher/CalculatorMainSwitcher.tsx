@@ -6,17 +6,18 @@ import type { TabsProps } from "antd";
 import Button from "@/components/ui/Button/Button";
 
 import styles from "./CalculatorMainSwitcher.module.scss";
+import CalculatorMainForm from "../CalculatorMainForm/CalculatorMainForm";
 
 const items: TabsProps["items"] = [
   {
     key: "1",
     label: "ОСАГО",
-    children: "Content of Tab Pane 1",
+    children: <CalculatorMainForm variant="osago"/>,
   },
   {
     key: "2",
     label: "НС",
-    children: "Content of Tab Pane 2",
+    children: <CalculatorMainForm variant="ns"/>,
   },
 ];
 
