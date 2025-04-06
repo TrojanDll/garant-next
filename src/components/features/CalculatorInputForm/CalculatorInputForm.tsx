@@ -6,12 +6,6 @@ import styles from "./CalculatorInputForm.module.scss";
 import CustomSelect, { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
 import Button from "@/components/ui/Button/Button";
 
-const options = [
-  { value: "1", label: "Вариант 1" },
-  { value: "2", label: "Вариант 2" },
-  { value: "3", label: "Вариант 3" },
-];
-
 interface IProps {
   setIsCorrectSubmit: (value: boolean) => void;
   selects: ISelectsProps[];

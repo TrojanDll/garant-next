@@ -1,7 +1,9 @@
 "use client";
 
-import Substrate from "@/components/ui/Substrate/Substrate";
 import React, { useState } from "react";
+import Image from "next/image";
+
+import Substrate from "@/components/ui/Substrate/Substrate";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import { ISelectsProps } from "@/components/features/CalculatorInputForm/CalculatorInputForm";
 import CalculatorPolicyPrice from "@/components/features/CalculatorPolicyPrice/CalculatorPolicyPrice";
@@ -122,8 +124,28 @@ const CalculatorMainForm = ({ variant }: IProps) => {
             selects={selectsNSProps}
           />
         )}
-        {isCorrectSubmit && <CalculatorPolicyPrice className={styles.price} policyType={variant} price={1000} />}
+        {isCorrectSubmit && (
+          <CalculatorPolicyPrice className={styles.price} policyType={variant} price={1000} />
+        )}
       </div>
+
+      {variant === "osago" ? (
+        <Image
+          className={styles.image}
+          src="/img/calculator-osago-bg.png"
+          alt=""
+          width={840}
+          height={520}
+        />
+      ) : (
+        <Image
+          className={styles.image}
+          src="/img/calculator-ns-bg.png"
+          alt=""
+          width={840}
+          height={520}
+        />
+      )}
     </Substrate>
   );
 };

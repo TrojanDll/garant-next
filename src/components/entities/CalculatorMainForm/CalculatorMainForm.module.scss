@@ -1,12 +1,21 @@
 .root {
   margin-top: 15px;
   font-size: 16px;
-  padding: 40px;
   font-family: var(--font-family);
+  display: flex;
+  justify-content: space-between;
 }
 
 .formWrapper {
-  max-width: 480px;
+  max-width: 500px;
+  flex-shrink: 0;
+  padding: 40px 20px 40px 40px;
+  width: calc(39%);
+  height: 100%;
+}
+
+.image {
+  width: 61%;
 }
 
 .price {
