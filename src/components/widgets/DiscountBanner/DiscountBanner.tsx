@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const DiscountBanner = () => {
   return (
-    <div className={styles.wrapper}>
+    <section className={styles.wrapper}>
       <div className={styles.bgWrapper}>
         <Image
           className={styles.bgImage}
@@ -28,7 +28,7 @@ const DiscountBanner = () => {
         </div>
       </div>
       <div className={styles.discountValue}>-10%</div>
-    </div>
+    </section>
   );
 };
 

@@ -12,6 +12,14 @@
   width: 100%;
 }
 
+.withLightShadow {
+  box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.13);
+}
+
+.withDeepShadow {
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
 @media (max-width: 1149px) {
   .substrate {
     border-radius: 15px;

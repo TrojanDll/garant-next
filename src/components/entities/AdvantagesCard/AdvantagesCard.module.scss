@@ -1,0 +1,45 @@
+.substrate {
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  column-gap: 15px;
+  max-width: 380px;
+}
+
+.title {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 125%;
+  color: var(--dark-grey);
+}
+
+.descr {
+  margin-top: 5px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 128%;
+  color: var(--dark-grey);
+}
+
+@media (max-width: 1149px) {
+  .substrate {
+    padding: 10px 15px;
+    max-width: 320px;
+  }
+
+  .image {
+    width: 45px;
+    height: 45px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .descr {
+    font-weight: 400;
+    font-size: 14px;
+  }
+}

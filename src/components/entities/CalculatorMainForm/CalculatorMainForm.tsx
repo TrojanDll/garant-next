@@ -110,7 +110,7 @@ const CalculatorMainForm = ({ variant }: IProps) => {
   const [isCorrectSubmit, setIsCorrectSubmit] = useState(false);
 
   return (
-    <Substrate className={styles.root}>
+    <Substrate withShadow="light" className={styles.root}>
       <div className={styles.formWrapper}>
         <CustomTitle className={styles.title}>{titles[variant]}</CustomTitle>
         {variant === "osago" ? (

@@ -19,9 +19,9 @@ const items: TabsProps["items"] = [
 
 const CalculatorPromo = () => {
   return (
-    <div className={styles.root}>
+    <section className={styles.root}>
       <CalculatorMainSwitcher items={items} />
-    </div>
+    </section>
   );
 };
 
