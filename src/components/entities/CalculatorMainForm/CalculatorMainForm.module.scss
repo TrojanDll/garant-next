@@ -4,7 +4,7 @@
   font-family: var(--font-family);
   display: flex;
   justify-content: space-between;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .formWrapper {
@@ -16,6 +16,9 @@
 
 .imageWrapper {
   width: 61%;
+  overflow: hidden;
+  border-bottom-left-radius: 22px;
+  border-bottom-right-radius: 22px;
 }
 
 .image {
@@ -44,6 +47,8 @@
 
   .imageWrapper {
     width: 100%;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
   }
 
   .image {

@@ -1,0 +1,32 @@
+.root {
+  margin-top: 100px;
+}
+
+.reviewsWrapper {
+  margin: 0 auto;
+  margin-top: 52px;
+  width: 100%;
+  max-width: 760px;
+  // transform-origin: 0 0;
+  // transform: scale(1.44); // 1095 / 760 ≈ 1.44
+  height: 1125px;
+  overflow: hidden;
+  position: relative;
+}
+
+.iframe {
+  & .badge {
+    max-width: none;
+  }
+}
+
+@media (max-width: 1149px) {
+  .root {
+    margin-top: 50px;
+  }
+
+  .reviewsWrapper {
+    margin-top: 15px;
+    height: 700px;
+  }
+}
