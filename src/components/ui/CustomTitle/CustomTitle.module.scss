@@ -5,3 +5,9 @@
   line-height: 125%;
   color: var(--dark-grey);
 }
+
+@media (max-width: 1149px) {
+  .title {
+    font-size: 20px;
+  }
+}

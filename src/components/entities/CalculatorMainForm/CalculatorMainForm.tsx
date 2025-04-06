@@ -145,7 +145,6 @@ const CalculatorMainForm = ({ variant }: IProps) => {
             alt=""
             width={840}
             height={520}
-            layout="responsive"
           />
         )}
       </div>

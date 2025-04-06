@@ -12,6 +12,14 @@
   padding: 20px 30px !important;
   background: var(--white);
   bottom: 0 !important;
+  margin: 0 !important;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 128%;
+  letter-spacing: 0.01em;
+  color: var(--dark-grey);
+  cursor: pointer !important;
 }
 
 .control {
@@ -97,27 +105,10 @@
   background: var(--white) !important;
 }
 
-.option {
-  margin: 0 !important;
-  padding: 20px 30px;
-  font-family: var(--font-family);
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 128%;
-  letter-spacing: 0.01em;
-  color: var(--dark-grey);
-  cursor: pointer !important;
-}
-
 .optionFocused {
   color: var(--dark-grey) !important;
   background: var(--light-grey) !important;
 }
-
-// .optionSelected {
-//   background-color: var(--white) !important;
-//   color: var(--dark-blue) !important;
-// }
 
 .menuList {
   margin: 0 !important;
@@ -132,4 +123,54 @@
   line-height: 128%;
   letter-spacing: 0.01em;
   color: var(--dark-grey);
+}
+
+@media (max-width: 1149px) {
+  .label {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 129%;
+  }
+
+  .control {
+    border-radius: 18px !important;
+    padding: 7px 12px !important;
+  }
+
+  .placeholder {
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .indicatorCustomContainer {
+    &::after {
+      width: 14px !important;
+      height: 8px !important;
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-image: url("data:image/svg+xml,%3Csvg width='14' height='8' viewBox='0 0 14 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.83575 7.49987C6.83575 7.4998 6.8357 7.49975 6.83564 7.49974C6.52146 7.43168 6.29984 7.2473 6.07905 7.05354C4.17415 5.37997 2.26624 3.70881 0.357508 2.03861C0.127649 1.83762 -0.0211152 1.60922 0.00244602 1.31711C0.0301168 0.97259 0.227921 0.721591 0.584353 0.580224C0.927087 0.444146 1.25968 0.484537 1.56488 0.675912C1.63831 0.722072 1.70324 0.779773 1.76762 0.836272C3.47553 2.33241 5.18372 3.8283 6.8889 5.32708C6.973 5.40113 7.01629 5.41147 7.10807 5.33069C8.82229 3.82301 10.5412 2.31966 12.2573 0.813672C12.5628 0.545604 12.9132 0.430202 13.3359 0.553778C13.6343 0.641051 13.8348 0.822087 13.9452 1.0803C13.9782 1.15729 14 1.24799 14 1.33175V1.45282C14 1.50658 13.9925 1.5605 13.9709 1.60972C13.8555 1.87285 13.6203 2.05825 13.3975 2.25331C11.5705 3.85234 9.74391 5.45186 7.92038 7.05402C7.70715 7.24138 7.49288 7.41975 7.19488 7.49286C7.1744 7.49789 7.15332 7.5 7.13223 7.5H6.83588C6.83581 7.5 6.83575 7.49994 6.83575 7.49987Z' fill='%231C1C1F' /%3E%3C/svg%3E");
+    }
+  }
+
+  .dropdown {
+    border-radius: 15px !important;
+    padding: 15px 1px !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.13), 0 3px 14px 0 rgba(0, 0, 0, 0.04),
+      0 8px 32px 0 rgba(0, 0, 0, 0.05), 0 30px 84px 0 rgba(0, 0, 0, 0.07);
+  }
+
+  .option {
+    padding: 15px 20px !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    line-height: 129% !important;
+  }
+
+  .singleCustomValue {
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    line-height: 129% !important;
+  }
 }

@@ -1,11 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
+
 const Select = dynamic(() => import("react-select"), {
   ssr: false,
 });
 import styles from "./CustomSelect.module.scss";
-import dynamic from "next/dynamic";
 
 export interface IOptions {
   value: string;
