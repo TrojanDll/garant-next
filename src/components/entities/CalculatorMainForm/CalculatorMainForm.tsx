@@ -129,23 +129,26 @@ const CalculatorMainForm = ({ variant }: IProps) => {
         )}
       </div>
 
-      {variant === "osago" ? (
-        <Image
-          className={styles.image}
-          src="/img/calculator-osago-bg.png"
-          alt=""
-          width={840}
-          height={520}
-        />
-      ) : (
-        <Image
-          className={styles.image}
-          src="/img/calculator-ns-bg.png"
-          alt=""
-          width={840}
-          height={520}
-        />
-      )}
+      <div className={styles.imageWrapper}>
+        {variant === "osago" ? (
+          <Image
+            className={styles.image}
+            src="/img/calculator-osago-bg.png"
+            alt=""
+            width={840}
+            height={520}
+          />
+        ) : (
+          <Image
+            className={styles.image}
+            src="/img/calculator-ns-bg.png"
+            alt=""
+            width={840}
+            height={520}
+            layout="responsive"
+          />
+        )}
+      </div>
     </Substrate>
   );
 };

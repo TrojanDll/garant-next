@@ -4,6 +4,7 @@
   font-family: var(--font-family);
   display: flex;
   justify-content: space-between;
+  overflow: hidden;
 }
 
 .formWrapper {
@@ -11,11 +12,18 @@
   flex-shrink: 0;
   padding: 40px 20px 40px 40px;
   width: calc(39%);
-  height: 100%;
+  // height: 100%;
+}
+
+.imageWrapper {
+  width: 61%;
 }
 
 .image {
-  width: 61%;
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  object-position: left; /* фиксирует левую часть, обрезая правую */
 }
 
 .price {

@@ -55,7 +55,7 @@ const CustomSelect = ({
     setIsJustSelected(true);
     setValue(value);
   };
-  
+
   return (
     <div className={className}>
       {label && <p className={styles.label}>{label}</p>}
@@ -84,7 +84,7 @@ const CustomSelect = ({
           menu: () => styles.dropdown,
           option: (state) =>
             `${styles.option} ${state.isFocused ? styles.optionFocused : ""} ${
-              state.isSelected ? styles.optionSelected : ""
+              state.isSelected ? styles.optionFocused : ""
             }`,
           menuList: () => styles.menuList,
         }}

@@ -14,19 +14,11 @@
   bottom: 0 !important;
 }
 
-.select {
-  margin: 0;
-  :global {
-    &__control {
-      background-color: aqua !important;
-    }
-  }
-}
-
 .control {
   border: 1px solid var(--grey) !important;
   border-radius: 22px !important;
   padding: 12px 22px !important;
+  cursor: pointer !important;
 }
 
 .indicatorCustomSeparator {
@@ -118,14 +110,14 @@
 }
 
 .optionFocused {
-  color: var(--blue) !important;
-  background-color: var(--white) !important;
+  color: var(--dark-grey) !important;
+  background: var(--light-grey) !important;
 }
 
-.optionSelected {
-  background-color: var(--white) !important;
-  color: var(--dark-blue) !important;
-}
+// .optionSelected {
+//   background-color: var(--white) !important;
+//   color: var(--dark-blue) !important;
+// }
 
 .menuList {
   margin: 0 !important;
