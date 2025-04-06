@@ -137,6 +137,7 @@ const CalculatorMainForm = ({ variant }: IProps) => {
             alt=""
             width={840}
             height={520}
+            priority
           />
         ) : (
           <Image
@@ -145,6 +146,7 @@ const CalculatorMainForm = ({ variant }: IProps) => {
             alt=""
             width={840}
             height={520}
+            priority
           />
         )}
       </div>

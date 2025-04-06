@@ -10,16 +10,19 @@ const advantageCards: IAdvantageCards[] = [
     image: "/img/icons/timer.png",
     title: "Быстро",
     descr: "Получите полис онлайн без ожидания в очередях",
+    alt: "Таймер",
   },
   {
     image: "/img/icons/wallet.png",
     title: "Выгодно",
     descr: "Выберите для себя лучшие условия в пару кликов",
+    alt: "Кошелек",
   },
   {
     image: "/img/icons/folder.png",
     title: "Удобно",
     descr: "Полис всегда с собой и доступен в любой момент",
+    alt: "Папка",
   },
 ];
 
@@ -29,8 +32,6 @@ const Advantages = () => {
       {advantageCards.map((card) => (
         <AdvantagesCard className={styles.card} key={card.descr} cardInfo={card} />
       ))}
-
-
     </section>
   );
 };
