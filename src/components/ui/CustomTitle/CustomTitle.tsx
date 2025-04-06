@@ -4,13 +4,16 @@ import styles from "./CustomTitle.module.scss";
 interface IProps {
   isCentered?: boolean;
   className?: string;
+  tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 }
 
-const CustomTitle = ({ isCentered, className, children }: PropsWithChildren<IProps>) => {
+const CustomTitle = ({ isCentered, className, children, tag }: PropsWithChildren<IProps>) => {
+  const Tag = tag ? tag : "h1";
+
   return (
-    <h1 className={`${styles.title} ${isCentered ? styles.centered : ""} ${className}`}>
+    <Tag className={`${styles.title} ${isCentered ? styles.centered : ""} ${className}`}>
       {children}
-    </h1>
+    </Tag>
   );
 };
 

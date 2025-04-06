@@ -8,6 +8,8 @@ class PAGESCLASS {
   CONTACTS = `${this.root}contacts`;
   HELP = `${this.root}help`;
   DASHBOARD = `${this.root}dashboard`;
+  DOCUMENTS = `${this.root}documents`;
+  ABOUT = `${this.root}about`;
 }
 
 export const PAGES = new PAGESCLASS();

@@ -3,5 +3,8 @@ export enum ESvgName {
   PROFILE = "profile",
   HAMBURGER = "hamburger",
   CLOSE = "close",
-  CHEVRON_DOWN = "chevron_down"
+  CHEVRON_DOWN = "chevron_down",
+  TELEGRAM_ROUNDED = "telegram_rounded",
+  WHATSAPP_ROUNDED = "whatsapp_rounded",
+  EMAIL_ROUNDED = "email_rounded",
 }

@@ -1,0 +1,89 @@
+.root {
+  margin-top: 400px;
+  border-radius: 40px 40px 0 0;
+  padding: 74px 110px 82px 110px;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.logoSvg {
+  width: 339px;
+  height: 70px;
+}
+
+.logoLink {
+  display: block;
+}
+
+.title {
+  font-family: var(--font-family);
+  font-weight: 500 !important;
+  font-size: 30px !important;
+  line-height: 127%;
+  color: var(--dark-grey);
+}
+
+.columnsWrapper {
+  margin-top: 56px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.link {
+  margin-top: 30px;
+  display: block;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 125%;
+  color: var(--dark-grey);
+
+  &:first-child {
+    margin-top: 38px;
+  }
+}
+
+.linkLarge {
+  margin-top: 23px;
+  display: block;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 125%;
+  color: var(--dark-grey);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.socialLinks {
+  margin-top: 30px;
+  display: flex;
+  column-gap: 22px;
+  justify-content: center;
+  align-items: center;
+}
+
+.address {
+  margin-top: 73px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 125%;
+  color: var(--dark-grey);
+  text-align: center;
+}
+
+.copyright {
+  margin-top: 30px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 125%;
+  color: var(--dark-grey);
+  text-align: center;
+}

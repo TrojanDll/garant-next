@@ -4,6 +4,7 @@ import AdvantagesCard, {
 import React from "react";
 
 import styles from "./Advantages.module.scss";
+import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
 
 const advantageCards: IAdvantageCards[] = [
   {
@@ -28,11 +29,13 @@ const advantageCards: IAdvantageCards[] = [
 
 const Advantages = () => {
   return (
-    <section className={styles.root}>
-      {advantageCards.map((card) => (
-        <AdvantagesCard className={styles.card} key={card.descr} cardInfo={card} />
-      ))}
-    </section>
+    <ContentContainer>
+      <section className={styles.root}>
+        {advantageCards.map((card) => (
+          <AdvantagesCard className={styles.card} key={card.descr} cardInfo={card} />
+        ))}
+      </section>
+    </ContentContainer>
   );
 };
 

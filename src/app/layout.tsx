@@ -5,6 +5,7 @@ import "@ant-design/v5-patch-for-react-19";
 
 // import "antd/dist/antd.css";
 import "./globals.scss";
+import Footer from "@/components/widgets/Footer/Footer";
 
 export const metadata: Metadata = {
   title: {
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

@@ -10,9 +10,9 @@ import Button from "@/components/ui/Button/Button";
 import CustomLink from "@/components/ui/CustomLink/CustomLink";
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
 import CustomHamburger from "@/components/ui/CustomHamburger/CustomHamburger";
+import DropdownHeader from "@/components/entities/DropdownHeader/DropdownHeader";
 
 import styles from "./Header.module.scss";
-import DropdownHeader from "@/components/entities/DropdownHeader/DropdownHeader";
 
 const Header = () => {
   return (

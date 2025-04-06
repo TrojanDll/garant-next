@@ -8,13 +8,11 @@ import ReviwesYandex from "@/components/widgets/ReviwesYandex/ReviwesYandex";
 export default function Home() {
   return (
     <div>
-      <ContentContainer>
-        <DiscountBanner />
-        <CalculatorPromo />
-        <Advantages />
-        <ReviwesYandex />
-        <FAQ />
-      </ContentContainer>
+      <DiscountBanner />
+      <CalculatorPromo />
+      <Advantages />
+      <ReviwesYandex />
+      <FAQ />
     </div>
   );
 }

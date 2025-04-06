@@ -62,7 +62,7 @@
 
 @media (max-width: 1149px) {
   .dashboardButtonDesktop {
-    display: none;
+    display: none !important;
   }
 
   .links {

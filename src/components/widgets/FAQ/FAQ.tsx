@@ -6,6 +6,7 @@ import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import FAQItem, { IFAQItem } from "@/components/entities/FAQItem/FAQItem";
 
 import styles from "./FAQ.module.scss";
+import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
 
 const FAQItems: IFAQItem[] = [
   {
@@ -42,15 +43,22 @@ const FAQ = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
   return (
-    <section className={styles.root}>
-      <CustomTitle isCentered>Ответы на вопросы</CustomTitle>
+    <ContentContainer>
+      <section className={styles.root}>
+        <CustomTitle tag="h2" isCentered>Ответы на вопросы</CustomTitle>
 
-      <div className={styles.FAQItemsWrapper}>
-        {FAQItems.map((item, i) => (
-          <FAQItem key={i} data={item} isOpen={openIndex === i} onToggle={() => handleToggle(i)} />
-        ))}
-      </div>
-    </section>
+        <div className={styles.FAQItemsWrapper}>
+          {FAQItems.map((item, i) => (
+            <FAQItem
+              key={i}
+              data={item}
+              isOpen={openIndex === i}
+              onToggle={() => handleToggle(i)}
+            />
+          ))}
+        </div>
+      </section>
+    </ContentContainer>
   );
 };
 
