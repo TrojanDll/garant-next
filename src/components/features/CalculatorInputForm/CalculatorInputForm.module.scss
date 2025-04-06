@@ -1,30 +1,7 @@
-.selectOption {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.13), 0 3px 14px 0 rgba(0, 0, 0, 0.04),
-    0 8px 32px 0 rgba(0, 0, 0, 0.05), 0 30px 84px 0 rgba(0, 0, 0, 0.07);
-  background: var(--white);
-  border: 1px solid var(--light-grey-2);
-  border-radius: 22px;
-  padding: 22px 1px;
-  bottom: 0 !important;
-}
-
-.option {
-  padding: 20px 30px !important;
-  background: var(--white);
-  bottom: 0 !important;
-}
-
 .select {
-  margin: 0;
-  :global {
-    &__control {
-      background-color: aqua !important;
-    }
-  }
+  margin-top: 30px;
 }
 
-.control {
-  border: 1px solid var(--grey) !important;
-  border-radius: 22px !important;
-  padding: 12px 22px !important;
+.submit {
+  margin-top: 30px;
 }

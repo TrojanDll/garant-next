@@ -60,7 +60,7 @@ const Header = () => {
 
               <Button
                 className={styles.dashboardButtonDesktop}
-                type="dashboard"
+                variant="dashboard"
                 isLink={true}
                 href={PAGES.DASHBOARD}
               >

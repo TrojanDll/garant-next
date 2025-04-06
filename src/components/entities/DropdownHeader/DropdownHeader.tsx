@@ -59,7 +59,7 @@ const DropdownHeader = () => {
 
         <Button
           className={styles.dropdownDasboard}
-          type="dashboard"
+          variant="dashboard"
           isLink={true}
           href={PAGES.DASHBOARD}
           onClickEvent={() => setIsDropdownOpened(false)}
