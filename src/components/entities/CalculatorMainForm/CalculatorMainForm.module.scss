@@ -12,7 +12,6 @@
   flex-shrink: 0;
   padding: 40px 20px 40px 40px;
   width: calc(39%);
-  // height: 100%;
 }
 
 .imageWrapper {
@@ -28,4 +27,27 @@
 
 .price {
   margin-top: 30px;
+}
+
+@media (max-width: 1149px) {
+  .root {
+    display: block;
+    width: 100%;
+  }
+
+  .formWrapper {
+    width: 100%;
+    max-width: none;
+    padding: 20px;
+    padding-bottom: 0;
+  }
+
+  .imageWrapper {
+    width: 100%;
+  }
+
+  .image {
+    width: 120%;
+    transform: translateX(-16%) translateY(5%);
+  }
 }

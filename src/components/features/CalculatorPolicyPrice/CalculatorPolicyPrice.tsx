@@ -1,7 +1,11 @@
 import React from "react";
-import styles from "./CalculatorPolicyPrice.module.scss";
+
 import Button from "@/components/ui/Button/Button";
+
 import { PAGES } from "@/config/pages-url.config";
+
+import styles from "./CalculatorPolicyPrice.module.scss";
+
 
 interface IProps {
   price: number;
@@ -16,7 +20,7 @@ const CalculatorPolicyPrice = ({ price, policyType, className }: IProps) => {
         <h3 className={styles.title}>Стоимость полиса</h3>
         <p className={styles.price}>{price} ₽</p>
       </div>
-      <Button isLink={true} href={policyType === "osago" ? PAGES.OSAGO : PAGES.NS}>
+      <Button className={styles.button} isLink={true} href={policyType === "osago" ? PAGES.OSAGO : PAGES.NS}>
         Купить полис
       </Button>
     </div>
