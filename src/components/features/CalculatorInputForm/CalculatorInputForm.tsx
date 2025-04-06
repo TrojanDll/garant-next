@@ -26,10 +26,11 @@ export interface ISelectsProps {
 }
 
 const CalculatorInputForm = ({ setIsCorrectSubmit, selects }: IProps) => {
-  const [isSubmitClicked, setIsSubmitClicked] = useState<boolean>(false);
+  const [isSubmitClicked, setIsSubmitClicked] = useState(false);
+  const [localCorrect, setLocalCorrect] = useState(false)
 
   const [selectsValues, setSelectsValues] = useState<IOptions[]>(
-    new Array(selects.length).fill("")
+    new Array(selects.length).fill({ value: "", label: "" })
   );
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -39,13 +40,14 @@ const CalculatorInputForm = ({ setIsCorrectSubmit, selects }: IProps) => {
     let correct = true;
 
     selectsValues.forEach((selectValue) => {
-      if (!selectValue.value.length) {
+      if (!selectValue.value) {
         correct = false;
       }
     });
 
     if (correct) {
       setIsCorrectSubmit(true);
+      setLocalCorrect(true)
     }
   };
 
@@ -66,38 +68,15 @@ const CalculatorInputForm = ({ setIsCorrectSubmit, selects }: IProps) => {
           name={select.name}
           placeholder={select.placeholder}
           label={select.label}
-          required={select.required}
+          required={select.required ? select.required : false}
           options={select.options as IOptions[]}
           selectedValue={selectsValues[i]?.value}
           setValue={(value) => handleSingleSelect(i, value)}
           isSubmitClicked={isSubmitClicked}
         />
       ))}
-      {/* <CustomSelect
-        className={styles.select}
-        name="car_category"
-        placeholder="Выберите категорию ТС"
-        label="Категория ТС"
-        required={true}
-        options={options}
-        selectedValue={carCategoryValue?.value}
-        setValue={(value) => setCarCategoryValue(value)}
-        isSubmitClicked={isSubmitClicked}
-      />
 
-      <CustomSelect
-        className={styles.select}
-        name="duration_of_stay"
-        placeholder="Выберите срок пребывания"
-        label="Выберите срок пребывания"
-        required={true}
-        options={options}
-        selectedValue={durationOfStay?.value}
-        setValue={(value) => setDurationOfStay(value)}
-        isSubmitClicked={isSubmitClicked}
-      /> */}
-
-      <Button className={styles.submit} type="submit">
+      <Button className={`${styles.submit} ${localCorrect ? styles.submitHidden : ""}`} type="submit">
         Рассчитать
       </Button>
     </form>

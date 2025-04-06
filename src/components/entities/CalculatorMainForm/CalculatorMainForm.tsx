@@ -2,12 +2,12 @@
 
 import Substrate from "@/components/ui/Substrate/Substrate";
 import React, { useState } from "react";
-import styles from "./CalculatorMainForm.module.scss";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import { ISelectsProps } from "@/components/features/CalculatorInputForm/CalculatorInputForm";
-import CalculatorInputNSForm from "@/components/features/CalculatorInputNSForm/CalculatorInputNSForm";
 import CalculatorPolicyPrice from "@/components/features/CalculatorPolicyPrice/CalculatorPolicyPrice";
 import CalculatorInputForm from "@/components/features/CalculatorInputForm/CalculatorInputForm";
+
+import styles from "./CalculatorMainForm.module.scss";
 
 interface IProps {
   variant: "osago" | "ns";
@@ -18,11 +18,12 @@ const titles = {
   ns: "Полис от несчастного случая в Абхазии",
 };
 
-const selectsProps: ISelectsProps[] = [
+const selectsOsagoProps: ISelectsProps[] = [
   {
     name: "car_category",
-    label: "qwer",
+    label: "Категория ТС",
     placeholder: "Выберите категорию ТС",
+    required: true,
     options: [
       {
         label: "aboba 1",
@@ -40,8 +41,52 @@ const selectsProps: ISelectsProps[] = [
   },
   {
     name: "duration_of_stay",
-    label: "uurt",
+    label: "Выберите срок пребывания",
     placeholder: "Выберите срок пребывания",
+    required: true,
+    options: [
+      {
+        label: "aboba 1",
+        value: "aboba 1",
+      },
+      {
+        label: "aboba 2",
+        value: "aboba 2",
+      },
+      {
+        label: "aboba 3",
+        value: "aboba 3",
+      },
+    ],
+  },
+];
+
+const selectsNSProps: ISelectsProps[] = [
+  {
+    name: "number_of_people",
+    label: "Количество человек",
+    placeholder: "Количество человек",
+    required: true,
+    options: [
+      {
+        label: "aboba 1",
+        value: "aboba 1",
+      },
+      {
+        label: "aboba 2",
+        value: "aboba 2",
+      },
+      {
+        label: "aboba 3",
+        value: "aboba 3",
+      },
+    ],
+  },
+  {
+    name: "duration_of_stay",
+    label: "Выберите срок пребывания",
+    placeholder: "Выберите срок пребывания",
+    required: true,
     options: [
       {
         label: "aboba 1",
@@ -69,12 +114,15 @@ const CalculatorMainForm = ({ variant }: IProps) => {
         {variant === "osago" ? (
           <CalculatorInputForm
             setIsCorrectSubmit={(value: boolean) => setIsCorrectSubmit(value)}
-            selects={selectsProps}
+            selects={selectsOsagoProps}
           />
         ) : (
-          <CalculatorInputNSForm />
+          <CalculatorInputForm
+            setIsCorrectSubmit={(value: boolean) => setIsCorrectSubmit(value)}
+            selects={selectsNSProps}
+          />
         )}
-        {isCorrectSubmit && <CalculatorPolicyPrice price={1000} />}
+        {isCorrectSubmit && <CalculatorPolicyPrice className={styles.price} policyType={variant} price={1000} />}
       </div>
     </Substrate>
   );

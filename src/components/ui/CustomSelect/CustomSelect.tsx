@@ -37,18 +37,14 @@ const CustomSelect = ({
 }: IProps) => {
   const [isSelectOpened, setIsSelectOpened] = useState(false);
   const [isJustSelected, setIsJustSelected] = useState(false);
-  const [isSelected, setIsSelected] = useState(false);
-
-  // console.log(isSelected);
 
   const handleMenuOpen = () => {
     setIsSelectOpened(true);
-    setIsJustSelected(false); // Сбрасываем флаг при открытии меню
+    setIsJustSelected(false);
   };
 
   const handleMenuClose = () => {
     if (isJustSelected) {
-      // Если элемент только что выбран, игнорируем закрытие из-за потери фокуса
       setIsJustSelected(false);
       return;
     }
@@ -56,10 +52,10 @@ const CustomSelect = ({
   };
 
   const handleChange = (value: IOptions) => {
-    setIsJustSelected(true); // Устанавливаем флаг, что элемент выбран
+    setIsJustSelected(true);
     setValue(value);
   };
-
+  
   return (
     <div className={className}>
       {label && <p className={styles.label}>{label}</p>}
@@ -77,7 +73,7 @@ const CustomSelect = ({
             }`,
           placeholder: () =>
             `${styles.placeholder} ${
-              !selectedValue?.length && required && isSubmitClicked ? styles.placeholderError : ""
+              !selectedValue && required && isSubmitClicked ? styles.placeholderError : ""
             }`,
           indicatorSeparator: () => styles.indicatorCustomSeparator,
           indicatorsContainer: () =>
