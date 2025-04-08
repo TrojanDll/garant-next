@@ -11,7 +11,7 @@ import CalculatorInputForm from "@/components/features/CalculatorInputForm/Calcu
 
 import styles from "./CalculatorMainForm.module.scss";
 
-interface IProps {
+export interface ICalculatorMainFormProps {
   variant: "osago" | "ns";
 }
 
@@ -106,7 +106,7 @@ const selectsNSProps: ISelectsProps[] = [
   },
 ];
 
-const CalculatorMainForm = ({ variant }: IProps) => {
+const CalculatorMainForm = ({ variant }: ICalculatorMainFormProps) => {
   const [isCorrectSubmit, setIsCorrectSubmit] = useState(false);
 
   return (

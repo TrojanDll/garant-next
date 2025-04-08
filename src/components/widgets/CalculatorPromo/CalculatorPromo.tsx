@@ -1,28 +1,32 @@
-import CalculatorMainSwitcher from "@/components/entities/CalculatorMainSwitcher/CalculatorMainSwitcher";
-import React from "react";
-import styles from "./CalculatorPromo.module.scss";
-import { TabsProps } from "antd";
-import CalculatorMainForm from "@/components/entities/CalculatorMainForm/CalculatorMainForm";
-import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
+"use client";
 
-const items: TabsProps["items"] = [
-  {
-    key: "1",
-    label: "ОСАГО",
-    children: <CalculatorMainForm variant="osago" />,
-  },
-  {
-    key: "2",
-    label: "НС",
-    children: <CalculatorMainForm variant="ns" />,
-  },
-];
+import React, { useState } from "react";
+
+import CalculatorMainForm, {
+  ICalculatorMainFormProps,
+} from "@/components/entities/CalculatorMainForm/CalculatorMainForm";
+import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
+import ButtonGroup from "@/components/ui/ButtonGroup/ButtonGroup";
+
+import styles from "./CalculatorPromo.module.scss";
 
 const CalculatorPromo = () => {
+  const [currentTab, setCurrentTab] = useState(0);
+
+  const buttons = ["ОСАГО", "НС"];
+
+  const variants = ["osago", "ns"];
+
   return (
     <ContentContainer>
       <section className={styles.root}>
-        <CalculatorMainSwitcher items={items} />
+        <ButtonGroup
+          // className={styles.buttonGroup}
+          items={buttons}
+          defaultActiveIndex={0}
+          onButtonClick={setCurrentTab}
+        />
+        <CalculatorMainForm variant={variants[currentTab] as ICalculatorMainFormProps["variant"]} />
       </section>
     </ContentContainer>
   );

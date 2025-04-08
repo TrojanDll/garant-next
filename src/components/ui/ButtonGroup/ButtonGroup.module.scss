@@ -1,0 +1,58 @@
+$button-width: 155px;
+$button-gap: 25px;
+$button-gap-mobile: 15px;
+
+.container {
+  position: relative;
+  display: inline-flex;
+  border-radius: 22px;
+  padding: 7px;
+  box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.13);
+  background: var(--white);
+  gap: $button-gap;
+}
+
+.button {
+  position: relative;
+  width: $button-width;
+  padding: 17px 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  font-size: 16px;
+  z-index: 2;
+  transition: color 0.3s ease;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 125%;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: var(--dark-grey);
+}
+
+.activeBackground {
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  width: $button-width;
+  background: #ffffff;
+  border-radius: 17px;
+  background: var(--light-grey);
+  transition: transform 0.3s ease;
+}
+
+.active {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 125%;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: var(--blue);
+}
+
+@media (max-width: 1149px) {
+  .container {
+    gap: $button-gap-mobile;
+  }
+}
