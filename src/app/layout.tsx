@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { SITE_NAME } from "@/constants/seo.constants";
 import Header from "@/components/widgets/Header/Header";
-import "@ant-design/v5-patch-for-react-19";
 
-// import "antd/dist/antd.css";
 import "./globals.scss";
 import Footer from "@/components/widgets/Footer/Footer";
 
