@@ -16,14 +16,16 @@ export interface IOptions {
 
 interface IProps {
   options: IOptions[];
-  setValue: (value: IOptions) => void;
   required?: boolean;
-  selectedValue: string | null | undefined;
+  setValue?: (value: IOptions) => void;
+  selectedValue?: string | null | undefined;
   isSubmitClicked?: boolean;
   name: string;
   className?: string;
   placeholder?: string;
   label?: string;
+  other?: any;
+  errorMessage?: string;
 }
 
 const CustomSelect = ({
@@ -36,6 +38,8 @@ const CustomSelect = ({
   className,
   placeholder,
   label,
+  other,
+  errorMessage,
 }: IProps) => {
   const [isSelectOpened, setIsSelectOpened] = useState(false);
   const [isJustSelected, setIsJustSelected] = useState(false);
@@ -55,7 +59,9 @@ const CustomSelect = ({
 
   const handleChange = (value: IOptions) => {
     setIsJustSelected(true);
-    setValue(value);
+    if (setValue) {
+      setValue(value);
+    }
   };
 
   return (
@@ -75,11 +81,15 @@ const CustomSelect = ({
         classNames={{
           control: () =>
             `${styles.control} ${isSelectOpened ? styles.controlOpened : ""} ${
-              !selectedValue?.length && required && isSubmitClicked ? styles.controlError : ""
+              !selectedValue?.length && required && isSubmitClicked && errorMessage?.length
+                ? styles.controlError
+                : ""
             }`,
           placeholder: () =>
             `${styles.placeholder} ${
-              !selectedValue && required && isSubmitClicked ? styles.placeholderError : ""
+              !selectedValue && required && isSubmitClicked && errorMessage?.length
+                ? styles.placeholderError
+                : ""
             }`,
           indicatorSeparator: () => styles.indicatorCustomSeparator,
           indicatorsContainer: () =>
