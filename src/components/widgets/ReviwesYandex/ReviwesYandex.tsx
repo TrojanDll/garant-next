@@ -7,7 +7,9 @@ const ReviwesYandex = () => {
   return (
     <ContentContainer>
       <section className={styles.root}>
-        <CustomTitle tag="h2" isCentered>Отзывы о нас</CustomTitle>
+        <CustomTitle tag="h2" isCentered>
+          Отзывы о нас
+        </CustomTitle>
 
         <div className={styles.reviewsWrapper}>
           <iframe

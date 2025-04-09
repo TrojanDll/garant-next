@@ -6,11 +6,10 @@ import { PAGES } from "@/config/pages-url.config";
 
 import styles from "./CalculatorPolicyPrice.module.scss";
 
-
 interface IProps {
   price: number;
   policyType: "osago" | "ns";
-  className: string
+  className: string;
 }
 
 const CalculatorPolicyPrice = ({ price, policyType, className }: IProps) => {
@@ -20,7 +19,11 @@ const CalculatorPolicyPrice = ({ price, policyType, className }: IProps) => {
         <h3 className={styles.title}>Стоимость полиса</h3>
         <p className={styles.price}>{price} ₽</p>
       </div>
-      <Button className={styles.button} isLink={true} href={policyType === "osago" ? PAGES.OSAGO : PAGES.NS}>
+      <Button
+        className={styles.button}
+        isLink={true}
+        href={policyType === "osago" ? PAGES.OSAGO_APPLY : PAGES.NS_APPLY}
+      >
         Купить полис
       </Button>
     </div>

@@ -21,7 +21,6 @@ const CalculatorPromo = () => {
     <ContentContainer>
       <section className={styles.root}>
         <ButtonGroup
-          // className={styles.buttonGroup}
           items={buttons}
           defaultActiveIndex={0}
           onButtonClick={setCurrentTab}

@@ -10,6 +10,9 @@ class PAGESCLASS {
   DASHBOARD = `${this.root}dashboard`;
   DOCUMENTS = `${this.root}documents`;
   ABOUT = `${this.root}about`;
+
+  OSAGO_APPLY = `${this.OSAGO}/apply`;
+  NS_APPLY = `${this.NS}/apply`;
 }
 
 export const PAGES = new PAGESCLASS();
