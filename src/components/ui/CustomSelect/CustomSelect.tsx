@@ -7,6 +7,7 @@ const Select = dynamic(() => import("react-select"), {
   ssr: false,
 });
 import styles from "./CustomSelect.module.scss";
+import CustomTitle from "../CustomTitle/CustomTitle";
 
 export interface IOptions {
   value: string;
@@ -59,7 +60,11 @@ const CustomSelect = ({
 
   return (
     <div className={className}>
-      {label && <p className={styles.label}>{label}</p>}
+      {label && (
+        <CustomTitle tag="h3" className={styles.label}>
+          {label}
+        </CustomTitle>
+      )}
       <Select
         name={name}
         openMenuOnFocus={false}

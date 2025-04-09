@@ -11,7 +11,11 @@ const CustomTitle = ({ isCentered, className, children, tag }: PropsWithChildren
   const Tag = tag ? tag : "h1";
 
   return (
-    <Tag className={`${styles.title} ${isCentered ? styles.centered : ""} ${className}`}>
+    <Tag
+      className={`${styles.title} ${isCentered ? styles.centered : ""} ${
+        Tag === "h2" ? styles.h2 : Tag === "h3" ? styles.h3 : ""
+      } ${className}`}
+    >
       {children}
     </Tag>
   );

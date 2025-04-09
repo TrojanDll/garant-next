@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import styles from './ButtonGroup.module.scss';
+import { useState, useRef, useEffect } from "react";
+import styles from "./ButtonGroup.module.scss";
 
 interface ButtonGroupProps {
   items: string[];
@@ -39,17 +39,11 @@ export default function ButtonGroup({
   };
 
   return (
-    <div 
-      ref={containerRef}
-      className={styles.container}
-    >
-      <div
-        ref={activeBgRef}
-        className={styles.activeBackground}
-      />
+    <div ref={containerRef} className={styles.container}>
+      <div ref={activeBgRef} className={styles.activeBackground} />
       {items.map((item, index) => (
         <button
-          key={index}
+          key={item}
           className={`${styles.button} ${activeIndex === index ? styles.active : ""}`}
           onClick={() => handleClick(index)}
         >

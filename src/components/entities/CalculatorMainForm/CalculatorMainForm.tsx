@@ -42,7 +42,7 @@ const selectsOsagoProps: ISelectsProps[] = [
     ],
   },
   {
-    name: "duration_of_stay",
+    name: "duration_of_stay_osago",
     label: "Выберите срок пребывания",
     placeholder: "Выберите срок пребывания",
     required: true,
@@ -85,7 +85,7 @@ const selectsNSProps: ISelectsProps[] = [
     ],
   },
   {
-    name: "duration_of_stay",
+    name: "duration_of_stay_ns",
     label: "Выберите срок пребывания",
     placeholder: "Выберите срок пребывания",
     required: true,

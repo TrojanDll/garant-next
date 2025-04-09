@@ -10,8 +10,30 @@
   text-align: center;
 }
 
+.h2 {
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 123%;
+}
+
+.h3 {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 128%;
+}
+
 @media (max-width: 1149px) {
   .title {
     font-size: 20px;
+  }
+
+  .h2 {
+    font-size: 18px;
+    line-height: 128%;
+  }
+
+  .h3 {
+    font-size: 14px;
+    line-height: 129%;
   }
 }

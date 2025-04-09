@@ -5,9 +5,5 @@ export const metadata: Metadata = {
   title: "Осаго",
 };
 export default function OsagoPage() {
-  return (
-    <ContentContainer>
-      <div>Osago</div>
-    </ContentContainer>
-  );
+  return <div>Osago</div>;
 }

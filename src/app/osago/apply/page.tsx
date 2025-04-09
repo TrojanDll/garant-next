@@ -6,10 +6,5 @@ export const metadata: Metadata = {
   title: "Оформить ОСАГО",
 };
 export default function OsagoApplyPage() {
-  return (
-    <ContentContainer>
-      <div>OsagoApplyPage</div>
-      <OsagoApply />
-    </ContentContainer>
-  );
+  return <OsagoApply />;
 }
