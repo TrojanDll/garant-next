@@ -7,35 +7,49 @@ import Substrate from "@/components/ui/Substrate/Substrate";
 
 import styles from "./OsagoApply.module.scss";
 import CustomSelect, { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
-import { ISelectsProps } from "@/components/features/CalculatorInputForm/CalculatorInputForm";
 import { ChangeHandler, Controller, SubmitHandler, useForm } from "react-hook-form";
 import Button from "@/components/ui/Button/Button";
 import { IOsagoApplyForm } from "@/types/IOsagoApplyForm";
+import { IFieldConfig } from "@/types/IFieldConfig";
 
-const carCategoryParams: ISelectsProps = {
-  name: "car_category",
-  label: "Категория ТС",
-  placeholder: "Категория ТС",
-  options: [
-    {
-      label: "Option 1",
-      value: "Option 1",
-    },
-    {
-      label: "Option 2",
-      value: "Option 2",
-    },
-  ],
-};
+const carCategoryParams: IFieldConfig[] = [
+  {
+    type: "select",
+    name: "vehicle_category",
+    label: "Категория ТС",
+    placeholder: "Категория ТС",
+    required: true,
+    options: [
+      {
+        label: "Option 1",
+        value: "Option 1",
+      },
+      {
+        label: "Option 2",
+        value: "Option 2",
+      },
+    ],
+  },
+  {
+    type: "select",
+    name: "vehicle_make",
+    label: "Марка",
+    placeholder: "Марка",
+    required: true,
+    options: [
+      {
+        label: "Option 1",
+        value: "Option 1",
+      },
+      {
+        label: "Option 2",
+        value: "Option 2",
+      },
+    ],
+  },
+];
 
 const OsagoApply = () => {
-  // const [isSubmitClicked, setIsSubmitClicked] = useState(false);
-  // const [localCorrect, setLocalCorrect] = useState(false);
-
-  // const [selectsValues, setSelectsValues] = useState<IOptions[]>(
-  //   new Array(selects.length).fill({ value: "", label: "" })
-  // );
-
   const {
     register,
     handleSubmit,
@@ -45,16 +59,27 @@ const OsagoApply = () => {
     reset,
   } = useForm<IOsagoApplyForm>({
     defaultValues: {
-      car_category: "",
+      vehicle_category: "",
     },
     mode: "onSubmit",
   });
 
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
-    console.log(data["car_category"]);
+    console.log(data["vehicle_category"]);
     reset();
   };
-  
+
+  const options: IOptions[] = [
+    {
+      label: "Option 1",
+      value: "Option 1",
+    },
+    {
+      label: "Option 2",
+      value: "Option 2",
+    },
+  ];
+
   return (
     <section className={styles.root}>
       <ContentContainer>
@@ -68,23 +93,20 @@ const OsagoApply = () => {
           <div className={styles.inputsWrapper}>
             <form onSubmit={handleSubmit(onSubmit)} action="">
               <Controller
-                name="car_category"
+                name="vehicle_category"
                 control={control}
                 rules={{ required: "ОБЯЗАТЕЛЬНО" }}
                 render={({ field, fieldState }) => (
-                  <>
-                    <CustomSelect
-                      name={field.name}
-                      options={carCategoryParams.options as IOptions[]}
-                      placeholder={carCategoryParams.placeholder}
-                      required={carCategoryParams.required}
-                      key={carCategoryParams.name}
-                      selectedValue={field.value}
-                      setValue={(value: IOptions) => field.onChange(value)}
-                      errorMessage={fieldState.error?.message}
-                    />
-                    {fieldState.error?.message}
-                  </>
+                  <CustomSelect
+                    name={field.name}
+                    options={options}
+                    placeholder={carCategoryParams.placeholder}
+                    required={carCategoryParams.required}
+                    key={carCategoryParams.name}
+                    selectedValue={field.value}
+                    setValue={(value: IOptions) => field.onChange(value)}
+                    errorMessage={fieldState.error?.message}
+                  />
                 )}
               />
               <Button type="submit">submit</Button>

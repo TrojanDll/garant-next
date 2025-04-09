@@ -6,4 +6,5 @@ export interface IFieldConfig {
   rules?: any;
   placeholder?: string;
   required?: boolean
+  errorMessage?: string
 }

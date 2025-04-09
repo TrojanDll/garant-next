@@ -3,14 +3,13 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
+import { IFieldConfig } from "@/types/IFieldConfig";
+
 import Substrate from "@/components/ui/Substrate/Substrate";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
-import { ISelectsProps } from "@/components/features/CalculatorInputForm/CalculatorInputForm";
-import CalculatorPolicyPrice from "@/components/features/CalculatorPolicyPrice/CalculatorPolicyPrice";
 import CalculatorInputForm from "@/components/features/CalculatorInputForm/CalculatorInputForm";
 
 import styles from "./CalculatorMainForm.module.scss";
-import { IFieldConfig } from "@/types/IFieldConfig";
 
 export interface ICalculatorMainFormProps {
   variant: "osago" | "ns";
@@ -112,20 +111,14 @@ const selectsNSProps: IFieldConfig[] = [
 ];
 
 const CalculatorMainForm = ({ variant }: ICalculatorMainFormProps) => {
-  const [isCorrectSubmit, setIsCorrectSubmit] = useState(false);
-
   return (
     <Substrate withShadow="light" className={styles.root}>
       <div className={styles.formWrapper}>
         <CustomTitle className={styles.title}>{titles[variant]}</CustomTitle>
         {variant === "osago" ? (
-          <CalculatorInputForm config={{ fields: selectsOsagoProps }} />
+          <CalculatorInputForm variant="osago" config={{ fields: selectsOsagoProps }} />
         ) : (
-          <CalculatorInputForm config={{ fields: selectsOsagoProps }} />
-
-        )}
-        {isCorrectSubmit && (
-          <CalculatorPolicyPrice className={styles.price} policyType={variant} price={1000} />
+          <CalculatorInputForm variant="ns" config={{ fields: selectsNSProps }} />
         )}
       </div>
 

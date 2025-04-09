@@ -3,7 +3,7 @@
 import { useSidebarStore } from "@/components/entities/DropdownHeader/store";
 import React from "react";
 import SvgSelector from "../SvgSelector/SvgSelector";
-import { ESvgName } from "@/config/svg-ids.config";
+import { ESvgName } from "@/constants/svg-ids.constants";
 
 import styles from "./CustomHamburger.module.scss"
 

@@ -7,4 +7,5 @@ export enum ESvgName {
   TELEGRAM_ROUNDED = "telegram_rounded",
   WHATSAPP_ROUNDED = "whatsapp_rounded",
   EMAIL_ROUNDED = "email_rounded",
+  ATTENTION = "attention",
 }

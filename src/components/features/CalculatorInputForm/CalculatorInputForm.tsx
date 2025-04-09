@@ -9,24 +9,19 @@ import styles from "./CalculatorInputForm.module.scss";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { ICalculatorOsagoForm } from "@/types/ICalculatorForms";
 import { IFieldConfig } from "@/types/IFieldConfig";
+import CalculatorPolicyPrice from "../CalculatorPolicyPrice/CalculatorPolicyPrice";
 
 interface FormData {
   [key: string]: any;
 }
 
-interface FormConfig {
-  fields: IFieldConfig[];
+
+interface IProps {
+  config: { fields: IFieldConfig[] };
+  variant: "osago" | "ns";
 }
 
-export interface ISelectsProps {
-  name: string;
-  placeholder?: string;
-  label?: string;
-  required?: boolean;
-  options?: IOptions[];
-}
-
-const CalculatorInputForm = ({ config }: { config: FormConfig }) => {
+const CalculatorInputForm = ({ config, variant }: IProps) => {
   const [isCorrect, setIsCorrect] = useState(false);
 
   const defaultValues = config.fields.reduce((acc, field) => {
@@ -47,7 +42,6 @@ const CalculatorInputForm = ({ config }: { config: FormConfig }) => {
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log("Данные формы:", data);
     setIsCorrect(true);
-    alert(JSON.stringify(data, null, 2));
     reset();
   };
 
@@ -90,6 +84,9 @@ const CalculatorInputForm = ({ config }: { config: FormConfig }) => {
       <Button className={`${styles.submit} ${isCorrect ? styles.submitHidden : ""}`} type="submit">
         Рассчитать
       </Button>
+      {isCorrect && (
+        <CalculatorPolicyPrice className={styles.price} policyType={variant} price={1000} />
+      )}
     </form>
   );
 };

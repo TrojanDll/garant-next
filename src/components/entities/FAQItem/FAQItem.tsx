@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import styles from "./FAQItem.module.scss";
 import SvgSelector from "@/components/ui/SvgSelector/SvgSelector";
-import { ESvgName } from "@/config/svg-ids.config";
+import { ESvgName } from "@/constants/svg-ids.constants";
 
 export interface IFAQItem {
   question: string;

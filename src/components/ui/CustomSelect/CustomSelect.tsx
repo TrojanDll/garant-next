@@ -2,12 +2,15 @@
 
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-
 const Select = dynamic(() => import("react-select"), {
   ssr: false,
 });
-import styles from "./CustomSelect.module.scss";
+
 import CustomTitle from "../CustomTitle/CustomTitle";
+
+import styles from "./CustomSelect.module.scss";
+import SvgSelector from "../SvgSelector/SvgSelector";
+import { ESvgName } from "@/constants/svg-ids.constants";
 
 export interface IOptions {
   value: string;
@@ -64,8 +67,6 @@ const CustomSelect = ({
     }
   };
 
-  console.log(errorMessage);
-
   return (
     <div className={className}>
       {label && (
@@ -102,6 +103,12 @@ const CustomSelect = ({
         }}
         options={options}
       />
+      {/* {errorMessage?.length && (
+        <p className={styles.errorMessage}>
+          <SvgSelector id={ESvgName.ATTENTION} />
+          {errorMessage}
+        </p>
+      )} */}
     </div>
   );
 };

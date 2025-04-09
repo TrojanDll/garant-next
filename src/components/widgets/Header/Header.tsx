@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 import { PAGES } from "@/config/pages-url.config";
-import { ESvgName } from "@/config/svg-ids.config";
+import { ESvgName } from "@/constants/svg-ids.constants";
 
 import Substrate from "@/components/ui/Substrate/Substrate";
 import SvgSelector from "@/components/ui/SvgSelector/SvgSelector";

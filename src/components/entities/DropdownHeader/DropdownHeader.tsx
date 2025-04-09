@@ -9,7 +9,7 @@ import CustomLink from "@/components/ui/CustomLink/CustomLink";
 import { PAGES } from "@/config/pages-url.config";
 import Button from "@/components/ui/Button/Button";
 import SvgSelector from "@/components/ui/SvgSelector/SvgSelector";
-import { ESvgName } from "@/config/svg-ids.config";
+import { ESvgName } from "@/constants/svg-ids.constants";
 
 type TDropdownLinks = {
   href: string;
