@@ -64,6 +64,8 @@ const CustomSelect = ({
     }
   };
 
+  console.log(errorMessage);
+
   return (
     <div className={className}>
       {label && (
@@ -81,16 +83,10 @@ const CustomSelect = ({
         classNames={{
           control: () =>
             `${styles.control} ${isSelectOpened ? styles.controlOpened : ""} ${
-              !selectedValue?.length && required && isSubmitClicked && errorMessage?.length
-                ? styles.controlError
-                : ""
+              errorMessage?.length ? styles.controlError : ""
             }`,
           placeholder: () =>
-            `${styles.placeholder} ${
-              !selectedValue && required && isSubmitClicked && errorMessage?.length
-                ? styles.placeholderError
-                : ""
-            }`,
+            `${styles.placeholder} ${errorMessage?.length ? styles.placeholderError : ""}`,
           indicatorSeparator: () => styles.indicatorCustomSeparator,
           indicatorsContainer: () =>
             `${styles.indicatorCustomContainer} ${

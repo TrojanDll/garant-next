@@ -10,6 +10,7 @@ import CalculatorPolicyPrice from "@/components/features/CalculatorPolicyPrice/C
 import CalculatorInputForm from "@/components/features/CalculatorInputForm/CalculatorInputForm";
 
 import styles from "./CalculatorMainForm.module.scss";
+import { IFieldConfig } from "@/types/IFieldConfig";
 
 export interface ICalculatorMainFormProps {
   variant: "osago" | "ns";
@@ -20,8 +21,9 @@ const titles = {
   ns: "Полис от несчастного случая в Абхазии",
 };
 
-const selectsOsagoProps: ISelectsProps[] = [
+const selectsOsagoProps: IFieldConfig[] = [
   {
+    type: "select",
     name: "car_category",
     label: "Категория ТС",
     placeholder: "Выберите категорию ТС",
@@ -42,6 +44,7 @@ const selectsOsagoProps: ISelectsProps[] = [
     ],
   },
   {
+    type: "select",
     name: "duration_of_stay_osago",
     label: "Выберите срок пребывания",
     placeholder: "Выберите срок пребывания",
@@ -63,8 +66,9 @@ const selectsOsagoProps: ISelectsProps[] = [
   },
 ];
 
-const selectsNSProps: ISelectsProps[] = [
+const selectsNSProps: IFieldConfig[] = [
   {
+    type: "select",
     name: "number_of_people",
     label: "Количество человек",
     placeholder: "Количество человек",
@@ -85,6 +89,7 @@ const selectsNSProps: ISelectsProps[] = [
     ],
   },
   {
+    type: "select",
     name: "duration_of_stay_ns",
     label: "Выберите срок пребывания",
     placeholder: "Выберите срок пребывания",
@@ -114,15 +119,10 @@ const CalculatorMainForm = ({ variant }: ICalculatorMainFormProps) => {
       <div className={styles.formWrapper}>
         <CustomTitle className={styles.title}>{titles[variant]}</CustomTitle>
         {variant === "osago" ? (
-          <CalculatorInputForm
-            setIsCorrectSubmit={(value: boolean) => setIsCorrectSubmit(value)}
-            selects={selectsOsagoProps}
-          />
+          <CalculatorInputForm config={{ fields: selectsOsagoProps }} />
         ) : (
-          <CalculatorInputForm
-            setIsCorrectSubmit={(value: boolean) => setIsCorrectSubmit(value)}
-            selects={selectsNSProps}
-          />
+          <CalculatorInputForm config={{ fields: selectsOsagoProps }} />
+
         )}
         {isCorrectSubmit && (
           <CalculatorPolicyPrice className={styles.price} policyType={variant} price={1000} />

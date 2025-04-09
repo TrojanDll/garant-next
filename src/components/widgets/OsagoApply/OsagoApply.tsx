@@ -47,17 +47,14 @@ const OsagoApply = () => {
     defaultValues: {
       car_category: "",
     },
+    mode: "onSubmit",
   });
 
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
     console.log(data["car_category"]);
     reset();
   };
-
-  const onChangeField = (data: string) => {
-    console.log(data);
-  };
-
+  
   return (
     <section className={styles.root}>
       <ContentContainer>

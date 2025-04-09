@@ -6,10 +6,16 @@ import CustomSelect, { IOptions } from "@/components/ui/CustomSelect/CustomSelec
 import Button from "@/components/ui/Button/Button";
 
 import styles from "./CalculatorInputForm.module.scss";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { ICalculatorOsagoForm } from "@/types/ICalculatorForms";
+import { IFieldConfig } from "@/types/IFieldConfig";
 
-interface IProps {
-  setIsCorrectSubmit: (value: boolean) => void;
-  selects: ISelectsProps[];
+interface FormData {
+  [key: string]: any;
+}
+
+interface FormConfig {
+  fields: IFieldConfig[];
 }
 
 export interface ISelectsProps {
@@ -20,58 +26,68 @@ export interface ISelectsProps {
   options?: IOptions[];
 }
 
-const CalculatorInputForm = ({ setIsCorrectSubmit, selects }: IProps) => {
-  const [isSubmitClicked, setIsSubmitClicked] = useState(false);
-  const [localCorrect, setLocalCorrect] = useState(false)
+const CalculatorInputForm = ({ config }: { config: FormConfig }) => {
+  const [isCorrect, setIsCorrect] = useState(false);
 
-  const [selectsValues, setSelectsValues] = useState<IOptions[]>(
-    new Array(selects.length).fill({ value: "", label: "" })
-  );
+  const defaultValues = config.fields.reduce((acc, field) => {
+    acc[field.name] = field.type === "checkbox" ? false : field.type === "select" ? null : "";
+    return acc;
+  }, {} as FormData);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitClicked(true);
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormData>({
+    defaultValues,
+    mode: "onSubmit",
+  });
 
-    let correct = true;
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    console.log("Данные формы:", data);
+    setIsCorrect(true);
+    alert(JSON.stringify(data, null, 2));
+    reset();
+  };
 
-    selectsValues.forEach((selectValue) => {
-      if (!selectValue.value) {
-        correct = false;
-      }
-    });
+  const renderField = (config: IFieldConfig) => {
+    switch (config.type) {
+      case "select":
+        return (
+          <Controller
+            key={config.name}
+            name={config.name}
+            control={control}
+            rules={{
+              required: { value: config.required ? config.required : false, message: "error" },
+            }}
+            render={({ field, fieldState }) => (
+              <CustomSelect
+                key={config.name}
+                className={styles.select}
+                name={config.name}
+                placeholder={config.placeholder}
+                label={config.label}
+                required={config.required}
+                options={config.options as IOptions[]}
+                selectedValue={field.value}
+                setValue={(value) => field.onChange(value.value)}
+                errorMessage={fieldState.error?.message}
+              />
+            )}
+          />
+        );
 
-    if (correct) {
-      setIsCorrectSubmit(true);
-      setLocalCorrect(true)
+      default:
+        return null;
     }
   };
 
-  const handleSingleSelect = (index: number, newValue: IOptions) => {
-    setSelectsValues((prevArray) => {
-      const newArray = [...prevArray];
-      newArray[index] = newValue;
-      return newArray;
-    });
-  };
-
   return (
-    <form className={styles.form} onSubmit={(e) => handleSubmit(e)} action="">
-      {selects.map((select, i) => (
-        <CustomSelect
-          key={select.name}
-          className={styles.select}
-          name={select.name}
-          placeholder={select.placeholder}
-          label={select.label}
-          required={select.required ? select.required : false}
-          options={select.options as IOptions[]}
-          selectedValue={selectsValues[i]?.value}
-          setValue={(value) => handleSingleSelect(i, value)}
-          isSubmitClicked={isSubmitClicked}
-        />
-      ))}
-
-      <Button className={`${styles.submit} ${localCorrect ? styles.submitHidden : ""}`} type="submit">
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)} action="">
+      {config.fields.map((field) => renderField(field))}
+      <Button className={`${styles.submit} ${isCorrect ? styles.submitHidden : ""}`} type="submit">
         Рассчитать
       </Button>
     </form>
