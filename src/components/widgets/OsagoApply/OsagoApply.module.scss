@@ -5,3 +5,15 @@
 .substrate {
   padding: 50px;
 }
+
+.input {
+  width: 43.6%;
+  flex-shrink: 0;
+}
+
+
+.inputsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

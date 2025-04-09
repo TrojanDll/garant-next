@@ -1,63 +1,23 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { ChangeHandler, Controller, SubmitHandler, useForm } from "react-hook-form";
+
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import Substrate from "@/components/ui/Substrate/Substrate";
-
-import styles from "./OsagoApply.module.scss";
-import CustomSelect, { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
-import { ChangeHandler, Controller, SubmitHandler, useForm } from "react-hook-form";
 import Button from "@/components/ui/Button/Button";
+import CustomSelect, { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
+
 import { IOsagoApplyForm } from "@/types/IOsagoApplyForm";
 import { IFieldConfig } from "@/types/IFieldConfig";
 
-const carCategoryParams: IFieldConfig[] = [
-  {
-    type: "select",
-    name: "vehicle_category",
-    label: "Категория ТС",
-    placeholder: "Категория ТС",
-    required: true,
-    options: [
-      {
-        label: "Option 1",
-        value: "Option 1",
-      },
-      {
-        label: "Option 2",
-        value: "Option 2",
-      },
-    ],
-  },
-  {
-    type: "select",
-    name: "vehicle_make",
-    label: "Марка",
-    placeholder: "Марка",
-    required: true,
-    options: [
-      {
-        label: "Option 1",
-        value: "Option 1",
-      },
-      {
-        label: "Option 2",
-        value: "Option 2",
-      },
-    ],
-  },
-];
+import styles from "./OsagoApply.module.scss";
+import getOsagoApplyFields, { ISplitFieldConfig } from "@/helpers/getOsagoApplyFields.helper";
 
 const OsagoApply = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    control,
-    watch,
-    reset,
-  } = useForm<IOsagoApplyForm>({
+  const [inputsConfig, setInputsConfig] = useState<ISplitFieldConfig>({});
+  const { handleSubmit, control, reset } = useForm<IOsagoApplyForm>({
     defaultValues: {
       vehicle_category: "",
     },
@@ -69,16 +29,43 @@ const OsagoApply = () => {
     reset();
   };
 
-  const options: IOptions[] = [
-    {
-      label: "Option 1",
-      value: "Option 1",
-    },
-    {
-      label: "Option 2",
-      value: "Option 2",
-    },
-  ];
+  useEffect(() => {
+    async function fetchConfig() {
+      const inputsConfigData: ISplitFieldConfig = await getOsagoApplyFields();
+      console.log(inputsConfigData.vehicle);
+
+      setInputsConfig(inputsConfigData);
+    }
+
+    fetchConfig();
+  }, []);
+
+  // Вынести в отдельный файл выбор между select, input
+  const renderedVehicleInputs = (
+    <>
+      {inputsConfig.vehicle.map((config) => (
+        <Controller
+          name={config.name}
+          control={control}
+          rules={{ required: "Обязательное поле" }}
+          render={({ field, fieldState }) => (
+            <CustomSelect
+              name={field.name}
+              options={config.options as IOptions[]}
+              label={config.label}
+              placeholder={config.placeholder}
+              required={config.required}
+              key={config.name}
+              selectedValue={field.value}
+              setValue={(value: IOptions) => field.onChange(value)}
+              errorMessage={fieldState.error?.message}
+              className={styles.input}
+            />
+          )}
+        />
+      ))}
+    </>
+  );
 
   return (
     <section className={styles.root}>
@@ -89,29 +76,12 @@ const OsagoApply = () => {
 
         <Substrate withShadow="light" className={styles.substrate}>
           <CustomTitle tag="h2">Транспортное средство</CustomTitle>
-
-          <div className={styles.inputsWrapper}>
-            <form onSubmit={handleSubmit(onSubmit)} action="">
-              <Controller
-                name="vehicle_category"
-                control={control}
-                rules={{ required: "ОБЯЗАТЕЛЬНО" }}
-                render={({ field, fieldState }) => (
-                  <CustomSelect
-                    name={field.name}
-                    options={options}
-                    placeholder={carCategoryParams.placeholder}
-                    required={carCategoryParams.required}
-                    key={carCategoryParams.name}
-                    selectedValue={field.value}
-                    setValue={(value: IOptions) => field.onChange(value)}
-                    errorMessage={fieldState.error?.message}
-                  />
-                )}
-              />
-              <Button type="submit">submit</Button>
-            </form>
-          </div>
+          <form onSubmit={handleSubmit(onSubmit)} action="">
+            <div className={styles.inputsWrapper}>
+              {inputsConfig.vehicle ? renderedVehicleInputs : <div>loading...</div>}
+            </div>
+            <Button type="submit">submit</Button>
+          </form>
         </Substrate>
       </ContentContainer>
     </section>

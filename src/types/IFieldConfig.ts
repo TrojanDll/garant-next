@@ -1,5 +1,7 @@
+import { IOsagoApplyForm } from "./IOsagoApplyForm";
+
 export interface IFieldConfig {
-  name: string;
+  name: keyof IOsagoApplyForm;
   type: "input" | "select" | "checkbox";
   label: string;
   options?: { value: string; label: string }[];
