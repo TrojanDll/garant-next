@@ -2,9 +2,10 @@
 
 import React, { useState } from "react";
 
-import styles from "./CalculatorInputForm.module.scss";
 import CustomSelect, { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
 import Button from "@/components/ui/Button/Button";
+
+import styles from "./CalculatorInputForm.module.scss";
 
 interface IProps {
   setIsCorrectSubmit: (value: boolean) => void;

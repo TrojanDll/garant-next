@@ -54,5 +54,32 @@ $button-gap-mobile: 15px;
 @media (max-width: 1149px) {
   .container {
     gap: $button-gap-mobile;
+    border-radius: 18px;
+    padding: 5px;
+  }
+
+  .activeBackground {
+    top: 5px;
+    bottom: 5px;
+  }
+
+  .button {
+    border-radius: 15px;
+    padding: 10px 15px;
+    width: 100px;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 129%;
+  }
+
+  .activeBackground {
+    border-radius: 15px;
+    padding: 10px 15px;
+    width: 100px;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 129%;
   }
 }
