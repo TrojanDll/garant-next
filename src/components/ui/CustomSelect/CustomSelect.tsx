@@ -20,7 +20,7 @@ export interface IOptions {
 interface IProps {
   options: IOptions[];
   required?: boolean;
-  setValue?: (value: IOptions) => void;
+  setValue?: (value: string) => void;
   selectedValue?: string | null | undefined;
   isSubmitClicked?: boolean;
   name: string;
@@ -63,7 +63,7 @@ const CustomSelect = ({
   const handleChange = (value: IOptions) => {
     setIsJustSelected(true);
     if (setValue) {
-      setValue(value);
+      setValue(value.value);
     }
   };
 

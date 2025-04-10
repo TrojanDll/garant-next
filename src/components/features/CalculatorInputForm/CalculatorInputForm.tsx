@@ -7,17 +7,17 @@ import Button from "@/components/ui/Button/Button";
 
 import styles from "./CalculatorInputForm.module.scss";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { ICalculatorOsagoForm } from "@/types/ICalculatorForms";
+import { ICalculatorNsForm, ICalculatorOsagoForm } from "@/types/ICalculatorForms";
 import { IFieldConfig } from "@/types/IFieldConfig";
 import CalculatorPolicyPrice from "../CalculatorPolicyPrice/CalculatorPolicyPrice";
+import { IOsagoApplyForm } from "@/types/IOsagoApplyForm";
 
 interface FormData {
   [key: string]: any;
 }
 
-
 interface IProps {
-  config: { fields: IFieldConfig[] };
+  config: { fields: IFieldConfig<ICalculatorOsagoForm & ICalculatorNsForm>[] };
   variant: "osago" | "ns";
 }
 
@@ -45,7 +45,7 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
     reset();
   };
 
-  const renderField = (config: IFieldConfig) => {
+  const renderField = (config: IFieldConfig<ICalculatorOsagoForm & ICalculatorNsForm>) => {
     switch (config.type) {
       case "select":
         return (
@@ -66,7 +66,7 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
                 required={config.required}
                 options={config.options as IOptions[]}
                 selectedValue={field.value}
-                setValue={(value) => field.onChange(value.value)}
+                setValue={(value: string) => field.onChange(value)}
                 errorMessage={fieldState.error?.message}
               />
             )}

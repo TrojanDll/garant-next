@@ -10,6 +10,7 @@ import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import CalculatorInputForm from "@/components/features/CalculatorInputForm/CalculatorInputForm";
 
 import styles from "./CalculatorMainForm.module.scss";
+import { ICalculatorNsForm, ICalculatorOsagoForm } from "@/types/ICalculatorForms";
 
 export interface ICalculatorMainFormProps {
   variant: "osago" | "ns";
@@ -20,7 +21,7 @@ const titles = {
   ns: "Полис от несчастного случая в Абхазии",
 };
 
-const selectsOsagoProps: IFieldConfig[] = [
+const selectsOsagoProps: IFieldConfig<ICalculatorOsagoForm>[] = [
   {
     type: "select",
     name: "car_category",
@@ -65,7 +66,7 @@ const selectsOsagoProps: IFieldConfig[] = [
   },
 ];
 
-const selectsNSProps: IFieldConfig[] = [
+const selectsNSProps: IFieldConfig<ICalculatorNsForm>[] = [
   {
     type: "select",
     name: "number_of_people",

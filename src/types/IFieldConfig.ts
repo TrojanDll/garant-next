@@ -1,12 +1,16 @@
-import { IOsagoApplyForm } from "./IOsagoApplyForm";
+import { TButtonGroupType } from "@/components/ui/ButtonGroup/ButtonGroup";
 
-export interface IFieldConfig {
-  name: keyof IOsagoApplyForm;
-  type: "input" | "select" | "checkbox";
+export type TFieldType = "input" | "select" | "checkbox" | "radio";
+
+export interface IFieldConfig<T> {
+  name: keyof T;
+  type: TFieldType;
   label: string;
   options?: { value: string; label: string }[];
   rules?: any;
   placeholder?: string;
-  required?: boolean
-  errorMessage?: string
+  required?: boolean;
+  errorMessage?: string;
+  buttons?: string[];
+  buttonGroupType?: TButtonGroupType;
 }

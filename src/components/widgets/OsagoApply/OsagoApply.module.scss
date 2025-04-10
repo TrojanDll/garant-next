@@ -3,17 +3,52 @@
 }
 
 .substrate {
+  margin-top: 50px;
   padding: 50px;
 }
 
 .input {
-  width: 43.6%;
   flex-shrink: 0;
 }
-
 
 .inputsWrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.singleInStroke {
+  width: 100%;
+}
+
+.inputSingleInStroke {
+  width: 43.6%;
+}
+
+.partial {
+  width: 50%;
+
+  &:nth-child(2n + 1) {
+    & .input,
+    .inputPartial {
+      width: 87%;
+      margin-left: auto !important;
+    }
+  }
+}
+
+.inputPartial {
+  width: 87%;
+}
+
+.inputWrapper {
+  margin-top: 40px;
+}
+
+.section {
+  margin-top: 100px;
+
+  &:first-child {
+    margin-top: 0;
+  }
 }

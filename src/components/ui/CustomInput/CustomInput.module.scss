@@ -1,0 +1,47 @@
+// .root {
+//   width: fit-content;
+// }
+
+.input {
+  width: 100%;
+  border: 1px solid var(--grey);
+  border-radius: 22px;
+  padding: 20px 30px;
+  background-color: var(--white);
+
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 128%;
+  letter-spacing: 0.01em;
+  color: var(--dark-grey);
+
+  &::placeholder {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 128%;
+    letter-spacing: 0.01em;
+    color: var(--grey);
+  }
+}
+
+.error {
+  color: var(--red2);
+  border: 1px solid var(--red2);
+
+  &::placeholder {
+    color: var(--red2);
+  }
+}
+
+.label {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 128%;
+  letter-spacing: 0.01em;
+  color: var(--dark-grey);
+}

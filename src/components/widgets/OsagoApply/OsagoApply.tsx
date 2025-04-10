@@ -1,19 +1,24 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { ChangeHandler, Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { ru } from "date-fns/locale";
 
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import Substrate from "@/components/ui/Substrate/Substrate";
 import Button from "@/components/ui/Button/Button";
-import CustomSelect, { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
+import { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
 
 import { IOsagoApplyForm } from "@/types/IOsagoApplyForm";
-import { IFieldConfig } from "@/types/IFieldConfig";
+
+import getOsagoApplyFields, { ISplitFieldConfig } from "@/helpers/getOsagoApplyFields.helper";
+import InputsSelector from "@/components/ui/InputsSelector/InputsSelector";
 
 import styles from "./OsagoApply.module.scss";
-import getOsagoApplyFields, { ISplitFieldConfig } from "@/helpers/getOsagoApplyFields.helper";
+import ButtonGroup from "@/components/ui/ButtonGroup/ButtonGroup";
+import { DayPicker } from "react-day-picker";
+import CustomChevron from "@/components/ui/CustomChevron/CustomChevron";
 
 const OsagoApply = () => {
   const [inputsConfig, setInputsConfig] = useState<ISplitFieldConfig>({});
@@ -25,47 +30,127 @@ const OsagoApply = () => {
   });
 
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
-    console.log(data["vehicle_category"]);
-    reset();
+    console.log(data);
+    // reset();
   };
 
   useEffect(() => {
     async function fetchConfig() {
       const inputsConfigData: ISplitFieldConfig = await getOsagoApplyFields();
-      console.log(inputsConfigData.vehicle);
-
       setInputsConfig(inputsConfigData);
     }
 
     fetchConfig();
   }, []);
 
-  // Вынести в отдельный файл выбор между select, input
   const renderedVehicleInputs = (
     <>
-      {inputsConfig.vehicle.map((config) => (
-        <Controller
-          name={config.name}
-          control={control}
-          rules={{ required: "Обязательное поле" }}
-          render={({ field, fieldState }) => (
-            <CustomSelect
-              name={field.name}
-              options={config.options as IOptions[]}
-              label={config.label}
-              placeholder={config.placeholder}
-              required={config.required}
-              key={config.name}
-              selectedValue={field.value}
-              setValue={(value: IOptions) => field.onChange(value)}
-              errorMessage={fieldState.error?.message}
-              className={styles.input}
+      {inputsConfig.vehicle &&
+        inputsConfig.vehicle.map((config, i) => (
+          <div
+            key={config.name}
+            className={`${i === 0 ? styles.singleInStroke : styles.partial} ${styles.inputWrapper}`}
+          >
+            <Controller
+              name={config.name}
+              control={control}
+              rules={{ required: "Обязательное поле" }}
+              render={({ field, fieldState }) => (
+                <InputsSelector
+                  type={config.type}
+                  name={field.name}
+                  options={config.options as IOptions[]}
+                  label={config.label}
+                  placeholder={config.placeholder}
+                  required={config.required}
+                  key={config.name}
+                  value={field.value}
+                  setValue={(value: string) => field.onChange(value)}
+                  errorMessage={fieldState.error?.message}
+                  className={`${styles.input} ${
+                    i === 0 ? styles.inputSingleInStroke : styles.inputPartial
+                  }`}
+                />
+              )}
             />
-          )}
-        />
-      ))}
+          </div>
+        ))}
     </>
   );
+
+  const renderedOwnerInputs = (
+    <>
+      {inputsConfig.owner &&
+        inputsConfig.owner.map((config, i) => (
+          <div
+            key={config.name}
+            className={`${i === 0 ? styles.singleInStroke : styles.partial} ${styles.inputWrapper}`}
+          >
+            <Controller
+              name={config.name}
+              control={control}
+              render={({ field, fieldState }) => (
+                <InputsSelector
+                  buttonGroupType="small"
+                  type={config.type}
+                  name={field.name}
+                  options={config.options as IOptions[]}
+                  label={config.label}
+                  placeholder={config.placeholder}
+                  required={config.required}
+                  key={config.name}
+                  value={field.value}
+                  setValue={(value: string) => field.onChange(value)}
+                  errorMessage={fieldState.error?.message}
+                  buttons={config.buttons}
+                  className={`${styles.input} ${
+                    i === 0 ? styles.inputSingleInStroke : styles.inputPartial
+                  }`}
+                />
+              )}
+            />
+          </div>
+        ))}
+    </>
+  );
+
+  const renderedDurationOfstayInputs = (
+    <>
+      {inputsConfig.duration &&
+        inputsConfig.duration.map((config, i) => (
+          <div
+            key={config.name}
+            className={`${i === 0 ? styles.singleInStroke : styles.partial} ${styles.inputWrapper}`}
+          >
+            <Controller
+              name={config.name}
+              control={control}
+              render={({ field, fieldState }) => (
+                <InputsSelector
+                  buttonGroupType="small"
+                  type={config.type}
+                  name={field.name}
+                  options={config.options as IOptions[]}
+                  label={config.label}
+                  placeholder={config.placeholder}
+                  required={config.required}
+                  key={config.name}
+                  value={field.value}
+                  setValue={(value: string) => field.onChange(value)}
+                  errorMessage={fieldState.error?.message}
+                  buttons={config.buttons}
+                  className={`${styles.input} ${
+                    i === 0 ? styles.inputSingleInStroke : styles.inputPartial
+                  }`}
+                />
+              )}
+            />
+          </div>
+        ))}
+    </>
+  );
+
+  const [selected, setSelected] = useState<Date>();
 
   return (
     <section className={styles.root}>
@@ -75,13 +160,49 @@ const OsagoApply = () => {
         </CustomTitle>
 
         <Substrate withShadow="light" className={styles.substrate}>
-          <CustomTitle tag="h2">Транспортное средство</CustomTitle>
-          <form onSubmit={handleSubmit(onSubmit)} action="">
-            <div className={styles.inputsWrapper}>
-              {inputsConfig.vehicle ? renderedVehicleInputs : <div>loading...</div>}
+          <form noValidate onSubmit={handleSubmit(onSubmit)} action="">
+            <div className={styles.section}>
+              <CustomTitle tag="h2">Транспортное средство</CustomTitle>
+              <div className={styles.inputsWrapper}>
+                {inputsConfig.vehicle ? renderedVehicleInputs : <div key={1}>loading...</div>}
+              </div>
             </div>
+
+            <div className={styles.section}>
+              <CustomTitle tag="h2" className={styles.sectionTitle}>
+                Собственник
+              </CustomTitle>
+              <div className={styles.inputsWrapper}>
+                {inputsConfig.owner ? renderedOwnerInputs : <div key={1}>loading...</div>}
+              </div>
+            </div>
+
+            <div className={styles.section}>
+              <CustomTitle tag="h2" className={styles.sectionTitle}>
+                Срок пребывания
+              </CustomTitle>
+              <div className={styles.inputsWrapper}>
+                {inputsConfig.duration ? (
+                  renderedDurationOfstayInputs
+                ) : (
+                  <div key={1}>loading...</div>
+                )}
+              </div>
+            </div>
+
             <Button type="submit">submit</Button>
           </form>
+          <DayPicker
+            locale={ru}
+            animate
+            mode="single"
+            selected={selected}
+            onSelect={setSelected}
+            footer={selected ? `Selected: ${selected.toLocaleDateString()}` : "Pick a day."}
+            components={{
+              Chevron: CustomChevron
+            }}
+          />
         </Substrate>
       </ContentContainer>
     </section>

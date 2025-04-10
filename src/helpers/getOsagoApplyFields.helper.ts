@@ -1,7 +1,8 @@
 import { IFieldConfig } from "@/types/IFieldConfig";
+import { IOsagoApplyForm } from "@/types/IOsagoApplyForm";
 
 export interface ISplitFieldConfig {
-  [key: string]: IFieldConfig[]
+  [key: string]: IFieldConfig<IOsagoApplyForm>[];
 }
 
 export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> {
@@ -95,6 +96,48 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         label: "Серия и номер регистрации ТС",
         placeholder: "Серия и номер регистрации ТС",
         required: true,
+      },
+    ],
+    owner: [
+      {
+        type: "radio",
+        buttonGroupType: "small",
+        name: "owner_person_type",
+        label: "owner_person_type",
+        buttons: ["Физ. лицо", "Юр. лицо"],
+      },
+      {
+        type: "input",
+        name: "owner_fio",
+        label: "ФИО",
+        placeholder: "ФИО Собственника",
+        required: true,
+      },
+      {
+        type: "input",
+        name: "owner_passport_data",
+        label: "Серия и номер паспорта",
+        placeholder: "Введите серию и номер",
+        required: true,
+      },
+    ],
+    duration: [
+      {
+        type: "select",
+        name: "duration_of_stay",
+        label: "Длительность пребывания",
+        placeholder: "Длительность пребывания",
+        required: true,
+        options: [
+          {
+            label: "Option 1",
+            value: "Option 1",
+          },
+          {
+            label: "Option 2",
+            value: "Option 2",
+          },
+        ],
       },
     ],
   };

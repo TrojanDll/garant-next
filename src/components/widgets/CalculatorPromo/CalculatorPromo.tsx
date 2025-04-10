@@ -2,11 +2,9 @@
 
 import React, { useState } from "react";
 
-import CalculatorMainForm, {
-  ICalculatorMainFormProps,
-} from "@/components/entities/CalculatorMainForm/CalculatorMainForm";
+import CalculatorMainForm from "@/components/entities/CalculatorMainForm/CalculatorMainForm";
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
-import ButtonGroup from "@/components/ui/ButtonGroup/ButtonGroup";
+import ButtonGroup, { TButtonGroupRequest } from "@/components/ui/ButtonGroup/ButtonGroup";
 
 import styles from "./CalculatorPromo.module.scss";
 
@@ -27,7 +25,11 @@ const CalculatorPromo = () => {
   return (
     <ContentContainer>
       <section className={styles.root}>
-        <ButtonGroup items={buttons} defaultActiveIndex={0} onButtonClick={setCurrentTab} />
+        <ButtonGroup
+          items={buttons}
+          defaultActiveIndex={0}
+          onButtonClick={(value: TButtonGroupRequest) => setCurrentTab(value.index)}
+        />
         {content[currentTab].value}
       </section>
     </ContentContainer>
