@@ -19,10 +19,10 @@ interface IProps {
 
 const CalendarSelect = ({ calendarMonth, displayIndex }: IProps) => {
   const { goToMonth, months } = useDayPicker();
-  const [isSelectOpened, setIsSelectOpened] = useState<boolean[]>([false, false]);
-  const [isJustSelected, setIsJustSelected] = useState<boolean[]>([false, false]);
-  // const [selectedMonth, setSelectedMonth] = useState();
-  // const [selectedYear, setSelectedYear] = useState();
+  const [isMonthSelectOpened, setIsMonthSelectOpened] = useState(false);
+  const [isMonthJustSelected, setIsMonthJustSelected] = useState(false);
+  const [isYearSelectOpened, setIsYearSelectOpened] = useState(false);
+  const [isYearJustSelected, setIsYearJustSelected] = useState(false);
 
   const currentMonth = months[0].date;
 
@@ -65,40 +65,36 @@ const CalendarSelect = ({ calendarMonth, displayIndex }: IProps) => {
   };
 
   const handleMenuOpen = (index: number) => {
-    setIsSelectOpened((prev) => {
-      const newArr = prev;
-      newArr[index] = !newArr[index];
-      return newArr;
-    });
-    setIsJustSelected((prev) => {
-      const newArr = prev;
-      newArr[index] = false;
-      return newArr;
-    });
+    if (index === 0) {
+      setIsMonthSelectOpened(true);
+      setIsMonthJustSelected(false);
+    } else {
+      setIsYearSelectOpened(true);
+      setIsYearJustSelected(false);
+    }
   };
 
   const handleMenuClose = (index: number) => {
-    if (isJustSelected) {
-      setIsJustSelected((prev) => {
-        const newArr = prev;
-        newArr[index] = false;
-        return newArr;
-      });
-      return;
+    if (index === 0) {
+      if (isMonthJustSelected) {
+        setIsMonthJustSelected(false);
+        return;
+      }
+      setIsMonthSelectOpened(false);
+    } else {
+      if (isYearJustSelected) {
+        setIsYearJustSelected(false);
+        return;
+      }
+      setIsYearSelectOpened(false);
     }
-    setIsSelectOpened((prev) => {
-      const newArr = prev;
-      newArr[index] = !newArr[index];
-      return newArr;
-    });
   };
 
   return (
-    <div className="flex gap-2 p-2">
+    <div className={styles.selectsContainer}>
       <Select
         defaultValue={monthsList[currentMonthIndex]}
         value={currentMonthOption}
-        // defaultInputValue={monthsList[0].label}
         key={9283754}
         openMenuOnFocus={false}
         onMenuOpen={() => handleMenuOpen(0)}
@@ -106,12 +102,12 @@ const CalendarSelect = ({ calendarMonth, displayIndex }: IProps) => {
         onChange={(value) => handleMonthChange(value as ICalendarSelectOptions)}
         classNames={{
           container: () => `${styles.container}`,
-          control: () => `${styles.control} ${isSelectOpened[0] ? styles.controlOpened : ""}`,
+          control: () => `${styles.control} ${isMonthSelectOpened ? styles.controlOpened : ""}`,
           placeholder: () => `${styles.placeholder} `,
           indicatorSeparator: () => styles.indicatorCustomSeparator,
           indicatorsContainer: () =>
             `${styles.indicatorCustomContainer} ${
-              isSelectOpened[0] ? styles.indicatorCustomContainerOpened : ""
+              isMonthSelectOpened ? styles.indicatorCustomContainerOpened : ""
             }`,
           singleValue: () => styles.singleCustomValue,
           menu: () => styles.dropdown,
@@ -134,12 +130,12 @@ const CalendarSelect = ({ calendarMonth, displayIndex }: IProps) => {
         onChange={(value) => handleYearChange(value as ICalendarSelectOptions)}
         classNames={{
           container: () => `${styles.container}`,
-          control: () => `${styles.control} ${isSelectOpened[1] ? styles.controlOpened : ""}`,
+          control: () => `${styles.control} ${isYearSelectOpened ? styles.controlOpened : ""}`,
           placeholder: () => `${styles.placeholder} `,
           indicatorSeparator: () => styles.indicatorCustomSeparator,
           indicatorsContainer: () =>
             `${styles.indicatorCustomContainer} ${
-              isSelectOpened[1] ? styles.indicatorCustomContainerOpened : ""
+              isYearSelectOpened ? styles.indicatorCustomContainerOpened : ""
             }`,
           singleValue: () => styles.singleCustomValue,
           menu: () => styles.dropdown,
@@ -151,28 +147,6 @@ const CalendarSelect = ({ calendarMonth, displayIndex }: IProps) => {
         }}
         options={yearsList}
       />
-      {/* <select
-        value={currentMonth.getMonth()}
-        onChange={handleMonthChange}
-        className="border rounded p-1"
-      >
-        {monthsList.map((month) => (
-          <option key={month.value} value={month.value}>
-            {month.label}
-          </option>
-        ))}
-      </select>
-      <select
-        value={currentMonth.getFullYear()}
-        onChange={handleYearChange}
-        className="border rounded p-1"
-      >
-        {years.map((year) => (
-          <option key={year} value={year}>
-            {year}
-          </option>
-        ))}
-      </select> */}
     </div>
   );
 };

@@ -3,8 +3,9 @@ import React from "react";
 import { DayPicker, OnSelectHandler } from "react-day-picker";
 import CustomChevron from "../CustomChevron/CustomChevron";
 
-import styles from "./Calendar.module.scss";
 import CalendarSelect from "../CalendarSelect/CalendarSelect";
+
+import styles from "./Calendar.module.scss";
 
 interface IProps {
   value: Date | undefined;
@@ -39,6 +40,7 @@ const Calendar = ({ value, setValue }: IProps) => {
         months: `${styles.months} rdp-months`,
         nav: `${styles.nav} rdp-nav`,
         weekday: `${styles.weekday} rdp-weekday`,
+        weekdays: `${styles.weekdays} rdp-weekdays`,
         day_button: `${styles.dayButton} rdp-day_button`,
         selected: `${styles.selected} rdp-selected`,
       }}

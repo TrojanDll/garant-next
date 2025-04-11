@@ -53,3 +53,9 @@
     transform: translate(-50%, -50%) rotate(180deg);
   }
 }
+
+.selectsContainer {
+  display: flex;
+  column-gap: 20px;
+  margin-bottom: 15px;
+}
