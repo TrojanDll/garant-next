@@ -19,8 +19,8 @@ interface IProps {
 
 const CalendarSelect = ({ calendarMonth, displayIndex }: IProps) => {
   const { goToMonth, months } = useDayPicker();
-  const [isSelectOpened, setIsSelectOpened] = useState(false);
-  const [isJustSelected, setIsJustSelected] = useState(false);
+  const [isSelectOpened, setIsSelectOpened] = useState<boolean[]>([false, false]);
+  const [isJustSelected, setIsJustSelected] = useState<boolean[]>([false, false]);
   // const [selectedMonth, setSelectedMonth] = useState();
   // const [selectedYear, setSelectedYear] = useState();
 
@@ -64,17 +64,33 @@ const CalendarSelect = ({ calendarMonth, displayIndex }: IProps) => {
     goToMonth(new Date(newYear, currentMonth.getMonth()));
   };
 
-  const handleMenuOpen = () => {
-    setIsSelectOpened(true);
-    setIsJustSelected(false);
+  const handleMenuOpen = (index: number) => {
+    setIsSelectOpened((prev) => {
+      const newArr = prev;
+      newArr[index] = !newArr[index];
+      return newArr;
+    });
+    setIsJustSelected((prev) => {
+      const newArr = prev;
+      newArr[index] = false;
+      return newArr;
+    });
   };
 
-  const handleMenuClose = () => {
+  const handleMenuClose = (index: number) => {
     if (isJustSelected) {
-      setIsJustSelected(false);
+      setIsJustSelected((prev) => {
+        const newArr = prev;
+        newArr[index] = false;
+        return newArr;
+      });
       return;
     }
-    setIsSelectOpened(false);
+    setIsSelectOpened((prev) => {
+      const newArr = prev;
+      newArr[index] = !newArr[index];
+      return newArr;
+    });
   };
 
   return (
@@ -85,16 +101,17 @@ const CalendarSelect = ({ calendarMonth, displayIndex }: IProps) => {
         // defaultInputValue={monthsList[0].label}
         key={9283754}
         openMenuOnFocus={false}
-        onMenuOpen={() => handleMenuOpen()}
-        onMenuClose={() => handleMenuClose()}
+        onMenuOpen={() => handleMenuOpen(0)}
+        onMenuClose={() => handleMenuClose(0)}
         onChange={(value) => handleMonthChange(value as ICalendarSelectOptions)}
         classNames={{
-          control: () => `${styles.control} ${isSelectOpened ? styles.controlOpened : ""}`,
+          container: () => `${styles.container}`,
+          control: () => `${styles.control} ${isSelectOpened[0] ? styles.controlOpened : ""}`,
           placeholder: () => `${styles.placeholder} `,
           indicatorSeparator: () => styles.indicatorCustomSeparator,
           indicatorsContainer: () =>
             `${styles.indicatorCustomContainer} ${
-              isSelectOpened ? styles.indicatorCustomContainerOpened : ""
+              isSelectOpened[0] ? styles.indicatorCustomContainerOpened : ""
             }`,
           singleValue: () => styles.singleCustomValue,
           menu: () => styles.dropdown,
@@ -112,16 +129,17 @@ const CalendarSelect = ({ calendarMonth, displayIndex }: IProps) => {
         defaultValue={yearsList[0]}
         key={129365}
         openMenuOnFocus={false}
-        onMenuOpen={() => handleMenuOpen()}
-        onMenuClose={() => handleMenuClose()}
+        onMenuOpen={() => handleMenuOpen(1)}
+        onMenuClose={() => handleMenuClose(1)}
         onChange={(value) => handleYearChange(value as ICalendarSelectOptions)}
         classNames={{
-          control: () => `${styles.control} ${isSelectOpened ? styles.controlOpened : ""}`,
+          container: () => `${styles.container}`,
+          control: () => `${styles.control} ${isSelectOpened[1] ? styles.controlOpened : ""}`,
           placeholder: () => `${styles.placeholder} `,
           indicatorSeparator: () => styles.indicatorCustomSeparator,
           indicatorsContainer: () =>
             `${styles.indicatorCustomContainer} ${
-              isSelectOpened ? styles.indicatorCustomContainerOpened : ""
+              isSelectOpened[1] ? styles.indicatorCustomContainerOpened : ""
             }`,
           singleValue: () => styles.singleCustomValue,
           menu: () => styles.dropdown,

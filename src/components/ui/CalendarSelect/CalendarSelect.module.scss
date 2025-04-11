@@ -1,0 +1,55 @@
+.container {
+  width: fit-content !important;
+  font-family: var(--font-family) !important;
+}
+
+.control {
+  border: none !important;
+  cursor: pointer !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.singleCustomValue {
+  color: var(--blue) !important;
+  font-weight: 500 !important;
+  font-size: 26px !important;
+  line-height: 123% !important;
+  text-transform: capitalize !important;
+}
+
+.option {
+  text-transform: capitalize !important;
+  cursor: pointer !important;
+}
+
+.indicatorCustomSeparator {
+  display: none !important;
+}
+
+.indicatorCustomContainer {
+  position: relative;
+
+  & svg {
+    display: none;
+  }
+
+  &::after {
+    content: "";
+    width: 16px;
+    height: 10px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0);
+    transition: all 0.3s ease-in-out;
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='10' viewBox='0 0 16 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 1.75L8 8.25L0.999999 1.75' stroke='%233233F3' stroke-width='2' stroke-linecap='round' /%3E%3C/svg%3E");
+  }
+}
+
+.indicatorCustomContainerOpened {
+  &::after {
+    transform: translate(-50%, -50%) rotate(180deg);
+  }
+}
