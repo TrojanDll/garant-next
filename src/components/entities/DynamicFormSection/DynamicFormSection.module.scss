@@ -1,0 +1,24 @@
+.input {
+  flex-shrink: 0;
+}
+
+.inputWrapper {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 43.6%;
+
+  & .input {
+    width: 100%;
+  }
+}
+
+.singleInStroke {
+  width: 100%;
+
+  & .inputSingleInStroke {
+    width: 43.6%;
+  }
+}

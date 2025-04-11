@@ -19,6 +19,7 @@ import styles from "./OsagoApply.module.scss";
 import ButtonGroup from "@/components/ui/ButtonGroup/ButtonGroup";
 import { DayPicker } from "react-day-picker";
 import CustomChevron from "@/components/ui/CustomChevron/CustomChevron";
+import DynamicFormSection from "@/components/entities/DynamicFormSection/DynamicFormSection";
 
 const OsagoApply = () => {
   const [inputsConfig, setInputsConfig] = useState<ISplitFieldConfig>({});
@@ -164,7 +165,16 @@ const OsagoApply = () => {
             <div className={styles.section}>
               <CustomTitle tag="h2">Транспортное средство</CustomTitle>
               <div className={styles.inputsWrapper}>
-                {inputsConfig.vehicle ? renderedVehicleInputs : <div key={1}>loading...</div>}
+                {inputsConfig.vehicle ? (
+                  <DynamicFormSection
+                    fields={inputsConfig.vehicle}
+                    control={control}
+                    className={styles.input}
+                    isTopItemSingle
+                  />
+                ) : (
+                  <div>loading...</div>
+                )}
               </div>
             </div>
 
@@ -173,7 +183,15 @@ const OsagoApply = () => {
                 Собственник
               </CustomTitle>
               <div className={styles.inputsWrapper}>
-                {inputsConfig.owner ? renderedOwnerInputs : <div key={1}>loading...</div>}
+                {inputsConfig.owner ? (
+                  <DynamicFormSection
+                    fields={inputsConfig.owner}
+                    control={control}
+                    isTopItemSingle
+                  />
+                ) : (
+                  <div>loading...</div>
+                )}
               </div>
             </div>
 
@@ -183,9 +201,9 @@ const OsagoApply = () => {
               </CustomTitle>
               <div className={styles.inputsWrapper}>
                 {inputsConfig.duration ? (
-                  renderedDurationOfstayInputs
+                  <DynamicFormSection fields={inputsConfig.duration} control={control} />
                 ) : (
-                  <div key={1}>loading...</div>
+                  <div>loading...</div>
                 )}
               </div>
             </div>
@@ -200,7 +218,7 @@ const OsagoApply = () => {
             onSelect={setSelected}
             footer={selected ? `Selected: ${selected.toLocaleDateString()}` : "Pick a day."}
             components={{
-              Chevron: CustomChevron
+              Chevron: CustomChevron,
             }}
           />
         </Substrate>
