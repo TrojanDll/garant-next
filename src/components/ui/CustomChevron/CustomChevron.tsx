@@ -1,26 +1,27 @@
 import React from "react";
-
-import styles from "./CustomChevron.module.scss";
-import SvgSelector from "../SvgSelector/SvgSelector";
-import { ESvgName } from "@/constants/svg-ids.constants";
 import { ChevronProps } from "react-day-picker";
 
-// interface IProps {
-//   className?: string | undefined;
-//   size?: number | undefined;
-//   disabled?: boolean | undefined;
-//   orientation?: "left" | "right" | "up" | "down" | undefined;
-// }
+import { ESvgName } from "@/constants/svg-ids.constants";
 
-const CustomChevron = ({ orientation, className, disabled, size }: ChevronProps) => {
+import SvgSelector from "../SvgSelector/SvgSelector";
+
+import styles from "./CustomChevron.module.scss";
+
+const CustomChevron = ({ orientation, className, size }: ChevronProps) => {
   return (
     <span
       className={`${styles.chevron} ${
-        orientation === "left" ? styles.left : styles.right
+        orientation === "left"
+          ? styles.left
+          : orientation === "down"
+          ? styles.down
+          : orientation === "up"
+          ? styles.up
+          : styles.right
       } ${className}`}
       style={{ width: size, height: size }}
     >
-      <SvgSelector id={ESvgName.CHEVRON_DOWN} />
+      <SvgSelector fill="#3233F3" id={ESvgName.CHEVRON_CALENDAR} />
     </span>
   );
 };

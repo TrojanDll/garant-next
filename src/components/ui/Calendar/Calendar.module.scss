@@ -1,0 +1,93 @@
+.dayPickerRoot {
+  font-family: var(--font-family);
+}
+
+.dropdown {
+  text-transform: capitalize;
+  outline: none;
+
+  & option {
+    text-transform: capitalize;
+  }
+}
+
+.captionLabel {
+  font-family: var(--font-family);
+  text-transform: capitalize;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 123%;
+  color: var(--blue);
+}
+
+.chevron {
+  margin-left: 10px;
+}
+
+.dropdowns {
+  gap: 20px;
+}
+
+.day {
+  width: 50px;
+  height: 50px;
+}
+
+.months {
+  border-radius: 15px;
+  padding: 20px 30px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.13), 0 3px 14px 0 rgba(0, 0, 0, 0.04),
+    0 8px 32px 0 rgba(0, 0, 0, 0.05), 0 30px 84px 0 rgba(0, 0, 0, 0.07);
+  background: var(--fill-color-12---white);
+}
+
+.nav {
+  inset-block-start: unset;
+  inset-block-end: unset;
+
+  top: 20px;
+  right: 30px;
+}
+
+.weekday {
+  width: 50px;
+  height: 50px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  text-align: center;
+  color: var(--prozrachnyy-grey);
+}
+
+.dayButton {
+  width: 100%;
+  height: 100%;
+
+  &:hover {
+    border-radius: 5px;
+    background: var(--light-grey);
+  }
+}
+
+.selected {
+  background: var(--blue);
+  border-radius: 5px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 128%;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: var(--white);
+
+  & .dayButton {
+    border: none;
+
+    &:hover {
+      background: var(--blue);
+    }
+  }
+
+
+}

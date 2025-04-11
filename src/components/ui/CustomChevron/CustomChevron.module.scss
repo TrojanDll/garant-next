@@ -1,7 +1,20 @@
-.left {
+// .left {
+//   transform: rotate(90deg);
+// }
+
+.right {
+  transform: rotate(180deg);
+}
+
+.down {
+  transform: rotate(-90deg);
+}
+
+.up {
   transform: rotate(90deg);
 }
 
-.right {
-  transform: rotate(-90deg);
+.chevron {
+  width: 11px;
+  height: 18px;
 }
