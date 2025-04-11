@@ -26,7 +26,6 @@ const OsagoApply = () => {
     console.log(data);
   };
 
-  const [selected, setSelected] = useState<Date>();
 
   return (
     <section className={styles.root}>
@@ -81,7 +80,6 @@ const OsagoApply = () => {
 
             <Button type="submit">submit</Button>
           </form>
-          <Calendar value={selected} setValue={setSelected} />
         </Substrate>
       </ContentContainer>
     </section>

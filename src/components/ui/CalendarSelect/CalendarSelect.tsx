@@ -112,7 +112,7 @@ const CalendarSelect = ({ calendarMonth, displayIndex }: IProps) => {
           singleValue: () => styles.singleCustomValue,
           menu: () => styles.dropdown,
           option: (state) =>
-            `${styles.option} ${state.isFocused ? styles.optionFocused : ""} ${
+            `${styles.option} ${state.isFocused ? styles.optionHovered : ""} ${
               state.isSelected ? styles.optionFocused : ""
             }`,
           menuList: () => styles.menuList,
@@ -140,7 +140,7 @@ const CalendarSelect = ({ calendarMonth, displayIndex }: IProps) => {
           singleValue: () => styles.singleCustomValue,
           menu: () => styles.dropdown,
           option: (state) =>
-            `${styles.option} ${state.isFocused ? styles.optionFocused : ""} ${
+            `${styles.option} ${state.isFocused ? styles.optionHovered : ""} ${
               state.isSelected ? styles.optionFocused : ""
             }`,
           menuList: () => styles.menuList,

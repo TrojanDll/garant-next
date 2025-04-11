@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import getOsagoApplyFields, { ISplitFieldConfig } from "@/helpers/getOsagoApplyFields.helper";
+import getOsagoApplyFields, { ISplitFieldConfig } from "@/helpers/OsagoApply/getOsagoApplyFields.helper";
 
 export const useOsagoFormConfig = () => {
   const [config, setConfig] = useState<ISplitFieldConfig>({});

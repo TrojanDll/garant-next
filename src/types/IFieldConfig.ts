@@ -2,6 +2,8 @@ import { TButtonGroupType } from "@/components/ui/ButtonGroup/ButtonGroup";
 
 export type TFieldType = "input" | "select" | "checkbox" | "radio";
 
+export type TInputType = "text" | "date" | "promocode" | "password";
+
 export interface IFieldConfig<T> {
   name: keyof T;
   type: TFieldType;
@@ -13,4 +15,5 @@ export interface IFieldConfig<T> {
   errorMessage?: string;
   buttons?: string[];
   buttonGroupType?: TButtonGroupType;
+  inputType?: TInputType;
 }

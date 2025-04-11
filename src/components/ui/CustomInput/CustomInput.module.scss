@@ -1,6 +1,6 @@
-// .root {
-//   width: fit-content;
-// }
+.root {
+  position: relative;
+}
 
 .input {
   width: 100%;
@@ -44,4 +44,26 @@
   line-height: 128%;
   letter-spacing: 0.01em;
   color: var(--dark-grey);
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.asideElement {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.calendar {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  // transform: translateY(100%);
+  z-index: 100;
 }

@@ -139,6 +139,24 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
           },
         ],
       },
+      {
+        type: "input",
+        name: "date_of_start",
+        label: "Дата начала",
+        placeholder: "Выберите дату",
+        inputType: "date",
+        required: true,
+        options: [
+          {
+            label: "Option 1",
+            value: "Option 1",
+          },
+          {
+            label: "Option 2",
+            value: "Option 2",
+          },
+        ],
+      },
     ],
   };
   return fields;

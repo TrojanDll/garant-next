@@ -1,5 +1,6 @@
 .dayPickerRoot {
   font-family: var(--font-family);
+  background: var(--white) !important;
 }
 
 .dropdown {
@@ -22,6 +23,7 @@
 
 .chevron {
   margin-left: 10px;
+  z-index: 2;
 }
 
 .dropdowns {
@@ -95,3 +97,9 @@
     }
   }
 }
+
+// .month {
+//   opacity: 0 !important;
+//   width: 0 !important;
+//   height: 0 !important;
+// }

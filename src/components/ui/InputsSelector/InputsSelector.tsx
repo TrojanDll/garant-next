@@ -1,7 +1,7 @@
 import React from "react";
 import CustomSelect, { IOptions } from "../CustomSelect/CustomSelect";
 import CustomInput from "../CustomInput/CustomInput";
-import { TFieldType } from "@/types/IFieldConfig";
+import { TFieldType, TInputType } from "@/types/IFieldConfig";
 import ButtonGroup, { TButtonGroupRequest, TButtonGroupType } from "../ButtonGroup/ButtonGroup";
 
 interface IProps {
@@ -18,6 +18,7 @@ interface IProps {
   options?: IOptions[];
   buttons?: string[];
   buttonGroupType?: TButtonGroupType;
+  inputType?: TInputType;
 }
 
 const InputsSelector = ({
@@ -34,6 +35,7 @@ const InputsSelector = ({
   options,
   buttons,
   buttonGroupType,
+  inputType,
 }: IProps) => {
   const renderComponent = (
     <>
@@ -61,6 +63,7 @@ const InputsSelector = ({
           setValue={(value: string) => setValue(value)}
           errorMessage={errorMessage}
           className={className}
+          inputType={inputType}
         />
       ) : type === "radio" ? (
         <ButtonGroup
