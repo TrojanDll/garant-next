@@ -11,20 +11,21 @@ import styles from "./InputAsideElement.module.scss";
 interface IProps {
   inputType: TInputType;
   className?: string;
+  onClick?: () => void;
+  isLoading?: boolean;
 }
 
-const InputAsideElement = ({ inputType, className }: IProps) => {
+const InputAsideElement = ({ inputType, className, onClick, isLoading = true }: IProps) => {
   return (
     <>
       {inputType === "date" && (
-        <SvgSelector
-          className={`${className} ${styles.calendar}`}
-          id={ESvgName.CALENDAR}
-        />
+        <SvgSelector className={`${className} ${styles.calendar}`} id={ESvgName.CALENDAR} />
       )}
 
       {inputType === "promocode" && (
-        <Button className={`${className} ${styles.promocode}`}>Применить</Button>
+        <Button onClickEvent={onClick} type="button" className={`${className} ${styles.promocode}`}>
+          {isLoading ? <div className={styles.loader}></div> : "Применить"}
+        </Button>
       )}
     </>
   );

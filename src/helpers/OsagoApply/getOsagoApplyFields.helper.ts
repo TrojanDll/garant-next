@@ -155,7 +155,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         label: "Промокод",
         placeholder: "Введите промокод",
         inputType: "promocode",
-        required: true,
+        required: false,
       },
     ],
   };

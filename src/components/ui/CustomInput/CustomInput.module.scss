@@ -26,6 +26,11 @@
   }
 }
 
+.promocode {
+  padding: 26px 30px;
+  padding-right: 190px;
+}
+
 .error {
   color: var(--red2);
   border: 1px solid var(--red2);
@@ -79,4 +84,8 @@
 .labelSpan {
   font-weight: 400;
   margin-left: 4px;
+}
+
+.discountValue {
+  font-weight: 500;
 }

@@ -1,0 +1,22 @@
+.root {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  column-gap: 7px;
+}
+
+.success {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 128%;
+  color: var(--dark-green);
+}
+
+.error {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 128%;
+  color: var(--red2);
+}

@@ -8,6 +8,9 @@ import InputAsideElement from "../InputAsideElement/InputAsideElement";
 import Calendar from "../Calendar/Calendar";
 import ClickOutsideWrapper from "../ClickOutsideWrapper/ClickOutsideWrapper";
 
+import { usePromocodeValidate } from "@/hooks/usePromocodeValidate/usePromocodeValidate";
+import InputNotification from "../InputNotification/InputNotification";
+
 import styles from "./CustomInput.module.scss";
 
 interface IProps {
@@ -36,7 +39,10 @@ const CustomInput = ({
   inputType = "text",
 }: IProps) => {
   const [selected, setSelected] = useState<Date>();
+  const [isValidationError, setIsValidationError] = useState(false);
   const [isCalendarOpened, setIsCalendarOpened] = useState(false);
+  const { isPromocodeLoading, promocodeResult, validatePromocode } = usePromocodeValidate();
+
   const handleInputClick = () => {
     setIsCalendarOpened(!isCalendarOpened);
   };
@@ -55,7 +61,22 @@ const CustomInput = ({
 
   const isPointer = inputType === "date" ? true : false;
 
-  // const labelValue = inputType === "promocode" ? `${value} (если есть)`
+  const handleAsideElementClick = () => {
+    if (inputType === "promocode") {
+      validatePromocode(value);
+    }
+  };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+    setIsValidationError(false);
+  };
+
+  useEffect(() => {
+    if (promocodeResult && !promocodeResult.isValid) {
+      setIsValidationError(true);
+    }
+  }, [promocodeResult]);
 
   return (
     <ClickOutsideWrapper
@@ -66,6 +87,7 @@ const CustomInput = ({
         {label}
         {inputType === "promocode" ? <span className={styles.labelSpan}>(если есть)</span> : ""}
       </label>
+
       <div className={styles.inputWrapper}>
         <input
           onClick={isPointer ? handleInputClick : undefined}
@@ -76,13 +98,29 @@ const CustomInput = ({
           placeholder={placeholder}
           required={required}
           value={value ? value : ""}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
-          className={` ${isErrorMessage ? styles.error : ""} ${styles.input} ${
+          onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(e)}
+          className={` ${isErrorMessage || isValidationError ? styles.error : ""} ${styles.input} ${
             isPointer ? styles.pointer : ""
-          }`}
+          } ${inputType === "promocode" ? styles.promocode : ""}`}
         />
-        <InputAsideElement className={styles.asideElement} inputType={inputType} />
+        <InputAsideElement
+          isLoading={isPromocodeLoading}
+          onClick={handleAsideElementClick}
+          className={styles.asideElement}
+          inputType={inputType}
+        />
       </div>
+
+      {promocodeResult && promocodeResult?.isValid && (
+        <InputNotification variant="success">
+          Промокод успешно применен -{" "}
+          <span className={styles.discountValue}>СКИДКА {promocodeResult.discountValue}%</span>
+        </InputNotification>
+      )}
+
+      {promocodeResult && !promocodeResult?.isValid && (
+        <InputNotification variant="error">Промокод недействителен</InputNotification>
+      )}
 
       {inputType === "date" && (
         <Calendar
