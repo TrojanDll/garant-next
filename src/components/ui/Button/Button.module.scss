@@ -26,6 +26,10 @@
   padding: 18px 25px;
 }
 
+.wide {
+  padding: 20px 60px;
+}
+
 @media (max-width: 1149px) {
   .dashboard {
     padding: 13px 20px;
@@ -42,5 +46,9 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 129%;
+  }
+
+  .wide {
+    padding: 15px 40px;
   }
 }

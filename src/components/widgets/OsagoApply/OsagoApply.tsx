@@ -2,8 +2,6 @@
 
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ru } from "date-fns/locale";
-import { DayPicker } from "react-day-picker";
 
 import { IOsagoApplyForm } from "@/types/IOsagoApplyForm";
 
@@ -16,7 +14,6 @@ import Button from "@/components/ui/Button/Button";
 import DynamicFormSection from "@/components/entities/DynamicFormSection/DynamicFormSection";
 
 import styles from "./OsagoApply.module.scss";
-import Calendar from "@/components/ui/Calendar/Calendar";
 
 const OsagoApply = () => {
   const { config, isLoading } = useOsagoFormConfig();
@@ -85,7 +82,9 @@ const OsagoApply = () => {
               )}
             </div>
 
-            <Button type="submit">submit</Button>
+            <Button type="submit" className={styles.submitButton} variant="wide">
+              Рассчитать
+            </Button>
           </form>
         </Substrate>
       </ContentContainer>

@@ -8,11 +8,11 @@ interface IProps {
   backgroundColor?: string;
   style?: "filled" | "outlined";
   type?: "button" | "submit" | "reset";
-  variant?: "primary" | "dashboard"
+  variant?: "primary" | "dashboard" | "wide";
   onClickEvent?: () => void;
   isLink?: boolean;
   href?: string;
-  className?: string
+  className?: string;
 }
 
 const Button = ({
@@ -24,9 +24,11 @@ const Button = ({
   isLink,
   href,
   className,
-  variant
+  variant,
 }: PropsWithChildren<IProps>) => {
-  const classNames = `${styles.button} ${style ? styles[style] : ""} ${variant ? styles[variant] : ""}`;
+  const classNames = `${styles.button} ${style ? styles[style] : ""} ${
+    variant ? styles[variant] : ""
+  }`;
 
   const content =
     isLink && href ? (
@@ -34,7 +36,11 @@ const Button = ({
         {children}
       </Link>
     ) : (
-      <button type={type} className={`${classNames} ${className}`} onClick={onClickEvent ? onClickEvent : () => {}}>
+      <button
+        type={type}
+        className={`${classNames} ${className}`}
+        onClick={onClickEvent ? onClickEvent : () => {}}
+      >
         {children}
       </button>
     );
