@@ -76,7 +76,7 @@ const CustomSelect = ({
       )}
       <Select
         name={name}
-        isSearchable={isSearchable}
+        // isSearchable={isSearchable}
         openMenuOnFocus={false}
         onMenuOpen={() => handleMenuOpen()}
         onMenuClose={() => handleMenuClose()}
