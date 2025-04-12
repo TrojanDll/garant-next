@@ -67,3 +67,17 @@
   // transform: translateY(100%);
   z-index: 100;
 }
+
+.hidden {
+  // width: 0;
+  // height: 0;
+  // opacity: 0;
+  display: none;
+}
+
+.visible {
+  display: block;
+  // width: auto;
+  // height: auto;
+  // opacity: 1;
+}

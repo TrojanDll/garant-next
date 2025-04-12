@@ -6,6 +6,7 @@ import InputAsideElement from "../InputAsideElement/InputAsideElement";
 
 import styles from "./CustomInput.module.scss";
 import Calendar from "../Calendar/Calendar";
+import ClickOutsideWrapper from "../ClickOutsideWrapper/ClickOutsideWrapper";
 
 interface IProps {
   name: string;
@@ -43,12 +44,25 @@ const CustomInput = ({
     setIsCalendarOpened(!isCalendarOpened);
   };
 
+  const handleDateChange = (value: Date | undefined) => {
+    if (value) {
+      setSelected(value);
+      setValue(value.toLocaleDateString());
+    } else {
+      setValue("");
+      setSelected(value);
+    }
+  };
+
   const isErrorMessage: boolean = !!errorMessage?.length;
 
   const isPointer = inputType === "date" ? true : false;
 
   return (
-    <div className={`${className} ${styles.root}`}>
+    <ClickOutsideWrapper
+      className={`${className} ${styles.root}`}
+      onClickOutside={() => setIsCalendarOpened(false)}
+    >
       <label className={styles.label} htmlFor={name}>
         {label}
       </label>
@@ -70,10 +84,14 @@ const CustomInput = ({
         <InputAsideElement className={styles.asideElement} inputType={inputType} />
       </div>
 
-      {inputType === "date" && isCalendarOpened && (
-        <Calendar className={styles.calendar} value={selected} setValue={setSelected} />
+      {inputType === "date" && (
+        <Calendar
+          className={`${styles.calendar} ${isCalendarOpened ? styles.visible : styles.hidden}`}
+          value={selected}
+          setValue={(value: Date | undefined) => handleDateChange(value)}
+        />
       )}
-    </div>
+    </ClickOutsideWrapper>
   );
 };
 
