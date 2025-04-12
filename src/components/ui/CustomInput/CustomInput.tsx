@@ -1,12 +1,14 @@
 "use client";
 
-import React, { ChangeEvent, useEffect, useState } from "react";
-import { TInputType } from "@/types/IFieldConfig";
-import InputAsideElement from "../InputAsideElement/InputAsideElement";
+import React, { ChangeEvent, ReactNode, useEffect, useState } from "react";
 
-import styles from "./CustomInput.module.scss";
+import { TInputType } from "@/types/IFieldConfig";
+
+import InputAsideElement from "../InputAsideElement/InputAsideElement";
 import Calendar from "../Calendar/Calendar";
 import ClickOutsideWrapper from "../ClickOutsideWrapper/ClickOutsideWrapper";
+
+import styles from "./CustomInput.module.scss";
 
 interface IProps {
   name: string;
@@ -35,11 +37,6 @@ const CustomInput = ({
 }: IProps) => {
   const [selected, setSelected] = useState<Date>();
   const [isCalendarOpened, setIsCalendarOpened] = useState(false);
-
-  useEffect(() => {
-    setIsCalendarOpened(false);
-  }, [selected]);
-
   const handleInputClick = () => {
     setIsCalendarOpened(!isCalendarOpened);
   };
@@ -58,6 +55,8 @@ const CustomInput = ({
 
   const isPointer = inputType === "date" ? true : false;
 
+  // const labelValue = inputType === "promocode" ? `${value} (если есть)`
+
   return (
     <ClickOutsideWrapper
       className={`${className} ${styles.root}`}
@@ -65,6 +64,7 @@ const CustomInput = ({
     >
       <label className={styles.label} htmlFor={name}>
         {label}
+        {inputType === "promocode" ? <span className={styles.labelSpan}>(если есть)</span> : ""}
       </label>
       <div className={styles.inputWrapper}>
         <input

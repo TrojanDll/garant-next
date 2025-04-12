@@ -1,7 +1,9 @@
 .calendar {
   right: 30px;
+  pointer-events: none;
+
 }
 
-.item {
-  pointer-events: none;
+.promocode {
+  right: 7px;
 }

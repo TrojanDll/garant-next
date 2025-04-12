@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import CustomSelect, { IOptions } from "../CustomSelect/CustomSelect";
 import CustomInput from "../CustomInput/CustomInput";
 import { TFieldType, TInputType } from "@/types/IFieldConfig";

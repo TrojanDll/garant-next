@@ -26,7 +26,6 @@ const OsagoApply = () => {
     console.log(data);
   };
 
-
   return (
     <section className={styles.root}>
       <ContentContainer>
@@ -76,6 +75,14 @@ const OsagoApply = () => {
                   <div>loading...</div>
                 )}
               </div>
+            </div>
+
+            <div className={styles.section}>
+              {!isLoading && config.duration ? (
+                <DynamicFormSection fields={config.promocode} control={control} />
+              ) : (
+                <div>loading...</div>
+              )}
             </div>
 
             <Button type="submit">submit</Button>

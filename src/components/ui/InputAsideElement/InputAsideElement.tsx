@@ -1,8 +1,10 @@
 import React from "react";
 
 import { TInputType } from "@/types/IFieldConfig";
-import SvgSelector from "../SvgSelector/SvgSelector";
 import { ESvgName } from "@/constants/svg-ids.constants";
+
+import SvgSelector from "../SvgSelector/SvgSelector";
+import Button from "../Button/Button";
 
 import styles from "./InputAsideElement.module.scss";
 
@@ -16,9 +18,13 @@ const InputAsideElement = ({ inputType, className }: IProps) => {
     <>
       {inputType === "date" && (
         <SvgSelector
-          className={`${className} ${styles.calendar} ${styles.item}`}
+          className={`${className} ${styles.calendar}`}
           id={ESvgName.CALENDAR}
         />
+      )}
+
+      {inputType === "promocode" && (
+        <Button className={`${className} ${styles.promocode}`}>Применить</Button>
       )}
     </>
   );

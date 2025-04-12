@@ -9,8 +9,6 @@ const Select = dynamic(() => import("react-select"), {
 import CustomTitle from "../CustomTitle/CustomTitle";
 
 import styles from "./CustomSelect.module.scss";
-import SvgSelector from "../SvgSelector/SvgSelector";
-import { ESvgName } from "@/constants/svg-ids.constants";
 
 export interface IOptions {
   value: string;

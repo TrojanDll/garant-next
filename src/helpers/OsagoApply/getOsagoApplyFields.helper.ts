@@ -87,7 +87,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         type: "input",
         name: "vehicle_registration_plate",
         label: "Регистрационный знак",
-        placeholder: "Регистрационный знак",
+        placeholder: "А123АА | 999",
         required: true,
       },
       {
@@ -146,16 +146,16 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         placeholder: "Выберите дату",
         inputType: "date",
         required: true,
-        options: [
-          {
-            label: "Option 1",
-            value: "Option 1",
-          },
-          {
-            label: "Option 2",
-            value: "Option 2",
-          },
-        ],
+      },
+    ],
+    promocode: [
+      {
+        type: "input",
+        name: "promocode",
+        label: "Промокод",
+        placeholder: "Введите промокод",
+        inputType: "promocode",
+        required: true,
       },
     ],
   };

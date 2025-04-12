@@ -6,7 +6,7 @@
   width: 100%;
   border: 1px solid var(--grey);
   border-radius: 22px;
-  padding: 20px 30px;
+  padding: 19px 30px;
   background-color: var(--white);
 
   font-family: var(--font-family);
@@ -69,15 +69,14 @@
 }
 
 .hidden {
-  // width: 0;
-  // height: 0;
-  // opacity: 0;
   display: none;
 }
 
 .visible {
   display: block;
-  // width: auto;
-  // height: auto;
-  // opacity: 1;
+}
+
+.labelSpan {
+  font-weight: 400;
+  margin-left: 4px;
 }
