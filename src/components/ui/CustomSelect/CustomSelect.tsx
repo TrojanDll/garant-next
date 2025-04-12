@@ -27,6 +27,7 @@ interface IProps {
   label?: string;
   other?: any;
   errorMessage?: string;
+  isSearchable?: boolean;
 }
 
 const CustomSelect = ({
@@ -41,6 +42,7 @@ const CustomSelect = ({
   label,
   other,
   errorMessage,
+  isSearchable = true,
 }: IProps) => {
   const [isSelectOpened, setIsSelectOpened] = useState(false);
   const [isJustSelected, setIsJustSelected] = useState(false);
@@ -74,6 +76,7 @@ const CustomSelect = ({
       )}
       <Select
         name={name}
+        isSearchable={isSearchable}
         openMenuOnFocus={false}
         onMenuOpen={() => handleMenuOpen()}
         onMenuClose={() => handleMenuClose()}

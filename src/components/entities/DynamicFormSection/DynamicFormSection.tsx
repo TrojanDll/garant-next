@@ -2,6 +2,7 @@ import { Controller, Control } from "react-hook-form";
 import InputsSelector from "@/components/ui/InputsSelector/InputsSelector";
 import { IFieldConfig } from "@/types/IFieldConfig";
 import { IOsagoApplyForm } from "@/types/IOsagoApplyForm";
+
 import styles from "./DynamicFormSection.module.scss";
 
 interface Props {

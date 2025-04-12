@@ -17,7 +17,10 @@ const InputNotification = ({ variant, children, className }: PropsWithChildren<I
         styles.root
       }`}
     >
-      <SvgSelector id={variant === "success" ? ESvgName.CHECKMARK : ESvgName.ATTENTION} />
+      <SvgSelector
+        className={`${variant === "success" ? styles.successSvg : styles.errorSvg}`}
+        id={variant === "success" ? ESvgName.CHECKMARK : ESvgName.ATTENTION}
+      />
       {children}
     </div>
   );

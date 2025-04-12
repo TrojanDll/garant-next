@@ -19,6 +19,7 @@ interface IProps {
   buttons?: string[];
   buttonGroupType?: TButtonGroupType;
   inputType?: TInputType;
+  isSearchable?: boolean;
 }
 
 const InputsSelector = ({
@@ -36,11 +37,13 @@ const InputsSelector = ({
   buttons,
   buttonGroupType,
   inputType,
+  isSearchable,
 }: IProps) => {
   const renderComponent = (
     <>
       {type === "select" ? (
         <CustomSelect
+          isSearchable={isSearchable}
           name={name}
           options={options as IOptions[]}
           label={label}

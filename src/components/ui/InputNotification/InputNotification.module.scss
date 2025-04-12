@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   column-gap: 7px;
+  flex-wrap: wrap;
 }
 
 .success {
@@ -19,4 +20,39 @@
   font-size: 18px;
   line-height: 128%;
   color: var(--red2);
+}
+
+.errorSvg {
+  width: 30px;
+  height: 30px;
+}
+
+.successSvg {
+  width: 30px;
+  height: 30px;
+}
+
+@media (max-width: 1149px) {
+  .root {
+    margin-top: 7px;
+  }
+
+  .errorSvg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .error {
+    font-size: 14px;
+    line-height: 129%;
+  }
+
+  .successSvg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .success {
+    font-size: 14px;
+  }
 }

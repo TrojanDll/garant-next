@@ -89,3 +89,66 @@
 .discountValue {
   font-weight: 500;
 }
+
+@media (max-width: 1149px) {
+  .input {
+    border-radius: 18px;
+    padding: 14px 20px;
+    font-size: 14px;
+
+    &::placeholder {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 129%;
+    }
+  }
+
+  .label {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 129%;
+  }
+
+  .promocode {
+    padding: 22px 30px;
+    padding-right: 131px;
+  }
+}
+
+@media (max-width: 420px) {
+  // .months {
+  //   padding: 10px 15px !important;
+  // }
+
+  // .nav {
+  //   top: 10px;
+  //   right: 20px;
+  // }
+
+  .modalOverlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 200;
+  }
+
+  .calendar {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    // max-width: 360px;
+    height: auto;
+    z-index: 1000;
+    // border-radius: 12px;
+    // box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .input {
+    &::placeholder {
+      font-size: 12px;
+    }
+  }
+}

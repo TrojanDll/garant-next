@@ -1,6 +1,7 @@
 .dayPickerRoot {
   font-family: var(--font-family);
   background: var(--white) !important;
+  border-radius: 15px !important;
 }
 
 .dropdown {
@@ -95,6 +96,56 @@
     &:hover {
       background: var(--blue);
     }
+  }
+}
+
+.modalOverlay {
+  display: none;
+}
+
+@media (max-width: 1149px) {
+  .weekday {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
+
+  .day {
+    margin: 10px !important;
+    width: 40px !important;
+    height: 30px !important;
+    font-size: 14px;
+  }
+
+  .dayButton {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 14px;
+  }
+
+  .selected {
+    & .dayButton {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 100%;
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .months {
+    margin: 0 auto;
+    padding: 15px 20px;
+    background: var(--white) !important;
+  }
+
+  .nav {
+    top: 15px;
+    right: 20px;
+  }
+
+  .dayPickerRoot {
+    background: none !important;
   }
 }
 

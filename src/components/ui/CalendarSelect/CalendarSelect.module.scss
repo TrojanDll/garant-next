@@ -88,3 +88,32 @@
 .dropdown {
   width: fit-content !important;
 }
+
+@media (max-width: 1149px) {
+  .singleCustomValue {
+    font-size: 18px !important;
+  }
+
+  .option {
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    line-height: 129% !important;
+  }
+
+  .optionHovered {
+    background: var(--white) !important;
+    color: var(--dark-grey) !important;
+  }
+
+  .optionFocused {
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    line-height: 129% !important;
+    color: var(--white) !important;
+    background: var(--blue) !important;
+  }
+
+  .selectsContainer {
+    margin-bottom: 10px;
+  }
+}

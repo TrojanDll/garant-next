@@ -16,4 +16,5 @@ export interface IFieldConfig<T> {
   buttons?: string[];
   buttonGroupType?: TButtonGroupType;
   inputType?: TInputType;
+  isSearchable?: boolean
 }

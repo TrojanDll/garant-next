@@ -333,6 +333,7 @@ const SvgSelector = ({ id, width, height, className, fill }: IProps) => {
           width={width ? width : "30"}
           height={height ? height : "30"}
           className={`${className ? className : ""}`}
+          viewBox="0 0 30 30"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >

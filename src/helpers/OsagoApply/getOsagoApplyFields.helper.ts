@@ -12,6 +12,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         type: "select",
         name: "vehicle_category",
         label: "Категория ТС",
+        isSearchable: false,
         placeholder: "Категория ТС",
         required: true,
         options: [
@@ -127,6 +128,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         name: "duration_of_stay",
         label: "Длительность пребывания",
         placeholder: "Длительность пребывания",
+        isSearchable: false,
         required: true,
         options: [
           {

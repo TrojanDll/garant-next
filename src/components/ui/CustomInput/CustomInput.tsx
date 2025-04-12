@@ -123,11 +123,17 @@ const CustomInput = ({
       )}
 
       {inputType === "date" && (
-        <Calendar
-          className={`${styles.calendar} ${isCalendarOpened ? styles.visible : styles.hidden}`}
-          value={selected}
-          setValue={(value: Date | undefined) => handleDateChange(value)}
-        />
+        <>
+          <div
+            onClick={() => setIsCalendarOpened(false)}
+            className={isCalendarOpened ? styles.modalOverlay : ""}
+          ></div>
+          <Calendar
+            className={`${styles.calendar} ${isCalendarOpened ? styles.visible : styles.hidden}`}
+            value={selected}
+            setValue={(value: Date | undefined) => handleDateChange(value)}
+          />
+        </>
       )}
     </ClickOutsideWrapper>
   );

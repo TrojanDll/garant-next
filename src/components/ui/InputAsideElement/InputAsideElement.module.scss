@@ -26,3 +26,11 @@
     background-size: calc(100% / 3) 100%, calc(100% / 3) 100%, calc(100% / 3) 0%;
   }
 }
+
+@media (max-width: 1149px) {
+  .calendar {
+    right: 20px;
+    width: 18px;
+    height: 18px;
+  }
+}

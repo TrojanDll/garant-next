@@ -22,3 +22,18 @@
     width: 43.6%;
   }
 }
+
+@media (max-width: 1149px) {
+  .inputWrapper {
+    margin-top: 30px;
+    width: 100%;
+  }
+
+  .singleInStroke {
+    width: 100%;
+
+    & .inputSingleInStroke {
+      width: 100%;
+    }
+  }
+}
