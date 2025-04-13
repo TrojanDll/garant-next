@@ -63,7 +63,6 @@ export default function ButtonGroup({
 
         offset = activeIndex * (width + gap);
       } else {
-        // Считаем смещение на основе ширин предыдущих кнопок
         for (let i = 0; i < activeIndex; i++) {
           offset += (buttonsRef.current[i]?.offsetWidth || 0) + gap;
         }
