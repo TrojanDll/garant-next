@@ -12,6 +12,7 @@ import { usePromocodeValidate } from "@/hooks/usePromocodeValidate/usePromocodeV
 import InputNotification from "../InputNotification/InputNotification";
 
 import styles from "./CustomInput.module.scss";
+import useOsagoApplyCarMark from "@/stores/OsagoApplyCarMark/osagoApplyCarMark.store";
 
 interface IProps {
   name: string;
@@ -43,6 +44,8 @@ const CustomInput = ({
   const [isCalendarOpened, setIsCalendarOpened] = useState(false);
   const { isPromocodeLoading, promocodeResult, validatePromocode } = usePromocodeValidate();
 
+  const isAnotherCarVisible = useOsagoApplyCarMark((state) => state.isAnotherCarMark);
+
   const handleInputClick = () => {
     setIsCalendarOpened(!isCalendarOpened);
   };
@@ -66,6 +69,12 @@ const CustomInput = ({
       validatePromocode(value);
     }
   };
+
+  useEffect(() => {
+    if (name === "vehicle_refined_make" && !isAnotherCarVisible && setValue) {
+      setValue("");
+    }
+  }, [isAnotherCarVisible]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -132,6 +141,7 @@ const CustomInput = ({
             className={`${styles.calendar} ${isCalendarOpened ? styles.visible : styles.hidden}`}
             value={selected}
             setValue={(value: Date | undefined) => handleDateChange(value)}
+            onClose={() => setIsCalendarOpened(false)}
           />
         </>
       )}

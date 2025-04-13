@@ -18,9 +18,17 @@
 .singleInStroke {
   width: 100%;
 
-  & .inputSingleInStroke {
+  & .input {
     width: 43.6%;
   }
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
 }
 
 @media (max-width: 1149px) {
@@ -32,8 +40,16 @@
   .singleInStroke {
     width: 100%;
 
-    & .inputSingleInStroke {
+    & .input {
       width: 100%;
     }
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .visible {
+    display: block;
   }
 }

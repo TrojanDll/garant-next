@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 const Select = dynamic(() => import("react-select"), {
   ssr: false,
@@ -9,6 +9,8 @@ const Select = dynamic(() => import("react-select"), {
 import Tooltip from "../Tooltip/Tooltip";
 
 import styles from "./CustomSelect.module.scss";
+import useOsagoApplyCarMark from "@/stores/OsagoApplyCarMark/osagoApplyCarMark.store";
+
 
 export interface IOptions {
   value: string;
@@ -51,6 +53,8 @@ const CustomSelect = ({
   const [isSelectOpened, setIsSelectOpened] = useState(false);
   const [isJustSelected, setIsJustSelected] = useState(false);
 
+  const setIsAnotherCarMark = useOsagoApplyCarMark((state) => state.setCarMarkValue);
+
   const handleMenuOpen = () => {
     setIsSelectOpened(true);
     setIsJustSelected(false);
@@ -69,10 +73,16 @@ const CustomSelect = ({
     if (setValue) {
       setValue(value.value);
     }
+
+    if (value.value === "another_vehicle") {
+      setIsAnotherCarMark(true);
+    } else {
+      setIsAnotherCarMark(false);
+    }
   };
 
   return (
-    <div className={className}>
+    <div className={`${className}`}>
       {label && (
         <label htmlFor={name} className={styles.label}>
           {label}

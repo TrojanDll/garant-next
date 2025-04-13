@@ -3,7 +3,10 @@ import InputsSelector from "@/components/ui/InputsSelector/InputsSelector";
 import { IFieldConfig } from "@/types/IFieldConfig";
 import { IOsagoApplyForm } from "@/types/IOsagoApplyForm";
 
+import useOsagoApplyCarMark from "@/stores/OsagoApplyCarMark/osagoApplyCarMark.store";
+
 import styles from "./DynamicFormSection.module.scss";
+import { useEffect } from "react";
 
 interface Props {
   fields: IFieldConfig<IOsagoApplyForm>[];
@@ -13,6 +16,36 @@ interface Props {
 }
 
 const DynamicFormSection = ({ fields, control, className, isTopItemSingle = false }: Props) => {
+  const isAnotherCarVisible = useOsagoApplyCarMark((state) => state.isAnotherCarMark);
+
+  // const isRequired = (config: IFieldConfig<IOsagoApplyForm>) => {
+  //   // const isAnother: boolean = config.name === "vehicle_refined_make";
+
+  //   if (config.required) {
+  //     if (config.name === "vehicle_refined_make" && !isAnotherCarVisible) {
+  //       // if (isAnother) {
+  //       //   console.log(false);
+  //       // }
+  //       return false;
+  //     } else if (config.name === "vehicle_refined_make" && isAnotherCarVisible) {
+  //       // if (isAnother) {
+  //       //   console.log(true);
+  //       // }
+  //       return true;
+  //     }
+
+  //     // if (isAnother) {
+  //     //   console.log(true);
+  //     // }
+  //     return true;
+  //   }
+
+  //   // if (isAnother) {
+  //   //   console.log(false);
+  //   // }
+  //   return false;
+  // };
+
   return (
     <>
       {fields.map((config, i) => (
@@ -20,7 +53,17 @@ const DynamicFormSection = ({ fields, control, className, isTopItemSingle = fals
           key={config.name}
           className={`${isTopItemSingle && i === 0 ? styles.singleInStroke : ""} ${
             styles.inputWrapper
-          }`}
+          }  ${
+            config.name !== "vehicle_refined_make"
+              ? styles.visible
+              : isAnotherCarVisible
+              ? styles.visible
+              : styles.hidden
+          }
+          ${
+            config.name !== "vehicle_make" ? "" : isAnotherCarVisible ? styles.singleInStroke : ""
+          }    
+          `}
         >
           <Controller
             name={config.name}
@@ -28,13 +71,11 @@ const DynamicFormSection = ({ fields, control, className, isTopItemSingle = fals
             rules={config.required ? { required: "Обязательное поле" } : {}}
             render={({ field, fieldState }) => (
               <InputsSelector
-                {...config}
-                value={field.value}
-                setValue={field.onChange}
+              value={field.value}
+              setValue={field.onChange}
                 errorMessage={fieldState.error?.message}
-                className={`${styles.input} ${
-                  isTopItemSingle && i === 0 ? styles.inputSingleInStroke : ""
-                } ${className}`}
+                className={`${styles.input} ${className}  `}
+                {...config}
               />
             )}
           />

@@ -3,6 +3,7 @@ import CustomSelect, { IOptions } from "../CustomSelect/CustomSelect";
 import CustomInput from "../CustomInput/CustomInput";
 import { TFieldType, TInputType } from "@/types/IFieldConfig";
 import ButtonGroup, { TButtonGroupRequest, TButtonGroupType } from "../ButtonGroup/ButtonGroup";
+import useOsagoApplyCarMark from "@/stores/OsagoApplyCarMark/osagoApplyCarMark.store";
 
 interface IProps {
   type: TFieldType;
@@ -43,6 +44,10 @@ const InputsSelector = ({
   tooltip,
   tooltipText,
 }: IProps) => {
+  // if (name === "vehicle_refined_make") {
+  //   console.log(name);
+  //   console.log(required);
+  // }
   const renderComponent = (
     <>
       {type === "select" ? (

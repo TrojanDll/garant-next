@@ -5,15 +5,18 @@ import CustomChevron from "../CustomChevron/CustomChevron";
 
 import CalendarSelect from "../CalendarSelect/CalendarSelect";
 
+import Button from "../Button/Button";
+
 import styles from "./Calendar.module.scss";
 
 interface IProps {
   value: Date | undefined;
   setValue: OnSelectHandler<Date | undefined>;
+  onClose?: () => void;
   className?: string;
 }
 
-const Calendar = ({ value, setValue, className }: IProps) => {
+const Calendar = ({ value, setValue, className, onClose }: IProps) => {
   return (
     <div className={className}>
       <DayPicker
@@ -48,6 +51,13 @@ const Calendar = ({ value, setValue, className }: IProps) => {
           selected: `${styles.selected} rdp-selected`,
           month: `${styles.month} rdp-month`,
         }}
+        footer={
+          <div className={styles.calendarFooter}>
+            <Button onClickEvent={onClose} type="button" className={styles.submitDateBtn}>
+              Подтвердить
+            </Button>
+          </div>
+        }
       />
     </div>
   );

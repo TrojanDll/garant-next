@@ -14,10 +14,12 @@ import Button from "@/components/ui/Button/Button";
 import DynamicFormSection from "@/components/entities/DynamicFormSection/DynamicFormSection";
 
 import styles from "./OsagoApply.module.scss";
+import useOsagoApplyCarMark from "@/stores/OsagoApplyCarMark/osagoApplyCarMark.store";
 
 const OsagoApply = () => {
   const { config, isLoading } = useOsagoFormConfig();
   const { handleSubmit, control } = useForm<IOsagoApplyForm>();
+
 
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
     console.log(data);

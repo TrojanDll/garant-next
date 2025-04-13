@@ -93,6 +93,7 @@ const CalendarSelect = ({ calendarMonth, displayIndex }: IProps) => {
   return (
     <div className={styles.selectsContainer}>
       <Select
+        isSearchable={false}
         defaultValue={monthsList[currentMonthIndex]}
         value={currentMonthOption}
         key={9283754}
@@ -121,6 +122,7 @@ const CalendarSelect = ({ calendarMonth, displayIndex }: IProps) => {
       />
 
       <Select
+        isSearchable={false}
         value={currentYearOption}
         defaultValue={yearsList[0]}
         key={129365}

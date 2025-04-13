@@ -103,6 +103,22 @@
   display: none;
 }
 
+.submitDateBtn {
+  margin: 0 auto;
+  // margin-top: 20px;
+}
+
+.calendarFooter {
+  margin: 0 auto;
+  background: var(--white) !important;
+  width: 320px !important;
+  // padding: 12px;
+  padding-bottom: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  transform: translateY(-1px);
+}
+
 @media (max-width: 1149px) {
   .weekday {
     width: 30px;
@@ -137,6 +153,10 @@
     margin: 0 auto;
     padding: 15px 20px;
     background: var(--white) !important;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: none;
+    border-bottom: none;
   }
 
   .nav {

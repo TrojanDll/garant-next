@@ -45,7 +45,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
           },
           {
             label: "Другое ТС",
-            value: "another",
+            value: "another_vehicle",
           },
         ],
       },
@@ -54,7 +54,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         name: "vehicle_refined_make",
         label: "Уточните марку",
         placeholder: "Введите марку",
-        required: true,
+        required: false,
       },
       {
         type: "select",
