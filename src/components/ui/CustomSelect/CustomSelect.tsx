@@ -6,7 +6,7 @@ const Select = dynamic(() => import("react-select"), {
   ssr: false,
 });
 
-import CustomTitle from "../CustomTitle/CustomTitle";
+import Tooltip from "../Tooltip/Tooltip";
 
 import styles from "./CustomSelect.module.scss";
 
@@ -28,6 +28,8 @@ interface IProps {
   other?: any;
   errorMessage?: string;
   isSearchable?: boolean;
+  tooltip?: boolean;
+  tooltipText?: string;
 }
 
 const CustomSelect = ({
@@ -43,6 +45,8 @@ const CustomSelect = ({
   other,
   errorMessage,
   isSearchable = true,
+  tooltip = false,
+  tooltipText = "",
 }: IProps) => {
   const [isSelectOpened, setIsSelectOpened] = useState(false);
   const [isJustSelected, setIsJustSelected] = useState(false);
@@ -70,13 +74,15 @@ const CustomSelect = ({
   return (
     <div className={className}>
       {label && (
-        <CustomTitle tag="h3" className={styles.label}>
+        <label htmlFor={name} className={styles.label}>
           {label}
-        </CustomTitle>
+          {tooltip && <Tooltip className={styles.tooltip} text={tooltipText} />}
+        </label>
       )}
+
       <Select
         name={name}
-        // isSearchable={isSearchable}
+        isSearchable={isSearchable}
         openMenuOnFocus={false}
         onMenuOpen={() => handleMenuOpen()}
         onMenuClose={() => handleMenuClose()}
@@ -86,7 +92,7 @@ const CustomSelect = ({
           control: () =>
             `${styles.control} ${isSelectOpened ? styles.controlOpened : ""} ${
               errorMessage?.length ? styles.controlError : ""
-            }`,
+            } ${isSearchable ? styles.controlSearchable : ""}`,
           placeholder: () =>
             `${styles.placeholder} ${errorMessage?.length ? styles.placeholderError : ""}`,
           indicatorSeparator: () => styles.indicatorCustomSeparator,

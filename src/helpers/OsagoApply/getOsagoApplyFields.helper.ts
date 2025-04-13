@@ -32,6 +32,8 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         label: "Марка",
         placeholder: "Марка",
         required: true,
+        tooltip: true,
+        tooltipText: "Если марки вашего ТС нет в списке, выберите «Другое ТС» ",
         options: [
           {
             label: "Option 1",
@@ -41,7 +43,18 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
             label: "Option 2",
             value: "Option 2",
           },
+          {
+            label: "Другое ТС",
+            value: "another",
+          },
         ],
+      },
+      {
+        type: "input",
+        name: "vehicle_refined_make",
+        label: "Уточните марку",
+        placeholder: "Введите марку",
+        required: true,
       },
       {
         type: "select",

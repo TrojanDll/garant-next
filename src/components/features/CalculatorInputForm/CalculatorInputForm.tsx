@@ -58,6 +58,7 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
             }}
             render={({ field, fieldState }) => (
               <CustomSelect
+                isSearchable={false}
                 key={config.name}
                 className={styles.select}
                 name={config.name}

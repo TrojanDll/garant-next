@@ -1,0 +1,61 @@
+.root {
+  max-width: 207px;
+  width: auto;
+  position: relative;
+  flex-shrink: 0;
+
+  &:hover {
+    & .tooltip {
+      display: block;
+    }
+  }
+}
+
+.tooltip {
+  // white-space: nowrap;
+  width: 207px;
+  max-width: 207px;
+  display: none;
+  position: absolute;
+  top: -10px;
+  transform: translate(-7%, -100%);
+  background-color: var(--white);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  color: #000;
+  padding: 5px 8px;
+  border-radius: 7px;
+  z-index: 10;
+  text-align: left;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.13), 0 3px 14px 0 rgba(0, 0, 0, 0.04),
+    0 8px 32px 0 rgba(0, 0, 0, 0.05), 0 30px 84px 0 rgba(0, 0, 0, 0.07);
+}
+
+.triangle {
+  position: absolute;
+  bottom: -6px;
+  left: 10%;
+  // // transform: translateX(-50%);
+  // width: 0;
+  // height: 0;
+  // border-left: 6px solid transparent;
+  // border-right: 6px solid transparent;
+  // border-top: 6px solid var(--white);
+}
+
+.visible {
+  display: block;
+}
+
+@media (max-width: 1149px) {
+  .svg {
+    width: 18px;
+    height: 18px;
+  }
+  .tooltip {
+    width: 176px;
+    font-weight: 400;
+    font-size: 10px;
+  }
+}

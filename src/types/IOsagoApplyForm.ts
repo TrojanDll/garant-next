@@ -3,6 +3,7 @@ export type TPersonType = "individual" | "legal_entity";
 export interface IOsagoApplyForm {
   vehicle_category: string;
   vehicle_make: string;
+  vehicle_refined_make: string;
   vehicle_year_of_manufacture: string;
   vehicle_registration_plate: string;
   vehicle_model: string;

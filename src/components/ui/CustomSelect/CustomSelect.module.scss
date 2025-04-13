@@ -23,10 +23,14 @@
 }
 
 .control {
+  padding: 17px 30px !important;
   border: 1px solid var(--grey) !important;
   border-radius: 22px !important;
-  padding: 14px 30px 15px 22px !important;
   cursor: pointer !important;
+}
+
+.controlSearchable {
+  padding: 14px 30px 15px 22px !important;
 }
 
 .indicatorCustomSeparator {
@@ -116,6 +120,8 @@
 }
 
 .label {
+  display: inline-flex;
+  column-gap: 10px;
   margin-bottom: 10px;
   font-family: var(--font-family);
   font-weight: 500;
@@ -123,6 +129,10 @@
   line-height: 128%;
   letter-spacing: 0.01em;
   color: var(--dark-grey);
+}
+
+.tooltip {
+  flex-shrink: 0;
 }
 
 @media (max-width: 1149px) {
@@ -135,6 +145,10 @@
 
   .control {
     border-radius: 18px !important;
+    padding: 11px 12px !important;
+  }
+
+  .controlSearchable {
     padding: 7px 12px !important;
   }
 

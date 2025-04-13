@@ -11,4 +11,5 @@ export enum ESvgName {
   ATTENTION = "attention",
   CHECKMARK = "checkmark",
   CALENDAR = "calendar",
+  TOOLTIP = "tooltip",
 }
