@@ -9,8 +9,9 @@ import Substrate from "@/components/ui/Substrate/Substrate";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import CalculatorInputForm from "@/components/features/CalculatorInputForm/CalculatorInputForm";
 
-import styles from "./CalculatorMainForm.module.scss";
 import { ICalculatorNsForm, ICalculatorOsagoForm } from "@/types/ICalculatorForms";
+
+import styles from "./CalculatorMainForm.module.scss";
 
 export interface ICalculatorMainFormProps {
   variant: "osago" | "ns";
@@ -126,7 +127,7 @@ const CalculatorMainForm = ({ variant }: ICalculatorMainFormProps) => {
       <div className={styles.imageWrapper}>
         {variant === "osago" ? (
           <Image
-            className={styles.image}
+            className={`${styles.image} ${styles.osagoImage}`}
             src="/img/calculator-osago-bg.png"
             alt=""
             width={5652}
@@ -135,7 +136,7 @@ const CalculatorMainForm = ({ variant }: ICalculatorMainFormProps) => {
           />
         ) : (
           <Image
-            className={styles.image}
+            className={`${styles.image} ${styles.nsImage}`}
             src="/img/calculator-ns-bg.png"
             alt=""
             width={6187}

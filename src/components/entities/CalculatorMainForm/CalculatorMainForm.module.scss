@@ -24,6 +24,14 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+.osagoImage {
+  transform: translate(67px, 24px);
+}
+
+.nsImage {
+  transform: translate(55px, 49px);
   object-position: left;
 }
 
