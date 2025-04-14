@@ -1,37 +1,75 @@
-.dropdown {
-  position: absolute;
-  top: 100%;
+.layout {
+  display: none;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
   left: 0;
-  width: 100%;
-  overflow: hidden;
-  max-height: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  overflow-y: scroll;
+  z-index: 100;
+}
+
+.dropdown {
+  overflow-y: scroll;
+
+  position: fixed;
+  margin: 0 auto;
+  top: 5%;
+  left: 20px;
+  right: 20px;
+  bottom: 5%;
+  height: fit-content;
+  max-height: 90vh;
+  width: calc(100% - 40px) !important;
+  max-width: 440px;
+  // max-height: 0;
   opacity: 0;
   transition: all 0.4s ease;
-  padding: 0 7px;
+  padding: 40px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   display: none;
+  z-index: 101;
 }
 
 .open {
-  top: calc(100% - 20px);
-  padding-top: 20px;
-  padding-bottom: 20px;
-  max-height: 400px;
+  display: block;
+  // top: calc(100% - 20px);
+  // padding-top: 20px;
+  // padding-bottom: 20px;
+  // max-height: 400px;
   opacity: 1;
+}
+
+.layoutOpen {
+  display: block;
 }
 
 .link {
   display: block;
   padding: 15px 20px;
   text-align: left;
+  padding-left: 0;
 }
 
 .dropdownDasboard {
-  margin-left: 20px;
+  // margin-left: 20px;
   margin-top: 15px;
 }
 
+.close {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+}
+
+.title {
+  margin-bottom: 10px;
+  font-size: 20px !important;
+}
 
 @media (max-width: 1149px) {
   .dropdown {
@@ -40,7 +78,7 @@
 }
 
 @media (max-width: 576px) {
-  .dropdownDasboard {
-    margin: 0 auto;
-  }
+  // .dropdownDasboard {
+  //   margin: 0 auto;
+  // }
 }

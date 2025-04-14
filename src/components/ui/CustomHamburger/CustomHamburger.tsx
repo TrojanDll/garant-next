@@ -1,6 +1,6 @@
 "use client";
 
-import { useSidebarStore } from "@/components/entities/DropdownHeader/store";
+import { useSidebarStore } from "@/stores/Header/store";
 import React from "react";
 import SvgSelector from "../SvgSelector/SvgSelector";
 import { ESvgName } from "@/constants/svg-ids.constants";
