@@ -109,6 +109,7 @@
 }
 
 .calendarFooter {
+  display: none;
   margin: 0 auto;
   background: var(--white) !important;
   width: 320px !important;
@@ -166,6 +167,10 @@
 
   .dayPickerRoot {
     background: none !important;
+  }
+
+  .calendarFooter {
+    display: block;
   }
 }
 

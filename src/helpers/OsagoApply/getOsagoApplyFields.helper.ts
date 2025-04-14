@@ -1,5 +1,5 @@
 import { IFieldConfig } from "@/types/IFieldConfig";
-import { IOsagoApplyForm } from "@/types/IOsagoApplyForm";
+import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
 
 export interface ISplitFieldConfig {
   [key: string]: IFieldConfig<IOsagoApplyForm>[];
@@ -36,16 +36,16 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         tooltipText: "Если марки вашего ТС нет в списке, выберите «Другое ТС» ",
         options: [
           {
+            label: "Другое ТС",
+            value: "another_vehicle",
+          },
+          {
             label: "Option 1",
             value: "Option 1",
           },
           {
             label: "Option 2",
             value: "Option 2",
-          },
-          {
-            label: "Другое ТС",
-            value: "another_vehicle",
           },
         ],
       },

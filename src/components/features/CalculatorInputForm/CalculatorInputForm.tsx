@@ -10,7 +10,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { ICalculatorNsForm, ICalculatorOsagoForm } from "@/types/ICalculatorForms";
 import { IFieldConfig } from "@/types/IFieldConfig";
 import CalculatorPolicyPrice from "../CalculatorPolicyPrice/CalculatorPolicyPrice";
-import { IOsagoApplyForm } from "@/types/IOsagoApplyForm";
+import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
 
 interface FormData {
   [key: string]: any;

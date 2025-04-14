@@ -9,7 +9,7 @@ const Select = dynamic(() => import("react-select"), {
 import Tooltip from "../Tooltip/Tooltip";
 
 import styles from "./CustomSelect.module.scss";
-import useOsagoApplyCarMark from "@/stores/OsagoApplyCarMark/osagoApplyCarMark.store";
+import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 
 
 export interface IOptions {

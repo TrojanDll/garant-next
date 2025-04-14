@@ -34,7 +34,7 @@ $button-gap-mobile: 15px;
   bottom: 7px;
   background: var(--light-grey);
   border-radius: 17px;
-  transition: transform 0.3s ease, width 0.3s ease; // 👈 добавляем width
+  transition: transform 0.3s ease, width 0.3s ease;
   z-index: 1;
 }
 

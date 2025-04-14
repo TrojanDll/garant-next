@@ -3,7 +3,9 @@ import CustomSelect, { IOptions } from "../CustomSelect/CustomSelect";
 import CustomInput from "../CustomInput/CustomInput";
 import { TFieldType, TInputType } from "@/types/IFieldConfig";
 import ButtonGroup, { TButtonGroupRequest, TButtonGroupType } from "../ButtonGroup/ButtonGroup";
-import useOsagoApplyCarMark from "@/stores/OsagoApplyCarMark/osagoApplyCarMark.store";
+import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
+import { personTypes, TPersonType } from "@/types/OsagoApplyForm/IOsagoApplyForm";
+import usePersonType from "@/stores/OsagoApply/personType";
 
 interface IProps {
   type: TFieldType;
@@ -44,10 +46,14 @@ const InputsSelector = ({
   tooltip,
   tooltipText,
 }: IProps) => {
-  // if (name === "vehicle_refined_make") {
-  //   console.log(name);
-  //   console.log(required);
-  // }
+  const setPersonType = usePersonType((state) => state.setPersonType);
+
+  const handleButtonGroupChange = (value: TButtonGroupRequest) => {
+    setPersonType(personTypes[value.index]);
+
+    setValue(value.value);
+  };
+
   const renderComponent = (
     <>
       {type === "select" ? (
@@ -86,7 +92,7 @@ const InputsSelector = ({
           name={name}
           items={buttons as string[]}
           key={name}
-          onButtonClick={(value: TButtonGroupRequest) => setValue(value.value)}
+          onButtonClick={(value: TButtonGroupRequest) => handleButtonGroupChange(value)}
         />
       ) : (
         ""

@@ -12,7 +12,7 @@ import { usePromocodeValidate } from "@/hooks/usePromocodeValidate/usePromocodeV
 import InputNotification from "../InputNotification/InputNotification";
 
 import styles from "./CustomInput.module.scss";
-import useOsagoApplyCarMark from "@/stores/OsagoApplyCarMark/osagoApplyCarMark.store";
+import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 
 interface IProps {
   name: string;

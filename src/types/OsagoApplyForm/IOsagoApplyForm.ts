@@ -1,4 +1,6 @@
-export type TPersonType = "individual" | "legal_entity";
+export const personTypes = ["individual", "legal_entity"] as const;
+
+export type TPersonType = typeof personTypes[number];
 
 export interface IOsagoApplyForm {
   vehicle_category: string;

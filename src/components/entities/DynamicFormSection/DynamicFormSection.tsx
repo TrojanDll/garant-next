@@ -1,12 +1,13 @@
 import { Controller, Control } from "react-hook-form";
 import InputsSelector from "@/components/ui/InputsSelector/InputsSelector";
 import { IFieldConfig } from "@/types/IFieldConfig";
-import { IOsagoApplyForm } from "@/types/IOsagoApplyForm";
+import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
 
-import useOsagoApplyCarMark from "@/stores/OsagoApplyCarMark/osagoApplyCarMark.store";
+import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 
 import styles from "./DynamicFormSection.module.scss";
 import { useEffect } from "react";
+import usePersonType from "@/stores/OsagoApply/personType";
 
 interface Props {
   fields: IFieldConfig<IOsagoApplyForm>[];
@@ -17,34 +18,24 @@ interface Props {
 
 const DynamicFormSection = ({ fields, control, className, isTopItemSingle = false }: Props) => {
   const isAnotherCarVisible = useOsagoApplyCarMark((state) => state.isAnotherCarMark);
+  const personType = usePersonType((state) => state.personType);
 
-  // const isRequired = (config: IFieldConfig<IOsagoApplyForm>) => {
-  //   // const isAnother: boolean = config.name === "vehicle_refined_make";
+  const fieldText = (
+    field: IFieldConfig<IOsagoApplyForm>
+  ): { label: string; placeholder: string | undefined } => {
+    let label: string = field.label;
+    let placeholder: string | undefined = field.placeholder;
 
-  //   if (config.required) {
-  //     if (config.name === "vehicle_refined_make" && !isAnotherCarVisible) {
-  //       // if (isAnother) {
-  //       //   console.log(false);
-  //       // }
-  //       return false;
-  //     } else if (config.name === "vehicle_refined_make" && isAnotherCarVisible) {
-  //       // if (isAnother) {
-  //       //   console.log(true);
-  //       // }
-  //       return true;
-  //     }
+    if (field.name === "owner_fio" && personType === "legal_entity") {
+      label = "Полное наименование";
+      placeholder = "Введите полное наименование";
+    } else if (field.name === "owner_passport_data" && personType === "legal_entity") {
+      label = "ИНН";
+      placeholder = "Введите ИНН";
+    }
 
-  //     // if (isAnother) {
-  //     //   console.log(true);
-  //     // }
-  //     return true;
-  //   }
-
-  //   // if (isAnother) {
-  //   //   console.log(false);
-  //   // }
-  //   return false;
-  // };
+    return { label, placeholder };
+  };
 
   return (
     <>
@@ -71,11 +62,16 @@ const DynamicFormSection = ({ fields, control, className, isTopItemSingle = fals
             rules={config.required ? { required: "Обязательное поле" } : {}}
             render={({ field, fieldState }) => (
               <InputsSelector
-              value={field.value}
-              setValue={field.onChange}
+                value={field.value}
+                setValue={field.onChange}
                 errorMessage={fieldState.error?.message}
                 className={`${styles.input} ${className}  `}
                 {...config}
+                type={
+                  config.name === "vehicle_model" && isAnotherCarVisible ? "input" : config.type
+                }
+                label={fieldText(config).label}
+                placeholder={fieldText(config).placeholder}
               />
             )}
           />

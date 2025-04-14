@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { IOsagoApplyForm } from "@/types/IOsagoApplyForm";
+import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
 
 import { useOsagoFormConfig } from "@/hooks/useOsagoFormConfig";
 
@@ -14,7 +14,7 @@ import Button from "@/components/ui/Button/Button";
 import DynamicFormSection from "@/components/entities/DynamicFormSection/DynamicFormSection";
 
 import styles from "./OsagoApply.module.scss";
-import useOsagoApplyCarMark from "@/stores/OsagoApplyCarMark/osagoApplyCarMark.store";
+import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 
 const OsagoApply = () => {
   const { config, isLoading } = useOsagoFormConfig();
