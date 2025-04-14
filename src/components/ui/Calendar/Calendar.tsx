@@ -46,13 +46,7 @@ const Calendar = ({ value, setValue, className, onClose }: IProps) => {
           selected: `${styles.selected} rdp-selected`,
           month: `${styles.month} rdp-month`,
         }}
-        // footer={
-        //   <div className={styles.calendarFooter}>
-        //     <Button onClickEvent={onClose} type="button" className={styles.submitDateBtn}>
-        //       Подтвердить
-        //     </Button>
-        //   </div>
-        // }
+        
       />
     </div>
   );
