@@ -24,6 +24,7 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
+  object-position: left;
 }
 
 .osagoImage {
@@ -32,7 +33,6 @@
 
 .nsImage {
   transform: translate(55px, 49px);
-  object-position: left;
 }
 
 .price {
@@ -60,6 +60,15 @@
 
   .image {
     width: 120%;
-    transform: translateX(-16%) translateY(5%);
+  }
+
+  .nsImage {
+    transform: translateX(-9%) translateY(13%);
+  }
+
+  .osagoImage {
+    transform: translateX(-11%) translateY(13%);
+    width: 130%;
+
   }
 }
