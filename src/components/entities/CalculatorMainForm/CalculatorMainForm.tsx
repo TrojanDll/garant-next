@@ -129,8 +129,8 @@ const CalculatorMainForm = ({ variant }: ICalculatorMainFormProps) => {
             className={styles.image}
             src="/img/calculator-osago-bg.png"
             alt=""
-            width={840}
-            height={520}
+            width={5652}
+            height={3001}
             priority
           />
         ) : (
@@ -138,8 +138,8 @@ const CalculatorMainForm = ({ variant }: ICalculatorMainFormProps) => {
             className={styles.image}
             src="/img/calculator-ns-bg.png"
             alt=""
-            width={840}
-            height={520}
+            width={6187}
+            height={3289}
             priority
           />
         )}

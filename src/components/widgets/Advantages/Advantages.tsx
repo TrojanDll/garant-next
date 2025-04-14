@@ -8,19 +8,19 @@ import ContentContainer from "@/components/ui/ContentContainer/ContentContainer"
 
 const advantageCards: IAdvantageCards[] = [
   {
-    image: "/img/icons/timer.png",
+    image: "/img/icons/timer.svg",
     title: "Быстро",
     descr: "Получите полис онлайн без ожидания в очередях",
     alt: "Таймер",
   },
   {
-    image: "/img/icons/wallet.png",
+    image: "/img/icons/wallet.svg",
     title: "Выгодно",
     descr: "Выберите для себя лучшие условия в пару кликов",
     alt: "Кошелек",
   },
   {
-    image: "/img/icons/folder.png",
+    image: "/img/icons/folder.svg",
     title: "Удобно",
     descr: "Полис всегда с собой и доступен в любой момент",
     alt: "Папка",
