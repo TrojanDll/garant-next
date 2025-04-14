@@ -29,7 +29,7 @@ const OsagoApply = () => {
     <section className={styles.root}>
       <ContentContainer>
         <CustomTitle tag="h1" isCentered>
-          Оформить полис ОСАГО в Абхазии!
+          Оформить полис ОСАГО в Абхазии
         </CustomTitle>
 
         <Substrate withShadow="light" className={styles.substrate}>
