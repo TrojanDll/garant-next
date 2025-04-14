@@ -58,6 +58,7 @@ const CustomInput = ({
       setValue("");
       setSelected(value);
     }
+    setIsCalendarOpened(false);
   };
 
   const isErrorMessage: boolean = !!errorMessage?.length;
@@ -77,8 +78,8 @@ const CustomInput = ({
   }, [isAnotherCarVisible]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
     setIsValidationError(false);
+    setValue(e.target.value);
   };
 
   useEffect(() => {

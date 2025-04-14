@@ -27,15 +27,10 @@ const Calendar = ({ value, setValue, className, onClose }: IProps) => {
         mode="single"
         selected={value}
         onSelect={setValue}
-        // footer={value ? `Selected: ${value.toLocaleDateString()}` : "Pick a day."}
         components={{
           Chevron: CustomChevron,
           MonthCaption: CalendarSelect,
         }}
-        // styles={{
-        //   root: { fontFamily: 'Inter, sans-serif', fontSize: '14px' },
-        //   caption: { backgroundColor: '#f5f5f5', boxShadow: '0 2px 6px rgba(0,0,0,0.1)' },
-        // }}
         classNames={{
           root: `${styles.dayPickerRoot} rdp-root`,
           dropdown: `${styles.dropdown} rdp-dropdown`,
@@ -51,13 +46,13 @@ const Calendar = ({ value, setValue, className, onClose }: IProps) => {
           selected: `${styles.selected} rdp-selected`,
           month: `${styles.month} rdp-month`,
         }}
-        footer={
-          <div className={styles.calendarFooter}>
-            <Button onClickEvent={onClose} type="button" className={styles.submitDateBtn}>
-              Подтвердить
-            </Button>
-          </div>
-        }
+        // footer={
+        //   <div className={styles.calendarFooter}>
+        //     <Button onClickEvent={onClose} type="button" className={styles.submitDateBtn}>
+        //       Подтвердить
+        //     </Button>
+        //   </div>
+        // }
       />
     </div>
   );
