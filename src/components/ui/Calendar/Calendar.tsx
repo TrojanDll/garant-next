@@ -1,11 +1,11 @@
+"use client";
+
 import { ru } from "date-fns/locale";
 import React from "react";
 import { DayPicker, OnSelectHandler } from "react-day-picker";
 import CustomChevron from "../CustomChevron/CustomChevron";
 
 import CalendarSelect from "../CalendarSelect/CalendarSelect";
-
-import Button from "../Button/Button";
 
 import styles from "./Calendar.module.scss";
 

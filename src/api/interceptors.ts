@@ -1,0 +1,48 @@
+import axios, { type CreateAxiosDefaults } from "axios";
+
+import { errorCatch } from "./error";
+import { getToken, removeFromStorage } from "@/services/auth-token.service";
+import { authService } from "@/services/auth.service";
+import { NextResponse } from "next/server";
+import { PAGES } from "@/config/pages-url.config";
+
+const options: CreateAxiosDefaults = {
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  // withCredentials: true,
+};
+
+const axiosClassic = axios.create(options);
+const axiosWithAuth = axios.create(options);
+
+axiosWithAuth.interceptors.request.use((config) => {
+  const token = getToken();
+
+  if (config?.headers && token) config.headers.Authorization = `Bearer ${token}`;
+
+  return config;
+});
+
+axiosWithAuth.interceptors.response.use(
+  (config) => config,
+  async (error) => {
+    console.log(error);
+    if (error?.response?.status === 401 || errorCatch(error) === "Unauthenticated.") {
+      removeFromStorage();
+    }
+
+    NextResponse.redirect(PAGES.HOME)
+
+    throw error;
+  }
+);
+
+// const getData = async () => {
+//   const data = await axiosWithAuth.get("/api/get_auth_user");
+//   console.log(data);
+// };
+// getData();
+
+export { axiosClassic, axiosWithAuth };
