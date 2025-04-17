@@ -11,3 +11,23 @@
   line-height: 123% !important;
   color: #000 !important;
 }
+
+.input {
+  margin-top: 40px;
+}
+
+.checkboxWrapper {
+  margin-top: 40px;
+  display: flex;
+  align-items: flex-start;
+  column-gap: 15px;
+}
+
+.checkboxLink {
+  color: var(--blue);
+}
+
+.submit {
+  width: 100%;
+  margin-top: 40px;
+}

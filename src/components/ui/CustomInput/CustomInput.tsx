@@ -10,9 +10,9 @@ import ClickOutsideWrapper from "../ClickOutsideWrapper/ClickOutsideWrapper";
 
 import { usePromocodeValidate } from "@/hooks/usePromocodeValidate/usePromocodeValidate";
 import InputNotification from "../InputNotification/InputNotification";
+import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 
 import styles from "./CustomInput.module.scss";
-import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 
 interface IProps {
   name: string;
@@ -22,6 +22,7 @@ interface IProps {
   value: string;
   setValue: (value: string) => void;
   errorMessage?: string;
+  displayErrorMessage?: boolean;
   className?: string;
   isError?: boolean;
   inputType?: TInputType;
@@ -38,6 +39,7 @@ const CustomInput = ({
   isError,
   errorMessage,
   inputType = "text",
+  displayErrorMessage = false,
 }: IProps) => {
   const [selected, setSelected] = useState<Date>();
   const [isValidationError, setIsValidationError] = useState(false);
@@ -120,6 +122,10 @@ const CustomInput = ({
           inputType={inputType}
         />
       </div>
+
+      {isErrorMessage && displayErrorMessage && (
+        <InputNotification variant="error">{errorMessage}</InputNotification>
+      )}
 
       {promocodeResult && promocodeResult?.isValid && (
         <InputNotification variant="success">

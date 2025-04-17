@@ -46,7 +46,7 @@ export default function ButtonGroup({
     }
   }, [items, isEquals, buttonWidth]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (activeBgRef.current && containerRef.current) {
       const computedStyle = window.getComputedStyle(containerRef.current);
       const gap = parseFloat(computedStyle.gap) || 0;

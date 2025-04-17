@@ -7,6 +7,7 @@ import Footer from "@/components/widgets/Footer/Footer";
 
 import "./globals.scss";
 import Head from "next/head";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: {
@@ -43,9 +44,11 @@ export default function RootLayout({
         <link rel="manifest" href="/favicon/site.webmanifest" />
       </Head>
       <body>
-        <Header />
-        {children}
-        <Footer />
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

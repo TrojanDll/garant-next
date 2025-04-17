@@ -7,28 +7,24 @@ export interface IRegistrationForm {
   date_of_birth: string;
   password: string;
   password_confirmation: string;
-}
-
-export interface IAuthForm {
-  email: string;
-  password: string;
+  checkbox: boolean;
 }
 
 export interface IUser {
   id: number;
-  name?: string;
+  name: string;
+  surname: string;
+  patronymic: string;
+  phone: string;
+  date_of_birth: string;
   email: string;
-
-  workInterval?: number;
-  breakInterval?: number;
-  intervalsCount?: number;
 }
 
-export interface IAuthResponse {
-  accessToken: string;
-  user: IUser;
+export interface IRegistrationResponse {
+  user: Pick<IUser, "id" | "name" | "email">;
+  token: string;
 }
+
+export type IRegistrationFormApiData = Omit<IRegistrationForm, "checkbox">;
 
 export type TAuthType = "login" | "registration";
-
-export type TypeUserForm = Omit<IUser, "id"> & { password?: string };

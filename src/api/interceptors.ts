@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 import { PAGES } from "@/config/pages-url.config";
 
 const options: CreateAxiosDefaults = {
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  baseURL: "https://xn----nbck7b7ald8atlv.xn--y9a3aq/strahovanie.loc/public",
   headers: {
     "Content-Type": "application/json",
   },
