@@ -7,7 +7,7 @@ import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 
 import styles from "./DynamicFormSection.module.scss";
 import { useEffect } from "react";
-import usePersonType from "@/stores/OsagoApply/personType";
+import usePersonType from "@/stores/OsagoApply/personType.store";
 
 interface Props {
   fields: IFieldConfig<IOsagoApplyForm>[];

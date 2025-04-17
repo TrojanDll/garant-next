@@ -28,7 +28,7 @@ export default function ButtonGroup({
   name,
   className,
   buttonWidth,
-  groupType,
+  groupType = "default",
   isEquals = true,
 }: ButtonGroupProps) {
   const [activeIndex, setActiveIndex] = useState(defaultActiveIndex);
@@ -99,7 +99,7 @@ export default function ButtonGroup({
   };
 
   useEffect(() => {
-    handleClick(0);
+    handleClick(defaultActiveIndex);
   }, []);
 
   return (

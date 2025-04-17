@@ -14,7 +14,6 @@ import Button from "@/components/ui/Button/Button";
 import DynamicFormSection from "@/components/entities/DynamicFormSection/DynamicFormSection";
 
 import styles from "./OsagoApply.module.scss";
-import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 
 const OsagoApply = () => {
   const { config, isLoading } = useOsagoFormConfig();

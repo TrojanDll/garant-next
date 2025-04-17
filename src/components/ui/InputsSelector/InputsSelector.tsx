@@ -5,7 +5,7 @@ import { TFieldType, TInputType } from "@/types/IFieldConfig";
 import ButtonGroup, { TButtonGroupRequest, TButtonGroupType } from "../ButtonGroup/ButtonGroup";
 import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 import { personTypes, TPersonType } from "@/types/OsagoApplyForm/IOsagoApplyForm";
-import usePersonType from "@/stores/OsagoApply/personType";
+import usePersonType from "@/stores/OsagoApply/personType.store";
 
 interface IProps {
   type: TFieldType;
