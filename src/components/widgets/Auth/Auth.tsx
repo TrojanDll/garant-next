@@ -7,8 +7,8 @@ import ContentContainer from "@/components/ui/ContentContainer/ContentContainer"
 import useAuthType from "@/stores/Auth/authType.store";
 
 import styles from "./Auth.module.scss";
-import Login from "@/components/features/Login/Login";
 import Registration from "@/components/features/Registration/Registration";
+import Login from "@/components/features/Login/Login";
 
 const buttonGroupValues = ["Вход", "Регистрация"];
 
