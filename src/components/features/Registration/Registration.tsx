@@ -15,8 +15,8 @@ import { PAGES } from "@/config/pages-url.config";
 
 import styles from "./Registration.module.scss";
 import { registrationFields } from "./fields.data";
-import { useRegistration } from "@/hooks/auth/useRegistration";
 import toast from "react-hot-toast";
+import { useRegistration } from "@/hooks/Auth/useRegistration";
 
 const Registration = () => {
   const { handleSubmit, control, watch } = useForm<IRegistrationForm>();

@@ -13,9 +13,9 @@ import { loginFields } from "./fields.data";
 import Button from "@/components/ui/Button/Button";
 import Link from "next/link";
 import { PAGES } from "@/config/pages-url.config";
-import { useLogin } from "@/hooks/auth/useLogin";
 import toast from "react-hot-toast";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
+import { useLogin } from "@/hooks/Auth/useLogin";
 
 const Login = () => {
   const { handleSubmit, control } = useForm<ILoginForm>();
