@@ -36,7 +36,7 @@ export const registrationFields: IField<IRegistrationForm>[] = [
     name: "patronymic",
     label: "Отчество (при наличии)",
     placeholder: "Отчество (при наличии)",
-    required: true,
+    required: false,
   },
   {
     name: "password",
