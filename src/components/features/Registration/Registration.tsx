@@ -15,12 +15,18 @@ import { PAGES } from "@/config/pages-url.config";
 
 import styles from "./Registration.module.scss";
 import { registrationFields } from "./fields.data";
-import { useRegistration } from "@/hooks/Auth/useRegistration";
+import { useRegistration } from "@/hooks/auth/useRegistration";
+import toast from "react-hot-toast";
 
 const Registration = () => {
   const { handleSubmit, control, watch } = useForm<IRegistrationForm>();
-  const { registration, isRegistrationPending, registrationResponse } =
-    useRegistration();
+  const {
+    registration,
+    isRegistrationPending,
+    registrationResponse,
+    isRegistrationError,
+    isRegistrationSuccess,
+  } = useRegistration();
 
   const password = watch("password");
 
@@ -29,13 +35,19 @@ const Registration = () => {
     registration(data);
   };
 
-  // useEffect(() => {
-  //   if (registrationError) {
-  //     console.log(registrationError);
-  //   } else {
-  //     console.log(registrationResponse);
-  //   }
-  // }, [registrationResponse]);
+  useEffect(() => {
+    if (isRegistrationPending) {
+      toast.loading("Загрузка");
+    }
+
+    if (isRegistrationError) {
+      toast.dismiss();
+      toast.error("Ошибка регистрации");
+    } else if (isRegistrationSuccess) {
+      toast.dismiss();
+      toast.success("Регистрация прошла успешно");
+    }
+  }, [isRegistrationPending]);
 
   return (
     <Substrate className={styles.substrate}>

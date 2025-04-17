@@ -10,6 +10,11 @@ export interface IRegistrationForm {
   checkbox: boolean;
 }
 
+export interface ILoginForm {
+  email: string;
+  password: string;
+}
+
 export interface IUser {
   id: number;
   name: string;
@@ -23,6 +28,12 @@ export interface IUser {
 export interface IRegistrationResponse {
   user: Pick<IUser, "id" | "name" | "email">;
   token: string;
+}
+
+export interface ILoginResponse {
+  user: Pick<IUser, "id" | "name" | "email">;
+  token: string;
+  success: boolean;
 }
 
 export type IRegistrationFormApiData = Omit<IRegistrationForm, "checkbox">;

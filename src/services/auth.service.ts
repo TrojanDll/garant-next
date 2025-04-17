@@ -1,11 +1,21 @@
 import { axiosClassic } from "@/api/interceptors";
 
 import { removeFromStorage, saveTokenStorage } from "./auth-token.service";
-import { IRegistrationFormApiData, IRegistrationResponse } from "@/types/auth.types";
+import {
+  ILoginForm,
+  ILoginResponse,
+  IRegistrationFormApiData,
+  IRegistrationResponse,
+} from "@/types/auth.types";
 
 class AuthService {
   async registration(data: IRegistrationFormApiData) {
     const response = await axiosClassic.post<IRegistrationResponse>("/api/register", data);
+    return response;
+  }
+
+  async login(data: ILoginForm) {
+    const response = await axiosClassic.post<ILoginResponse>("/api/login", data);
     return response;
   }
 

@@ -1,0 +1,51 @@
+.substrate {
+  max-width: 700px;
+  margin: 0 auto;
+  margin-top: 17px;
+  padding: 40px 60px;
+}
+
+.title {
+  font-weight: 500 !important;
+  font-size: 26px !important;
+  line-height: 123% !important;
+  color: #000 !important;
+}
+
+.input {
+  margin-top: 40px;
+}
+
+.submit {
+  width: 100% !important;
+  margin-top: 40px;
+}
+
+.recovery {
+  display: block;
+  margin-top: 40px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 128%;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-align: center;
+  color: var(--blue);
+}
+
+.errorMessage {
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background: var(--pink);
+  padding: 15px 0;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 128%;
+  color: var(--red2);
+}

@@ -10,7 +10,8 @@ export function useRegistration() {
     mutate: registration,
     isPending: isRegistrationPending,
     data: registrationResponse,
-    isSuccess: isRegistrationSuccess
+    isSuccess: isRegistrationSuccess,
+    isError: isRegistrationError,
   } = useMutation({
     mutationKey: ["registration"],
     mutationFn: (data: IRegistrationFormApiData) => authService.registration(data),
@@ -31,5 +32,11 @@ export function useRegistration() {
     },
   });
 
-  return { registration, isRegistrationPending, registrationResponse, isRegistrationSuccess };
+  return {
+    registration,
+    isRegistrationPending,
+    registrationResponse,
+    isRegistrationSuccess,
+    isRegistrationError,
+  };
 }

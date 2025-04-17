@@ -11,11 +11,10 @@ class PAGESCLASS {
   DOCUMENTS = `${this.root}documents`;
   ABOUT = `${this.root}about`;
   POLICY = `${this.root}policy`;
+  RECOVERY = `${this.root}recovery`;
 
   OSAGO_APPLY = `${this.OSAGO}/apply`;
   NS_APPLY = `${this.NS}/apply`;
-
-
 }
 
 export const PAGES = new PAGESCLASS();
