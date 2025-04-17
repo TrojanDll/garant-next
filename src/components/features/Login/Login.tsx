@@ -70,6 +70,7 @@ const Login = () => {
                 value={field.value as string}
                 errorMessage={fieldState.error?.message}
                 placeholder={config.placeholder}
+                inputType={field.name === "password" ? "password" : "text"}
               />
             )}
           />

@@ -27,6 +27,11 @@
   }
 }
 
+.eye {
+  right: 30px;
+  transform: translateY(-43%) !important;
+}
+
 @media (max-width: 1149px) {
   .calendar {
     right: 20px;

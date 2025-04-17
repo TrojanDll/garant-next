@@ -1,0 +1,19 @@
+import { PAGES } from "./pages-url.config";
+
+export const publicPages: string[] = [
+  PAGES.ABOUT,
+  PAGES.CALCULATOR,
+  PAGES.CONTACTS,
+  PAGES.DOCUMENTS,
+  PAGES.DOCUMENTS,
+  PAGES.HELP,
+  PAGES.HOME,
+  PAGES.NS,
+  PAGES.NS_APPLY,
+  PAGES.OSAGO,
+  PAGES.OSAGO_APPLY,
+  PAGES.POLICY,
+  PAGES.RECOVERY,
+];
+
+export const privatePages: string[] = [PAGES.DASHBOARD];

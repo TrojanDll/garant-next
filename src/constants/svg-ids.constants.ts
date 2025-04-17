@@ -12,4 +12,6 @@ export enum ESvgName {
   CHECKMARK = "checkmark",
   CALENDAR = "calendar",
   TOOLTIP = "tooltip",
+  EYE = "eye",
+  EYE_CLOSED = "eye_closed",
 }
