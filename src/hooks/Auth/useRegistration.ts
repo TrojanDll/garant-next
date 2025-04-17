@@ -5,7 +5,7 @@ import axios from "axios";
 
 export function useRegistration() {
   const queryClient = useQueryClient();
-
+// 
   const {
     mutate: registration,
     isPending: isRegistrationPending,
