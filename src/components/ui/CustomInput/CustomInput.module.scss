@@ -8,6 +8,8 @@
   border-radius: 22px;
   padding: 19px 30px;
   background-color: var(--white);
+  display: flex;
+  align-items: flex-start;
 
   font-family: var(--font-family);
   font-weight: 500;
@@ -20,7 +22,7 @@
     font-family: var(--font-family);
     font-weight: 500;
     font-size: 18px;
-    line-height: 128%;
+    line-height: 18px;
     letter-spacing: 0.01em;
     color: var(--grey);
   }
@@ -88,6 +90,16 @@
 
 .discountValue {
   font-weight: 500;
+}
+
+.passwordHidden {
+  font-size: 28px;
+  line-height: 100%;
+  padding: 13px 30px;
+
+  &::placeholder {
+    transform: translateY(-4px);
+  }
 }
 
 @media (max-width: 1149px) {

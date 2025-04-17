@@ -41,6 +41,7 @@ const CustomInput = ({
   inputType = "text",
   displayErrorMessage = false,
 }: IProps) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [selected, setSelected] = useState<Date>();
   const [isValidationError, setIsValidationError] = useState(false);
   const [isCalendarOpened, setIsCalendarOpened] = useState(false);
@@ -70,6 +71,10 @@ const CustomInput = ({
   const handleAsideElementClick = () => {
     if (inputType === "promocode") {
       validatePromocode(value);
+    }
+
+    if (inputType === "password") {
+      setIsPasswordVisible(!isPasswordVisible);
     }
   };
 
@@ -104,7 +109,7 @@ const CustomInput = ({
         <input
           onClick={isPointer ? handleInputClick : undefined}
           readOnly={isPointer}
-          type="text"
+          type={inputType === "password" && isPasswordVisible === false ? "password" : "text"}
           name={name}
           id={name}
           placeholder={placeholder}
@@ -113,13 +118,16 @@ const CustomInput = ({
           onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(e)}
           className={` ${isErrorMessage || isValidationError ? styles.error : ""} ${styles.input} ${
             isPointer ? styles.pointer : ""
-          } ${inputType === "promocode" ? styles.promocode : ""}`}
+          } ${inputType === "promocode" ? styles.promocode : ""} ${
+            inputType === "password" && isPasswordVisible === false ? styles.passwordHidden : ""
+          }`}
         />
         <InputAsideElement
           isLoading={isPromocodeLoading}
           onClick={handleAsideElementClick}
           className={styles.asideElement}
           inputType={inputType}
+          isVisible={isPasswordVisible}
         />
       </div>
 

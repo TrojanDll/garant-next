@@ -15,7 +15,7 @@ import Link from "next/link";
 import { PAGES } from "@/config/pages-url.config";
 import toast from "react-hot-toast";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
-import { useLogin } from "@/hooks/Auth/useLogin";
+import { useLogin } from "@/hooks/auth/useLogin";
 
 const Login = () => {
   const { handleSubmit, control } = useForm<ILoginForm>();
@@ -70,6 +70,7 @@ const Login = () => {
                 value={field.value as string}
                 errorMessage={fieldState.error?.message}
                 placeholder={config.placeholder}
+                inputType={field.name === "password" ? "password" : "text"}
               />
             )}
           />
