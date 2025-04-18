@@ -1,0 +1,28 @@
+.input {
+  margin-top: 40px;
+}
+
+.checkboxWrapper {
+  margin-top: 40px;
+  display: flex;
+  align-items: flex-start;
+  column-gap: 15px;
+}
+
+.checkboxText {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 128%;
+  color: var(--grey);
+}
+
+@media (max-width: 1149px) {
+  .input {
+    margin-top: 35px;
+  }
+
+  .checkboxText {
+    font-size: 14px;
+  }
+}

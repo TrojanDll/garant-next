@@ -1,6 +1,6 @@
 import { axiosClassic } from "@/api/interceptors";
 
-import { removeFromStorage, saveTokenStorage } from "./auth-token.service";
+import { removeFromStorage, saveTokenToStorage } from "./auth-token.service";
 import {
   ILoginForm,
   ILoginResponse,
@@ -10,12 +10,18 @@ import {
 
 class AuthService {
   async registration(data: IRegistrationFormApiData) {
-    const response = await axiosClassic.post<IRegistrationResponse>("/api/register", data);
+    const response = await axiosClassic.post<IRegistrationResponse>("/api/registration", data);
+
+    saveTokenToStorage(response.data.token);
+
     return response;
   }
 
   async login(data: ILoginForm) {
     const response = await axiosClassic.post<ILoginResponse>("/api/login", data);
+
+    saveTokenToStorage(response.data.token);
+
     return response;
   }
 
