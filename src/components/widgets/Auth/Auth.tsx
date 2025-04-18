@@ -34,6 +34,7 @@ const Auth = () => {
     <ContentContainer>
       <div className={styles.buttonGroupWrapper}>
         <ButtonGroup
+          active={authType === "login" ? 0 : 1}
           defaultActiveIndex={defaultActiveTabIndex}
           items={buttonGroupValues}
           isEquals={false}

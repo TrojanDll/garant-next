@@ -11,10 +11,28 @@
   }
 }
 
+.underline {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 128%;
+  text-decoration: underline;
+  color: var(--blue);
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+}
+
 @media (max-width: 1149px) {
   .link {
     font-weight: 400;
     font-size: 18px;
     line-height: 128%;
+  }
+
+  .underline {
+    font-size: 14px;
   }
 }

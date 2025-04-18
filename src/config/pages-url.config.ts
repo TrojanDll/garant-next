@@ -12,6 +12,7 @@ class PAGESCLASS {
   ABOUT = `${this.root}about`;
   POLICY = `${this.root}policy`;
   RECOVERY = `${this.root}recovery`;
+  AUTH = `${this.root}auth`;
 
   OSAGO_APPLY = `${this.OSAGO}/apply`;
   NS_APPLY = `${this.NS}/apply`;
