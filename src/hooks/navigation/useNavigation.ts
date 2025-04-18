@@ -1,3 +1,4 @@
+import { PAGES } from "@/config/pages-url.config";
 import { useRouter } from "next/navigation";
 
 export function useNavigation() {
@@ -15,5 +16,18 @@ export function useNavigation() {
     router.refresh();
   };
 
-  return { goBack, reloadPage };
+  const navigateToDashboard = () => {
+    router.push(PAGES.DASHBOARD);
+  };
+
+  const navigateToAuth = () => {
+    router.push(PAGES.AUTH);
+  };
+
+  const savePathBeforeAuth = () => {
+    const currentPath = window.location.pathname;
+    sessionStorage.setItem("redirectAfterLogin", currentPath);
+  };
+
+  return { goBack, reloadPage, navigateToDashboard, savePathBeforeAuth, navigateToAuth };
 }

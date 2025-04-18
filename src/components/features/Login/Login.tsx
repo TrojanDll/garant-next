@@ -19,7 +19,7 @@ import LoginFields from "@/components/entities/LoginFields/LoginFields";
 const Login = () => {
   const { handleSubmit, control } = useForm<ILoginForm>();
   const { login, isLoginSuccess, isLoginError, isLoginPending, loginError } = useLogin();
-  const { goBack } = useNavigation();
+  const { navigateToDashboard } = useNavigation();
 
   const onSubmit: SubmitHandler<ILoginForm> = (data) => {
     console.log(data);
@@ -27,19 +27,21 @@ const Login = () => {
   };
 
   useEffect(() => {
+    if (!isLoginPending) {
+      toast.dismiss();
+    }
+
     if (isLoginPending) {
       toast.loading("Загрузка");
     }
 
-    if (loginError.length > 0) {
-      toast.dismiss();
-    } else if (isLoginSuccess) {
+    if (isLoginSuccess) {
       toast.dismiss();
       toast.success("Успешный вход");
 
       setTimeout(() => {
         toast.dismiss();
-        goBack();
+        navigateToDashboard();
       }, 1000);
     }
   }, [isLoginPending]);

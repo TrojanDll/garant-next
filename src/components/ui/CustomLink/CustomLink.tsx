@@ -5,12 +5,27 @@ import styles from "./CustomLink.module.scss";
 interface IProps {
   href: string;
   className?: string;
-  onClick?: () => void
+  onClick?: () => void;
+  variant?: "underline" | "primary";
+  isCentered?: boolean;
 }
 
-const CustomLink = ({ children, href, className, onClick}: PropsWithChildren<IProps>) => {
+const CustomLink = ({
+  children,
+  href,
+  className,
+  onClick,
+  variant,
+  isCentered = false,
+}: PropsWithChildren<IProps>) => {
   return (
-    <Link onClick={onClick} className={`${className ? className : ""} ${styles.link}`} href={href}>
+    <Link
+      onClick={onClick}
+      className={`${className ? className : ""} ${styles.link} ${
+        variant === "underline" ? styles.underline : ""
+      } ${isCentered ? styles.centered : ""}`}
+      href={href}
+    >
       {children}
     </Link>
   );
