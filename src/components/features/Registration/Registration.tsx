@@ -13,10 +13,11 @@ import Checkbox from "@/components/ui/Checkbox/Checkbox";
 import Link from "next/link";
 import { PAGES } from "@/config/pages-url.config";
 
-import styles from "./Registration.module.scss";
 import { registrationFields } from "./fields.data";
 import toast from "react-hot-toast";
 import { useRegistration } from "@/hooks/auth/useRegistration";
+
+import styles from "./Registration.module.scss";
 
 const Registration = () => {
   const { handleSubmit, control, watch } = useForm<IRegistrationForm>();
@@ -80,6 +81,7 @@ const Registration = () => {
                   displayErrorMessage={isPasswordConfirm}
                   label={config.label}
                   placeholder={config.placeholder}
+                  inputType={config.inputType}
                 />
               )}
             />

@@ -33,3 +33,26 @@
   justify-content: center;
   flex-shrink: 0;
 }
+
+@media (max-width: 1149px) {
+  .root {
+    width: 22px;
+    height: 22px;
+  }
+
+  .field {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+  }
+
+  .checked {
+    width: 22px;
+    height: 22px;
+  }
+
+  .svg {
+    width: 15px;
+    height: 13px;
+  }
+}

@@ -37,7 +37,10 @@ const InputAsideElement = ({
 
       {inputType === "password" && (
         <button className={`${className} ${styles.eye}`} type="button" onClick={onClick}>
-          <SvgSelector id={isVisible ? ESvgName.EYE : ESvgName.EYE_CLOSED} />
+          <SvgSelector
+            className={`${isVisible ? styles.svgEyeOpened : styles.svgEyeClosed}`}
+            id={isVisible ? ESvgName.EYE : ESvgName.EYE_CLOSED}
+          />
         </button>
       )}
     </>
