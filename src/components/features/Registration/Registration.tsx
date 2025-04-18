@@ -80,6 +80,7 @@ const Registration = () => {
                   displayErrorMessage={isPasswordConfirm}
                   label={config.label}
                   placeholder={config.placeholder}
+                  inputType={config.inputType}
                 />
               )}
             />
