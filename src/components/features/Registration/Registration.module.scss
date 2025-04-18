@@ -3,6 +3,7 @@
   margin: 0 auto;
   margin-top: 17px;
   padding: 40px 60px;
+  box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.13);
 }
 
 .title {
@@ -23,6 +24,14 @@
   column-gap: 15px;
 }
 
+.checkboxText {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 128%;
+  color: var(--grey);
+}
+
 .checkboxLink {
   color: var(--blue);
 }
@@ -30,4 +39,29 @@
 .submit {
   width: 100%;
   margin-top: 40px;
+}
+
+@media (max-width: 1149px) {
+  .substrate {
+    padding: 30px 20px 40px 20px;
+  }
+
+  .title {
+    font-weight: 700 !important;
+    font-size: 20px !important;
+    line-height: 125% !important;
+    color: var(--dark-grey);
+  }
+
+  .input {
+    margin-top: 35px;
+  }
+
+  .checkboxText {
+    font-size: 14px;
+  }
+
+  .submit {
+    margin-top: 35px;
+  }
 }

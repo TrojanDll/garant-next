@@ -125,6 +125,16 @@
     padding: 22px 30px;
     padding-right: 131px;
   }
+
+  .passwordHidden {
+    font-size: 24px;
+    line-height: 129%;
+    padding: 8px 20px;
+    padding-bottom: 7px;
+    &::placeholder {
+      transform: translateY(-5px);
+    }
+  }
 }
 
 @media (max-width: 420px) {

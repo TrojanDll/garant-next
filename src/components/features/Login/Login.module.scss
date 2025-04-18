@@ -49,3 +49,36 @@
   line-height: 128%;
   color: var(--red2);
 }
+
+@media (max-width: 1149px) {
+  .substrate {
+    padding: 30px 20px 40px 20px;
+  }
+
+  .title {
+    font-weight: 700 !important;
+    font-size: 20px !important;
+    line-height: 125% !important;
+    color: var(--dark-grey);
+  }
+
+  .input {
+    margin-top: 35px;
+  }
+
+  .errorMessage {
+    margin-top: 35px;
+    padding: 10px 25px;
+    font-size: 14px;
+  }
+
+  .recovery {
+    margin-top: 35px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .submit {
+    margin-top: 35px;
+  }
+}
