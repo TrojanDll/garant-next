@@ -58,9 +58,9 @@ const Registration = () => {
       toast.dismiss();
       toast.success("Регистрация прошла успешно");
 
-      setTimeout(() => {
-        navigateToHome();
-      }, 1000);
+      // setTimeout(() => {
+      //   navigateToHome();
+      // }, 1000);
     }
   }, [isRegistrationPending]);
 
