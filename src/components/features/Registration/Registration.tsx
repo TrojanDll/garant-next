@@ -17,6 +17,7 @@ import RegistrationFields from "@/components/entities/RegistrationFields/Registr
 
 import styles from "./Registration.module.scss";
 import EmailConfirmation from "@/components/entities/EmailConfirmation/EmailConfirmation";
+import { useNavigation } from "@/hooks/navigation/useNavigation";
 
 const Registration = () => {
   const { handleSubmit, control, watch } = useForm<IRegistrationForm>();
@@ -27,6 +28,8 @@ const Registration = () => {
     isRegistrationSuccess,
     registrationErrors,
   } = useRegistration();
+
+  const { navigateToHome } = useNavigation();
 
   const password = watch("password");
 
@@ -54,6 +57,10 @@ const Registration = () => {
     } else if (isRegistrationSuccess) {
       toast.dismiss();
       toast.success("Регистрация прошла успешно");
+
+      setTimeout(() => {
+        navigateToHome();
+      }, 1000);
     }
   }, [isRegistrationPending]);
 

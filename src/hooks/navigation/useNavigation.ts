@@ -20,6 +20,11 @@ export function useNavigation() {
     router.push(PAGES.DASHBOARD);
   };
 
+  const navigateToHome = () => {
+    router.push(PAGES.HOME);
+  };
+
+
   const navigateToAuth = () => {
     router.push(PAGES.AUTH);
   };
@@ -29,5 +34,5 @@ export function useNavigation() {
     sessionStorage.setItem("redirectAfterLogin", currentPath);
   };
 
-  return { goBack, reloadPage, navigateToDashboard, savePathBeforeAuth, navigateToAuth };
+  return { goBack, reloadPage, navigateToDashboard, savePathBeforeAuth, navigateToAuth, navigateToHome };
 }
