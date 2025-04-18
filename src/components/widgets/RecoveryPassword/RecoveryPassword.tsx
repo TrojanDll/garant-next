@@ -32,6 +32,8 @@ const RecoveryPassword = () => {
       slug = params.slug[0];
     }
 
+    slug = decodeURIComponent(slug);
+
     const formatedData: IRecoveryPasswordApiData = {
       ...data,
       hash_email: slug,
