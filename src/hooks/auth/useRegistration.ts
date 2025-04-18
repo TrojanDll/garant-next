@@ -2,10 +2,31 @@ import { authService } from "@/services/auth.service";
 import { IRegistrationFormApiData } from "@/types/auth.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { useState } from "react";
+
+export interface IErrors {
+  name: boolean;
+  surname: boolean;
+  patronymic: boolean;
+  email: "taken" | "incorrect" | "required" | "";
+  phone: boolean;
+  date_of_birth: boolean;
+  password: boolean;
+}
 
 export function useRegistration() {
   const queryClient = useQueryClient();
-// 
+
+  const [registrationErrors, setRegistrationErrors] = useState<IErrors>({
+    name: false,
+    surname: false,
+    patronymic: false,
+    email: "",
+    phone: false,
+    date_of_birth: false,
+    password: false,
+  });
+
   const {
     mutate: registration,
     isPending: isRegistrationPending,
@@ -26,6 +47,16 @@ export function useRegistration() {
         const message = error.response?.data?.message || "Ошибка регистрации";
 
         console.log("Registration error", status, message);
+
+        console.log(error.response);
+
+        const emailError = error.response?.data?.data?.email;
+        if (emailError) {
+          setRegistrationErrors((prev) => ({
+            ...prev,
+            email: emailError[0] === "The email has already been taken." ? "taken" : "incorrect",
+          }));
+        }
       } else {
         console.log("Неизвестная ошибка", error);
       }
@@ -38,5 +69,6 @@ export function useRegistration() {
     registrationResponse,
     isRegistrationSuccess,
     isRegistrationError,
+    registrationErrors,
   };
 }

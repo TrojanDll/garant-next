@@ -1,7 +1,7 @@
 "use client";
 
 import Substrate from "@/components/ui/Substrate/Substrate";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
@@ -13,27 +13,32 @@ import Checkbox from "@/components/ui/Checkbox/Checkbox";
 import Link from "next/link";
 import { PAGES } from "@/config/pages-url.config";
 
-import { registrationFields } from "./fields.data";
 import toast from "react-hot-toast";
 import { useRegistration } from "@/hooks/auth/useRegistration";
 
 import styles from "./Registration.module.scss";
+import { formatPhoneNumber } from "@/helpers/user/formatPhoneNumber.helper";
+import RegistrationFields from "@/components/entities/RegistrationFields/RegistrationFields";
 
 const Registration = () => {
   const { handleSubmit, control, watch } = useForm<IRegistrationForm>();
   const {
     registration,
     isRegistrationPending,
-    registrationResponse,
     isRegistrationError,
     isRegistrationSuccess,
+    registrationErrors,
   } = useRegistration();
 
   const password = watch("password");
 
   const onSubmit: SubmitHandler<IRegistrationForm> = (data) => {
-    console.log(data);
-    registration(data);
+    const formatedData: IRegistrationForm = {
+      ...data,
+      phone: formatPhoneNumber(data.phone),
+    };
+
+    registration(formatedData);
   };
 
   useEffect(() => {
@@ -43,7 +48,11 @@ const Registration = () => {
 
     if (isRegistrationError) {
       toast.dismiss();
-      toast.error("Ошибка регистрации");
+      if (registrationErrors.email === "taken") {
+        toast.error("Этот email уже занят");
+      } else {
+        toast.error("Ошибка регистрации");
+      }
     } else if (isRegistrationSuccess) {
       toast.dismiss();
       toast.success("Регистрация прошла успешно");
@@ -57,67 +66,7 @@ const Registration = () => {
           Регистрация нового пользователя
         </CustomTitle>
 
-        {registrationFields.map((config) => {
-          const isPasswordConfirm = config.name === "password_confirmation";
-
-          return (
-            <Controller<IRegistrationForm, keyof IRegistrationForm>
-              key={config.name}
-              name={config.name}
-              control={control}
-              rules={{
-                required: config.required ? "Обязательное поле" : false,
-                ...(isPasswordConfirm && {
-                  validate: (value) => value === password || "Пароли не совпадают",
-                }),
-              }}
-              render={({ field, fieldState }) => (
-                <CustomInput
-                  className={styles.input}
-                  name={field.name}
-                  setValue={field.onChange}
-                  value={field.value as string}
-                  errorMessage={fieldState.error?.message}
-                  displayErrorMessage={isPasswordConfirm}
-                  label={config.label}
-                  placeholder={config.placeholder}
-                  inputType={config.inputType}
-                />
-              )}
-            />
-          );
-        })}
-
-        <div className={styles.checkboxWrapper}>
-          <Controller<IRegistrationForm, keyof IRegistrationForm>
-            key={styles.checkbox}
-            name="checkbox"
-            control={control}
-            rules={{
-              required: "Обязательное поле",
-            }}
-            render={({ field, fieldState }) => (
-              <Checkbox
-                className={styles.input}
-                setValue={field.onChange}
-                value={field.value as boolean}
-                isError={!!fieldState.error?.message}
-                errorMessage={fieldState.error?.message}
-              />
-            )}
-          />
-
-          <div className={styles.checkboxText}>
-            Я согласен на обработку{" "}
-            <Link className={styles.checkboxLink} href={PAGES.POLICY}>
-              персональных данных (ПД)
-            </Link>{" "}
-            и ознакомился с{" "}
-            <Link className={styles.checkboxLink} href={PAGES.POLICY}>
-              политикой обработки ПД
-            </Link>
-          </div>
-        </div>
+        <RegistrationFields control={control} password={password} />
 
         <Button className={styles.submit} type="submit">
           Регистрация

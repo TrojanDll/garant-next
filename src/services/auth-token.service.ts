@@ -9,7 +9,7 @@ export const getToken = () => {
 	return token || null
 }
 
-export const saveTokenStorage = (token: string) => {
+export const saveTokenToStorage = (token: string) => {
 	Cookies.set(EnumTokens.TOKEN, token, {
 		sameSite: 'strict',
 		expires: 7

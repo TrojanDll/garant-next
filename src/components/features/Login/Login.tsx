@@ -4,22 +4,24 @@ import React, { useEffect } from "react";
 
 import styles from "./Login.module.scss";
 
+import Cookies from "js-cookie";
+
 import Substrate from "@/components/ui/Substrate/Substrate";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { ILoginForm } from "@/types/auth.types";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
-import CustomInput from "@/components/ui/CustomInput/CustomInput";
-import { loginFields } from "./fields.data";
 import Button from "@/components/ui/Button/Button";
 import Link from "next/link";
 import { PAGES } from "@/config/pages-url.config";
 import toast from "react-hot-toast";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
 import { useLogin } from "@/hooks/auth/useLogin";
+import LoginFields from "@/components/entities/LoginFields/LoginFields";
+import { EnumTokens } from "@/services/auth-token.service";
 
 const Login = () => {
   const { handleSubmit, control } = useForm<ILoginForm>();
-  const { login, isLoginSuccess, isLoginError, isLoginPending } = useLogin();
+  const { login, isLoginSuccess, isLoginError, isLoginPending, loginError } = useLogin();
   const { goBack } = useNavigation();
 
   const onSubmit: SubmitHandler<ILoginForm> = (data) => {
@@ -32,7 +34,7 @@ const Login = () => {
       toast.loading("Загрузка");
     }
 
-    if (isLoginError) {
+    if (loginError.length > 0) {
       toast.dismiss();
     } else if (isLoginSuccess) {
       toast.dismiss();
@@ -41,9 +43,11 @@ const Login = () => {
       setTimeout(() => {
         toast.dismiss();
         goBack();
-      }, 500);
+      }, 1000);
     }
   }, [isLoginPending]);
+
+  console.log(Cookies.get(EnumTokens.TOKEN));
 
   return (
     <Substrate className={styles.substrate}>
@@ -52,29 +56,15 @@ const Login = () => {
           Вход в личный кабинет
         </CustomTitle>
 
-        {isLoginError && <div className={styles.errorMessage}>Неверный Email или пароль</div>}
+        {isLoginError && (
+          <div className={styles.errorMessage}>
+            {loginError === "unsubmited_email"
+              ? "Email не подтвержден"
+              : "Неверный Email или пароль"}
+          </div>
+        )}
 
-        {loginFields.map((config) => (
-          <Controller<ILoginForm, keyof ILoginForm>
-            key={config.name}
-            name={config.name}
-            control={control}
-            rules={{
-              required: config.required ? "Обязательное поле" : false,
-            }}
-            render={({ field, fieldState }) => (
-              <CustomInput
-                className={styles.input}
-                name={field.name}
-                setValue={field.onChange}
-                value={field.value as string}
-                errorMessage={fieldState.error?.message}
-                placeholder={config.placeholder}
-                inputType={field.name === "password" ? "password" : "text"}
-              />
-            )}
-          />
-        ))}
+        <LoginFields control={control} />
 
         <Link href={PAGES.RECOVERY} className={styles.recovery}>
           Забыли пароль?

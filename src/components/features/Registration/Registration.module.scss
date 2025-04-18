@@ -13,25 +13,6 @@
   color: #000 !important;
 }
 
-.input {
-  margin-top: 40px;
-}
-
-.checkboxWrapper {
-  margin-top: 40px;
-  display: flex;
-  align-items: flex-start;
-  column-gap: 15px;
-}
-
-.checkboxText {
-  font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 128%;
-  color: var(--grey);
-}
-
 .checkboxLink {
   color: var(--blue);
 }
@@ -51,14 +32,6 @@
     font-size: 20px !important;
     line-height: 125% !important;
     color: var(--dark-grey);
-  }
-
-  .input {
-    margin-top: 35px;
-  }
-
-  .checkboxText {
-    font-size: 14px;
   }
 
   .submit {
