@@ -4,8 +4,6 @@ import React, { useEffect } from "react";
 
 import styles from "./Login.module.scss";
 
-import Cookies from "js-cookie";
-
 import Substrate from "@/components/ui/Substrate/Substrate";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ILoginForm } from "@/types/auth.types";
@@ -17,7 +15,6 @@ import toast from "react-hot-toast";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
 import { useLogin } from "@/hooks/auth/useLogin";
 import LoginFields from "@/components/entities/LoginFields/LoginFields";
-import { EnumTokens } from "@/services/auth-token.service";
 
 const Login = () => {
   const { handleSubmit, control } = useForm<ILoginForm>();
@@ -46,8 +43,6 @@ const Login = () => {
       }, 1000);
     }
   }, [isLoginPending]);
-
-  console.log(Cookies.get(EnumTokens.TOKEN));
 
   return (
     <Substrate className={styles.substrate}>

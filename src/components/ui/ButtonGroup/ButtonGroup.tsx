@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useLayoutEffect } from "react";
+import { useState, useRef, useEffect, useLayoutEffect, use } from "react";
 import styles from "./ButtonGroup.module.scss";
 
 export type TButtonGroupRequest = {
@@ -13,6 +13,7 @@ export type TButtonGroupType = "default" | "small";
 interface ButtonGroupProps {
   items: string[];
   defaultActiveIndex?: number;
+  active?: number;
   onButtonClick?: (value: TButtonGroupRequest) => void;
   name?: string;
   className?: string;
@@ -24,6 +25,7 @@ interface ButtonGroupProps {
 export default function ButtonGroup({
   items,
   defaultActiveIndex = 0,
+  active,
   onButtonClick,
   name,
   className,
@@ -37,6 +39,12 @@ export default function ButtonGroup({
   const activeBgRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<(HTMLButtonElement | null)[]>([]);
+
+  useEffect(() => {
+    if (active !== undefined) {
+      setActiveIndex(active);
+    }
+  }, [active]);
 
   useLayoutEffect(() => {
     if (isEquals && !buttonWidth && buttonsRef.current.length > 0) {
@@ -76,7 +84,7 @@ export default function ButtonGroup({
           activeBgRef.current.style.width = `${currentBtn.offsetWidth}px`;
         }
       }
-      
+
       activeBgRef.current.style.transform = `translateX(${offset}px)`;
     }
   }, [activeIndex, buttonWidth, isEquals, maxWidth]);

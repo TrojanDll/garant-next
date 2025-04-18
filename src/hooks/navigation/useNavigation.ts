@@ -11,5 +11,9 @@ export function useNavigation() {
     }
   };
 
-  return { goBack };
+  const reloadPage = () => {
+    router.refresh();
+  };
+
+  return { goBack, reloadPage };
 }

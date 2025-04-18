@@ -1,0 +1,44 @@
+.title {
+  font-size: 26px !important;
+  font-weight: 500 !important;
+}
+
+.text {
+  margin-top: 40px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 125%;
+  color: #000;
+}
+
+.returnButton {
+  margin: 0 auto;
+  margin-top: 40px;
+  width: fit-content;
+  display: block;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 128%;
+  text-decoration: underline;
+  text-align: center;
+  color: var(--blue);
+}
+
+@media (max-width: 1149px) {
+  .title {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+  }
+
+  .text {
+    margin-top: 35px;
+    font-size: 14px;
+  }
+
+  .returnButton {
+    margin-top: 35px;
+    font-size: 14px;
+  }
+}
