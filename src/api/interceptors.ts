@@ -33,16 +33,10 @@ axiosWithAuth.interceptors.response.use(
       removeFromStorage();
     }
 
-    NextResponse.redirect(PAGES.HOME)
+    NextResponse.redirect(PAGES.HOME);
 
     throw error;
   }
 );
-
-// const getData = async () => {
-//   const data = await axiosWithAuth.get("/api/get_auth_user");
-//   console.log(data);
-// };
-// getData();
 
 export { axiosClassic, axiosWithAuth };

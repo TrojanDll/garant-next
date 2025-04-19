@@ -25,7 +25,7 @@ const PersonalData = () => {
   const { userData } = useGetCurrientUser();
 
   return (
-    <div className={styles.root}>
+    <div>
       <CustomTitle tag="h1" isCentered>
         Личные данные
       </CustomTitle>

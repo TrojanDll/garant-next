@@ -1,10 +1,5 @@
 import { userService } from "@/services/user.service";
-import { ICurrientUserResponse } from "@/types/user.types";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import { useEffect, useState } from "react";
-
-export type TLoginErrors = "" | "incorrect" | "unsubmited_email";
+import { useQuery } from "@tanstack/react-query";
 
 export function useGetCurrientUser() {
   const { data, isLoading, isError, isSuccess } = useQuery({

@@ -1,4 +1,5 @@
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
+import EditPersonalData from "@/components/widgets/EditPersonalData/EditPersonalData";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function EditPersonalDataPage() {
-  return <ContentContainer>EditPersonalDataPage</ContentContainer>;
+  return (
+    <ContentContainer>
+      <EditPersonalData />
+    </ContentContainer>
+  );
 }

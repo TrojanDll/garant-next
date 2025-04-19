@@ -3,8 +3,6 @@ import { IRecoveryPasswordApiData } from "@/types/recovery.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
-export type TLoginErrors = "" | "incorrect" | "unsubmited_email";
-
 export function useRecoveryPassword() {
   const queryClient = useQueryClient();
 

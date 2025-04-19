@@ -1,16 +1,19 @@
-import { authService } from "@/services/auth.service";
+import { recoveryService } from "@/services/recovery-service.service";
+import { userService } from "@/services/user.service";
+import { IRecoveryPasswordApiData } from "@/types/recovery.types";
+import { IEditUserForm } from "@/types/user.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
-export function useLogout() {
+export function useEditCurrientUser() {
   const queryClient = useQueryClient();
 
   const { mutate, isPending, isSuccess, isError } = useMutation({
-    mutationKey: ["logout"],
-    mutationFn: () => authService.logout(),
+    mutationKey: ["editCurrientUser"],
+    mutationFn: (data: IEditUserForm) => userService.editCurrientUser(data),
     onSuccess() {
       queryClient.invalidateQueries({
-        queryKey: ["logout"],
+        queryKey: ["editCurrientUser"],
       });
     },
     onError: (error) => {

@@ -26,6 +26,19 @@ export interface ICurrientUser {
 
 export interface ICurrientUserResponse {
   success: boolean;
-
   data: ICurrientUser;
+}
+
+export interface IEditUserForm {
+  name: string;
+  surname: string;
+  patronymic: string;
+  email: string;
+  phone: string;
+  date_of_birth: string;
+}
+
+export interface IEditCurrientUserResponse {
+  success: boolean;
+  message: string;
 }
