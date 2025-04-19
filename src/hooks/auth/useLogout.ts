@@ -13,6 +13,8 @@ export function useLogout() {
         queryKey: ["logout"],
       });
       queryClient.clear();
+      window.location.reload();
+
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {

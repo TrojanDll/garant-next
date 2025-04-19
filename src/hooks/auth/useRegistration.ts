@@ -40,6 +40,7 @@ export function useRegistration() {
       queryClient.invalidateQueries({
         queryKey: ["registration"],
       });
+      window.location.reload();
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
