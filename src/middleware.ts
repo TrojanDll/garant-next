@@ -5,7 +5,6 @@ import { EnumTokens } from "./services/auth-token.service";
 import { privatePages, publicPages } from "./config/pages-privacy.config";
 
 export async function middleware(request: NextRequest, response: NextResponse) {
-
   const { url, cookies, nextUrl } = request;
 
   const token = cookies.get(EnumTokens.TOKEN)?.value;
@@ -36,34 +35,23 @@ export async function middleware(request: NextRequest, response: NextResponse) {
 
 export const config = {
   matcher: [
-    "/",
-    "/calculator",
-    "/osago",
-    "/ns",
-    "/contacts",
-    "/help",
-    "/dashboard",
-    "/documents",
-    "/about",
-    "/policy",
-    "/recovery",
-    "/auth",
-    "/osago/apply",
-    "/ns/apply",
-    // PAGES.ABOUT,
-    // PAGES.CALCULATOR,
-    // PAGES.CONTACTS,
-    // PAGES.DOCUMENTS,в
-    // PAGES.DOCUMENTS,
-    // PAGES.HELP,
-    // PAGES.HOME,
-    // PAGES.NS,
-    // PAGES.NS_APPLY,
-    // PAGES.OSAGO,
-    // PAGES.OSAGO_APPLY,
-    // PAGES.POLICY,
-    // PAGES.RECOVERY,
-    // PAGES.DASHBOARD,
+    "/((?!_next|api|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff2?|ttf|eot|otf|js|css|map)).*)",
   ],
+  // matcher: [
+  //   "/",
+  //   "/calculator",
+  //   "/osago",
+  //   "/ns",
+  //   "/contacts",
+  //   "/help",
+  //   "/dashboard",
+  //   "/documents",
+  //   "/about",
+  //   "/policy",
+  //   "/recovery",
+  //   "/auth",
+  //   "/osago/apply",
+  //   "/ns/apply",
+  // ],
   // matcher
 };

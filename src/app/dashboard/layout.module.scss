@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  column-gap: 30px;
+}
+
+.sidebar {
+  width: calc(21% - 15px);
+}
+
+.content {
+  width: calc(79% - 15px);
+}

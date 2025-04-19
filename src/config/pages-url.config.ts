@@ -16,6 +16,9 @@ class PAGESCLASS {
 
   OSAGO_APPLY = `${this.OSAGO}/apply`;
   NS_APPLY = `${this.NS}/apply`;
+
+  CARS = `${this.DASHBOARD}/cars`;
+  MY_POLICIES = `${this.DASHBOARD}/my-policies`;
 }
 
 export const PAGES = new PAGESCLASS();
