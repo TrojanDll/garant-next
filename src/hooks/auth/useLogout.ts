@@ -12,6 +12,7 @@ export function useLogout() {
       queryClient.invalidateQueries({
         queryKey: ["logout"],
       });
+      queryClient.clear();
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {

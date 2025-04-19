@@ -34,6 +34,7 @@ const LogoutButton = ({ className }: IProps) => {
       toast.success("Вы вышли из системы");
 
       navigateToAuth();
+      window.location.href = "/auth";
     }
   }, [isPending]);
 
