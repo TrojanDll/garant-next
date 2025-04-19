@@ -7,6 +7,7 @@ import styles from "./SidebarDashboard.module.scss";
 import Substrate from "@/components/ui/Substrate/Substrate";
 import SidebarLink from "@/components/ui/SidebarLink/SidebarLink";
 import { PAGES } from "@/config/pages-url.config";
+import LogoutButton from "@/components/ui/LogoutButton/LogoutButton";
 
 interface ISidebarLink {
   text: string;
@@ -36,6 +37,7 @@ const SidebarDashboard = () => {
       <nav>
         {sidebarLinks.map((item, i) => (
           <SidebarLink
+          className={styles.link}
             active={active === i}
             setActive={() => setActive(i)}
             key={item.text}
@@ -44,6 +46,8 @@ const SidebarDashboard = () => {
             {item.text}
           </SidebarLink>
         ))}
+
+        <LogoutButton className={styles.logout} />
       </nav>
     </Substrate>
   );

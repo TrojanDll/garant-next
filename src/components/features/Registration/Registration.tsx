@@ -57,10 +57,6 @@ const Registration = () => {
     } else if (isRegistrationSuccess) {
       toast.dismiss();
       toast.success("Регистрация прошла успешно");
-
-      // setTimeout(() => {
-      //   navigateToHome();
-      // }, 1000);
     }
   }, [isRegistrationPending]);
 

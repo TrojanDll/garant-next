@@ -16,4 +16,9 @@ export const publicPages: string[] = [
   PAGES.RECOVERY,
 ];
 
-export const privatePages: string[] = [PAGES.DASHBOARD];
+export const privatePages: string[] = [
+  PAGES.DASHBOARD,
+  PAGES.CARS,
+  PAGES.EDIT_PERSONAL_DATA,
+  PAGES.MY_POLICIES,
+];

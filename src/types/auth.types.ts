@@ -1,3 +1,5 @@
+import { IUser } from "./user.types";
+
 export interface IRegistrationForm {
   name: string;
   surname: string;
@@ -15,16 +17,6 @@ export interface ILoginForm {
   password: string;
 }
 
-export interface IUser {
-  id: number;
-  name: string;
-  surname: string;
-  patronymic: string;
-  phone: string;
-  date_of_birth: string;
-  email: string;
-}
-
 export interface IRegistrationResponse {
   user: Pick<IUser, "id" | "name" | "email">;
   token: string;
@@ -34,6 +26,11 @@ export interface ILoginResponse {
   user: Pick<IUser, "id" | "name" | "email">;
   token: string;
   success: boolean;
+}
+
+export interface ILogoutResponse {
+  success?: boolean;
+  message: string;
 }
 
 export type IRegistrationFormApiData = Omit<IRegistrationForm, "checkbox">;

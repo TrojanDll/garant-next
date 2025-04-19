@@ -1,0 +1,22 @@
+.substrate {
+  margin-top: 32px;
+  padding: 50px;
+}
+
+.dataItem {
+  margin-top: 40px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.toggleEdit {
+  display: block;
+  margin-top: 80px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 128%;
+  color: var(--blue);
+}

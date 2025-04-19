@@ -1,9 +1,10 @@
-import { axiosClassic } from "@/api/interceptors";
+import { axiosClassic, axiosWithAuth } from "@/api/interceptors";
 
 import { removeFromStorage, saveTokenToStorage } from "./auth-token.service";
 import {
   ILoginForm,
   ILoginResponse,
+  ILogoutResponse,
   IRegistrationFormApiData,
   IRegistrationResponse,
 } from "@/types/auth.types";
@@ -26,7 +27,7 @@ class AuthService {
   }
 
   async logout() {
-    const response = await axiosClassic.post<boolean>("/api/logout");
+    const response = await axiosWithAuth.get<ILogoutResponse>("/api/logout");
 
     if (response.data) removeFromStorage();
 

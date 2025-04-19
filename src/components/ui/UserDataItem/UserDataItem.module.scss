@@ -1,0 +1,24 @@
+.userDataItem {
+  display: block;
+  display: flex;
+  column-gap: 70px;
+}
+
+.userDataTitle {
+  width: 230px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 125%;
+  letter-spacing: 0.01em;
+  color: var(--grey);
+}
+
+.userDataInfo {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 125%;
+  letter-spacing: 0.01em;
+  color: var(--dark-grey);
+}

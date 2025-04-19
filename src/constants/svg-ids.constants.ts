@@ -14,4 +14,5 @@ export enum ESvgName {
   TOOLTIP = "tooltip",
   EYE = "eye",
   EYE_CLOSED = "eye_closed",
+  LOGOUT = "logout",
 }

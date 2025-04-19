@@ -1,0 +1,13 @@
+.button {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  border-radius: 15px;
+  padding: 17px 25px;
+
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 125%;
+  color: var(--red2);
+}
