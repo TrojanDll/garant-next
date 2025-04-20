@@ -13,8 +13,9 @@ import { ESvgName } from "@/constants/svg-ids.constants";
 
 import { PAGES } from "@/config/pages-url.config";
 
+import Link from "next/link";
+
 import styles from "./DropdownHeader.module.scss";
-import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 
 type TDropdownLinks = {
   href: string;
@@ -77,9 +78,9 @@ const DropdownHeader = () => {
             <SvgSelector id={ESvgName.CLOSE} />
           </button>
 
-          <CustomTitle tag="h2" className={styles.title}>
-            Меню
-          </CustomTitle>
+          <Link onClick={() => setIsDropdownOpened(false)} href={PAGES.HOME}>
+            <SvgSelector className={styles.logo} id={ESvgName.LOGO} />
+          </Link>
 
           <div className={styles.content}>
             {dropdownLinks.map((dropdownLink) => (

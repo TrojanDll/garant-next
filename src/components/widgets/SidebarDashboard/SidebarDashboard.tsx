@@ -96,6 +96,7 @@ const SidebarDashboard = ({ className }: IProps) => {
             setActive={() => setActive(i)}
             key={item.text}
             href={item.href}
+            onClick={handleSidebarMenuButtonClick}
           >
             {item.text}
           </SidebarLink>

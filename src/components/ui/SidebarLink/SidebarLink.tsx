@@ -10,6 +10,7 @@ interface IProps {
   active?: boolean;
   setActive?: () => void;
   href: string;
+  onClick?: () => void;
 }
 
 const SidebarLink = ({
@@ -18,12 +19,22 @@ const SidebarLink = ({
   active,
   setActive,
   href = "/",
+  onClick,
 }: PropsWithChildren<IProps>) => {
+  const handleClick = () => {
+    if (setActive) {
+      setActive();
+    }
+
+    if (onClick) {
+      onClick();
+    }
+  };
   return (
     <Link
       href={href}
       className={`${styles.link} ${className} ${active ? styles.active : ""}`}
-      onClick={setActive}
+      onClick={handleClick}
     >
       {children}
       <svg
