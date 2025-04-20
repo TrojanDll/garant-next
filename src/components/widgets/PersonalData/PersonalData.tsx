@@ -12,16 +12,6 @@ import Link from "next/link";
 import { PAGES } from "@/config/pages-url.config";
 import Loader from "@/components/ui/Loader/Loader";
 
-enum EUserData {
-  id = "id",
-  name = "Имя",
-  surname = "Фамилия",
-  patronymic = "Отчество",
-  email = "Email",
-  phone = "Номер телефона",
-  date_of_birth = "Дата рождения",
-}
-
 const PersonalData = () => {
   const { userData } = useGetCurrientUser();
 

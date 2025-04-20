@@ -38,7 +38,7 @@ interface IProps {
 }
 
 const SidebarDashboard = ({ className }: IProps) => {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState<number>();
   const toggleIsShadowVisible = useShadow((state) => state.toggleIsShadowVisible);
   const isShadowVisible = useShadow((state) => state.isShadowVisible);
   const [isOpened, setIsOpened] = useState(false);
@@ -64,12 +64,14 @@ const SidebarDashboard = ({ className }: IProps) => {
         break;
       case PAGES.DASHBOARD:
         activeIndex = 1;
+        break;
       case PAGES.EDIT_PERSONAL_DATA:
         activeIndex = 1;
+        break;
       case PAGES.CARS:
         activeIndex = 2;
+        break;
     }
-
     setActive(activeIndex);
   }, [pathname]);
 

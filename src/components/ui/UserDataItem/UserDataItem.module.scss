@@ -1,5 +1,4 @@
 .userDataItem {
-  display: block;
   display: flex;
   column-gap: 70px;
 }
@@ -21,4 +20,26 @@
   line-height: 125%;
   letter-spacing: 0.01em;
   color: var(--dark-grey);
+}
+
+@media (max-width: 1149px) {
+  .userDataItem {
+    display: block;
+  }
+
+  .userDataTitle {
+    display: block;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 129%;
+    color: var(--grey);
+  }
+
+  .userDataInfo {
+    display: block;
+    margin-top: 5px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 129%;
+  }
 }

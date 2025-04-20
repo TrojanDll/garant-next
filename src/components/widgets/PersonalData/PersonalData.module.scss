@@ -26,3 +26,23 @@
   display: flex;
   justify-content: center;
 }
+
+@media (max-width: 1149px) {
+  .substrate {
+    border-radius: 25px;
+    padding: 30px 20px 40px 20px;
+  }
+
+  .dataItem {
+    margin-top: 25px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .toggleEdit {
+    margin-top: 70px;
+    font-size: 14px;
+  }
+}
