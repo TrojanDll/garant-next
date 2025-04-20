@@ -16,7 +16,7 @@ export default function DashboardLayout({
   return (
     <ContentContainer className={styles.container}>
       <div className={styles.sidebar}>
-        <SidebarDashboard />
+        <SidebarDashboard className={styles.sidebarNav} />
       </div>
       <div className={styles.content}>{children}</div>
     </ContentContainer>

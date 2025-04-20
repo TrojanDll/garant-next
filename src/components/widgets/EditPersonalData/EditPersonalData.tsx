@@ -16,6 +16,8 @@ import {
   formatPhoneNumberToClient,
 } from "@/helpers/user/formatPhoneNumber.helper";
 import { useEditCurrientUser } from "@/hooks/user/useEditCurrientUser";
+import toast from "react-hot-toast";
+import { useNavigation } from "@/hooks/navigation/useNavigation";
 
 function pickFormData(userData: any): IEditUserForm {
   return {
@@ -30,8 +32,15 @@ function pickFormData(userData: any): IEditUserForm {
 
 const EditPersonalData = () => {
   const { handleSubmit, control, reset } = useForm<IEditUserForm>();
-  const { isSuccess, userData } = useGetCurrientUser();
-  const { isSuccess: isEditCurrientUserSuccess, mutate } = useEditCurrientUser();
+  const { isSuccess, userData, isLoading, isError } = useGetCurrientUser();
+  const {
+    isSuccess: isEditCurrientUserSuccess,
+    mutate,
+    isError: isEditCurrientUserError,
+    isPending,
+  } = useEditCurrientUser();
+
+  const { navigateToDashboard } = useNavigation();
 
   const onSubmit: SubmitHandler<IEditUserForm> = (data) => {
     console.log(data);
@@ -47,6 +56,37 @@ const EditPersonalData = () => {
       reset(pickedData);
     }
   }, [isSuccess, userData]);
+
+  useEffect(() => {
+    if (isLoading) {
+      toast.loading("Загрузка");
+    }
+
+    if (isError) {
+      toast.dismiss();
+      toast.error("Ошибка");
+    } else if (isSuccess) {
+      toast.dismiss();
+    }
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (isPending) {
+      toast.loading("Загрузка");
+    }
+
+    if (isEditCurrientUserError) {
+      toast.dismiss();
+      toast.error("Ошибка");
+    } else if (isEditCurrientUserSuccess) {
+      toast.dismiss();
+      toast.success("Данные изменены");
+
+      setTimeout(() => {
+        navigateToDashboard();
+      }, 300);
+    }
+  }, [isPending]);
 
   return (
     <div>

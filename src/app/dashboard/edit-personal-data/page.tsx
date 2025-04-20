@@ -7,9 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function EditPersonalDataPage() {
-  return (
-    <ContentContainer>
-      <EditPersonalData />
-    </ContentContainer>
-  );
+  return <EditPersonalData />;
 }

@@ -5,9 +5,17 @@
 }
 
 .sidebar {
-  width: calc(21% - 15px);
+  width: 275px;
+  flex-shrink: 0;
 }
 
 .content {
-  width: calc(79% - 15px);
+  width: 100%;
+  flex-shrink: 1;
+}
+
+@media (max-width: 1149px) {
+  .container {
+    display: block;
+  }
 }

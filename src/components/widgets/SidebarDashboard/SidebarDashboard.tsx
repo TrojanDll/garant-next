@@ -29,15 +29,19 @@ const sidebarLinks: ISidebarLink[] = [
   },
 ];
 
-const SidebarDashboard = () => {
+interface IProps {
+  className?: string;
+}
+
+const SidebarDashboard = ({ className }: IProps) => {
   const [active, setActive] = useState(1);
 
   return (
-    <Substrate withShadow="light" className={styles.substrate}>
+    <Substrate withShadow="light" className={`${styles.substrate} ${className}`}>
       <nav>
         {sidebarLinks.map((item, i) => (
           <SidebarLink
-          className={styles.link}
+            className={styles.link}
             active={active === i}
             setActive={() => setActive(i)}
             key={item.text}
