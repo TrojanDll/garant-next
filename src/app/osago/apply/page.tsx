@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 
 import "react-day-picker/style.css";
 
-
 export const metadata: Metadata = {
   title: "Оформить ОСАГО",
 };

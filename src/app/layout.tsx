@@ -8,6 +8,7 @@ import Header from "@/components/widgets/Header/Header";
 import Footer from "@/components/widgets/Footer/Footer";
 
 import "./globals.scss";
+
 import Head from "next/head";
 import { Providers } from "./providers";
 import Shadow from "@/components/ui/Shadow/Shadow";

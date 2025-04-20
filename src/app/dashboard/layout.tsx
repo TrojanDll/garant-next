@@ -2,6 +2,8 @@ import ContentContainer from "@/components/ui/ContentContainer/ContentContainer"
 import SidebarDashboard from "@/components/widgets/SidebarDashboard/SidebarDashboard";
 import type { Metadata } from "next";
 
+import "react-day-picker/style.css";
+
 import styles from "./layout.module.scss";
 
 export const metadata: Metadata = {
