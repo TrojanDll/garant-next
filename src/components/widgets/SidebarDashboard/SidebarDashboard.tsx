@@ -40,6 +40,7 @@ interface IProps {
 const SidebarDashboard = ({ className }: IProps) => {
   const [active, setActive] = useState<number>();
   const toggleIsShadowVisible = useShadow((state) => state.toggleIsShadowVisible);
+  const setIsShadowVisible = useShadow((state) => state.setIsShadowVisible);
   const isShadowVisible = useShadow((state) => state.isShadowVisible);
   const [isOpened, setIsOpened] = useState(false);
   const pathname = usePathname();
@@ -47,6 +48,11 @@ const SidebarDashboard = ({ className }: IProps) => {
   const handleSidebarMenuButtonClick = () => {
     toggleIsShadowVisible();
     setIsOpened(!isOpened);
+  };
+
+  const handleSidebarLinkClick = () => {
+    setIsShadowVisible(false);
+    setIsOpened(false);
   };
 
   useEffect(() => {
@@ -96,7 +102,7 @@ const SidebarDashboard = ({ className }: IProps) => {
             setActive={() => setActive(i)}
             key={item.text}
             href={item.href}
-            onClick={handleSidebarMenuButtonClick}
+            onClick={handleSidebarLinkClick}
           >
             {item.text}
           </SidebarLink>

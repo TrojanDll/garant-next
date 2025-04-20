@@ -6,9 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function MyPoliciesPage() {
-  return (
-    <ContentContainer>
-      <div>Мои полисы</div>
-    </ContentContainer>
-  );
+  return <div>Мои полисы</div>;
 }

@@ -6,9 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function CarsPage() {
-  return (
-    <ContentContainer>
-      <div>Сохранённые авто</div>
-    </ContentContainer>
-  );
+  return <div>Сохранённые авто</div>;
 }
