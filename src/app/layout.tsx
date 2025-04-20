@@ -10,6 +10,7 @@ import Footer from "@/components/widgets/Footer/Footer";
 import "./globals.scss";
 import Head from "next/head";
 import { Providers } from "./providers";
+import Shadow from "@/components/ui/Shadow/Shadow";
 
 export const metadata: Metadata = {
   title: {
@@ -51,6 +52,7 @@ export default function RootLayout({
           {children}
           <Footer />
           <Toaster />
+          <Shadow />
         </Providers>
       </body>
     </html>

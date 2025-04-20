@@ -11,3 +11,14 @@
   line-height: 125%;
   color: var(--red2);
 }
+
+@media (max-width: 1149px) {
+  .button {
+    font-size: 14px;
+  }
+
+  .svg {
+    width: 19px;
+    height: 18px;
+  }
+}

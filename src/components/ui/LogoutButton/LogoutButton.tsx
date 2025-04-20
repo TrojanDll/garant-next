@@ -34,13 +34,12 @@ const LogoutButton = ({ className }: IProps) => {
       toast.success("Вы вышли из системы");
 
       navigateToAuth();
-      // window.location.href = "/auth";
     }
   }, [isPending]);
 
   return (
     <button onClick={handleLogout} type="button" className={`${styles.button} ${className}`}>
-      <SvgSelector id={ESvgName.LOGOUT} />
+      <SvgSelector id={ESvgName.LOGOUT} className={styles.svg} />
       Выйти
     </button>
   );

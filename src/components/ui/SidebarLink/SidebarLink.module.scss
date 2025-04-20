@@ -15,3 +15,22 @@
   background: var(--light-grey);
   color: var(--blue);
 }
+
+.chevron {
+  display: none;
+}
+
+@media (max-width: 1149px) {
+  .chevron {
+    display: block;
+  }
+
+  .link {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 16px;
+    font-size: 18px;
+  }
+}
