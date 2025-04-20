@@ -92,15 +92,15 @@
   font-weight: 500;
 }
 
-.passwordHidden {
-  font-size: 28px;
-  line-height: 126%;
-  padding: 13px 30px;
+// .passwordHidden {
+//   font-size: 28px;
+//   line-height: 126%;
+//   padding: 13px 30px;
 
-  &::placeholder {
-    transform: translateY(-4px);
-  }
-}
+//   &::placeholder {
+//     transform: translateY(-4px);
+//   }
+// }
 
 @media (max-width: 1149px) {
   .input {
@@ -126,15 +126,15 @@
     padding-right: 131px;
   }
 
-  .passwordHidden {
-    font-size: 24px;
-    line-height: 129%;
-    padding: 8px 20px;
-    padding-bottom: 7px;
-    &::placeholder {
-      transform: translateY(-5px);
-    }
-  }
+  // .passwordHidden {
+  //   font-size: 24px;
+  //   line-height: 129%;
+  //   padding: 8px 20px;
+  //   padding-bottom: 7px;
+  //   &::placeholder {
+  //     transform: translateY(-3px);
+  //   }
+  // }
 }
 
 @media (max-width: 420px) {
