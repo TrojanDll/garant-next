@@ -1,3 +1,4 @@
+import { scrollToTop } from "@/helpers/scrollToTop";
 import { authService } from "@/services/auth.service";
 import { IRegistrationFormApiData } from "@/types/auth.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -40,7 +41,8 @@ export function useRegistration() {
       queryClient.invalidateQueries({
         queryKey: ["registration"],
       });
-      window.location.reload();
+      scrollToTop();
+      // window.location.reload();
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {

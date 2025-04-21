@@ -202,13 +202,6 @@ const CustomInput = ({
     }
   }, [promocodeResult]);
 
-  // useEffect(() => {
-  //   if (inputType === "phone") {
-  //     const initialDigits = value ? value.replace(/\D/g, "").slice(0, MAX_DIGITS) : "";
-  //     setRawValue(initialDigits);
-  //   }
-  // }, []);
-
   useEffect(() => {
     if (inputType === "phone") {
       const digits = value ? value.replace(/\D/g, "").slice(1, 11) : ""; // отсекаем первую 7 и оставляем 10 цифр
