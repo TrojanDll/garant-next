@@ -1,0 +1,30 @@
+.substrate {
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.infoItem {
+  margin-top: 10px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 125%;
+  letter-spacing: 0.01em;
+  color: var(--grey);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.value {
+  color: #000;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
