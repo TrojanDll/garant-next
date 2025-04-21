@@ -2,7 +2,7 @@ import { TButtonGroupType } from "@/components/ui/ButtonGroup/ButtonGroup";
 
 export type TFieldType = "input" | "select" | "checkbox" | "radio";
 
-export type TInputType = "text" | "date" | "promocode" | "password";
+export type TInputType = "text" | "date" | "promocode" | "password" | "phone";
 
 export interface IFieldConfig<T> {
   name: keyof T;

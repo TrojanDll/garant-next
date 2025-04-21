@@ -29,8 +29,6 @@ const Registration = () => {
     registrationErrors,
   } = useRegistration();
 
-  const { navigateToHome } = useNavigation();
-
   const password = watch("password");
 
   const onSubmit: SubmitHandler<IRegistrationForm> = (data) => {

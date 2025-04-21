@@ -22,7 +22,7 @@ export const registrationFields: IField<IRegistrationForm>[] = [
     label: "Номер телефона",
     placeholder: "Номер телефона",
     required: false,
-    inputType: "text",
+    inputType: "phone",
   },
   {
     name: "surname",
