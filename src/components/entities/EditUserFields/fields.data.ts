@@ -37,7 +37,7 @@ export const editUserFields: IField<IEditUserForm>[] = [
     name: "phone",
     placeholder: "Номер телефона",
     label: "Номер телефона",
-    inputType: "text",
+    inputType: "phone",
   },
   {
     name: "date_of_birth",

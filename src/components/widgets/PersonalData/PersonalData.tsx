@@ -11,6 +11,7 @@ import UserDataItem from "@/components/ui/UserDataItem/UserDataItem";
 import Link from "next/link";
 import { PAGES } from "@/config/pages-url.config";
 import Loader from "@/components/ui/Loader/Loader";
+import { formatPhoneNumberToClient } from "@/helpers/user/formatPhoneNumber.helper";
 
 const PersonalData = () => {
   const { userData } = useGetCurrientUser();
@@ -39,7 +40,7 @@ const PersonalData = () => {
             <UserDataItem
               className={styles.dataItem}
               title="Номер телефона"
-              value={userData.phone}
+              value={formatPhoneNumberToClient(userData.phone)}
             />
             <UserDataItem
               className={styles.dataItem}

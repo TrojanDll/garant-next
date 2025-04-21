@@ -1,24 +1,25 @@
 export function formatPhoneNumber(phone: string | undefined): string {
-  const cleaned = phone?.replace(/\D/g, "");
+  const digits = phone ? phone.replace(/\D/g, "").slice(0, 11) : "";
 
-  const normalized = cleaned?.startsWith("8")
-    ? "7" + cleaned.slice(1)
-    : cleaned?.startsWith("9")
-    ? "7" + cleaned
-    : cleaned?.startsWith("7")
-    ? cleaned
-    : "";
+  if (digits.length < 4) return digits;
 
-  const match = normalized.match(/^7(\d{3})(\d{3})(\d{4})$/);
-  return match ? `7(${match[1]})${match[2]}${match[3]}` : phone ? phone : "";
+  const first = digits[0];
+  const code = digits.slice(1, 4);
+  const rest = digits.slice(4);
+
+  return `${first}(${code})${rest}`;
 }
 
-export function formatPhoneNumberToClient(rawPhone: string | undefined): string {
-  const digits = rawPhone?.replace(/\D/g, "");
+export function formatPhoneNumberToClient(phone: string | undefined): string {
+  const digits = phone ? phone.replace(/\D/g, "").slice(0, 11) : "";
 
-  if (digits?.length === 11 && digits.startsWith("7")) {
-    return `+${digits}`;
-  }
+  if (digits.length < 11) return phone ? phone : "";
 
-  return rawPhone ? rawPhone : "";
+  const country = digits[0];
+  const code = digits.slice(1, 4);
+  const part1 = digits.slice(4, 7);
+  const part2 = digits.slice(7, 9);
+  const part3 = digits.slice(9, 11);
+
+  return `+${country} (${code}) ${part1} ${part2} ${part3}`;
 }
