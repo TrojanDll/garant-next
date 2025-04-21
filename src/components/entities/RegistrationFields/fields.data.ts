@@ -20,7 +20,7 @@ export const registrationFields: IField<IRegistrationForm>[] = [
   {
     name: "phone",
     label: "Номер телефона",
-    placeholder: "Номер телефона",
+    placeholder: "+71234567890",
     required: false,
     inputType: "phone",
   },

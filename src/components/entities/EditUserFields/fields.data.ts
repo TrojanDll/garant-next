@@ -35,7 +35,7 @@ export const editUserFields: IField<IEditUserForm>[] = [
   },
   {
     name: "phone",
-    placeholder: "Номер телефона",
+    placeholder: "+71234567890",
     label: "Номер телефона",
     inputType: "phone",
   },

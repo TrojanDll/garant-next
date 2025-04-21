@@ -13,7 +13,7 @@ import Button from "@/components/ui/Button/Button";
 import { useGetCurrientUser } from "@/hooks/user/useGetCurrientUser";
 import {
   formatPhoneNumber,
-  formatPhoneNumberToClient,
+  formatPhoneNumberToInput,
 } from "@/helpers/user/formatPhoneNumber.helper";
 import { useEditCurrientUser } from "@/hooks/user/useEditCurrientUser";
 import toast from "react-hot-toast";
@@ -25,7 +25,7 @@ function pickFormData(userData: any): IEditUserForm {
     surname: userData.surname,
     patronymic: userData.patronymic,
     email: userData.email,
-    phone: formatPhoneNumberToClient(userData.phone),
+    phone: formatPhoneNumberToInput(userData.phone),
     date_of_birth: userData.date_of_birth,
   };
 }

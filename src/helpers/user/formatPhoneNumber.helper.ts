@@ -1,13 +1,14 @@
 export function formatPhoneNumber(phone: string | undefined): string {
-  const digits = phone ? phone.replace(/\D/g, "").slice(0, 11) : "";
+  const digitsOnly = phone ? phone.replace(/\D/g, "") : "";
 
-  if (digits.length < 4) return digits;
+  const cleaned = digitsOnly.replace(/^(\+?7|8)/, "");
 
-  const first = digits[0];
-  const code = digits.slice(1, 4);
-  const rest = digits.slice(4);
+  const tenDigits = cleaned.slice(0, 10);
 
-  return `${first}(${code})${rest}`;
+  const areaCode = tenDigits.slice(0, 3);
+  const mainNumber = tenDigits.slice(3);
+
+  return phone ? `7(${areaCode})${mainNumber}` : "";
 }
 
 export function formatPhoneNumberToClient(phone: string | undefined): string {
@@ -22,4 +23,10 @@ export function formatPhoneNumberToClient(phone: string | undefined): string {
   const part3 = digits.slice(9, 11);
 
   return `+${country} (${code}) ${part1} ${part2} ${part3}`;
+}
+
+export function formatPhoneNumberToInput(phone: string | undefined): string {
+  const digitsOnly = phone ? phone.replace(/\D/g, "") : "";
+
+  return phone ? digitsOnly.slice(0, 11) : "";
 }
