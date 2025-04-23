@@ -1,11 +1,42 @@
 import { IFieldConfig } from "@/types/IFieldConfig";
 import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
+import { generateYearOptions } from "../generateYearOptions";
+import { carsService } from "@/services/cars.service";
+import { useGetCarCategories } from "@/hooks/cars/useGetCarCategories";
 
 export interface ISplitFieldConfig {
   [key: string]: IFieldConfig<IOsagoApplyForm>[];
 }
 
 export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> {
+  const carCategories = await carsService.getCarCategories();
+  const carBrands = await carsService.getCarBrands();
+
+  const formatedCarCategories = carCategories.data.data.map((category) => {
+    return {
+      label: category.Category,
+      value: category.Category,
+    };
+  });
+
+  let formatedCarBrands: { label: string; value: string }[] = [];
+
+  formatedCarBrands.push({
+    label: "Другое ТС",
+    value: "another_vehicle",
+  });
+
+  const fetchedAndFormatedCarBrands: { label: string; value: string }[] = carBrands.data.data.map(
+    (brand) => {
+      return {
+        label: brand.make_display,
+        value: brand.make_id,
+      };
+    }
+  );
+
+  formatedCarBrands = [...formatedCarBrands, ...fetchedAndFormatedCarBrands];
+
   const fields: ISplitFieldConfig = {
     vehicle: [
       {
@@ -15,16 +46,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         isSearchable: false,
         placeholder: "Категория ТС",
         required: true,
-        options: [
-          {
-            label: "Option 1",
-            value: "Option 1",
-          },
-          {
-            label: "Option 2",
-            value: "Option 2",
-          },
-        ],
+        options: formatedCarCategories,
       },
       {
         type: "select",
@@ -34,20 +56,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         required: true,
         tooltip: true,
         tooltipText: "Если марки вашего ТС нет в списке, выберите «Другое ТС» ",
-        options: [
-          {
-            label: "Другое ТС",
-            value: "another_vehicle",
-          },
-          {
-            label: "Option 1",
-            value: "Option 1",
-          },
-          {
-            label: "Option 2",
-            value: "Option 2",
-          },
-        ],
+        options: formatedCarBrands,
       },
       {
         type: "input",
@@ -64,12 +73,8 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         required: true,
         options: [
           {
-            label: "Option 1",
-            value: "Option 1",
-          },
-          {
-            label: "Option 2",
-            value: "Option 2",
+            label: "Сначала выберите марку",
+            value: "thumbnail",
           },
         ],
       },
@@ -79,16 +84,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         label: "Год выпуска ТС",
         placeholder: "Год выпуска ТС",
         required: true,
-        options: [
-          {
-            label: "Option 1",
-            value: "Option 1",
-          },
-          {
-            label: "Option 2",
-            value: "Option 2",
-          },
-        ],
+        options: generateYearOptions(1980),
       },
       {
         type: "input",
@@ -122,14 +118,14 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
       },
       {
         type: "input",
-        name: "owner_fio",
+        name: "fio",
         label: "ФИО",
         placeholder: "ФИО Собственника",
         required: true,
       },
       {
         type: "input",
-        name: "owner_passport_data",
+        name: "passport_number",
         label: "Серия и номер паспорта",
         placeholder: "Введите серию и номер",
         required: true,

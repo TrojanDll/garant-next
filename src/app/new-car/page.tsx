@@ -1,3 +1,4 @@
+import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
 import CarsNew from "@/components/widgets/CarsNew/CarsNew";
 import type { Metadata } from "next";
 
@@ -6,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function CarsPage() {
-  return <CarsNew />;
+  return (
+    <ContentContainer>
+      <CarsNew />
+    </ContentContainer>
+  );
 }

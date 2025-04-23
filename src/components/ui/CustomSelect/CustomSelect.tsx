@@ -10,6 +10,8 @@ import Tooltip from "../Tooltip/Tooltip";
 
 import styles from "./CustomSelect.module.scss";
 import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
+import useCarBrand from "@/stores/Cars/carBrand.store";
+import { useGetCarModelByBrandId } from "@/hooks/cars/useGetCarModelByBrandId";
 
 export interface IOptions {
   value: string;
@@ -51,8 +53,16 @@ const CustomSelect = ({
 }: IProps) => {
   const [isSelectOpened, setIsSelectOpened] = useState(false);
   const [isJustSelected, setIsJustSelected] = useState(false);
+  const [carModelOptions, setCarModelOptions] = useState<IOptions[]>([]);
 
-  const isModelSelect = options.map((item) => item.value).indexOf("another_vehicle") !== -1;
+  const { getCarModelByBrandId, isError, isPending, isSuccess, carBrandData } =
+    useGetCarModelByBrandId();
+
+  const isBrandSelect = options.map((item) => item.value).indexOf("another_vehicle") !== -1;
+  const isModelSelect = options.map((item) => item.value).indexOf("thumbnail") !== -1;
+
+  const carBrand = useCarBrand((state) => state.carBrand);
+  const setCarBrand = useCarBrand((state) => state.setCarBrand);
 
   const setIsAnotherCarMark = useOsagoApplyCarMark((state) => state.setCarMarkValue);
 
@@ -75,14 +85,21 @@ const CustomSelect = ({
       setValue(value.value);
     }
 
-    if (isModelSelect) {
+    if (isBrandSelect) {
       if (value.value === "another_vehicle") {
         setIsAnotherCarMark(true);
       } else {
         setIsAnotherCarMark(false);
+        setCarBrand(value.value);
       }
     }
   };
+
+  useEffect(() => {
+    if (isModelSelect) {
+      getCarModelByBrandId(carBrand);
+    }
+  }, [isPending]);
 
   return (
     <div className={`${className}`}>
@@ -121,7 +138,7 @@ const CustomSelect = ({
             }`,
           menuList: () => styles.menuList,
         }}
-        options={options}
+        options={isModelSelect && carBrandData ? options : options}
       />
       {/* {errorMessage?.length && (
         <p className={styles.errorMessage}>

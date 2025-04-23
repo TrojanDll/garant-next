@@ -31,8 +31,8 @@ const Advantages = () => {
   return (
     <ContentContainer>
       <section className={styles.root}>
-        {advantageCards.map((card) => (
-          <AdvantagesCard className={styles.card} key={card.descr} cardInfo={card} />
+        {advantageCards.map((card, idx) => (
+          <AdvantagesCard className={styles.card} key={`advCard${idx}`} cardInfo={card} />
         ))}
       </section>
     </ContentContainer>

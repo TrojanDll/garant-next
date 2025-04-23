@@ -5,9 +5,10 @@ import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
 
 import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 
-import styles from "./DynamicFormSection.module.scss";
-import { useEffect } from "react";
 import usePersonType from "@/stores/OsagoApply/personType.store";
+
+import styles from "./DynamicFormSection.module.scss";
+import useCarBrand from "@/stores/Cars/carBrand.store";
 
 interface Props {
   fields: IFieldConfig<IOsagoApplyForm>[];
@@ -26,10 +27,10 @@ const DynamicFormSection = ({ fields, control, className, isTopItemSingle = fals
     let label: string = field.label;
     let placeholder: string | undefined = field.placeholder;
 
-    if (field.name === "owner_fio" && personType === "legal_entity") {
+    if (field.name === "fio" && personType === "legal_entity") {
       label = "Полное наименование";
       placeholder = "Введите полное наименование";
-    } else if (field.name === "owner_passport_data" && personType === "legal_entity") {
+    } else if (field.name === "passport_number" && personType === "legal_entity") {
       label = "ИНН";
       placeholder = "Введите ИНН";
     }
@@ -51,9 +52,7 @@ const DynamicFormSection = ({ fields, control, className, isTopItemSingle = fals
               ? styles.visible
               : styles.hidden
           }
-          ${
-            config.name !== "brand" ? "" : isAnotherCarVisible ? styles.singleInStroke : ""
-          }    
+          ${config.name !== "brand" ? "" : isAnotherCarVisible ? styles.singleInStroke : ""}    
           `}
         >
           <Controller
@@ -67,9 +66,7 @@ const DynamicFormSection = ({ fields, control, className, isTopItemSingle = fals
                 errorMessage={fieldState.error?.message}
                 className={`${styles.input} ${className}  `}
                 {...config}
-                type={
-                  config.name === "model" && isAnotherCarVisible ? "input" : config.type
-                }
+                type={config.name === "model" && isAnotherCarVisible ? "input" : config.type}
                 label={fieldText(config).label}
                 placeholder={fieldText(config).placeholder}
               />

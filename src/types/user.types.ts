@@ -44,3 +44,4 @@ export interface IEditCurrientUserResponse {
 }
 
 export const personTypes = ["individual", "legal_entity"] as const;
+export type TPersonType = (typeof personTypes)[number];

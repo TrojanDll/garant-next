@@ -12,20 +12,21 @@ import { useOsagoFormConfig } from "@/hooks/useOsagoFormConfig";
 import DynamicFormSection from "@/components/entities/DynamicFormSection/DynamicFormSection";
 import Button from "@/components/ui/Button/Button";
 import { INewCarForm } from "@/types/cars.types";
+import { convertPersonType } from "@/helpers/convertPersonType";
+import { formatNewCarDataToRequest } from "@/helpers/formatNewCarDataToRequest";
 
 const CarsNew = () => {
   const { config, isLoading } = useOsagoFormConfig();
   const { handleSubmit, control } = useForm<IOsagoApplyForm>();
 
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
-    let formatedData: INewCarForm;
+    let formatedData: INewCarForm = formatNewCarDataToRequest(data);
 
-    
-    console.log(data);
+    console.log(formatedData);
   };
 
   return (
-    <div>
+    <div className={styles.root}>
       <CustomTitle tag="h1" isCentered>
         Добавить сохраненное авто
       </CustomTitle>
@@ -61,29 +62,8 @@ const CarsNew = () => {
             </div>
           </div>
 
-          <div className={styles.section}>
-            <CustomTitle tag="h2" className={styles.sectionTitle}>
-              Срок пребывания
-            </CustomTitle>
-            <div className={styles.inputsWrapper}>
-              {!isLoading && config.duration ? (
-                <DynamicFormSection fields={config.duration} control={control} />
-              ) : (
-                <div>loading...</div>
-              )}
-            </div>
-          </div>
-
-          <div className={styles.section}>
-            {!isLoading && config.duration ? (
-              <DynamicFormSection fields={config.promocode} control={control} />
-            ) : (
-              <div>loading...</div>
-            )}
-          </div>
-
           <Button type="submit" className={styles.submitButton} variant="wide">
-            Рассчитать
+            Сохранить
           </Button>
         </form>
       </Substrate>

@@ -1,3 +1,4 @@
+import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
 import Cars from "@/components/widgets/Cars/Cars";
 import type { Metadata } from "next";
 

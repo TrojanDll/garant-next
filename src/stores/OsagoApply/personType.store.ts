@@ -1,4 +1,4 @@
-import { TPersonType } from "@/types/OsagoApplyForm/IOsagoApplyForm";
+import { TPersonType } from "@/types/user.types";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
