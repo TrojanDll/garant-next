@@ -5,7 +5,7 @@ export type TPersonType = (typeof personTypes)[number];
 
 export interface IOsagoApplyForm extends INewCarForm {
   vehicle_refined_make: string;
-  owner_person_type: TPersonType;
+  owner: TPersonType;
   owner_fio: string;
   owner_passport_data: string;
 

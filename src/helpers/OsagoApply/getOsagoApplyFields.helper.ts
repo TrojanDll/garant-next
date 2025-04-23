@@ -116,8 +116,8 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
       {
         type: "radio",
         buttonGroupType: "small",
-        name: "owner_person_type",
-        label: "owner_person_type",
+        name: "owner",
+        label: "owner",
         buttons: ["Физ. лицо", "Юр. лицо"],
       },
       {
