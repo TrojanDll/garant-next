@@ -1,3 +1,28 @@
 .itemsWrapper {
   margin-top: 32px;
 }
+
+.addNewButton {
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.carItem {
+  margin-top: 20px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.loader {
+  display: block !important;
+  margin: 0 auto;
+  margin-top: 32px;
+}
+
+@media (max-width: 1149px) {
+  .itemsWrapper {
+    margin-top: 20px;
+  }
+}

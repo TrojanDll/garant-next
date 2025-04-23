@@ -10,7 +10,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
     vehicle: [
       {
         type: "select",
-        name: "vehicle_category",
+        name: "transport_category",
         label: "Категория ТС",
         isSearchable: false,
         placeholder: "Категория ТС",
@@ -28,7 +28,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
       },
       {
         type: "select",
-        name: "vehicle_make",
+        name: "brand",
         label: "Марка",
         placeholder: "Марка",
         required: true,
@@ -58,7 +58,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
       },
       {
         type: "select",
-        name: "vehicle_model",
+        name: "model",
         label: "Модель",
         placeholder: "Модель",
         required: true,
@@ -75,7 +75,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
       },
       {
         type: "select",
-        name: "vehicle_year_of_manufacture",
+        name: "year",
         label: "Год выпуска ТС",
         placeholder: "Год выпуска ТС",
         required: true,
@@ -92,21 +92,21 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
       },
       {
         type: "input",
-        name: "vehicle_vin",
+        name: "vin",
         label: "VIN",
         placeholder: "VIN",
         required: true,
       },
       {
         type: "input",
-        name: "vehicle_registration_plate",
+        name: "registration_plate",
         label: "Регистрационный знак",
         placeholder: "А123АА | 999",
         required: true,
       },
       {
         type: "input",
-        name: "vehicle_registration_series_and_number",
+        name: "registration_number",
         label: "Серия и номер регистрации ТС",
         placeholder: "Серия и номер регистрации ТС",
         required: true,

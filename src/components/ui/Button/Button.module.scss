@@ -30,6 +30,12 @@
   padding: 20px 60px;
 }
 
+.outlined {
+  border: 1px solid var(--blue);
+  background: none;
+  color: var(--blue);
+}
+
 @media (max-width: 1149px) {
   .dashboard {
     padding: 13px 20px;

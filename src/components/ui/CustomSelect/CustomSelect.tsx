@@ -11,7 +11,6 @@ import Tooltip from "../Tooltip/Tooltip";
 import styles from "./CustomSelect.module.scss";
 import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 
-
 export interface IOptions {
   value: string;
   label: string;
@@ -53,6 +52,8 @@ const CustomSelect = ({
   const [isSelectOpened, setIsSelectOpened] = useState(false);
   const [isJustSelected, setIsJustSelected] = useState(false);
 
+  const isModelSelect = options.map((item) => item.value).indexOf("another_vehicle") !== -1;
+
   const setIsAnotherCarMark = useOsagoApplyCarMark((state) => state.setCarMarkValue);
 
   const handleMenuOpen = () => {
@@ -74,10 +75,12 @@ const CustomSelect = ({
       setValue(value.value);
     }
 
-    if (value.value === "another_vehicle") {
-      setIsAnotherCarMark(true);
-    } else {
-      setIsAnotherCarMark(false);
+    if (isModelSelect) {
+      if (value.value === "another_vehicle") {
+        setIsAnotherCarMark(true);
+      } else {
+        setIsAnotherCarMark(false);
+      }
     }
   };
 

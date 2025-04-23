@@ -42,3 +42,5 @@ export interface IEditCurrientUserResponse {
   success: boolean;
   message: string;
 }
+
+export const personTypes = ["individual", "legal_entity"] as const;

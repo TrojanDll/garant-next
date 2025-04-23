@@ -1,0 +1,19 @@
+.root {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 128%;
+  letter-spacing: 0.01em;
+  color: var(--grey);
+
+  display: flex;
+  column-gap: 70px;
+}
+
+.title {
+  width: 230px;
+}
+
+.value {
+  color: var(--dark-grey);
+}

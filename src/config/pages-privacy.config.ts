@@ -19,6 +19,7 @@ export const publicPages: string[] = [
 export const privatePages: string[] = [
   PAGES.DASHBOARD,
   PAGES.CARS,
+  PAGES.CARS_NEW,
   PAGES.EDIT_PERSONAL_DATA,
   PAGES.MY_POLICIES,
 ];

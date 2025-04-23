@@ -28,3 +28,37 @@
   align-items: center;
   column-gap: 20px;
 }
+
+.moreMobile {
+  display: none;
+}
+
+@media (max-width: 1149px) {
+  .substrate {
+    padding: 20px;
+    display: block;
+  }
+
+  .infoItem {
+    margin-top: 12px;
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  .value {
+    margin-top: 5px;
+    font-weight: 500;
+    display: block;
+  }
+
+  .moreMobile {
+    width: fit-content;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  .buttons {
+    display: none;
+  }
+}

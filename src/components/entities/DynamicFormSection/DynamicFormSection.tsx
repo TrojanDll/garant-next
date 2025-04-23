@@ -52,7 +52,7 @@ const DynamicFormSection = ({ fields, control, className, isTopItemSingle = fals
               : styles.hidden
           }
           ${
-            config.name !== "vehicle_make" ? "" : isAnotherCarVisible ? styles.singleInStroke : ""
+            config.name !== "brand" ? "" : isAnotherCarVisible ? styles.singleInStroke : ""
           }    
           `}
         >
@@ -68,7 +68,7 @@ const DynamicFormSection = ({ fields, control, className, isTopItemSingle = fals
                 className={`${styles.input} ${className}  `}
                 {...config}
                 type={
-                  config.name === "vehicle_model" && isAnotherCarVisible ? "input" : config.type
+                  config.name === "model" && isAnotherCarVisible ? "input" : config.type
                 }
                 label={fieldText(config).label}
                 placeholder={fieldText(config).placeholder}
