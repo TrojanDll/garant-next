@@ -11,12 +11,16 @@ import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
 import { useOsagoFormConfig } from "@/hooks/useOsagoFormConfig";
 import DynamicFormSection from "@/components/entities/DynamicFormSection/DynamicFormSection";
 import Button from "@/components/ui/Button/Button";
+import { INewCarForm } from "@/types/cars.types";
 
 const CarsNew = () => {
   const { config, isLoading } = useOsagoFormConfig();
   const { handleSubmit, control } = useForm<IOsagoApplyForm>();
 
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
+    let formatedData: INewCarForm;
+
+    
     console.log(data);
   };
 
