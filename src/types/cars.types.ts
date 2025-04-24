@@ -54,4 +54,10 @@ export interface ICarModelResponse {
   data: ICarModel[];
 }
 
+export interface INewCarResponse {
+  success: boolean;
+  message: string;
+  data?: any;
+}
+
 export type INewCarForm = Omit<ICar, "updated_at" | "created_at" | "id" | "user_id">;

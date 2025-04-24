@@ -4,6 +4,8 @@ import {
   ICarCategoryResponse,
   ICarModelResponse,
   IGetCurrientUserCarsReponse,
+  INewCarForm,
+  INewCarResponse,
 } from "@/types/cars.types";
 
 class CarsService {
@@ -36,8 +38,8 @@ class CarsService {
     return response;
   }
 
-  async addNewCar(data: string) {
-    const response = await axiosClassic.get<ICarModelResponse>(`/api/add_transport`);
+  async addNewCar(data: INewCarForm) {
+    const response = await axiosWithAuth.post<INewCarResponse>(`/api/add_transport`, data);
     return response;
   }
 }

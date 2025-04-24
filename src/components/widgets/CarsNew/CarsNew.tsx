@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 
 import styles from "./CarsNew.module.scss";
 
@@ -13,16 +13,40 @@ import DynamicFormSection from "@/components/entities/DynamicFormSection/Dynamic
 import Button from "@/components/ui/Button/Button";
 import { INewCarForm } from "@/types/cars.types";
 import { formatNewCarDataToRequest } from "@/helpers/formatNewCarDataToRequest";
+import { useAddNewCar } from "@/hooks/cars/useAddNewCar";
+import toast from "react-hot-toast";
+import { useNavigation } from "@/hooks/navigation/useNavigation";
 
 const CarsNew = () => {
   const { config, isLoading } = useOsagoFormConfig();
   const { handleSubmit, control } = useForm<IOsagoApplyForm>();
+  const { isError, isPending, isSuccess, mutate } = useAddNewCar();
+  const { navigateToCars } = useNavigation();
 
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
     let formatedData: INewCarForm = formatNewCarDataToRequest(data);
 
+    mutate(formatedData);
     console.log(formatedData);
   };
+
+  useEffect(() => {
+    if (isPending) {
+      toast.loading("Загрузка");
+    }
+
+    if (isError) {
+      toast.dismiss();
+      toast.error("Ошибка добавления");
+    } else if (isSuccess) {
+      toast.dismiss();
+      toast.success("Транспортное средство добавлено");
+
+      setTimeout(() => {
+        navigateToCars();
+      }, 700);
+    }
+  }, [isPending]);
 
   return (
     <div className={styles.root}>
