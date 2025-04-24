@@ -19,6 +19,7 @@ export interface IOptions {
 }
 
 interface IProps {
+  allOptions?: IOptions[];
   options: IOptions[];
   required?: boolean;
   setValue?: (value: string) => void;
@@ -50,16 +51,21 @@ const CustomSelect = ({
   isSearchable = true,
   tooltip = false,
   tooltipText = "",
+  allOptions,
 }: IProps) => {
+  const [inputValue, setInputValue] = useState(""); // значение в поле ввода
+  const [filteredOptions, setFilteredOptions] = useState<IOptions[]>([]); // то, что отображаем
   const [isSelectOpened, setIsSelectOpened] = useState(false);
   const [isJustSelected, setIsJustSelected] = useState(false);
   const [carModelOptions, setCarModelOptions] = useState<IOptions[]>([]);
 
-  const { getCarModelByBrandId, isError, isPending, isSuccess, carBrandData } =
+  const { getCarModelByBrandId, isError, isPending, isSuccess, carModelData } =
     useGetCarModelByBrandId();
 
-  const isBrandSelect = options.map((item) => item.value).indexOf("another_vehicle") !== -1;
+  // const isBrandSelect = options.map((item) => item.value).indexOf("another_vehicle") !== -1;
   const isModelSelect = options.map((item) => item.value).indexOf("thumbnail") !== -1;
+
+  // console.log(isBrandSelect);
 
   const carBrand = useCarBrand((state) => state.carBrand);
   const setCarBrand = useCarBrand((state) => state.setCarBrand);
@@ -81,11 +87,14 @@ const CustomSelect = ({
 
   const handleChange = (value: IOptions) => {
     setIsJustSelected(true);
+
     if (setValue) {
       setValue(value.value);
     }
 
-    if (isBrandSelect) {
+    if (allOptions) {
+      // setInputValue(value?.label || "");
+
       if (value.value === "another_vehicle") {
         setIsAnotherCarMark(true);
       } else {
@@ -96,10 +105,38 @@ const CustomSelect = ({
   };
 
   useEffect(() => {
-    if (isModelSelect) {
+    if (isModelSelect && carBrand.length !== 0) {
+      console.log("event");
       getCarModelByBrandId(carBrand);
     }
-  }, [isPending]);
+  }, [carBrand]);
+
+  useEffect(() => {
+    async function search() {
+      // console.log(allOptions?.slice(0, 10));
+      // Фильтрация списка при вводе
+      if (inputValue.length >= 2 && allOptions) {
+        const filtered = await allOptions.filter((option) =>
+          option.label.toLowerCase().includes(inputValue.toLowerCase())
+        );
+        setFilteredOptions(filtered);
+      } else {
+        setFilteredOptions([]);
+      }
+    }
+
+    search();
+
+    setFilteredOptions((prev) => {
+      return [
+        {
+          label: "Другое ТС",
+          value: "another_vehicle",
+        },
+        ...prev,
+      ];
+    });
+  }, [inputValue, allOptions]);
 
   return (
     <div className={`${className}`}>
@@ -112,6 +149,8 @@ const CustomSelect = ({
 
       <Select
         name={name}
+        inputValue={inputValue}
+        onInputChange={(value) => setInputValue(value)}
         isSearchable={isSearchable}
         openMenuOnFocus={false}
         onMenuOpen={() => handleMenuOpen()}
@@ -138,14 +177,14 @@ const CustomSelect = ({
             }`,
           menuList: () => styles.menuList,
         }}
-        options={isModelSelect && carBrandData ? options : options}
+        options={
+          isModelSelect && carModelData
+            ? carModelData
+            : allOptions
+            ? filteredOptions.slice(0, 50)
+            : options
+        }
       />
-      {/* {errorMessage?.length && (
-        <p className={styles.errorMessage}>
-          <SvgSelector id={ESvgName.ATTENTION} />
-          {errorMessage}
-        </p>
-      )} */}
     </div>
   );
 };

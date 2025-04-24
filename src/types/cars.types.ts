@@ -33,20 +33,20 @@ export interface ICarCategoryResponse {
 }
 
 export interface ICarBrand {
-  make_id: string;
-  make_display: string;
-  make_is_common: string;
-  make_country: string;
+  Make_ID: number;
+  Make_Name: string;
 }
 
 export interface ICarBrandResponse {
   success: boolean;
-  data: ICarBrand[];
+  brands: ICarBrand[];
 }
 
 export interface ICarModel {
-  model_name: string;
-  model_make_id: string;
+  Model_Name: string;
+  Model_ID: string;
+  Make_ID: string;
+  Make_Name: string;
 }
 
 export interface ICarModelResponse {

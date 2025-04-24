@@ -12,7 +12,6 @@ import { useOsagoFormConfig } from "@/hooks/useOsagoFormConfig";
 import DynamicFormSection from "@/components/entities/DynamicFormSection/DynamicFormSection";
 import Button from "@/components/ui/Button/Button";
 import { INewCarForm } from "@/types/cars.types";
-import { convertPersonType } from "@/helpers/convertPersonType";
 import { formatNewCarDataToRequest } from "@/helpers/formatNewCarDataToRequest";
 
 const CarsNew = () => {

@@ -62,7 +62,8 @@ const InputsSelector = ({
           tooltipText={tooltipText}
           isSearchable={isSearchable}
           name={name}
-          options={options as IOptions[]}
+          allOptions={name === "brand" ? options : undefined}
+          options={name === "brand" ? ([] as IOptions[]) : (options as IOptions[])}
           label={label}
           placeholder={placeholder}
           required={required}

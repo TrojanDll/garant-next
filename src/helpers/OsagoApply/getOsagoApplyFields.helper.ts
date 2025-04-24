@@ -26,16 +26,18 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
     value: "another_vehicle",
   });
 
-  const fetchedAndFormatedCarBrands: { label: string; value: string }[] = carBrands.data.data.map(
+  const fetchedAndFormatedCarBrands: { label: string; value: string }[] = carBrands.data.brands.map(
     (brand) => {
       return {
-        label: brand.make_display,
-        value: brand.make_id,
+        label: brand.Make_Name,
+        value: brand.Make_ID.toString(),
       };
     }
   );
 
   formatedCarBrands = [...formatedCarBrands, ...fetchedAndFormatedCarBrands];
+
+  formatedCarBrands = formatedCarBrands;
 
   const fields: ISplitFieldConfig = {
     vehicle: [
@@ -52,7 +54,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         type: "select",
         name: "brand",
         label: "Марка",
-        placeholder: "Марка",
+        placeholder: "Начните вводить марку",
         required: true,
         tooltip: true,
         tooltipText: "Если марки вашего ТС нет в списке, выберите «Другое ТС» ",
