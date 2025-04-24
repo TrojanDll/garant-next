@@ -20,6 +20,11 @@ export interface IGetCurrientUserCarsReponse {
   data: ICar[];
 }
 
+export interface IGetCarInfoByIdResponse {
+  success: boolean;
+  data: ICar;
+}
+
 export interface ICarCategory {
   id: number;
   Category: string;

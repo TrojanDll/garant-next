@@ -3,6 +3,7 @@ import {
   ICarBrandResponse,
   ICarCategoryResponse,
   ICarModelResponse,
+  IGetCarInfoByIdResponse,
   IGetCurrientUserCarsReponse,
   INewCarForm,
   INewCarResponse,
@@ -40,6 +41,11 @@ class CarsService {
 
   async addNewCar(data: INewCarForm) {
     const response = await axiosWithAuth.post<INewCarResponse>(`/api/add_transport`, data);
+    return response;
+  }
+
+  async getCarInfoById(id: string) {
+    const response = await axiosWithAuth.get<IGetCarInfoByIdResponse>(`/api/transportById/${id}`);
     return response;
   }
 }

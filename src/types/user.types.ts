@@ -45,3 +45,7 @@ export interface IEditCurrientUserResponse {
 
 export const personTypes = ["individual", "legal_entity"] as const;
 export type TPersonType = (typeof personTypes)[number];
+// export enum EPersonTypes {
+//   INDIVIDUAL = "individual",
+//   LEGAL_ENTITY = "legal_entity",
+// }

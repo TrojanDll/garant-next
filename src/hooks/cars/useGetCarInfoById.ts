@@ -3,15 +3,15 @@ import { carsService } from "@/services/cars.service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
-export function useGetCarModelByBrandId() {
+export function useGetCarInfoById() {
   const queryClient = useQueryClient();
 
   const { mutate, isPending, isSuccess, isError, data } = useMutation({
-    mutationKey: ["carCategory"],
-    mutationFn: (id: string) => carsService.getCarModelByBrandId(id),
+    mutationKey: ["carInfoById"],
+    mutationFn: (id: string) => carsService.getCarInfoById(id),
     onSuccess() {
       queryClient.invalidateQueries({
-        queryKey: ["carCategory"],
+        queryKey: ["carInfoById"],
       });
       queryClient.clear();
     },
@@ -23,8 +23,8 @@ export function useGetCarModelByBrandId() {
   });
 
   return {
-    getCarModelByBrandId: mutate,
-    carModelData: data?.data.data,
+    mutate,
+    data: data?.data.data,
     isPending,
     isSuccess,
     isError,
