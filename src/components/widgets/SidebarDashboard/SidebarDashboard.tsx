@@ -64,19 +64,12 @@ const SidebarDashboard = ({ className }: IProps) => {
   useEffect(() => {
     let activeIndex = 0;
 
-    switch (pathname) {
-      case PAGES.MY_POLICIES:
-        activeIndex = 0;
-        break;
-      case PAGES.DASHBOARD:
-        activeIndex = 1;
-        break;
-      case PAGES.EDIT_PERSONAL_DATA:
-        activeIndex = 1;
-        break;
-      case PAGES.CARS:
-        activeIndex = 2;
-        break;
+    if (pathname === PAGES.MY_POLICIES) {
+      activeIndex = 0;
+    } else if (pathname === PAGES.DASHBOARD || pathname === PAGES.EDIT_PERSONAL_DATA) {
+      activeIndex = 1;
+    } else if (pathname.startsWith(PAGES.CARS)) {
+      activeIndex = 2;
     }
     setActive(activeIndex);
   }, [pathname]);
