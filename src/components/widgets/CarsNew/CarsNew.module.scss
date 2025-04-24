@@ -7,8 +7,15 @@
   margin-top: 32px;
 }
 
-.root {
-  margin-top: 50px;
+.titleWrapper {
+  position: relative;
+}
+
+.goBack {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
 }
 
 .input {
@@ -74,5 +81,11 @@
 
   .submitButton {
     margin-top: 80px;
+  }
+}
+
+@media (max-width: 455px) {
+  .goBack {
+    position: static;
   }
 }

@@ -16,6 +16,7 @@ import { formatNewCarDataToRequest } from "@/helpers/formatNewCarDataToRequest";
 import { useAddNewCar } from "@/hooks/cars/useAddNewCar";
 import toast from "react-hot-toast";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
+import GoBackLink from "@/components/ui/GoBackLink/GoBackLink";
 
 const CarsNew = () => {
   const { config, isLoading } = useOsagoFormConfig();
@@ -50,9 +51,12 @@ const CarsNew = () => {
 
   return (
     <div className={styles.root}>
-      <CustomTitle tag="h1" isCentered>
-        Добавить сохраненное авто
-      </CustomTitle>
+      <div className={styles.titleWrapper}>
+        <GoBackLink className={styles.goBack} />
+        <CustomTitle tag="h1" isCentered>
+          Добавить сохраненное авто
+        </CustomTitle>
+      </div>
 
       <Substrate withShadow="light" className={styles.substrate}>
         <form noValidate onSubmit={handleSubmit(onSubmit)} action="">

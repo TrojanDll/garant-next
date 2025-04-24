@@ -1,0 +1,21 @@
+.button {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 125%;
+  text-align: center;
+  color: var(--blue);
+}
+
+@media (max-width: 1149px) {
+  .button {
+    font-size: 12px;
+  }
+
+  .svg {
+    width: 17px;
+    height: 17px;
+  }
+}
