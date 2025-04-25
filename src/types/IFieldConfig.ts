@@ -1,4 +1,5 @@
 import { TButtonGroupType } from "@/components/ui/ButtonGroup/ButtonGroup";
+import { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
 
 export type TFieldType = "input" | "select" | "checkbox" | "radio";
 
@@ -19,4 +20,5 @@ export interface IFieldConfig<T> {
   isSearchable?: boolean;
   tooltip?: boolean;
   tooltipText?: string;
+  popularBrands?: IOptions[];
 }

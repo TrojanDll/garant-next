@@ -3,6 +3,7 @@ import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
 import { generateYearOptions } from "../generateYearOptions";
 import { carsService } from "@/services/cars.service";
 import { useGetCarCategories } from "@/hooks/cars/useGetCarCategories";
+import { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
 
 export interface ISplitFieldConfig {
   [key: string]: IFieldConfig<IOsagoApplyForm>[];
@@ -11,6 +12,14 @@ export interface ISplitFieldConfig {
 export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> {
   const carCategories = await carsService.getCarCategories();
   const carBrands = await carsService.getCarBrands();
+
+  const popularBrands: IOptions[] = [
+    { label: "Mercedes", value: "Mercedes" },
+    { label: "bmw", value: "bmw" },
+    { label: "nissan", value: "nissan" },
+    { label: "Ford", value: "Ford" },
+    { label: "mazeratti", value: "mazeratti" },
+  ];
 
   const formatedCarCategories = carCategories.data.data.map((category) => {
     return {
@@ -59,6 +68,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         tooltip: true,
         tooltipText: "Если марки вашего ТС нет в списке, выберите «Другое ТС» ",
         options: formatedCarBrands,
+        popularBrands: popularBrands,
       },
       {
         type: "input",

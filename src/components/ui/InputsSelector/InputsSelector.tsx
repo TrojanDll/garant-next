@@ -25,6 +25,7 @@ interface IProps {
   isSearchable?: boolean;
   tooltip?: boolean;
   tooltipText?: string;
+  popularBrands?: IOptions[];
 }
 
 const InputsSelector = ({
@@ -39,6 +40,7 @@ const InputsSelector = ({
   placeholder,
   required,
   options,
+  popularBrands,
   buttons,
   buttonGroupType,
   inputType,
@@ -62,6 +64,7 @@ const InputsSelector = ({
           tooltipText={tooltipText}
           isSearchable={isSearchable}
           name={name}
+          popularBrands={name === "brand" ? popularBrands : undefined}
           allOptions={name === "brand" ? options : undefined}
           options={name === "brand" ? ([] as IOptions[]) : (options as IOptions[])}
           label={label}

@@ -21,6 +21,7 @@ export interface IOptions {
 interface IProps {
   allOptions?: IOptions[];
   options: IOptions[];
+  popularBrands?: IOptions[];
   required?: boolean;
   setValue?: (value: string) => void;
   selectedValue?: string | null | undefined;
@@ -38,6 +39,7 @@ interface IProps {
 
 const CustomSelect = ({
   options,
+  popularBrands,
   setValue,
   required,
   selectedValue,
@@ -62,7 +64,6 @@ const CustomSelect = ({
   const { getCarModelByBrandName, isError, isPending, isSuccess, carModelData } =
     useGetCarModelByBrandId();
 
-  // const isBrandSelect = options.map((item) => item.value).indexOf("another_vehicle") !== -1;
   const isModelSelect = options.map((item) => item.value).indexOf("thumbnail") !== -1;
 
   const carBrand = useCarBrand((state) => state.carBrand);
@@ -141,18 +142,19 @@ const CustomSelect = ({
           },
         ]);
       }
+
+      if (inputValue.length === 0 && popularBrands) {
+        setFilteredOptions([
+          {
+            label: "Другое ТС",
+            value: "another_vehicle",
+          },
+          ...popularBrands,
+        ]);
+      }
     }
 
     search();
-
-    //   return [
-    //     {
-    //       label: "Другое ТС",
-    //       value: "another_vehicle",
-    //     },
-    //     ...prev,
-    //   ];
-    // });
   }, [inputValue, allOptions]);
 
   useEffect(() => {
