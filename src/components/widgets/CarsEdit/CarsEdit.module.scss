@@ -1,0 +1,97 @@
+.root {
+  margin-top: 50px;
+}
+
+.substrate {
+  padding: 50px;
+  margin-top: 32px;
+}
+
+.titleWrapper {
+  position: relative;
+}
+
+.goBack {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+}
+
+.input {
+  flex-shrink: 0;
+}
+
+.inputsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.singleInStroke {
+  width: 100%;
+}
+
+.inputSingleInStroke {
+  width: 43.6%;
+}
+
+.partial {
+  width: 50%;
+
+  &:nth-child(2n + 1) {
+    & .input,
+    .inputPartial {
+      width: 87%;
+      margin-left: auto !important;
+    }
+  }
+}
+
+.inputPartial {
+  width: 87%;
+}
+
+.inputWrapper {
+  margin-top: 40px;
+}
+
+.section {
+  margin-top: 100px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.submitButton {
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+.loader {
+  display: block !important;
+  margin: 0 auto;
+  margin-top: 32px;
+}
+
+@media (max-width: 1149px) {
+  .substrate {
+    margin-top: 20px;
+    padding: 30px 20px 40px 20px;
+  }
+
+  .section {
+    margin-top: 80px;
+  }
+
+  .submitButton {
+    margin-top: 80px;
+  }
+}
+
+@media (max-width: 455px) {
+  .goBack {
+    position: static;
+  }
+}

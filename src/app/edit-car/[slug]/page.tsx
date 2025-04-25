@@ -1,5 +1,5 @@
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
-import CarsNew from "@/components/widgets/CarsNew/CarsNew";
+import CarsEdit from "@/components/widgets/CarsEdit/CarsEdit";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function CarsPage() {
   return (
     <ContentContainer>
-      <CarsNew />
+      <CarsEdit />
     </ContentContainer>
   );
 }

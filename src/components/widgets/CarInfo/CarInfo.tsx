@@ -15,17 +15,6 @@ import Link from "next/link";
 import { PAGES } from "@/config/pages-url.config";
 import Button from "@/components/ui/Button/Button";
 
-const fieldNames: string[] = [
-  "Транспортное средство",
-  "Год выпуска ТС",
-  "Тип ТС",
-  "Регистрационный знак",
-  "Номер регистрации ТС",
-  "VIN",
-  "Собственник ТС",
-  "Серия и номер паспорта",
-];
-
 const CarInfo = () => {
   const params = useParams();
   const { data, isError, isPending, isSuccess, mutate } = useGetCarInfoById();
@@ -66,33 +55,44 @@ const CarInfo = () => {
             </CustomTitle>
 
             <div className={styles.content}>
-              <CarInfoItem
-                className={styles.contentItem}
-                name="Транспортное средство"
-                value="Mercedes-Benz CLS"
-              />
-              <CarInfoItem
-                className={styles.contentItem}
-                name="Транспортное средство"
-                value="Mercedes-Benz CLS"
-              />
-
               {data && (
                 <>
-                  <CarInfoItem key={data.id} name="Транспортное средство" value={data.brand} />
-                  <CarInfoItem key={data.id} name="Год выпуска ТС" value={data.year} />
-                  <CarInfoItem key={data.id} name="Тип ТС" value={data.transport_category} />
                   <CarInfoItem
-                    key={data.id}
+                    className={styles.contentItem}
+                    // key={data.brand}
+                    name="Транспортное средство"
+                    value={data.brand}
+                  />
+                  <CarInfoItem
+                    className={styles.contentItem}
+                    // key={data.year}
+                    name="Год выпуска ТС"
+                    value={data.year}
+                  />
+                  <CarInfoItem
+                    className={styles.contentItem}
+                    // key={data.transport_category}
+                    name="Тип ТС"
+                    value={data.transport_category}
+                  />
+                  <CarInfoItem
+                    className={styles.contentItem}
+                    // key={data.registration_plate}
                     name="Регистрационный знак"
                     value={data.registration_plate}
                   />
                   <CarInfoItem
-                    key={data.id}
+                    className={styles.contentItem}
+                    // key={data.registration_number}
                     name="Номер регистрации ТС"
                     value={data.registration_number}
                   />
-                  <CarInfoItem key={data.id} name="VIN" value={data.vin} />
+                  <CarInfoItem
+                    className={styles.contentItem}
+                    // key={data.vin}
+                    name="VIN"
+                    value={data.vin}
+                  />
                 </>
               )}
             </div>
@@ -104,9 +104,15 @@ const CarInfo = () => {
             <div className={styles.content}>
               {data && (
                 <>
-                  <CarInfoItem key={data.id} name="Собственник ТС" value={data.fio} />
                   <CarInfoItem
-                    key={data.id}
+                    className={styles.contentItem}
+                    // key={data.fio}
+                    name="Собственник ТС"
+                    value={data.fio}
+                  />
+                  <CarInfoItem
+                    className={styles.contentItem}
+                    // key={data.passport_number}
                     name="Серия и номер паспорта"
                     value={data.passport_number}
                   />

@@ -3,6 +3,8 @@ import {
   ICarBrandResponse,
   ICarCategoryResponse,
   ICarModelResponse,
+  IEditCarInfoForm,
+  IEditCarInfoResponse,
   IGetCarInfoByIdResponse,
   IGetCurrientUserCarsReponse,
   INewCarForm,
@@ -35,7 +37,7 @@ class CarsService {
   }
 
   async getCarModelByBrandName(name: string) {
-    const response = await axiosClassic.get<ICarModelResponse>(`/api/car_model/?brand=${name}`);
+    const response = await axiosClassic.get<ICarModelResponse>(`/api/car_model?brand=${name}`);
     return response;
   }
 
@@ -48,6 +50,11 @@ class CarsService {
     const response = await axiosWithAuth.get<IGetCarInfoByIdResponse>(
       `/api/transportById?transport_id=${id}`
     );
+    return response;
+  }
+
+  async editCarInfo(data: IEditCarInfoForm) {
+    const response = await axiosWithAuth.post<IEditCarInfoResponse>("/api/editTransportById", data);
     return response;
   }
 }

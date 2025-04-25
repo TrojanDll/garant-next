@@ -113,8 +113,6 @@ const CustomSelect = ({
 
   useEffect(() => {
     async function search() {
-      // console.log(allOptions?.slice(0, 10));
-      // Фильтрация списка при вводе
       if (inputValue.length >= 2 && allOptions) {
         const filtered = await allOptions.filter((option) =>
           option.label.toLowerCase().includes(inputValue.toLowerCase())

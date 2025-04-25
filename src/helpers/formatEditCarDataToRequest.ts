@@ -1,10 +1,11 @@
-import { INewCarForm } from "@/types/cars.types";
+import { IEditCarInfoForm, INewCarForm } from "@/types/cars.types";
 import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
 import { convertPersonType } from "./convertPersonType";
 import { selectCarModel } from "./selectCarModel";
 
-export function formatNewCarDataToRequest(data: IOsagoApplyForm): INewCarForm {
-  const formatedData: INewCarForm = {
+export function formatEditCarDataToRequest(data: IOsagoApplyForm, id: number): IEditCarInfoForm {
+  const formatedData: IEditCarInfoForm = {
+    transport_id: id,
     brand: selectCarModel(data.brand, data.vehicle_refined_make),
     fio: data.fio,
     model: data.model,

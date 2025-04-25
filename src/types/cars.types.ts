@@ -66,3 +66,13 @@ export interface INewCarResponse {
 }
 
 export type INewCarForm = Omit<ICar, "updated_at" | "created_at" | "id" | "user_id">;
+
+export interface IEditCarInfoForm extends INewCarForm {
+  transport_id: number;
+}
+
+export interface IEditCarInfoResponse {
+  success: boolean;
+  message: string;
+  data?: any;
+}
