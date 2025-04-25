@@ -24,7 +24,7 @@ export function useGetCarModelByBrandId() {
 
   return {
     getCarModelByBrandName: mutate,
-    carModelData: data?.data.data,
+    carModelData: data?.data.models,
     isPending,
     isSuccess,
     isError,

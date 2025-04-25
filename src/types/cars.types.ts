@@ -56,7 +56,8 @@ export interface ICarModel {
 
 export interface ICarModelResponse {
   success: boolean;
-  data: ICarModel[];
+  make: string;
+  models: ICarModel[];
 }
 
 export interface INewCarResponse {

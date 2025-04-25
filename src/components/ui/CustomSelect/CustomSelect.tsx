@@ -65,7 +65,7 @@ const CustomSelect = ({
   // const isBrandSelect = options.map((item) => item.value).indexOf("another_vehicle") !== -1;
   const isModelSelect = options.map((item) => item.value).indexOf("thumbnail") !== -1;
 
-  // console.log(isBrandSelect);
+  // console.log(isModelSelect);
 
   const carBrand = useCarBrand((state) => state.carBrand);
   const setCarBrand = useCarBrand((state) => state.setCarBrand);
@@ -110,6 +110,24 @@ const CustomSelect = ({
       getCarModelByBrandName(carBrand);
     }
   }, [carBrand]);
+
+  useEffect(() => {
+    if (isSuccess && carModelData) {
+      console.log("event3");
+
+      const newData: IOptions[] = carModelData.map((item) => {
+        return {
+          label: item.Model_Name,
+          value: item.Model_Name,
+        };
+      });
+      setCarModelOptions(newData);
+    }
+  }, [isPending]);
+
+  useEffect(() => {
+    console.log(carModelOptions);
+  }, [carModelOptions]);
 
   useEffect(() => {
     async function search() {
@@ -177,7 +195,7 @@ const CustomSelect = ({
         }}
         options={
           isModelSelect && carModelData
-            ? carModelData
+            ? carModelOptions
             : allOptions
             ? filteredOptions.slice(0, 50)
             : options
