@@ -19,17 +19,7 @@ const Cars = () => {
       <CustomTitle tag="h1" isCentered>
         Сохраненные авто
       </CustomTitle>
-
-      {/* <ul className={styles.itemsWrapper}>
-        <li className={styles.carItem}>
-          <CarsListItem id={1} brand="Mercedes" model="CLS 550" registration_plate="А123АА777" />
-        </li>
-
-        <li className={styles.carItem}>
-          <CarsListItem id={2} brand="Mercedes" model="CLS 550" registration_plate="А123АА777" />
-        </li>
-      </ul> */}
-
+      
       {carsData ? (
         <>
           <ul className={styles.itemsWrapper}>

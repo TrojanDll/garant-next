@@ -17,3 +17,21 @@
 .value {
   color: var(--dark-grey);
 }
+
+@media (max-width: 1149px) {
+  .root {
+    display: block;
+  }
+
+  .title {
+    width: auto;
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  .value {
+    // margin-top: 5px;
+    font-size: 14px;
+    display: block;
+  }
+}

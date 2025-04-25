@@ -7,11 +7,11 @@ export function useGetCarModelByBrandId() {
   const queryClient = useQueryClient();
 
   const { mutate, isPending, isSuccess, isError, data } = useMutation({
-    mutationKey: ["carCategory"],
-    mutationFn: (id: string) => carsService.getCarModelByBrandId(id),
+    mutationKey: ["carModel"],
+    mutationFn: (name: string) => carsService.getCarModelByBrandName(name),
     onSuccess() {
       queryClient.invalidateQueries({
-        queryKey: ["carCategory"],
+        queryKey: ["carModel"],
       });
       queryClient.clear();
     },
@@ -23,7 +23,7 @@ export function useGetCarModelByBrandId() {
   });
 
   return {
-    getCarModelByBrandId: mutate,
+    getCarModelByBrandName: mutate,
     carModelData: data?.data.data,
     isPending,
     isSuccess,

@@ -34,8 +34,8 @@ class CarsService {
     return response;
   }
 
-  async getCarModelByBrandId(id: string) {
-    const response = await axiosClassic.get<ICarModelResponse>(`/api/car_model/${id}`);
+  async getCarModelByBrandName(name: string) {
+    const response = await axiosClassic.get<ICarModelResponse>(`/api/car_model/?brand=${name}`);
     return response;
   }
 
@@ -45,7 +45,9 @@ class CarsService {
   }
 
   async getCarInfoById(id: string) {
-    const response = await axiosWithAuth.get<IGetCarInfoByIdResponse>(`/api/transportById/${id}`);
+    const response = await axiosWithAuth.get<IGetCarInfoByIdResponse>(
+      `/api/transportById?transport_id=${id}`
+    );
     return response;
   }
 }

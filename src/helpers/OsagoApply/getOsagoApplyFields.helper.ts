@@ -30,7 +30,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
     (brand) => {
       return {
         label: brand.Make_Name,
-        value: brand.Make_ID.toString(),
+        value: brand.Make_Name,
       };
     }
   );

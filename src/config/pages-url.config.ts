@@ -19,6 +19,7 @@ class PAGESCLASS {
 
   CARS = `${this.DASHBOARD}/cars`;
   CARS_NEW = `${this.root}new-car`;
+  CARS_EDIT = `${this.root}edit-car`;
 
   MY_POLICIES = `${this.DASHBOARD}/my-policies`;
   EDIT_PERSONAL_DATA = `${this.DASHBOARD}/edit-personal-data`;

@@ -11,6 +11,9 @@ import { useParams } from "next/navigation";
 import { useGetCarInfoById } from "@/hooks/cars/useGetCarInfoById";
 import Loader from "@/components/ui/Loader/Loader";
 import { personTypes } from "@/types/user.types";
+import Link from "next/link";
+import { PAGES } from "@/config/pages-url.config";
+import Button from "@/components/ui/Button/Button";
 
 const fieldNames: string[] = [
   "Транспортное средство",
@@ -41,6 +44,12 @@ const CarInfo = () => {
     mutate(slug);
   }, []);
 
+  useEffect(() => {
+    if (isSuccess) {
+      console.log(data);
+    }
+  }, [isPending]);
+
   return (
     <div>
       <CustomTitle tag="h1" isCentered>
@@ -48,7 +57,7 @@ const CarInfo = () => {
       </CustomTitle>
 
       {isPending ? (
-        <Loader />
+        <Loader className={styles.loader} />
       ) : (
         <Substrate withShadow="light" className={styles.substrate}>
           <div className={styles.wrapper}>
@@ -57,6 +66,17 @@ const CarInfo = () => {
             </CustomTitle>
 
             <div className={styles.content}>
+              <CarInfoItem
+                className={styles.contentItem}
+                name="Транспортное средство"
+                value="Mercedes-Benz CLS"
+              />
+              <CarInfoItem
+                className={styles.contentItem}
+                name="Транспортное средство"
+                value="Mercedes-Benz CLS"
+              />
+
               {data && (
                 <>
                   <CarInfoItem key={data.id} name="Транспортное средство" value={data.brand} />
@@ -93,7 +113,13 @@ const CarInfo = () => {
                 </>
               )}
             </div>
+
+            <Link href={`${PAGES.CARS_EDIT}/${data ? data.id : ""}`} className={styles.editLink}>
+              Изменить
+            </Link>
           </div>
+
+          <Button className={styles.buyPolicyButton}>Купить полис</Button>
         </Substrate>
       )}
     </div>

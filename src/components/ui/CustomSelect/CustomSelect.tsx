@@ -59,7 +59,7 @@ const CustomSelect = ({
   const [isJustSelected, setIsJustSelected] = useState(false);
   const [carModelOptions, setCarModelOptions] = useState<IOptions[]>([]);
 
-  const { getCarModelByBrandId, isError, isPending, isSuccess, carModelData } =
+  const { getCarModelByBrandName, isError, isPending, isSuccess, carModelData } =
     useGetCarModelByBrandId();
 
   // const isBrandSelect = options.map((item) => item.value).indexOf("another_vehicle") !== -1;
@@ -107,7 +107,7 @@ const CustomSelect = ({
   useEffect(() => {
     if (isModelSelect && carBrand.length !== 0) {
       console.log("event");
-      getCarModelByBrandId(carBrand);
+      getCarModelByBrandName(carBrand);
     }
   }, [carBrand]);
 
