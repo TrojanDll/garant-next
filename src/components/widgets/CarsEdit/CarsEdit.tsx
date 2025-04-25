@@ -25,12 +25,14 @@ import Loader from "@/components/ui/Loader/Loader";
 import { selectCarModel } from "@/helpers/selectCarModel";
 import { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
 import { useGetCarBrands } from "@/hooks/cars/useGetCarBrands";
+import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 
-function pickFormData(carInfoData: ICar): Partial<IOsagoApplyForm> {
-  // let found = carBrands.find((item) => item.Make_Name === carInfoData.brand);
+function pickFormData(carInfoData: ICar, carBrands: ICarBrand[]): Partial<IOsagoApplyForm> {
+  let found = carBrands.find((item) => item.Make_Name === carInfoData.brand);
 
+  // console.log(carInfoData.brand === found?.Make_Name ? carInfoData.brand : "");
   return {
-    brand: carInfoData.brand === "another_vehicle" ? carInfoData.brand : "",
+    brand: carInfoData.brand,
     fio: carInfoData.fio,
     model: carInfoData.model,
     owner: carInfoData.owner === "individual" ? "individual" : "legal_entity",
@@ -38,7 +40,7 @@ function pickFormData(carInfoData: ICar): Partial<IOsagoApplyForm> {
     registration_number: carInfoData.registration_number,
     registration_plate: carInfoData.registration_plate,
     transport_category: carInfoData.transport_category,
-    vehicle_refined_make: carInfoData.brand === "another_vehicle" ? carInfoData.brand : "",
+    vehicle_refined_make: carInfoData.brand === found?.Make_Name ? "" : carInfoData.brand,
     vin: carInfoData.vin,
     year: carInfoData.year,
   };
@@ -46,18 +48,17 @@ function pickFormData(carInfoData: ICar): Partial<IOsagoApplyForm> {
 
 const CarsEdit = () => {
   const { config, isLoading } = useOsagoFormConfig();
-  const { handleSubmit, control, reset } = useForm<IOsagoApplyForm>();
+  const { handleSubmit, control, reset, setValue } = useForm<IOsagoApplyForm>();
   const { navigateToCars } = useNavigation();
   const { data, isError, isPending, isSuccess, mutate } = useEditCarInfo();
   const [slug, setSlug] = useState("");
-  // const {
-  //   carsBrands,
-  //   isError: isCarBrandsError,
-  //   isLoading: isCarsBrandsLoading,
-  //   isSuccess: isCarsBrandsSuccess,
-  // } = useGetCarBrands();
+  const {
+    carsBrands,
+    isError: isCarBrandsError,
+    isLoading: isCarsBrandsLoading,
+    isSuccess: isCarsBrandsSuccess,
+  } = useGetCarBrands();
 
-  const params = useParams();
   const {
     data: carInfoData,
     isError: isCarInfoError,
@@ -65,6 +66,10 @@ const CarsEdit = () => {
     isSuccess: isCarInfoSuccess,
     mutate: getCarInfoById,
   } = useGetCarInfoById();
+
+  const setIsAnotherCarMark = useOsagoApplyCarMark((state) => state.setCarMarkValue);
+
+  const params = useParams();
 
   useEffect(() => {
     let newSlug = "";
@@ -84,15 +89,26 @@ const CarsEdit = () => {
   }, [slug]);
 
   useEffect(() => {
-    if (isCarInfoSuccess && carInfoData) {
-      reset(pickFormData(carInfoData));
+    async function resetValues() {
+      if (isCarInfoSuccess && carInfoData && carsBrands) {
+        console.log("event");
+        const pickedData = await pickFormData(carInfoData, carsBrands);
+        reset(pickedData);
+        let found = await carsBrands.find((item) => item.Make_Name === carInfoData.brand);
+        setValue("brand", Boolean(found) ? carInfoData.brand : "Другое ТС");
+        setIsAnotherCarMark(!Boolean(found));
+      }
     }
-  }, [isCarInfoPending]);
+
+    resetValues()
+
+  }, [isCarInfoPending, isCarsBrandsLoading]);
 
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
     let formatedData: IEditCarInfoForm = formatEditCarDataToRequest(data, +slug);
 
     console.log(formatedData);
+
     mutate(formatedData);
   };
 
@@ -123,7 +139,7 @@ const CarsEdit = () => {
         </CustomTitle>
       </div>
 
-      {isCarInfoPending || isLoading ? (
+      {isCarInfoPending || isLoading || isCarsBrandsLoading ? (
         <Loader className={styles.loader} />
       ) : (
         <Substrate withShadow="light" className={styles.substrate}>

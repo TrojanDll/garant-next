@@ -155,6 +155,11 @@ const CustomSelect = ({
     // });
   }, [inputValue, allOptions]);
 
+  useEffect(() => {
+    if (setValue) {
+      setValue(selectedValue ? selectedValue : "");
+    }
+  }, []);
 
   return (
     <div className={`${className}`}>
@@ -166,6 +171,9 @@ const CustomSelect = ({
       )}
 
       <Select
+        value={
+          selectedValue ? { value: selectedValue, label: selectedValue } : { value: "", label: "" }
+        }
         filterOption={() => true}
         name={name}
         inputValue={inputValue}
