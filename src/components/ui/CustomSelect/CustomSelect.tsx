@@ -110,7 +110,6 @@ const CustomSelect = ({
 
   useEffect(() => {
     if (isSuccess && carModelData) {
-
       const newData: IOptions[] = carModelData.map((item) => {
         return {
           label: item.Model_Name,
@@ -127,24 +126,35 @@ const CustomSelect = ({
         const filtered = await allOptions.filter((option) =>
           option.label.toLowerCase().includes(inputValue.toLowerCase())
         );
-        setFilteredOptions(filtered);
+        setFilteredOptions([
+          {
+            label: "Другое ТС",
+            value: "another_vehicle",
+          },
+          ...filtered,
+        ]);
       } else {
-        setFilteredOptions([]);
+        setFilteredOptions([
+          {
+            label: "Другое ТС",
+            value: "another_vehicle",
+          },
+        ]);
       }
     }
 
     search();
 
-    setFilteredOptions((prev) => {
-      return [
-        {
-          label: "Другое ТС",
-          value: "another_vehicle",
-        },
-        ...prev,
-      ];
-    });
+    //   return [
+    //     {
+    //       label: "Другое ТС",
+    //       value: "another_vehicle",
+    //     },
+    //     ...prev,
+    //   ];
+    // });
   }, [inputValue, allOptions]);
+
 
   return (
     <div className={`${className}`}>
@@ -156,6 +166,7 @@ const CustomSelect = ({
       )}
 
       <Select
+        filterOption={() => true}
         name={name}
         inputValue={inputValue}
         onInputChange={(value) => setInputValue(value)}
@@ -188,7 +199,7 @@ const CustomSelect = ({
         options={
           isModelSelect && carModelData
             ? carModelOptions
-            : allOptions
+            : name === "brand"
             ? filteredOptions.slice(0, 50)
             : options
         }
