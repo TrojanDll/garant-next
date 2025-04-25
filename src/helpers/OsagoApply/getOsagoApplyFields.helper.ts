@@ -66,7 +66,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         placeholder: "Начните вводить марку",
         required: true,
         tooltip: true,
-        tooltipText: "Если марки вашего ТС нет в списке, выберите «Другое ТС» ",
+        tooltipText: "Если вашего ТС нет в списке, в поле «Марка» выберите «Другое ТС»",
         options: formatedCarBrands,
         popularBrands: popularBrands,
       },
@@ -82,6 +82,8 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         name: "model",
         label: "Модель",
         placeholder: "Модель",
+        tooltip: true,
+        tooltipText: "Если вашего ТС нет в списке, в поле «Марка» выберите «Другое ТС»",
         required: true,
         options: [
           {
