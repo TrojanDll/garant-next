@@ -7,10 +7,16 @@ import Button from "@/components/ui/Button/Button";
 
 import styles from "./CalculatorInputForm.module.scss";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { ICalculatorNsForm, ICalculatorOsagoForm } from "@/types/ICalculatorForms";
+import {
+  ICalculatorNsForm,
+  ICalculatorNsFormFields,
+  ICalculatorOsagoForm,
+  ICalculatorOsagoFormFields,
+} from "@/types/ICalculatorForms";
 import { IFieldConfig } from "@/types/IFieldConfig";
 import CalculatorPolicyPrice from "../CalculatorPolicyPrice/CalculatorPolicyPrice";
 import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
+import { calculatorPromoCategories, osagoTable } from "./tables.data";
 
 interface FormData {
   [key: string]: any;
@@ -21,31 +27,64 @@ interface IProps {
   variant: "osago" | "ns";
 }
 
+function findValue(
+  variant: "osago" | "ns",
+  data: ICalculatorOsagoFormFields & ICalculatorNsFormFields
+): string {
+  if (variant === "osago") {
+    const row = osagoTable.find((r) => r.rowHeader === data.car_category.value);
+    if (row) {
+      return row.columns[data.duration_of_stay_osago.value];
+    }
+  }
+
+  if (variant === "ns") {
+    const foundPrice = calculatorPromoCategories.find(
+      (item) => item.value === data.duration_of_stay_ns.value
+    )?.price;
+
+    if (foundPrice) {
+      const ammount = foundPrice * Number(data.number_of_people.value);
+
+      return ammount.toString();
+    }
+  }
+
+  return "";
+}
+
 const CalculatorInputForm = ({ config, variant }: IProps) => {
   const [isCorrect, setIsCorrect] = useState(false);
+  const [foundPrice, setFoundPrice] = useState(0);
 
   const defaultValues = config.fields.reduce((acc, field) => {
-    acc[field.name] = field.type === "checkbox" ? false : field.type === "select" ? null : "";
+    acc[field.name] =
+      field.type === "checkbox" ? false : field.type === "select" ? null : "";
     return acc;
   }, {} as FormData);
 
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<FormData>({
+  const { control, handleSubmit, reset } = useForm<
+    ICalculatorOsagoFormFields & ICalculatorNsFormFields
+  >({
     defaultValues,
     mode: "onSubmit",
   });
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<ICalculatorOsagoFormFields & ICalculatorNsFormFields> = (
+    data
+  ) => {
     console.log("Данные формы:", data);
+
+    let value = findValue(variant, data);
+
+    setFoundPrice(value ? +value : 0);
+
     setIsCorrect(true);
-    reset();
   };
 
-  const renderField = (config: IFieldConfig<ICalculatorOsagoForm & ICalculatorNsForm>) => {
+  const renderField = (
+    config: IFieldConfig<ICalculatorOsagoForm & ICalculatorNsForm>
+  ) => {
     switch (config.type) {
       case "select":
         return (
@@ -54,7 +93,10 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
             name={config.name}
             control={control}
             rules={{
-              required: { value: config.required ? config.required : false, message: "error" },
+              required: {
+                value: config.required ? config.required : false,
+                message: "error",
+              },
             }}
             render={({ field, fieldState }) => (
               <CustomSelect
@@ -67,7 +109,7 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
                 required={config.required}
                 options={config.options as IOptions[]}
                 selectedValue={field.value}
-                setValue={(value: string) => field.onChange(value)}
+                setFullValue={(value: IOptions) => field.onChange(value)}
                 errorMessage={fieldState.error?.message}
               />
             )}
@@ -82,11 +124,18 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)} action="">
       {config.fields.map((field) => renderField(field))}
-      <Button className={`${styles.submit} ${isCorrect ? styles.submitHidden : ""}`} type="submit">
+      <Button
+        className={`${styles.submit} ${isCorrect ? styles.submitHidden : ""}`}
+        type="submit"
+      >
         Рассчитать
       </Button>
       {isCorrect && (
-        <CalculatorPolicyPrice className={styles.price} policyType={variant} price={1000} />
+        <CalculatorPolicyPrice
+          className={styles.price}
+          policyType={variant}
+          price={foundPrice}
+        />
       )}
     </form>
   );

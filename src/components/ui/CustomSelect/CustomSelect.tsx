@@ -24,7 +24,8 @@ interface IProps {
   popularBrands?: IOptions[];
   required?: boolean;
   setValue?: (value: string) => void;
-  selectedValue?: string | null | undefined;
+  setFullValue?: (value: IOptions) => void;
+  selectedValue?: string | null | undefined | IOptions;
   isSubmitClicked?: boolean;
   name: string;
   className?: string;
@@ -41,6 +42,7 @@ const CustomSelect = ({
   options,
   popularBrands,
   setValue,
+  setFullValue,
   required,
   selectedValue,
   isSubmitClicked,
@@ -89,6 +91,10 @@ const CustomSelect = ({
 
     if (setValue) {
       setValue(value.value);
+    }
+
+    if (setFullValue) {
+      setFullValue(value);
     }
 
     if (allOptions) {
@@ -159,7 +165,13 @@ const CustomSelect = ({
 
   useEffect(() => {
     if (setValue) {
-      setValue(selectedValue ? selectedValue : "");
+      setValue(
+        selectedValue
+          ? typeof selectedValue === "string"
+            ? selectedValue
+            : selectedValue.value
+          : ""
+      );
     }
   }, []);
 
@@ -173,7 +185,14 @@ const CustomSelect = ({
       )}
 
       <Select
-        value={selectedValue ? { value: selectedValue, label: selectedValue } : null}
+        value={
+          selectedValue
+            ? {
+                value: typeof selectedValue === "string" ? selectedValue : selectedValue.value,
+                label: typeof selectedValue === "string" ? selectedValue : selectedValue.label,
+              }
+            : null
+        }
         filterOption={() => true}
         name={name}
         inputValue={inputValue}
