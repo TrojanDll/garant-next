@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import CustomSelect, { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
 import Button from "@/components/ui/Button/Button";
@@ -56,6 +56,7 @@ function findValue(
 const CalculatorInputForm = ({ config, variant }: IProps) => {
   const [isCorrect, setIsCorrect] = useState(false);
   const [foundPrice, setFoundPrice] = useState(0);
+  const [isSubmittedOnce, setIsSubmittedOnce] = useState(false);
 
   const defaultValues = config.fields.reduce((acc, field) => {
     acc[field.name] =
@@ -63,23 +64,31 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
     return acc;
   }, {} as FormData);
 
-  const { control, handleSubmit, reset } = useForm<
+  const { control, handleSubmit, reset, watch, formState } = useForm<
     ICalculatorOsagoFormFields & ICalculatorNsFormFields
   >({
     defaultValues,
     mode: "onSubmit",
   });
 
+  const watchedFields = watch();
+
+  useEffect(() => {
+    if (isSubmittedOnce && formState.isDirty) {
+      let value = findValue(variant, watchedFields);
+      setFoundPrice(value ? +value : 0);
+    }
+  }, [watchedFields, isSubmittedOnce, formState.isDirty]);
+
   const onSubmit: SubmitHandler<ICalculatorOsagoFormFields & ICalculatorNsFormFields> = (
     data
   ) => {
-    console.log("Данные формы:", data);
-
     let value = findValue(variant, data);
 
     setFoundPrice(value ? +value : 0);
 
     setIsCorrect(true);
+    setIsSubmittedOnce(true);
   };
 
   const renderField = (
