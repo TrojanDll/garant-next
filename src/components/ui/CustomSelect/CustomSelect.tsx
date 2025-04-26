@@ -158,6 +158,25 @@ const CustomSelect = ({
           ...popularBrands,
         ]);
       }
+
+      if (inputValue.length >= 2 && carModelData) {
+        const filtered = await carModelData.filter((option) =>
+          option.Model_Name.toLowerCase().includes(inputValue.toLowerCase())
+        );
+        const filteredOptions: IOptions[] = await filtered.map((item) => ({
+          label: item.Model_Name,
+          value: item.Model_Name,
+        }));
+        setCarModelOptions(filteredOptions);
+      } else {
+        if (carModelData) {
+          const carModelOptions: IOptions[] = await carModelData.map((item) => ({
+            label: item.Model_Name,
+            value: item.Model_Name,
+          }));
+          setCarModelOptions(carModelOptions);
+        }
+      }
     }
 
     search();
@@ -188,8 +207,10 @@ const CustomSelect = ({
         value={
           selectedValue
             ? {
-                value: typeof selectedValue === "string" ? selectedValue : selectedValue.value,
-                label: typeof selectedValue === "string" ? selectedValue : selectedValue.label,
+                value:
+                  typeof selectedValue === "string" ? selectedValue : selectedValue.value,
+                label:
+                  typeof selectedValue === "string" ? selectedValue : selectedValue.label,
               }
             : null
         }
@@ -209,7 +230,9 @@ const CustomSelect = ({
               errorMessage?.length ? styles.controlError : ""
             } ${isSearchable ? styles.controlSearchable : ""}`,
           placeholder: () =>
-            `${styles.placeholder} ${errorMessage?.length ? styles.placeholderError : ""}`,
+            `${styles.placeholder} ${
+              errorMessage?.length ? styles.placeholderError : ""
+            }`,
           indicatorSeparator: () => styles.indicatorCustomSeparator,
           indicatorsContainer: () =>
             `${styles.indicatorCustomContainer} ${
