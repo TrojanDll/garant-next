@@ -47,6 +47,18 @@ export interface ICarBrandResponse {
   brands: ICarBrand[];
 }
 
+export interface IPopularCarBrand {
+  id: number;
+  title: string;
+  created_at: string | null;
+  updated_at: string | null;
+}
+
+export interface IPopularCarBrandResponse {
+  success: boolean;
+  data: IPopularCarBrand[];
+}
+
 export interface ICarModel {
   Model_Name: string;
   Model_ID: string;

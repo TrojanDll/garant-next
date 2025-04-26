@@ -173,9 +173,7 @@ const CustomSelect = ({
       )}
 
       <Select
-        value={
-          selectedValue ? { value: selectedValue, label: selectedValue } : { value: "", label: "" }
-        }
+        value={selectedValue ? { value: selectedValue, label: selectedValue } : null}
         filterOption={() => true}
         name={name}
         inputValue={inputValue}

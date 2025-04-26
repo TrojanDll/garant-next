@@ -12,16 +12,24 @@ export interface ISplitFieldConfig {
 export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> {
   const carCategories = await carsService.getCarCategories();
   const carBrands = await carsService.getCarBrands();
+  const popularBrands = await carsService.getPopularCarBrands();
 
-  const popularBrands: IOptions[] = [
-    { label: "Mercedes", value: "Mercedes" },
-    { label: "bmw", value: "bmw" },
-    { label: "nissan", value: "nissan" },
-    { label: "Ford", value: "Ford" },
-    { label: "mazeratti", value: "mazeratti" },
-  ];
+  // const popularBrands: IOptions[] = [
+  //   { label: "Mercedes", value: "Mercedes" },
+  //   { label: "bmw", value: "bmw" },
+  //   { label: "nissan", value: "nissan" },
+  //   { label: "Ford", value: "Ford" },
+  //   { label: "mazeratti", value: "mazeratti" },
+  // ];
 
-  const formatedCarCategories = carCategories.data.data.map((category) => {
+  let formatedPopularBrands: IOptions[] = await popularBrands.data.data.map((item) => {
+    return {
+      label: item.title,
+      value: item.title,
+    };
+  });
+
+  const formatedCarCategories = await carCategories.data.data.map((category) => {
     return {
       label: category.Category,
       value: category.Category,
@@ -35,14 +43,13 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
     value: "another_vehicle",
   });
 
-  const fetchedAndFormatedCarBrands: { label: string; value: string }[] = carBrands.data.brands.map(
-    (brand) => {
+  const fetchedAndFormatedCarBrands: { label: string; value: string }[] =
+    await carBrands.data.brands.map((brand) => {
       return {
         label: brand.Make_Name,
         value: brand.Make_Name,
       };
-    }
-  );
+    });
 
   formatedCarBrands = [...formatedCarBrands, ...fetchedAndFormatedCarBrands];
 
@@ -68,7 +75,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         tooltip: true,
         tooltipText: "Если вашего ТС нет в списке, в поле «Марка» выберите «Другое ТС»",
         options: formatedCarBrands,
-        popularBrands: popularBrands,
+        popularBrands: formatedPopularBrands,
       },
       {
         type: "input",

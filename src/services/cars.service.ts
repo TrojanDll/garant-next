@@ -9,6 +9,7 @@ import {
   IGetCurrientUserCarsReponse,
   INewCarForm,
   INewCarResponse,
+  IPopularCarBrandResponse,
 } from "@/types/cars.types";
 
 class CarsService {
@@ -33,6 +34,11 @@ class CarsService {
 
   async getCarBrands() {
     const response = await axiosClassic.get<ICarBrandResponse>("/api/brands");
+    return response;
+  }
+
+  async getPopularCarBrands() {
+    const response = await axiosWithAuth.get<IPopularCarBrandResponse>("/api/getTopTransport");
     return response;
   }
 
