@@ -59,37 +59,31 @@ const CarInfo = () => {
                 <>
                   <CarInfoItem
                     className={styles.contentItem}
-                    // key={data.brand}
                     name="Транспортное средство"
                     value={data.brand}
                   />
                   <CarInfoItem
                     className={styles.contentItem}
-                    // key={data.year}
                     name="Год выпуска ТС"
                     value={data.year}
                   />
                   <CarInfoItem
                     className={styles.contentItem}
-                    // key={data.transport_category}
                     name="Тип ТС"
                     value={data.transport_category}
                   />
                   <CarInfoItem
                     className={styles.contentItem}
-                    // key={data.registration_plate}
                     name="Регистрационный знак"
                     value={data.registration_plate}
                   />
                   <CarInfoItem
                     className={styles.contentItem}
-                    // key={data.registration_number}
                     name="Номер регистрации ТС"
                     value={data.registration_number}
                   />
                   <CarInfoItem
                     className={styles.contentItem}
-                    // key={data.vin}
                     name="VIN"
                     value={data.vin}
                   />
@@ -106,21 +100,24 @@ const CarInfo = () => {
                 <>
                   <CarInfoItem
                     className={styles.contentItem}
-                    // key={data.fio}
                     name="Собственник ТС"
                     value={data.fio}
                   />
                   <CarInfoItem
                     className={styles.contentItem}
-                    // key={data.passport_number}
-                    name="Серия и номер паспорта"
+                    name={
+                      data.owner === personTypes[0] ? "Серия и номер паспорта" : "ИНН"
+                    }
                     value={data.passport_number}
                   />
                 </>
               )}
             </div>
 
-            <Link href={`${PAGES.CARS_EDIT}/${data ? data.id : ""}`} className={styles.editLink}>
+            <Link
+              href={`${PAGES.CARS_EDIT}/${data ? data.id : ""}`}
+              className={styles.editLink}
+            >
               Изменить
             </Link>
           </div>

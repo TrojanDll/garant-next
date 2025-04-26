@@ -49,7 +49,7 @@ function pickFormData(
 const CarsEdit = () => {
   const { config, isLoading } = useOsagoFormConfig();
   const { handleSubmit, control, reset, setValue } = useForm<IOsagoApplyForm>();
-  const { navigateToCars } = useNavigation();
+  const { goBack } = useNavigation();
   const { data, isError, isPending, isSuccess, mutate } = useEditCarInfo();
   const [slug, setSlug] = useState("");
   const {
@@ -124,7 +124,7 @@ const CarsEdit = () => {
       toast.success("Транспортное средство отредактировано");
 
       setTimeout(() => {
-        navigateToCars();
+        goBack();
       }, 700);
     }
   }, [isPending]);
