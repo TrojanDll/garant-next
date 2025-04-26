@@ -2,10 +2,13 @@ import React, { ReactNode } from "react";
 import CustomSelect, { IOptions } from "../CustomSelect/CustomSelect";
 import CustomInput from "../CustomInput/CustomInput";
 import { TFieldType, TInputType } from "@/types/IFieldConfig";
-import ButtonGroup, { TButtonGroupRequest, TButtonGroupType } from "../ButtonGroup/ButtonGroup";
+import ButtonGroup, {
+  TButtonGroupRequest,
+  TButtonGroupType,
+} from "../ButtonGroup/ButtonGroup";
 import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 import usePersonType from "@/stores/OsagoApply/personType.store";
-import { personTypes } from "@/types/user.types";
+import { personTypes, TPersonType } from "@/types/user.types";
 
 interface IProps {
   type: TFieldType;
@@ -26,6 +29,7 @@ interface IProps {
   tooltip?: boolean;
   tooltipText?: string;
   popularBrands?: IOptions[];
+  owner?: TPersonType;
 }
 
 const InputsSelector = ({
@@ -47,6 +51,7 @@ const InputsSelector = ({
   isSearchable,
   tooltip,
   tooltipText,
+  owner,
 }: IProps) => {
   const setPersonType = usePersonType((state) => state.setPersonType);
 
@@ -92,7 +97,7 @@ const InputsSelector = ({
       ) : type === "radio" ? (
         <ButtonGroup
           groupType={buttonGroupType ? buttonGroupType : "default"}
-          defaultActiveIndex={0}
+          defaultActiveIndex={owner === "individual" ? 0 : 1}
           name={name}
           items={buttons as string[]}
           key={name}

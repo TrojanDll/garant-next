@@ -9,15 +9,23 @@ import usePersonType from "@/stores/OsagoApply/personType.store";
 
 import styles from "./DynamicFormSection.module.scss";
 import useCarBrand from "@/stores/Cars/carBrand.store";
+import { TPersonType } from "@/types/user.types";
 
 interface Props {
   fields: IFieldConfig<IOsagoApplyForm>[];
   control: Control<IOsagoApplyForm>;
   className?: string;
   isTopItemSingle?: boolean;
+  owner?: TPersonType;
 }
 
-const DynamicFormSection = ({ fields, control, className, isTopItemSingle = false }: Props) => {
+const DynamicFormSection = ({
+  fields,
+  control,
+  className,
+  isTopItemSingle = false,
+  owner,
+}: Props) => {
   const isAnotherCarVisible = useOsagoApplyCarMark((state) => state.isAnotherCarMark);
   const personType = usePersonType((state) => state.personType);
 
@@ -52,7 +60,13 @@ const DynamicFormSection = ({ fields, control, className, isTopItemSingle = fals
               ? styles.visible
               : styles.hidden
           }
-          ${config.name !== "brand" ? "" : isAnotherCarVisible ? styles.singleInStroke : ""}    
+          ${
+            config.name !== "brand"
+              ? ""
+              : isAnotherCarVisible
+              ? styles.singleInStroke
+              : ""
+          }    
           `}
         >
           <Controller
@@ -61,12 +75,15 @@ const DynamicFormSection = ({ fields, control, className, isTopItemSingle = fals
             rules={config.required ? { required: "Обязательное поле" } : {}}
             render={({ field, fieldState }) => (
               <InputsSelector
+                owner={owner}
                 value={field.value}
                 setValue={field.onChange}
                 errorMessage={fieldState.error?.message}
                 className={`${styles.input} ${className}  `}
                 {...config}
-                type={config.name === "model" && isAnotherCarVisible ? "input" : config.type}
+                type={
+                  config.name === "model" && isAnotherCarVisible ? "input" : config.type
+                }
                 label={fieldText(config).label}
                 placeholder={fieldText(config).placeholder}
               />

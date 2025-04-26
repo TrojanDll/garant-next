@@ -22,8 +22,12 @@ import { formatEditCarDataToRequest } from "@/helpers/formatEditCarDataToRequest
 import Loader from "@/components/ui/Loader/Loader";
 import { useGetCarBrands } from "@/hooks/cars/useGetCarBrands";
 import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
+import { TPersonType } from "@/types/user.types";
 
-function pickFormData(carInfoData: ICar, carBrands: ICarBrand[]): Partial<IOsagoApplyForm> {
+function pickFormData(
+  carInfoData: ICar,
+  carBrands: ICarBrand[]
+): Partial<IOsagoApplyForm> {
   let found = carBrands.find((item) => item.Make_Name === carInfoData.brand);
 
   // console.log(carInfoData.brand === found?.Make_Name ? carInfoData.brand : "");
@@ -96,8 +100,7 @@ const CarsEdit = () => {
       }
     }
 
-    resetValues()
-
+    resetValues();
   }, [isCarInfoPending, isCarsBrandsLoading]);
 
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
@@ -163,7 +166,12 @@ const CarsEdit = () => {
               </CustomTitle>
               <div className={styles.inputsWrapper}>
                 {!isLoading && config.owner ? (
-                  <DynamicFormSection fields={config.owner} control={control} isTopItemSingle />
+                  <DynamicFormSection
+                    owner={carInfoData?.owner as TPersonType}
+                    fields={config.owner}
+                    control={control}
+                    isTopItemSingle
+                  />
                 ) : (
                   <div>loading...</div>
                 )}
