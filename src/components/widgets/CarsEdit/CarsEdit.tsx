@@ -12,8 +12,6 @@ import { useOsagoFormConfig } from "@/hooks/useOsagoFormConfig";
 import DynamicFormSection from "@/components/entities/DynamicFormSection/DynamicFormSection";
 import Button from "@/components/ui/Button/Button";
 import { ICar, ICarBrand, IEditCarInfoForm, INewCarForm } from "@/types/cars.types";
-import { formatNewCarDataToRequest } from "@/helpers/formatNewCarDataToRequest";
-import { useAddNewCar } from "@/hooks/cars/useAddNewCar";
 import toast from "react-hot-toast";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
 import GoBackLink from "@/components/ui/GoBackLink/GoBackLink";
@@ -22,8 +20,6 @@ import { useParams } from "next/navigation";
 import { useEditCarInfo } from "@/hooks/cars/useEditCarInfo";
 import { formatEditCarDataToRequest } from "@/helpers/formatEditCarDataToRequest";
 import Loader from "@/components/ui/Loader/Loader";
-import { selectCarModel } from "@/helpers/selectCarModel";
-import { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
 import { useGetCarBrands } from "@/hooks/cars/useGetCarBrands";
 import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 

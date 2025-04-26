@@ -24,8 +24,8 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
 
   let formatedPopularBrands: IOptions[] = await popularBrands.data.data.map((item) => {
     return {
-      label: item.title,
-      value: item.title,
+      label: item.title.toUpperCase(),
+      value: item.title.toUpperCase(),
     };
   });
 
