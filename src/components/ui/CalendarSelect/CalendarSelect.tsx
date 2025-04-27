@@ -34,7 +34,10 @@ const CalendarSelect = ({ calendarMonth, displayIndex }: IProps) => {
   }));
 
   const currentYear = getYear(new Date());
-  let years = Array.from({ length: 6 }, (_, i) => currentYear + i);
+  const years = Array.from(
+    { length: currentYear - 1900 + 1 },
+    (_, i) => 1900 + i
+  ).reverse();
   const yearsList: ICalendarSelectOptions[] = years.map((year) => {
     const option: ICalendarSelectOptions = {
       value: year,
@@ -103,7 +106,8 @@ const CalendarSelect = ({ calendarMonth, displayIndex }: IProps) => {
         onChange={(value) => handleMonthChange(value as ICalendarSelectOptions)}
         classNames={{
           container: () => `${styles.container}`,
-          control: () => `${styles.control} ${isMonthSelectOpened ? styles.controlOpened : ""}`,
+          control: () =>
+            `${styles.control} ${isMonthSelectOpened ? styles.controlOpened : ""}`,
           placeholder: () => `${styles.placeholder} `,
           indicatorSeparator: () => styles.indicatorCustomSeparator,
           indicatorsContainer: () =>
@@ -132,7 +136,8 @@ const CalendarSelect = ({ calendarMonth, displayIndex }: IProps) => {
         onChange={(value) => handleYearChange(value as ICalendarSelectOptions)}
         classNames={{
           container: () => `${styles.container}`,
-          control: () => `${styles.control} ${isYearSelectOpened ? styles.controlOpened : ""}`,
+          control: () =>
+            `${styles.control} ${isYearSelectOpened ? styles.controlOpened : ""}`,
           placeholder: () => `${styles.placeholder} `,
           indicatorSeparator: () => styles.indicatorCustomSeparator,
           indicatorsContainer: () =>

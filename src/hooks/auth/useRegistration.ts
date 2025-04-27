@@ -41,7 +41,6 @@ export function useRegistration() {
       queryClient.invalidateQueries({
         queryKey: ["registration"],
       });
-      window.location.reload();
       scrollToTop();
     },
     onError: (error) => {
