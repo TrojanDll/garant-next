@@ -17,6 +17,7 @@ import { useAddNewCar } from "@/hooks/cars/useAddNewCar";
 import toast from "react-hot-toast";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
 import GoBackLink from "@/components/ui/GoBackLink/GoBackLink";
+import Loader from "@/components/ui/Loader/Loader";
 
 const CarsNew = () => {
   const { config, isLoading } = useOsagoFormConfig();
@@ -58,42 +59,50 @@ const CarsNew = () => {
         </CustomTitle>
       </div>
 
-      <Substrate withShadow="light" className={styles.substrate}>
-        <form noValidate onSubmit={handleSubmit(onSubmit)} action="">
-          <div className={styles.section}>
-            <CustomTitle tag="h2">Транспортное средство</CustomTitle>
-            <div className={styles.inputsWrapper}>
-              {!isLoading && config.vehicle ? (
-                <DynamicFormSection
-                  fields={config.vehicle}
-                  control={control}
-                  className={styles.input}
-                  isTopItemSingle
-                />
-              ) : (
-                <div>loading...</div>
-              )}
+      {isPending || isLoading ? (
+        <Loader className={styles.loader} />
+      ) : (
+        <Substrate withShadow="light" className={styles.substrate}>
+          <form noValidate onSubmit={handleSubmit(onSubmit)} action="">
+            <div className={styles.section}>
+              <CustomTitle tag="h2">Транспортное средство</CustomTitle>
+              <div className={styles.inputsWrapper}>
+                {!isLoading && config.vehicle ? (
+                  <DynamicFormSection
+                    fields={config.vehicle}
+                    control={control}
+                    className={styles.input}
+                    isTopItemSingle
+                  />
+                ) : (
+                  <div>loading...</div>
+                )}
+              </div>
             </div>
-          </div>
 
-          <div className={styles.section}>
-            <CustomTitle tag="h2" className={styles.sectionTitle}>
-              Собственник
-            </CustomTitle>
-            <div className={styles.inputsWrapper}>
-              {!isLoading && config.owner ? (
-                <DynamicFormSection fields={config.owner} control={control} isTopItemSingle />
-              ) : (
-                <div>loading...</div>
-              )}
+            <div className={styles.section}>
+              <CustomTitle tag="h2" className={styles.sectionTitle}>
+                Собственник
+              </CustomTitle>
+              <div className={styles.inputsWrapper}>
+                {!isLoading && config.owner ? (
+                  <DynamicFormSection
+                    fields={config.owner}
+                    control={control}
+                    isTopItemSingle
+                  />
+                ) : (
+                  <div>loading...</div>
+                )}
+              </div>
             </div>
-          </div>
 
-          <Button type="submit" className={styles.submitButton} variant="wide">
-            Сохранить
-          </Button>
-        </form>
-      </Substrate>
+            <Button type="submit" className={styles.submitButton} variant="wide">
+              Сохранить
+            </Button>
+          </form>
+        </Substrate>
+      )}
     </div>
   );
 };

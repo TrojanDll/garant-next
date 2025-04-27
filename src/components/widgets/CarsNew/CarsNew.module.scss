@@ -69,6 +69,12 @@
   margin-top: 100px;
 }
 
+.loader {
+  // display: block !important;
+  margin: 0 auto;
+  margin-top: 32px;
+}
+
 @media (max-width: 1149px) {
   .substrate {
     margin-top: 20px;

@@ -210,7 +210,11 @@ const CustomSelect = ({
                 value:
                   typeof selectedValue === "string" ? selectedValue : selectedValue.value,
                 label:
-                  typeof selectedValue === "string" ? selectedValue : selectedValue.label,
+                  typeof selectedValue === "string"
+                    ? selectedValue === "another_vehicle"
+                      ? "Другое ТС"
+                      : selectedValue
+                    : selectedValue.label,
               }
             : null
         }
