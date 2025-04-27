@@ -13,7 +13,7 @@ class AuthService {
   async registration(data: IRegistrationFormApiData) {
     const response = await axiosClassic.post<IRegistrationResponse>("/api/registration", data);
 
-    saveTokenToStorage(response.data.token);
+    // saveTokenToStorage(response.data.token);
 
     return response;
   }

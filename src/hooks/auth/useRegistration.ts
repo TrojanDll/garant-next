@@ -41,8 +41,8 @@ export function useRegistration() {
       queryClient.invalidateQueries({
         queryKey: ["registration"],
       });
+      window.location.reload();
       scrollToTop();
-      // window.location.reload();
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
@@ -57,7 +57,10 @@ export function useRegistration() {
         if (emailError) {
           setRegistrationErrors((prev) => ({
             ...prev,
-            email: emailError[0] === "The email has already been taken." ? "taken" : "incorrect",
+            email:
+              emailError[0] === "The email has already been taken."
+                ? "taken"
+                : "incorrect",
           }));
         }
       } else {
