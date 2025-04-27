@@ -34,14 +34,14 @@ export const registrationFields: IField<IRegistrationForm>[] = [
   {
     name: "name",
     label: "Имя*",
-    placeholder: "Ведите имя",
+    placeholder: "Введите имя",
     required: true,
     inputType: "text",
   },
   {
     name: "patronymic",
     label: "Отчество (при наличии)",
-    placeholder: "Отчество (при наличии)",
+    placeholder: "Введите отчество",
     required: false,
     inputType: "text",
   },
