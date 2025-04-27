@@ -33,12 +33,6 @@ const CarInfo = () => {
     mutate(slug);
   }, []);
 
-  useEffect(() => {
-    if (isSuccess) {
-      console.log(data);
-    }
-  }, [isPending]);
-
   return (
     <div>
       <CustomTitle tag="h1" isCentered>

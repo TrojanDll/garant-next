@@ -91,7 +91,6 @@ const CarsEdit = () => {
   useEffect(() => {
     async function resetValues() {
       if (isCarInfoSuccess && carInfoData && carsBrands) {
-        console.log("event");
         const pickedData = await pickFormData(carInfoData, carsBrands);
         reset(pickedData);
         let found = await carsBrands.find((item) => item.Make_Name === carInfoData.brand);
@@ -105,8 +104,6 @@ const CarsEdit = () => {
 
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
     let formatedData: IEditCarInfoForm = formatEditCarDataToRequest(data, +slug);
-
-    console.log(formatedData);
 
     mutate(formatedData);
   };

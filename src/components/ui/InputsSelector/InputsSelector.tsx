@@ -51,7 +51,7 @@ const InputsSelector = ({
   isSearchable,
   tooltip,
   tooltipText,
-  owner,
+  owner = "individual",
 }: IProps) => {
   const setPersonType = usePersonType((state) => state.setPersonType);
 
