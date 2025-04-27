@@ -47,11 +47,17 @@ const CustomInput = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const isAnotherCarVisible = useOsagoApplyCarMark((state) => state.isAnotherCarMark);
-  const { isPromocodeLoading, promocodeResult, validatePromocode } = usePromocodeValidate();
+  const { isPromocodeLoading, promocodeResult, validatePromocode } =
+    usePromocodeValidate();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setIsValidationError(false);
-    setValue(e.target.value);
+
+    if (inputType === "promocode") {
+      setValue(e.target.value.toUpperCase());
+    } else {
+      setValue(e.target.value);
+    }
   };
 
   const handleAsideElementClick = () => {
@@ -93,7 +99,9 @@ const CustomInput = ({
       {label && (
         <label className={styles.label} htmlFor={name}>
           {label}
-          {inputType === "promocode" && <span className={styles.labelSpan}>(если есть)</span>}
+          {inputType === "promocode" && (
+            <span className={styles.labelSpan}>(если есть)</span>
+          )}
         </label>
       )}
 
@@ -115,7 +123,9 @@ const CustomInput = ({
             ${isErrorMessage || isValidationError ? styles.error : ""}
             ${isPointer ? styles.pointer : ""}
             ${inputType === "promocode" ? styles.promocode : ""}
-            ${inputType === "password" && !isPasswordVisible ? styles.passwordHidden : ""}`}
+            ${
+              inputType === "password" && !isPasswordVisible ? styles.passwordHidden : ""
+            }`}
         />
 
         <InputAsideElement
@@ -134,7 +144,9 @@ const CustomInput = ({
       {promocodeResult?.isValid && (
         <InputNotification variant="success">
           Промокод успешно применен –{" "}
-          <span className={styles.discountValue}>СКИДКА {promocodeResult.discountValue}%</span>
+          <span className={styles.discountValue}>
+            СКИДКА {promocodeResult.discountValue}%
+          </span>
         </InputNotification>
       )}
 
@@ -149,7 +161,9 @@ const CustomInput = ({
             className={isCalendarOpened ? styles.modalOverlay : ""}
           ></div>
           <Calendar
-            className={`${styles.calendar} ${isCalendarOpened ? styles.visible : styles.hidden}`}
+            className={`${styles.calendar} ${
+              isCalendarOpened ? styles.visible : styles.hidden
+            }`}
             value={selected}
             setValue={handleDateChange}
             onClose={() => setIsCalendarOpened(false)}
