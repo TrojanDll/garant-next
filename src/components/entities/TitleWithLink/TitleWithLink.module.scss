@@ -1,0 +1,16 @@
+.titleWrapper {
+  position: relative;
+}
+
+.goBack {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+}
+
+@media (max-width: 455px) {
+  .goBack {
+    position: static;
+  }
+}
