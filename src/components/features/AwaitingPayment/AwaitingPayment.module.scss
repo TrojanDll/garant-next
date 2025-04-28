@@ -1,0 +1,27 @@
+.substrate {
+  padding: 30px 40px;
+}
+
+.title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 123%;
+  color: var(--red2);
+  text-align: center;
+}
+
+.ammount {
+  margin-top: 10px;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 125%;
+  color: var(--blue);
+  text-align: center;
+}
+
+.button {
+  margin: 0 auto;
+  margin-top: 25px;
+}

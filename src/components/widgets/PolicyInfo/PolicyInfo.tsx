@@ -16,6 +16,7 @@ import Link from "next/link";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import CarInfoItem from "@/components/entities/CarInfoItem/CarInfoItem";
 import { PAGES } from "@/config/pages-url.config";
+import AwaitingPayment from "@/components/features/AwaitingPayment/AwaitingPayment";
 
 interface IProps {
   className?: string;
@@ -126,6 +127,8 @@ const PolicyInfo = ({ className }: IProps) => {
             </div>
           </div>
         </Substrate>
+
+        <AwaitingPayment ammount={1000} className={styles.awaitingPayment} />
       </ContentContainer>
     </div>
   );
