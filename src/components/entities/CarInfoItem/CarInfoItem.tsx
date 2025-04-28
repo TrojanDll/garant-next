@@ -1,18 +1,28 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 
 import styles from "./CarInfoItem.module.scss";
 
 interface IProps {
-  name: string;
-  value: string;
+  name?: string;
+  value?: string;
   className?: string;
 }
 
-const CarInfoItem = ({ name, value, className }: IProps) => {
+const CarInfoItem = ({ name, value, className, children }: PropsWithChildren<IProps>) => {
   return (
     <div className={`${styles.root} ${className}`}>
-      <span className={styles.title}>{name}</span>
-      <span className={styles.value}>{value}</span>
+      {children ? (
+        <>
+          <span className={styles.title}>{name}</span>
+
+          {children}
+        </>
+      ) : (
+        <>
+          <span className={styles.title}>{name}</span>
+          <span className={styles.value}>{value}</span>
+        </>
+      )}
     </div>
   );
 };

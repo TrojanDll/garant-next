@@ -17,10 +17,53 @@
   font-size: 20px !important;
   column-gap: 10px !important;
   font-weight: 500 !important;
-  
+
   &:hover {
     .pdfSvg {
       stroke: var(--dark-blue);
     }
   }
+}
+
+.title {
+  margin-top: 80px;
+}
+
+.contentItem {
+  margin-top: 40px;
+}
+
+.contentItemTitle {
+  display: block;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 125%;
+  letter-spacing: 0.01em;
+  color: var(--dark-grey);
+}
+
+.contentItemValue {
+  margin-top: 5px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 128%;
+  color: var(--dark-grey);
+}
+
+.contentItemLarge {
+  margin-top: 70px;
+  display: flex;
+  column-gap: 70px;
+  align-items: flex-start;
+}
+
+.contentItemLargeTitle {
+  width: 230px;
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 123%;
+  color: var(--dark-grey);
 }
