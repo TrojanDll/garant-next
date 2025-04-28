@@ -17,4 +17,5 @@ export enum ESvgName {
   LOGOUT = "logout",
   OSAGO = "osago",
   NS = "ns",
+  PDF = "pdf",
 }

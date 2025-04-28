@@ -34,6 +34,17 @@
   border: 1px solid var(--blue);
   background: none;
   color: var(--blue);
+
+  &:hover {
+    background: none;
+    border: 1px solid var(--dark-blue);
+    color: var(--dark-blue);
+  }
+}
+
+.small {
+  padding: 10px 15px;
+  border-radius: 15px;
 }
 
 @media (max-width: 1149px) {

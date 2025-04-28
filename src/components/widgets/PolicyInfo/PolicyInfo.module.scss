@@ -11,3 +11,16 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.downloadButton {
+  margin-top: 40px;
+  font-size: 20px !important;
+  column-gap: 10px !important;
+  font-weight: 500 !important;
+  
+  &:hover {
+    .pdfSvg {
+      stroke: var(--dark-blue);
+    }
+  }
+}
