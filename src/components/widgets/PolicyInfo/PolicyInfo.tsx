@@ -19,7 +19,7 @@ const PolicyInfo = ({ className }: IProps) => {
 
   return (
     <div className={className}>
-      <ContentContainer>
+      <ContentContainer className={styles.container}>
         <Substrate className={styles.substrate} withShadow="light">
           <div className={styles.header}>
             <PolicyNumber policyNumber="АБ000012345" policyType={EPolicyTypes.OSAGO} />

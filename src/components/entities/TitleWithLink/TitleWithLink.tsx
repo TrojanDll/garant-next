@@ -19,7 +19,7 @@ const TitleWithLink = ({
   className,
 }: PropsWithChildren<IProps>) => {
   return (
-    <ContentContainer>
+    <ContentContainer className={styles.container}>
       <div className={`${styles.titleWrapper} ${className}`}>
         <GoBackLink className={styles.goBack} />
         <CustomTitle tag={tag} isCentered>
