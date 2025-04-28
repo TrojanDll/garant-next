@@ -5,3 +5,13 @@
 .info {
   margin-top: 50px;
 }
+
+@media (max-width: 1149px) {
+  .title {
+    margin-top: 30px;
+  }
+
+  .info {
+    margin-top: 20px;
+  }
+}

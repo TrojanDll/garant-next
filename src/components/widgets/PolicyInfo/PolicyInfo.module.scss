@@ -71,3 +71,62 @@
 .awaitingPayment {
   margin-top: 15px;
 }
+
+@media (max-width: 1149px) {
+  .substrate {
+    padding: 30px 20px 40px 20px;
+  }
+
+  .header {
+    display: block;
+  }
+
+  .status {
+    margin-top: 25px;
+  }
+
+  .downloadButton {
+    margin-top: 25px;
+    font-size: 14px !important;
+    column-gap: 7px !important;
+  }
+
+  .pdfSvg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .contentItem {
+    margin-top: 25px;
+
+    &:first-child {
+      margin-top: 30px;
+    }
+  }
+
+  .contentItemLarge {
+    display: block;
+  }
+
+  .contentItemLargeTitle {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 128%;
+  }
+
+  .contentItemLargeWrapper {
+    margin-top: 30px;
+  }
+
+  .contentItemTitle {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .contentItemValue {
+    margin-top: 5px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 129%;
+  }
+}

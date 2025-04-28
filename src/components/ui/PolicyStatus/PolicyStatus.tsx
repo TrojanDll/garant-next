@@ -5,9 +5,10 @@ import { EPolicyStatus } from "@/types/policy.types";
 
 interface IProps {
   status: EPolicyStatus;
+  className?: string;
 }
 
-const PolicyStatus = ({ status = EPolicyStatus.AWAITING_PAYMENT }: IProps) => {
+const PolicyStatus = ({ status = EPolicyStatus.AWAITING_PAYMENT, className }: IProps) => {
   const statusClassName =
     status === EPolicyStatus.ACTIVE
       ? styles.active
@@ -26,7 +27,9 @@ const PolicyStatus = ({ status = EPolicyStatus.AWAITING_PAYMENT }: IProps) => {
       ? "Истек срок действия"
       : "";
 
-  return <div className={`${styles.root} ${statusClassName}`}>{statusText}</div>;
+  return (
+    <div className={`${styles.root} ${statusClassName} ${className}`}>{statusText}</div>
+  );
 };
 
 export default PolicyStatus;

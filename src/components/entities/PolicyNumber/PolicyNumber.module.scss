@@ -25,3 +25,24 @@
   line-height: 125%;
   color: var(--dark-grey);
 }
+
+@media (max-width: 1149px) {
+  .root {
+    column-gap: 20px;
+  }
+
+  .svg {
+    width: 49px;
+    height: 49px;
+  }
+
+  .title {
+    font-size: 18px;
+    line-height: 128%;
+  }
+
+  .number {
+    font-size: 20px;
+    line-height: 125%;
+  }
+}
