@@ -15,4 +15,6 @@ export enum ESvgName {
   EYE = "eye",
   EYE_CLOSED = "eye_closed",
   LOGOUT = "logout",
+  OSAGO = "osago",
+  NS = "ns",
 }

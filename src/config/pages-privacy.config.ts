@@ -23,4 +23,5 @@ export const privatePages: string[] = [
   PAGES.CARS_EDIT,
   PAGES.EDIT_PERSONAL_DATA,
   PAGES.MY_POLICIES,
+  PAGES.POLICY_INFO,
 ];
