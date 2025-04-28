@@ -6,8 +6,9 @@ import styles from "./PolicyInfo.module.scss";
 
 import Substrate from "@/components/ui/Substrate/Substrate";
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
-import { EPolicyTypes } from "@/types/policy.types";
+import { EPolicyStatus, EPolicyTypes } from "@/types/policy.types";
 import PolicyNumber from "@/components/entities/PolicyNumber/PolicyNumber";
+import PolicyStatus from "@/components/ui/PolicyStatus/PolicyStatus";
 
 interface IProps {
   className?: string;
@@ -22,6 +23,7 @@ const PolicyInfo = ({ className }: IProps) => {
         <Substrate className={styles.substrate} withShadow="light">
           <div className={styles.header}>
             <PolicyNumber policyNumber="АБ000012345" policyType={EPolicyTypes.OSAGO} />
+            <PolicyStatus status={EPolicyStatus.AWAITING_PAYMENT} />
           </div>
         </Substrate>
       </ContentContainer>
