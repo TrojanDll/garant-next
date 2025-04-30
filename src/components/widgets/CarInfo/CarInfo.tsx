@@ -116,7 +116,9 @@ const CarInfo = () => {
             </Link>
           </div>
 
-          <Button className={styles.buyPolicyButton}>Купить полис</Button>
+          <Button isLink href={PAGES.OSAGO_APPLY} className={styles.buyPolicyButton}>
+            Купить полис
+          </Button>
         </Substrate>
       )}
     </div>

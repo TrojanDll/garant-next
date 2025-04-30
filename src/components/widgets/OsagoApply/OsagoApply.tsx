@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
@@ -14,11 +14,60 @@ import Button from "@/components/ui/Button/Button";
 import DynamicFormSection from "@/components/entities/DynamicFormSection/DynamicFormSection";
 
 import styles from "./OsagoApply.module.scss";
+import { ICar, ICarBrand } from "@/types/cars.types";
+import { useGetCarBrands } from "@/hooks/cars/useGetCarBrands";
+import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
+import useCurrientCar from "@/stores/Cars/currientCar";
+
+function pickFormData(
+  carInfoData: ICar,
+  carBrands: ICarBrand[]
+): Partial<IOsagoApplyForm> {
+  let found = carBrands.find((item) => item.Make_Name === carInfoData.brand);
+
+  // console.log(carInfoData.brand === found?.Make_Name ? carInfoData.brand : "");
+  return {
+    brand: carInfoData.brand,
+    fio: carInfoData.fio,
+    model: carInfoData.model,
+    owner: carInfoData.owner === "individual" ? "individual" : "legal_entity",
+    passport_number: carInfoData.passport_number,
+    registration_number: carInfoData.registration_number,
+    registration_plate: carInfoData.registration_plate,
+    transport_category: carInfoData.transport_category,
+    vehicle_refined_make: carInfoData.brand === found?.Make_Name ? "" : carInfoData.brand,
+    vin: carInfoData.vin,
+    year: carInfoData.year,
+  };
+}
 
 const OsagoApply = () => {
   const { config, isLoading } = useOsagoFormConfig();
-  const { handleSubmit, control } = useForm<IOsagoApplyForm>();
+  const { handleSubmit, control, reset, setValue } = useForm<IOsagoApplyForm>();
+  const currientCar = useCurrientCar((state) => state.car);
 
+  const {
+    carsBrands,
+    isError: isCarBrandsError,
+    isLoading: isCarsBrandsLoading,
+    isSuccess: isCarsBrandsSuccess,
+  } = useGetCarBrands();
+
+  const setIsAnotherCarMark = useOsagoApplyCarMark((state) => state.setCarMarkValue);
+
+  useEffect(() => {
+    async function resetValues() {
+      if (currientCar && carsBrands) {
+        const pickedData = await pickFormData(currientCar, carsBrands);
+        reset(pickedData);
+        let found = await carsBrands.find((item) => item.Make_Name === currientCar.brand);
+        setValue("brand", Boolean(found) ? currientCar.brand : "Другое ТС");
+        setIsAnotherCarMark(!Boolean(found));
+      }
+    }
+
+    resetValues();
+  }, [currientCar, isCarsBrandsLoading]);
 
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
     console.log(data);
@@ -55,7 +104,11 @@ const OsagoApply = () => {
               </CustomTitle>
               <div className={styles.inputsWrapper}>
                 {!isLoading && config.owner ? (
-                  <DynamicFormSection fields={config.owner} control={control} isTopItemSingle />
+                  <DynamicFormSection
+                    fields={config.owner}
+                    control={control}
+                    isTopItemSingle
+                  />
                 ) : (
                   <div>loading...</div>
                 )}

@@ -13,11 +13,19 @@ interface IProps {
   model: string;
   registration_plate: string;
   id: number;
+  onClick?: () => void;
 }
 
-const CarsListItem = ({ className, brand, model, registration_plate, id }: IProps) => {
+const CarsListItem = ({
+  className,
+  brand,
+  model,
+  registration_plate,
+  id,
+  onClick,
+}: IProps) => {
   return (
-    <Link href={`${PAGES.CARS}/${id}`}>
+    <div>
       <Substrate withShadow="light" className={`${styles.substrate} ${className}`}>
         <div className={styles.info}>
           <div className={styles.infoItem}>
@@ -29,20 +37,30 @@ const CarsListItem = ({ className, brand, model, registration_plate, id }: IProp
           </div>
 
           <div className={styles.infoItem}>
-            Регистрационный знак: <span className={styles.value}>{registration_plate}</span>
+            Регистрационный знак:{" "}
+            <span className={styles.value}>{registration_plate}</span>
           </div>
         </div>
 
         <div className={styles.buttons}>
-          <Button className={styles.byPolicyButton}>Купить полис</Button>
-          <Button className={styles.moreButton}>...</Button>
+          <Button
+            onClickEvent={onClick}
+            isLink
+            href={PAGES.OSAGO_APPLY}
+            className={styles.byPolicyButton}
+          >
+            Купить полис
+          </Button>
+          <Button isLink href={`${PAGES.CARS}/${id}`} className={styles.moreButton}>
+            ...
+          </Button>
         </div>
 
         <div className={styles.moreMobile}>
           <Button style="outlined">Подробнее</Button>
         </div>
       </Substrate>
-    </Link>
+    </div>
   );
 };
 

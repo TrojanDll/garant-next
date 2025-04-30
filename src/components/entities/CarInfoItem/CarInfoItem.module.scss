@@ -12,6 +12,8 @@
 
 .title {
   width: 230px;
+  flex-shrink: 0;
+  display: block;
 }
 
 .value {
@@ -30,7 +32,6 @@
   }
 
   .value {
-    // margin-top: 5px;
     font-size: 14px;
     display: block;
   }
