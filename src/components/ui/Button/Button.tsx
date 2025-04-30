@@ -5,7 +5,6 @@ import React, { PropsWithChildren } from "react";
 import styles from "./Button.module.scss";
 
 interface IProps {
-  backgroundColor?: string;
   style?: "filled" | "outlined";
   type?: "button" | "submit" | "reset" | "download";
   variant?: "primary" | "dashboard" | "wide" | "small";
@@ -14,11 +13,11 @@ interface IProps {
   href?: string;
   className?: string;
   fileName?: string;
+  isLoading?: boolean;
 }
 
 const Button = ({
   children,
-  backgroundColor,
   type,
   style,
   onClickEvent,
@@ -27,6 +26,7 @@ const Button = ({
   className,
   variant,
   fileName = "example.pdf",
+  isLoading = false,
 }: PropsWithChildren<IProps>) => {
   const classNames = `${styles.button} ${style ? styles[style] : ""} ${
     variant ? styles[variant] : ""
@@ -62,7 +62,11 @@ const Button = ({
         className={`${classNames} ${className}`}
         onClick={onClickEvent ? onClickEvent : () => {}}
       >
-        {children}
+        <span className={styles.text} style={{ opacity: isLoading ? 0 : 1 }}>
+          {children}
+        </span>
+
+        {isLoading && <div className={styles.loader}></div>}
       </button>
     );
 

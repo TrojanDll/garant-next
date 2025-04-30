@@ -19,6 +19,7 @@ import { useGetOsagoPolicyById } from "@/hooks/policy/useGetOsagoPolicyById";
 import { useParams } from "next/navigation";
 import Loader from "@/components/ui/Loader/Loader";
 import { personTypes } from "@/types/user.types";
+import { getDaysBetweenDates } from "@/helpers/getDaysBetweenDates";
 
 interface IProps {
   className?: string;
@@ -157,7 +158,9 @@ const PolicyInfo = ({ className }: IProps) => {
                       <h3 className={styles.contentItemLargeTitle}>Срок действия</h3>
                       <div className={styles.contentItemLargeWrapper}>
                         {data.finish_date && (
-                          <span className={styles.contentItemTitle}>15 суток</span>
+                          <span className={styles.contentItemTitle}>
+                            {getDaysBetweenDates(data.start_date, data.finish_date)} суток
+                          </span>
                         )}
                         <span className={styles.contentItemValue}>
                           с {data.start_date}{" "}
