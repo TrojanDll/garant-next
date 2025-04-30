@@ -173,10 +173,21 @@ const PolicyInfo = ({ className }: IProps) => {
             </div>
           </Substrate>
 
-          <AwaitingPayment ammount={1000} className={styles.awaitingPayment} />
+          {policyStatus === EPolicyStatus.AWAITING_PAYMENT && (
+            <AwaitingPayment
+              ammount={+data.amount_to_be_paid}
+              className={styles.awaitingPayment}
+            />
+          )}
         </ContentContainer>
-      ) : (
+      ) : !isError ? (
         <Loader className={styles.loader} />
+      ) : (
+        <ContentContainer>
+          <CustomTitle isCentered tag="h2" className={styles.error}>
+            Ошибка
+          </CustomTitle>
+        </ContentContainer>
       )}
     </div>
   );

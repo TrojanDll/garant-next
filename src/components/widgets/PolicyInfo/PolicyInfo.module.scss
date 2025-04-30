@@ -77,6 +77,10 @@
   margin-top: 50px;
 }
 
+.error {
+  color: var(--red);
+}
+
 @media (max-width: 1149px) {
   .substrate {
     padding: 30px 20px 40px 20px;

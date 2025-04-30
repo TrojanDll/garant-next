@@ -5,14 +5,14 @@ import { ICar } from "@/types/cars.types";
 
 interface ICurrientCar {
   car: ICar | undefined;
-  setCar: (value: ICar) => void;
+  setCar: (value: ICar | undefined) => void;
 }
 
 const useCurrientCar = create<ICurrientCar>()(
   persist(
     immer((set) => ({
       car: undefined,
-      setCar: (value: ICar) =>
+      setCar: (value: ICar | undefined) =>
         set((state) => {
           state.car = value;
         }),
