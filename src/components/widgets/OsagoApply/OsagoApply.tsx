@@ -22,6 +22,7 @@ import { useCreateOsagoPolicy } from "@/hooks/policy/useCreateOsagoPolicy";
 import { ICreateOsagoPolicyRequest } from "@/types/policy.types";
 import toast from "react-hot-toast";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
+import { convertPersonType } from "@/helpers/convertPersonType";
 
 function pickFormData(
   carInfoData: ICar,
@@ -54,7 +55,7 @@ function formatDataToCreateOsagoRequest(
     car_year: data.year,
     duration_of_stay: data.duration_of_stay,
     fio: data.fio,
-    owner: data.owner,
+    owner: convertPersonType(data.owner),
     passport_number: data.passport_number,
     promo_code: data.promocode,
     registration_number: data.registration_number,
