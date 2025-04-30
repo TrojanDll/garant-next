@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { type FC } from "react";
 
 import TitleWithLink from "@/components/entities/TitleWithLink/TitleWithLink";
 import PolicyInfo from "@/components/widgets/PolicyInfo/PolicyInfo";
@@ -11,12 +10,15 @@ export const metadata: Metadata = {
   title: "Полис",
 };
 
+// Интерфейс для props, учитывающий асинхронные params
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-const PolicyPage: FC<Props> = async ({ params }) => {
-  const { slug } = await params;
+export default async function PolicyPage({ params }: Props) {
+  // Разрешаем Promise для получения params
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
 
   const isValidSlug = /^osago-\d+$|^ns-\d+$/.test(slug);
 
@@ -30,6 +32,4 @@ const PolicyPage: FC<Props> = async ({ params }) => {
       <PolicyInfo className={styles.info} />
     </>
   );
-};
-
-export default PolicyPage;
+}
