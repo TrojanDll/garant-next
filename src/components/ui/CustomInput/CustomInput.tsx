@@ -11,6 +11,7 @@ import InputNotification from "../InputNotification/InputNotification";
 import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 
 import styles from "./CustomInput.module.scss";
+import { useValidatePromocode } from "@/hooks/promocode/useValidatePromocode";
 
 interface IProps {
   name: string;
@@ -47,8 +48,16 @@ const CustomInput = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const isAnotherCarVisible = useOsagoApplyCarMark((state) => state.isAnotherCarMark);
-  const { isPromocodeLoading, promocodeResult, validatePromocode } =
-    usePromocodeValidate();
+  // const { isPromocodeLoading, promocodeResult, validatePromocode } =
+  //   usePromocodeValidate();
+
+  const {
+    data: promocodeResult,
+    mutate: validatePromocode,
+    isPending: isPromocodeLoading,
+    isError: isPromocodeError,
+    isSuccess: isPromocodeSuccess,
+  } = useValidatePromocode();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setIsValidationError(false);
@@ -83,7 +92,7 @@ const CustomInput = ({
   }, [isAnotherCarVisible]);
 
   useEffect(() => {
-    if (promocodeResult && !promocodeResult.isValid) {
+    if (promocodeResult && isPromocodeError) {
       setIsValidationError(true);
     }
   }, [promocodeResult]);
@@ -141,16 +150,14 @@ const CustomInput = ({
         <InputNotification variant="error">{errorMessage}</InputNotification>
       )}
 
-      {promocodeResult?.isValid && (
+      {promocodeResult && (
         <InputNotification variant="success">
           Промокод успешно применен –{" "}
-          <span className={styles.discountValue}>
-            СКИДКА {promocodeResult.discountValue}%
-          </span>
+          <span className={styles.discountValue}>СКИДКА {promocodeResult.message}%</span>
         </InputNotification>
       )}
 
-      {promocodeResult && !promocodeResult.isValid && (
+      {isPromocodeError && (
         <InputNotification variant="error">Промокод недействителен</InputNotification>
       )}
 

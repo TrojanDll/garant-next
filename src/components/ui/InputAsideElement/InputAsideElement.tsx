@@ -26,12 +26,20 @@ const InputAsideElement = ({
   return (
     <>
       {inputType === "date" && (
-        <SvgSelector className={`${className} ${styles.calendar}`} id={ESvgName.CALENDAR} />
+        <SvgSelector
+          className={`${className} ${styles.calendar}`}
+          id={ESvgName.CALENDAR}
+        />
       )}
 
       {inputType === "promocode" && (
-        <Button onClickEvent={onClick} type="button" className={`${className} ${styles.promocode}`}>
-          {isLoading ? <div className={styles.loader}></div> : "Применить"}
+        <Button
+          isLoading={isLoading}
+          onClickEvent={onClick}
+          type="button"
+          className={`${className} ${styles.promocode}`}
+        >
+          Применить
         </Button>
       )}
 
