@@ -30,6 +30,7 @@ const PolicyInfo = ({ className }: IProps) => {
   const params = useParams();
   const [policyType, setPolicyType] = useState(EPolicyTypes.OSAGO);
   const [policyStatus, setPolicyStatus] = useState(EPolicyStatus.AWAITING_PAYMENT);
+  const [policyNumber, setPolicyNumber] = useState("");
 
   const { data, isError, isPending, isSuccess, mutate } = useGetOsagoPolicyById();
 
@@ -72,31 +73,34 @@ const PolicyInfo = ({ className }: IProps) => {
     }
   }, [isPending]);
 
+  useEffect(() => {
+    if (policyType === EPolicyTypes.OSAGO && data) {
+      setPolicyNumber(data.osaga_number);
+    }
+  }, [policyType, isPending, isSuccess]);
+
   return (
     <div className={className}>
-      <ContentContainer className={styles.container}>
-        <Substrate className={styles.substrate} withShadow="light">
-          <div className={styles.header}>
-            <PolicyNumber policyNumber="АБ000012345" policyType={policyType} />
-            <PolicyStatus
-              className={styles.status}
-              status={EPolicyStatus.AWAITING_PAYMENT}
-            />
-          </div>
+      {data ? (
+        <ContentContainer className={styles.container}>
+          <Substrate className={styles.substrate} withShadow="light">
+            <div className={styles.header}>
+              <PolicyNumber policyNumber={policyNumber} policyType={policyType} />
+              <PolicyStatus className={styles.status} status={policyStatus} />
+            </div>
 
-          <Button
-            isLink
-            href="/files/example.pdf"
-            type="download"
-            style="outlined"
-            variant="small"
-            className={styles.downloadButton}
-          >
-            <SvgSelector id={ESvgName.PDF} className={styles.pdfSvg} />
-            Скачать полис
-          </Button>
+            <Button
+              isLink
+              href="/files/example.pdf"
+              type="download"
+              style="outlined"
+              variant="small"
+              className={styles.downloadButton}
+            >
+              <SvgSelector id={ESvgName.PDF} className={styles.pdfSvg} />
+              Скачать полис
+            </Button>
 
-          {data ? (
             <div className={styles.wrapper}>
               <CustomTitle tag="h2" className={styles.title}>
                 Транспортное средство
@@ -167,13 +171,13 @@ const PolicyInfo = ({ className }: IProps) => {
                 )}
               </div>
             </div>
-          ) : (
-            <Loader className={styles.loader} />
-          )}
-        </Substrate>
+          </Substrate>
 
-        <AwaitingPayment ammount={1000} className={styles.awaitingPayment} />
-      </ContentContainer>
+          <AwaitingPayment ammount={1000} className={styles.awaitingPayment} />
+        </ContentContainer>
+      ) : (
+        <Loader className={styles.loader} />
+      )}
     </div>
   );
 };
