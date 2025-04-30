@@ -1,5 +1,3 @@
-import { ICar } from "./cars.types";
-
 export const enum EPolicyTypes {
   OSAGO = "osago",
   NS = "ns",
@@ -32,8 +30,9 @@ export interface IOsagoPolicy {
   amount_to_be_paid: string;
   created_at: string;
   updated_at: string;
-  osaga_number: string;
+  osaga_number: string; // сори, это бекендер такой грамотный, еще и менять поля отказался
   duration_of_stay: string;
+  discount_amount: string | null;
 }
 
 export interface ICreateOsagoPolicyRequest {

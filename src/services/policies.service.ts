@@ -17,9 +17,8 @@ class PoliciesService {
   }
 
   async getOsagoPolicyById(data: IGetOsagoPolicyByIdRequest) {
-    const response = await axiosWithAuth.post<IGetOsagoPolicyByIdResponse>(
-      "/api/getOsagoDetails",
-      data
+    const response = await axiosWithAuth.get<IGetOsagoPolicyByIdResponse>(
+      `/api/getOsagoDetails?osago_id=${data.osago_id}`
     );
     return response;
   }

@@ -28,7 +28,7 @@ export function useGetOsagoPolicyById() {
   return {
     mutate,
     isPending,
-    data,
+    data: data?.data.data,
     isSuccess,
     isError,
   };

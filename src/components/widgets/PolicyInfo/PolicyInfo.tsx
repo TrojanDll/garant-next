@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./PolicyInfo.module.scss";
 
@@ -17,21 +17,67 @@ import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import CarInfoItem from "@/components/entities/CarInfoItem/CarInfoItem";
 import { PAGES } from "@/config/pages-url.config";
 import AwaitingPayment from "@/components/features/AwaitingPayment/AwaitingPayment";
+import { useGetOsagoPolicyById } from "@/hooks/policy/useGetOsagoPolicyById";
+import { useParams } from "next/navigation";
+import Loader from "@/components/ui/Loader/Loader";
+import { personTypes } from "@/types/user.types";
 
 interface IProps {
   className?: string;
 }
 
 const PolicyInfo = ({ className }: IProps) => {
+  const params = useParams();
   const [policyType, setPolicyType] = useState(EPolicyTypes.OSAGO);
-  const [data, setData] = useState("sdvb");
+  const [policyStatus, setPolicyStatus] = useState(EPolicyStatus.AWAITING_PAYMENT);
+
+  const { data, isError, isPending, isSuccess, mutate } = useGetOsagoPolicyById();
+
+  useEffect(() => {
+    let slug = "";
+
+    if (typeof params.slug === "string") {
+      slug = params.slug;
+    } else if (Array.isArray(params.slug)) {
+      slug = params.slug[0];
+    }
+
+    slug = decodeURIComponent(slug);
+
+    const match = slug.match(/(osago|ns)-(\d+)/);
+
+    if (match && match[1] && match[2]) {
+      const type = match[1];
+      const id = parseInt(match[2], 10);
+
+      if (type === "osago") {
+        setPolicyType(EPolicyTypes.OSAGO);
+      } else if (type === "ns") {
+        setPolicyType(EPolicyTypes.NS);
+      }
+
+      mutate({ osago_id: id });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isSuccess && data) {
+      if (data.payment_status === "Активный") {
+        setPolicyStatus(EPolicyStatus.ACTIVE);
+      } else if (data.payment_status === "Ожидает оплаты") {
+        setPolicyStatus(EPolicyStatus.AWAITING_PAYMENT);
+      } else if (data.payment_status === "Истек срок действия") {
+        setPolicyStatus(EPolicyStatus.EXPIRED);
+      }
+    }
+  }, [isPending]);
 
   return (
     <div className={className}>
       <ContentContainer className={styles.container}>
         <Substrate className={styles.substrate} withShadow="light">
           <div className={styles.header}>
-            <PolicyNumber policyNumber="АБ000012345" policyType={EPolicyTypes.OSAGO} />
+            <PolicyNumber policyNumber="АБ000012345" policyType={policyType} />
             <PolicyStatus
               className={styles.status}
               status={EPolicyStatus.AWAITING_PAYMENT}
@@ -50,85 +96,80 @@ const PolicyInfo = ({ className }: IProps) => {
             Скачать полис
           </Button>
 
-          <div className={styles.wrapper}>
-            <CustomTitle tag="h2" className={styles.title}>
-              Транспортное средство
-            </CustomTitle>
+          {data ? (
+            <div className={styles.wrapper}>
+              <CustomTitle tag="h2" className={styles.title}>
+                Транспортное средство
+              </CustomTitle>
 
-            <div className={styles.content}>
-              {data && (
-                <>
-                  <CarInfoItem
-                    className={styles.contentItem}
-                    name="Транспортное средство"
-                    value={"Mercedes-Benz CLS"}
-                  />
-                  <CarInfoItem
-                    className={styles.contentItem}
-                    name="Год выпуска ТС"
-                    value={"2019"}
-                  />
-                  <CarInfoItem
-                    className={styles.contentItem}
-                    name="Тип ТС"
-                    value={"Легковой автомобиль"}
-                  />
-                  <CarInfoItem
-                    className={styles.contentItem}
-                    name="Регистрационный знак"
-                    value={"А123АА999"}
-                  />
-                  <CarInfoItem
-                    className={styles.contentItem}
-                    name="Номер регистрации ТС"
-                    value={"12345 67896789"}
-                  />
-                  <CarInfoItem
-                    className={styles.contentItem}
-                    name="VIN"
-                    value={"12345 67896789"}
-                  />
-                </>
-              )}
-            </div>
+              <div className={styles.content}>
+                <CarInfoItem
+                  className={styles.contentItem}
+                  name="Транспортное средство"
+                  value={data.brand}
+                />
+                <CarInfoItem
+                  className={styles.contentItem}
+                  name="Год выпуска ТС"
+                  value={data.year}
+                />
+                <CarInfoItem
+                  className={styles.contentItem}
+                  name="Тип ТС"
+                  value={data.transport_category}
+                />
+                <CarInfoItem
+                  className={styles.contentItem}
+                  name="Регистрационный знак"
+                  value={data.registration_plate}
+                />
+                <CarInfoItem
+                  className={styles.contentItem}
+                  name="Номер регистрации ТС"
+                  value={data.registration_number}
+                />
+                <CarInfoItem className={styles.contentItem} name="VIN" value={data.vin} />
+              </div>
 
-            <CustomTitle tag="h2" className={styles.title}>
-              Собственник ТС
-            </CustomTitle>
+              <CustomTitle tag="h2" className={styles.title}>
+                Собственник ТС
+              </CustomTitle>
 
-            <div className={styles.content}>
-              {data && (
-                <>
-                  <CarInfoItem
-                    className={styles.contentItem}
-                    name="Собственник ТС"
-                    value={"Иванов Петр Алексеевич"}
-                  />
-                  <CarInfoItem
-                    className={styles.contentItem}
-                    name={"Серия и номер паспорта"}
-                    value={"4523 77889955"}
-                  />
-                </>
-              )}
-            </div>
+              <div className={styles.content}>
+                <CarInfoItem
+                  className={styles.contentItem}
+                  name="Собственник ТС"
+                  value={data.fio}
+                />
+                <CarInfoItem
+                  className={styles.contentItem}
+                  name={data.owner === personTypes[1] ? "ИНН" : "Серия и номер паспорта"}
+                  value={data.passport_number}
+                />
+              </div>
 
-            <div className={styles.content}>
-              {data && (
-                <>
-                  <div className={`${styles.contentItem} ${styles.contentItemLarge}`}>
-                    <h3 className={styles.contentItemLargeTitle}>Срок действия</h3>
-                    <div className={styles.contentItemLargeWrapper}>
-                      <span className={styles.contentItemTitle}>15 суток</span>
-                      <span className={styles.contentItemValue}>
-                        с 01.01.2025 по 15.01.2025
-                      </span>
+              <div className={styles.content}>
+                {data && (
+                  <>
+                    <div className={`${styles.contentItem} ${styles.contentItemLarge}`}>
+                      <h3 className={styles.contentItemLargeTitle}>Срок действия</h3>
+                      <div className={styles.contentItemLargeWrapper}>
+                        {data.finish_date && (
+                          <span className={styles.contentItemTitle}>15 суток</span>
+                        )}
+                        <span className={styles.contentItemValue}>
+                          с {data.start_date}{" "}
+                          {data.finish_date && `по ${data.finish_date}`}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </>
-              )}
+                  </>
+                )}
+              </div>
             </div>
-          </div>
+          ) : (
+            <Loader className={styles.loader} />
+          )}
         </Substrate>
 
         <AwaitingPayment ammount={1000} className={styles.awaitingPayment} />
