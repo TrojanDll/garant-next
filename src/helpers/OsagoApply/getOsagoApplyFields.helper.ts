@@ -162,12 +162,28 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         required: true,
         options: [
           {
-            label: "Option 1",
-            value: "Option 1",
+            label: "До 3 суток",
+            value: "До 3 суток",
           },
           {
-            label: "Option 2",
-            value: "Option 2",
+            label: "До 15 суток",
+            value: "До 15 суток",
+          },
+          {
+            label: "До 30 суток",
+            value: "До 30 суток",
+          },
+          {
+            label: "До 90 суток",
+            value: "До 90 суток",
+          },
+          {
+            label: "До 183 суток",
+            value: "До 183 суток",
+          },
+          {
+            label: "До 1 года",
+            value: "До 1 года",
           },
         ],
       },

@@ -18,6 +18,10 @@ import { ICar, ICarBrand } from "@/types/cars.types";
 import { useGetCarBrands } from "@/hooks/cars/useGetCarBrands";
 import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 import useCurrientCar from "@/stores/Cars/currientCar";
+import { useCreateOsagoPolicy } from "@/hooks/policy/useCreateOsagoPolicy";
+import { ICreateOsagoPolicyRequest } from "@/types/policy.types";
+import toast from "react-hot-toast";
+import { useNavigation } from "@/hooks/navigation/useNavigation";
 
 function pickFormData(
   carInfoData: ICar,
@@ -41,6 +45,26 @@ function pickFormData(
   };
 }
 
+function formatDataToCreateOsagoRequest(
+  data: IOsagoApplyForm
+): ICreateOsagoPolicyRequest {
+  return {
+    brand: data.brand,
+    car_model: data.model,
+    car_year: data.year,
+    duration_of_stay: data.duration_of_stay,
+    fio: data.fio,
+    owner: data.owner,
+    passport_number: data.passport_number,
+    promo_code: data.promocode,
+    registration_number: data.registration_number,
+    registration_plate: data.registration_plate,
+    start_date: data.date_of_start,
+    transport_category: data.transport_category,
+    vin: data.vin,
+  };
+}
+
 const OsagoApply = () => {
   const { config, isLoading } = useOsagoFormConfig();
   const { handleSubmit, control, reset, setValue } = useForm<IOsagoApplyForm>();
@@ -53,7 +77,11 @@ const OsagoApply = () => {
     isSuccess: isCarsBrandsSuccess,
   } = useGetCarBrands();
 
+  const { data, isError, isPending, isSuccess, mutate } = useCreateOsagoPolicy();
+
   const setIsAnotherCarMark = useOsagoApplyCarMark((state) => state.setCarMarkValue);
+
+  const { navigateToPolicies } = useNavigation();
 
   useEffect(() => {
     async function resetValues() {
@@ -70,8 +98,28 @@ const OsagoApply = () => {
   }, [currientCar, isCarsBrandsLoading]);
 
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
-    console.log(data);
+    const formatedData = formatDataToCreateOsagoRequest(data);
+    console.log(formatedData);
+    mutate(formatedData);
   };
+
+  useEffect(() => {
+    if (isPending) {
+      toast.loading("Загрузка");
+    }
+
+    if (isError) {
+      toast.dismiss();
+      toast.error("Ошибка при рассчете");
+    } else if (isSuccess) {
+      toast.dismiss();
+      toast.success("Готово");
+
+      setTimeout(() => {
+        navigateToPolicies();
+      }, 1000);
+    }
+  }, [isPending]);
 
   return (
     <section className={styles.root}>
@@ -84,6 +132,7 @@ const OsagoApply = () => {
           <form noValidate onSubmit={handleSubmit(onSubmit)} action="">
             <div className={styles.section}>
               <CustomTitle tag="h2">Транспортное средство</CustomTitle>
+
               <div className={styles.inputsWrapper}>
                 {!isLoading && config.vehicle ? (
                   <DynamicFormSection

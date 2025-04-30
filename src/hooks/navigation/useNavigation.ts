@@ -37,6 +37,10 @@ export function useNavigation() {
     router.push(PAGES.CARS);
   };
 
+  const navigateToPolicies = () => {
+    router.push(PAGES.MY_POLICIES);
+  };
+
   return {
     goBack,
     reloadPage,
@@ -45,5 +49,6 @@ export function useNavigation() {
     navigateToAuth,
     navigateToHome,
     navigateToCars,
+    navigateToPolicies
   };
 }

@@ -1,4 +1,4 @@
-import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
+import MyPolicies from "@/components/widgets/MyPolicies/MyPolicies";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,5 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function MyPoliciesPage() {
-  return <div>Мои полисы</div>;
+  return <MyPolicies />;
 }
