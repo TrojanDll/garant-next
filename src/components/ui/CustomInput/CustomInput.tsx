@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect, ChangeEvent } from "react";
 import { TInputType } from "@/types/IFieldConfig";
+import { IMaskInput } from 'react-imask';
 
 import InputAsideElement from "../InputAsideElement/InputAsideElement";
 import Calendar from "../Calendar/Calendar";
@@ -115,27 +116,49 @@ const CustomInput = ({
       )}
 
       <div className={styles.inputWrapper}>
-        <input
-          ref={inputRef}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          onClick={isPointer ? () => setIsCalendarOpened(true) : undefined}
-          readOnly={isPointer}
-          type={inputType === "password" && !isPasswordVisible ? "password" : "text"}
-          name={name}
-          id={name}
-          placeholder={placeholder}
-          required={required}
-          value={value ?? ""}
-          onChange={handleInputChange}
-          className={`${styles.input}
-            ${isErrorMessage || isValidationError ? styles.error : ""}
-            ${isPointer ? styles.pointer : ""}
-            ${inputType === "promocode" ? styles.promocode : ""}
-            ${
-              inputType === "password" && !isPasswordVisible ? styles.passwordHidden : ""
+      {inputType === 'phone' ? (
+          <IMaskInput
+            id={name}
+            mask="+7 (000) 000 00 00"
+            value={value}
+            onAccept={(value: string) => {
+              setIsValidationError(false);
+              setValue(value);
+            }}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            placeholder="+7 (___) ___ __ __"
+            type="tel"
+            name={name}
+            required={required}
+            inputRef={inputRef}
+            className={`${styles.input} ${
+              isErrorMessage || isValidationError ? styles.error : ''
             }`}
-        />
+          />
+        ) : (
+          <input
+            ref={inputRef}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            onClick={isPointer ? () => setIsCalendarOpened(true) : undefined}
+            readOnly={isPointer}
+            type={inputType === 'password' && !isPasswordVisible ? 'password' : 'text'}
+            name={name}
+            id={name}
+            placeholder={placeholder}
+            required={required}
+            value={value ?? ''}
+            onChange={handleInputChange}
+            className={`${styles.input}
+              ${isErrorMessage || isValidationError ? styles.error : ''}
+              ${isPointer ? styles.pointer : ''}
+              ${inputType === 'promocode' ? styles.promocode : ''}
+              ${
+                inputType === 'password' && !isPasswordVisible ? styles.passwordHidden : ''
+              }`}
+          />
+        )}
 
         <InputAsideElement
           isLoading={isPromocodeLoading}

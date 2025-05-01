@@ -13,6 +13,7 @@
     "@tanstack/react-query-devtools": "^5.74.4",
     "axios": "^1.8.4",
     "date-fns": "^4.1.0",
+    "imask": "^7.6.1",
     "immer": "^10.1.1",
     "js-cookie": "^3.0.5",
     "next": "15.2.4",
@@ -21,6 +22,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.55.0",
     "react-hot-toast": "^2.5.2",
+    "react-imask": "^7.6.1",
     "react-select": "^5.10.1",
     "sass": "^1.86.2",
     "zustand": "^5.0.3"

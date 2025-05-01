@@ -49,12 +49,12 @@ const RegistrationFields = ({ control, password }: IProps) => {
                   message: "Пароль должен содержать не более 40 символов",
                 },
               }),
-              ...(isPhone && {
-                pattern: {
-                  value: /^(\+7|7|8)?\d{10}$/,
-                  message: "Неверный формат номера",
-                },
-              }),
+              // ...(isPhone && {
+              //   pattern: {
+              //     value: /^(\+7|7|8)?\d{10}$/,
+              //     message: "Неверный формат номера",
+              //   },
+              // }),
             }}
             render={({ field, fieldState }) => (
               <CustomInput

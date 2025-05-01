@@ -37,6 +37,8 @@ const Registration = () => {
       phone: formatPhoneNumber(data.phone),
     };
 
+    console.log(formatedData);
+
     registration(formatedData);
   };
 
