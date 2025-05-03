@@ -13,13 +13,10 @@ import Button from "@/components/ui/Button/Button";
 import SvgSelector from "@/components/ui/SvgSelector/SvgSelector";
 import { ESvgName } from "@/constants/svg-ids.constants";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
-import CarInfoItem from "@/components/entities/CarInfoItem/CarInfoItem";
 import AwaitingPayment from "@/components/features/AwaitingPayment/AwaitingPayment";
 import { useGetOsagoPolicyById } from "@/hooks/policy/useGetOsagoPolicyById";
 import { useParams } from "next/navigation";
 import Loader from "@/components/ui/Loader/Loader";
-import { personTypes } from "@/types/user.types";
-import { getDaysBetweenDates } from "@/helpers/getDaysBetweenDates";
 import OsagoPolicyInfoFields from "@/components/features/OsagoPolicyInfoFields/OsagoPolicyInfoFields";
 
 interface IProps {
@@ -101,9 +98,7 @@ const PolicyInfo = ({ className }: IProps) => {
               Скачать полис
             </Button>
 
-            <div className={styles.wrapper}>
-              <OsagoPolicyInfoFields data={data} />
-            </div>
+            <OsagoPolicyInfoFields className={styles.fields} data={data} />
           </Substrate>
 
           {policyStatus === EPolicyStatus.AWAITING_PAYMENT && (

@@ -81,6 +81,10 @@
   color: var(--red);
 }
 
+.fields {
+  margin-top: 80px;
+}
+
 @media (max-width: 1149px) {
   .substrate {
     padding: 30px 20px 40px 20px;
@@ -103,6 +107,10 @@
   .pdfSvg {
     width: 28px;
     height: 28px;
+  }
+
+  .fields {
+    margin-top: 70px;
   }
 
   .contentItem {

@@ -15,6 +15,7 @@ const useCurrientOsagoPolicy = create<ICurrientOsagoPolicy>()(
       setPolicy: (value: IOsagoPolicy | undefined) =>
         set((state) => {
           state.policy = value;
+          console.log(value);
         }),
     })),
     {

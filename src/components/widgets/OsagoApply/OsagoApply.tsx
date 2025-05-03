@@ -24,7 +24,10 @@ import toast from "react-hot-toast";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
 import { formatDataToCreateOsagoRequest } from "@/helpers/OsagoApply/formatDataToCreateOsagoRequest";
 import Loader from "@/components/ui/Loader/Loader";
-import { pickOsagoApplyFormData } from "@/helpers/OsagoApply/pickOsagoApplyFormData";
+import {
+  pickOsagoApplyFormData,
+  pickOsagoApplyFormDataFromPolicy,
+} from "@/helpers/OsagoApply/pickOsagoApplyFormData";
 import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
 import useCurrientOsagoPolicy from "@/stores/Policy/currientOsagoPolicy";
 
@@ -39,7 +42,12 @@ const OsagoApply = () => {
 
   const currientCar = useCurrientCar((state) => state.car);
   const setIsAnotherCarMark = useOsagoApplyCarMark((state) => state.setCarMarkValue);
+  const currientPolicy = useCurrientOsagoPolicy((state) => state.policy);
   const setPolicy = useCurrientOsagoPolicy((state) => state.setPolicy);
+
+  useEffect(() => {
+    console.log(currientPolicy);
+  }, [currientPolicy]);
 
   const { carsBrands, isLoading: isCarsBrandsLoading } = useGetCarBrands();
   const {
@@ -52,17 +60,34 @@ const OsagoApply = () => {
 
   useEffect(() => {
     async function resetValues() {
-      if (currientCar && carsBrands) {
-        const pickedData = await pickOsagoApplyFormData(currientCar, carsBrands);
+      if ((currientCar || currientPolicy) && carsBrands) {
+        let pickedData;
+
+        if (currientCar && !currientPolicy) {
+          pickedData = await pickOsagoApplyFormData(currientCar, carsBrands);
+        } else if (currientPolicy) {
+          pickedData = await pickOsagoApplyFormDataFromPolicy(currientPolicy, carsBrands);
+        }
+
         reset(pickedData);
-        let found = await carsBrands.find((item) => item.Make_Name === currientCar.brand);
-        setValue("brand", Boolean(found) ? currientCar.brand : "Другое ТС");
+
+        let found;
+
+        if (currientCar) {
+          found = await carsBrands.find((item) => item.Make_Name === currientCar.brand);
+          setValue("brand", Boolean(found) ? currientCar.brand : "Другое ТС");
+        } else if (currientPolicy) {
+          found = await carsBrands.find(
+            (item) => item.Make_Name === currientPolicy.brand
+          );
+          setValue("brand", Boolean(found) ? currientPolicy.brand : "Другое ТС");
+        }
         setIsAnotherCarMark(!Boolean(found));
       }
     }
 
     resetValues();
-  }, [currientCar, isCarsBrandsLoading]);
+  }, [currientCar, isCarsBrandsLoading, currientPolicy]);
 
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
     const formatedData = formatDataToCreateOsagoRequest(data);
@@ -79,7 +104,7 @@ const OsagoApply = () => {
   useEffect(() => {
     if (isCountButtonClicked && formState.isDirty) {
       // Логика изменения цены будет здесь
-      console.log(watchedFields[0]);
+      // console.log(watchedFields[0]);
     }
   }, [watchedFields, isCountButtonClicked, formState.isDirty]);
 
@@ -97,11 +122,11 @@ const OsagoApply = () => {
       }
 
       toast.dismiss();
-      toast.success("Готово");
+      // toast.success("Готово");
 
       setTimeout(() => {
         navigateToOsagoConfirm();
-      }, 1000);
+      }, 50);
     }
   }, [isPending]);
 

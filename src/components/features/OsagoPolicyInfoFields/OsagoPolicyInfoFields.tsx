@@ -10,11 +10,12 @@ import { getDaysBetweenDates } from "@/helpers/getDaysBetweenDates";
 
 interface IProps {
   data: IOsagoPolicy;
+  className?: string;
 }
 
-const OsagoPolicyInfoFields = ({ data }: IProps) => {
+const OsagoPolicyInfoFields = ({ data, className }: IProps) => {
   return (
-    <div>
+    <div className={className}>
       <CustomTitle tag="h2" className={styles.title}>
         Транспортное средство
       </CustomTitle>
