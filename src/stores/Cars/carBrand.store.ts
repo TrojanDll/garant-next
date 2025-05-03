@@ -13,7 +13,6 @@ const useCarBrand = create<ICarBrand>()(
     setCarBrand: (value: string) =>
       set((state) => {
         state.carBrand = value;
-        console.log(state.carBrand);
       }),
   }))
 );

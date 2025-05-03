@@ -9,20 +9,34 @@ interface IProps {
   preliminaryCost: number;
   discount?: number;
   finalCost: number;
+  isIsolated?: boolean;
+  onClick?: () => void;
 }
 
-const CountedPrice = ({ discount, finalCost, preliminaryCost, className }: IProps) => {
+const CountedPrice = ({
+  discount,
+  finalCost,
+  preliminaryCost,
+  className,
+  isIsolated = false,
+  onClick,
+}: IProps) => {
   return (
-    <Substrate bordered className={`${className} ${styles.substrate}`}>
+    <Substrate
+      bordered
+      className={`${className} ${styles.substrate} ${isIsolated && styles.isolated}`}
+    >
       <div className={styles.priceRow}>
         <div className={styles.priceRowTitle}>Полис ОСАГО</div>
         <div className={styles.preliminaryCost}>{preliminaryCost} ₽</div>
       </div>
 
-      <div className={styles.priceRow}>
-        <div className={styles.priceRowTitle}>Скидка (промокод)</div>
-        <div className={styles.discount}>-{discount} ₽</div>
-      </div>
+      {discount && (
+        <div className={styles.priceRow}>
+          <div className={styles.priceRowTitle}>Скидка (промокод)</div>
+          <div className={styles.discount}>-{discount} ₽</div>
+        </div>
+      )}
 
       <div className={styles.divider}></div>
 
@@ -31,7 +45,12 @@ const CountedPrice = ({ discount, finalCost, preliminaryCost, className }: IProp
         <div className={styles.finalCost}>{finalCost} ₽</div>
       </div>
 
-      <Button type="submit" className={styles.button} variant="wide">
+      <Button
+        type="submit"
+        className={styles.button}
+        variant="wide"
+        onClickEvent={onClick}
+      >
         Оформить
       </Button>
     </Substrate>

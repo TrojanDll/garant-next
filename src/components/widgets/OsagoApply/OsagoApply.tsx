@@ -31,7 +31,8 @@ const OsagoApply = () => {
   const { config, isLoading } = useOsagoFormConfig();
   const { navigateToPolicies } = useNavigation();
 
-  const { handleSubmit, control, reset, setValue } = useForm<IOsagoApplyForm>();
+  const { handleSubmit, control, reset, setValue, watch, formState } =
+    useForm<IOsagoApplyForm>();
 
   const [isCountButtonClicked, setIsCountButtonClicked] = useState<boolean>(false);
 
@@ -61,7 +62,18 @@ const OsagoApply = () => {
     mutate(formatedData);
   };
 
-  const handleCountClick = () => {};
+  const handleCountClick = () => {
+    setIsCountButtonClicked(true);
+  };
+
+  const watchedFields = watch(["transport_category", "duration_of_stay"]);
+
+  useEffect(() => {
+    if (isCountButtonClicked && formState.isDirty) {
+      // Логика изменения цены будет здесь
+      console.log(watchedFields[0]);
+    }
+  }, [watchedFields, isCountButtonClicked, formState.isDirty]);
 
   useEffect(() => {
     if (isPending) {
@@ -152,7 +164,7 @@ const OsagoApply = () => {
                   type="button"
                   className={styles.countButton}
                   variant="wide"
-                  onClickEvent={() => setIsCountButtonClicked(true)}
+                  onClickEvent={handleCountClick}
                 >
                   Рассчитать
                 </Button>
