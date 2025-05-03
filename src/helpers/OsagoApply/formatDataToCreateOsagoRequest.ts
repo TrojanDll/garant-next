@@ -1,12 +1,13 @@
 import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
 import { ICreateOsagoPolicyRequest } from "@/types/policy.types";
 import { convertPersonType } from "../convertPersonType";
+import { selectCarModel } from "../selectCarModel";
 
 export function formatDataToCreateOsagoRequest(
   data: IOsagoApplyForm
 ): ICreateOsagoPolicyRequest {
   return {
-    brand: data.brand,
+    brand: selectCarModel(data.brand, data.vehicle_refined_make),
     car_model: data.model,
     car_year: data.year,
     duration_of_stay: data.duration_of_stay,

@@ -27,7 +27,7 @@ const Header = () => {
 
               <ul className={styles.links}>
                 <li>
-                  <CustomLink href={PAGES.CALCULATOR} className={styles.link}>
+                  <CustomLink href={PAGES.HOME} className={styles.link}>
                     Калькулятор стоимости
                   </CustomLink>
                 </li>
