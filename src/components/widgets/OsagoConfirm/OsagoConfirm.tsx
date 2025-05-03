@@ -11,6 +11,7 @@ import useCurrientOsagoPolicy from "@/stores/Policy/currientOsagoPolicy";
 import Substrate from "@/components/ui/Substrate/Substrate";
 import Link from "next/link";
 import { PAGES } from "@/config/pages-url.config";
+import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
 
 const OsagoConfirm = () => {
   const policy = useCurrientOsagoPolicy((state) => state.policy);
@@ -30,8 +31,18 @@ const OsagoConfirm = () => {
             "Ошибка. Данные полиса не найдены"
           )}
 
-          <Link href={PAGES.OSAGO_APPLY}>Изменить</Link>
+          <Link href={PAGES.OSAGO_APPLY} className={styles.editLink}>
+            Изменить
+          </Link>
         </Substrate>
+
+        <CountedPrice
+          isIsolated={true}
+          discount={100}
+          finalCost={900}
+          preliminaryCost={1000}
+          className={styles.priceWrapper}
+        />
       </ContentContainer>
     </section>
   );

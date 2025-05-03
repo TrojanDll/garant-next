@@ -23,6 +23,7 @@ const CountedPrice = ({
 }: IProps) => {
   return (
     <Substrate
+      withShadow={isIsolated ? "light" : undefined}
       bordered
       className={`${className} ${styles.substrate} ${isIsolated && styles.isolated}`}
     >
@@ -51,7 +52,7 @@ const CountedPrice = ({
         variant="wide"
         onClickEvent={onClick}
       >
-        Оформить
+        {isIsolated ? "Перейти к оплате" : "Оформить"}
       </Button>
     </Substrate>
   );
