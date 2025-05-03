@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./OsagoApply.module.scss";
 
@@ -25,19 +25,21 @@ import { useNavigation } from "@/hooks/navigation/useNavigation";
 import { formatDataToCreateOsagoRequest } from "@/helpers/OsagoApply/formatDataToCreateOsagoRequest";
 import Loader from "@/components/ui/Loader/Loader";
 import { pickOsagoApplyFormData } from "@/helpers/OsagoApply/pickOsagoApplyFormData";
+import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
 
 const OsagoApply = () => {
   const { config, isLoading } = useOsagoFormConfig();
+  const { navigateToPolicies } = useNavigation();
+
   const { handleSubmit, control, reset, setValue } = useForm<IOsagoApplyForm>();
+
+  const [isCountButtonClicked, setIsCountButtonClicked] = useState<boolean>(false);
+
   const currientCar = useCurrientCar((state) => state.car);
-
-  const { carsBrands, isLoading: isCarsBrandsLoading } = useGetCarBrands();
-
-  const { isError, isPending, isSuccess, mutate } = useCreateOsagoPolicy();
-
   const setIsAnotherCarMark = useOsagoApplyCarMark((state) => state.setCarMarkValue);
 
-  const { navigateToPolicies } = useNavigation();
+  const { carsBrands, isLoading: isCarsBrandsLoading } = useGetCarBrands();
+  const { isError, isPending, isSuccess, mutate } = useCreateOsagoPolicy();
 
   useEffect(() => {
     async function resetValues() {
@@ -58,6 +60,8 @@ const OsagoApply = () => {
     console.log(formatedData);
     mutate(formatedData);
   };
+
+  const handleCountClick = () => {};
 
   useEffect(() => {
     if (isPending) {
@@ -136,9 +140,23 @@ const OsagoApply = () => {
                 )}
               </div>
 
-              <Button type="submit" className={styles.submitButton} variant="wide">
-                Рассчитать
-              </Button>
+              {isCountButtonClicked ? (
+                <CountedPrice
+                  discount={100}
+                  finalCost={900}
+                  preliminaryCost={1000}
+                  className={styles.priceWrapper}
+                />
+              ) : (
+                <Button
+                  type="button"
+                  className={styles.countButton}
+                  variant="wide"
+                  onClickEvent={() => setIsCountButtonClicked(true)}
+                >
+                  Рассчитать
+                </Button>
+              )}
             </form>
           </Substrate>
         )}

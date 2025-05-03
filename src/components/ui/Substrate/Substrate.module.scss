@@ -26,6 +26,10 @@
   padding: 40px 60px;
 }
 
+.bordered {
+  border: 1px solid var(--light-grey-2);
+}
+
 @media (max-width: 1149px) {
   .substrate {
     border-radius: 15px;

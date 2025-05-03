@@ -1,0 +1,69 @@
+.substrate {
+  padding: 30px;
+}
+
+.priceRow {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.priceRowTitle {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 128%;
+  letter-spacing: 0.01em;
+  color: var(--grey-3);
+}
+
+.preliminaryCost {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 128%;
+  letter-spacing: 0.01em;
+  color: var(--grey-3);
+}
+
+.discount {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 128%;
+  letter-spacing: 0.01em;
+  color: var(--light-pink);
+}
+
+.priceRowTotalTitle {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 123%;
+  color: var(--dark-grey);
+}
+
+.finalCost {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 123%;
+  color: var(--blue);
+}
+
+.divider {
+  margin-top: 30px;
+  width: 100%;
+  height: 1px;
+  background-color: var(--light-grey-2);
+}
+
+.button {
+  margin: 0 auto;
+  margin-top: 30px;
+}

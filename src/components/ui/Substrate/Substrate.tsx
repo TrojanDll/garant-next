@@ -6,6 +6,7 @@ interface ISubstrateProps {
   className?: string;
   ref?: RefObject<HTMLDivElement | null>;
   withShadow?: "light" | "deep";
+  bordered?: boolean;
 }
 
 const Substrate = ({
@@ -14,6 +15,7 @@ const Substrate = ({
   className,
   ref,
   withShadow,
+  bordered = false
 }: PropsWithChildren<ISubstrateProps>) => {
   return (
     <div
@@ -27,7 +29,7 @@ const Substrate = ({
           : withShadow === "deep"
           ? styles.withDeepShadow
           : ""
-      }`}
+      } ${bordered && styles.bordered}`}
     >
       {children}
     </div>

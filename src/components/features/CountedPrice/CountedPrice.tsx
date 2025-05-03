@@ -1,9 +1,41 @@
-import React from 'react'
+import React from "react";
 
-const CountedPrice = () => {
-  return (
-    <div>CountedPrice</div>
-  )
+import styles from "./CountedPrice.module.scss";
+import Substrate from "@/components/ui/Substrate/Substrate";
+import Button from "@/components/ui/Button/Button";
+
+interface IProps {
+  className?: string;
+  preliminaryCost: number;
+  discount?: number;
+  finalCost: number;
 }
 
-export default CountedPrice
+const CountedPrice = ({ discount, finalCost, preliminaryCost, className }: IProps) => {
+  return (
+    <Substrate bordered className={`${className} ${styles.substrate}`}>
+      <div className={styles.priceRow}>
+        <div className={styles.priceRowTitle}>Полис ОСАГО</div>
+        <div className={styles.preliminaryCost}>{preliminaryCost} ₽</div>
+      </div>
+
+      <div className={styles.priceRow}>
+        <div className={styles.priceRowTitle}>Скидка (промокод)</div>
+        <div className={styles.discount}>-{discount} ₽</div>
+      </div>
+
+      <div className={styles.divider}></div>
+
+      <div className={styles.priceRow}>
+        <div className={styles.priceRowTotalTitle}>Итого</div>
+        <div className={styles.finalCost}>{finalCost} ₽</div>
+      </div>
+
+      <Button type="submit" className={styles.button} variant="wide">
+        Оформить
+      </Button>
+    </Substrate>
+  );
+};
+
+export default CountedPrice;
