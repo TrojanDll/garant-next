@@ -25,7 +25,7 @@ export function useCreateOsagoPolicy() {
   return {
     mutate,
     isPending,
-    data,
+    data: data?.data,
     isSuccess,
     isError,
   };

@@ -26,10 +26,11 @@ import { formatDataToCreateOsagoRequest } from "@/helpers/OsagoApply/formatDataT
 import Loader from "@/components/ui/Loader/Loader";
 import { pickOsagoApplyFormData } from "@/helpers/OsagoApply/pickOsagoApplyFormData";
 import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
+import useCurrientOsagoPolicy from "@/stores/Policy/currientOsagoPolicy";
 
 const OsagoApply = () => {
   const { config, isLoading } = useOsagoFormConfig();
-  const { navigateToPolicies } = useNavigation();
+  const { navigateToOsagoConfirm } = useNavigation();
 
   const { handleSubmit, control, reset, setValue, watch, formState } =
     useForm<IOsagoApplyForm>();
@@ -38,9 +39,16 @@ const OsagoApply = () => {
 
   const currientCar = useCurrientCar((state) => state.car);
   const setIsAnotherCarMark = useOsagoApplyCarMark((state) => state.setCarMarkValue);
+  const setPolicy = useCurrientOsagoPolicy((state) => state.setPolicy);
 
   const { carsBrands, isLoading: isCarsBrandsLoading } = useGetCarBrands();
-  const { isError, isPending, isSuccess, mutate } = useCreateOsagoPolicy();
+  const {
+    isError,
+    isPending,
+    isSuccess,
+    mutate,
+    data: createOsagoPolicyData,
+  } = useCreateOsagoPolicy();
 
   useEffect(() => {
     async function resetValues() {
@@ -84,11 +92,15 @@ const OsagoApply = () => {
       toast.dismiss();
       toast.error("Ошибка при рассчете");
     } else if (isSuccess) {
+      if (createOsagoPolicyData) {
+        setPolicy(createOsagoPolicyData.data);
+      }
+
       toast.dismiss();
       toast.success("Готово");
 
       setTimeout(() => {
-        navigateToPolicies();
+        navigateToOsagoConfirm();
       }, 1000);
     }
   }, [isPending]);

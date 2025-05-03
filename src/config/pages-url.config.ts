@@ -16,6 +16,7 @@ class PAGESCLASS {
   POLICY_INFO = `${this.root}policy-info`;
 
   OSAGO_APPLY = `${this.OSAGO}/apply`;
+  OSAGO_CONFIRM = `${this.OSAGO}/confirm`;
   NS_APPLY = `${this.NS}/apply`;
 
   CARS = `${this.DASHBOARD}/cars`;

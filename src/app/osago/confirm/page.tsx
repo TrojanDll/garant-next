@@ -1,11 +1,9 @@
-import OsagoApply from "@/components/widgets/OsagoApply/OsagoApply";
+import OsagoConfirm from "@/components/widgets/OsagoConfirm/OsagoConfirm";
 import type { Metadata } from "next";
-
-import "react-day-picker/style.css";
 
 export const metadata: Metadata = {
   title: "Оформить ОСАГО",
 };
 export default function OsagoApplyPage() {
-  return <OsagoApply />;
+  return <OsagoConfirm />;
 }

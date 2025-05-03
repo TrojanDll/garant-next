@@ -24,4 +24,5 @@ export const privatePages: string[] = [
   PAGES.MY_POLICIES,
   PAGES.POLICY_INFO,
   PAGES.OSAGO_APPLY,
+  PAGES.OSAGO_CONFIRM,
 ];

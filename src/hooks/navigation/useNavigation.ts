@@ -41,6 +41,10 @@ export function useNavigation() {
     router.push(PAGES.MY_POLICIES);
   };
 
+  const navigateToOsagoConfirm = () => {
+    router.push(PAGES.OSAGO_CONFIRM);
+  };
+
   return {
     goBack,
     reloadPage,
@@ -49,6 +53,7 @@ export function useNavigation() {
     navigateToAuth,
     navigateToHome,
     navigateToCars,
-    navigateToPolicies
+    navigateToPolicies,
+    navigateToOsagoConfirm,
   };
 }

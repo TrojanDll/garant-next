@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 
 import styles from "./layout.module.scss";
 
+import "react-day-picker/style.css";
+
 export const metadata: Metadata = {
   description: "Garant личный кабинет",
 };
