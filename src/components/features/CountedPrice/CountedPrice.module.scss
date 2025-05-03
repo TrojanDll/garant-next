@@ -67,3 +67,40 @@
   margin: 0 auto;
   margin-top: 30px;
 }
+
+@media (max-width: 1149px) {
+  .substrate {
+    padding: 20px;
+  }
+
+  .priceRow {
+    margin-top: 20px;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .divider {
+    margin-top: 20px;
+  }
+
+  .priceRowTitle {
+    font-size: 14px;
+  }
+
+  .priceRowTotalTitle {
+    font-size: 18px;
+  }
+
+  .preliminaryCost {
+    font-size: 14px;
+  }
+
+  .discount {
+    font-size: 14px;
+  }
+
+  .finalCost {
+    font-size: 18px;
+  }
+}
