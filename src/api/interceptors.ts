@@ -33,10 +33,12 @@ axiosWithAuth.interceptors.response.use(
       removeFromStorage();
     }
 
-    NextResponse.redirect(PAGES.HOME);
+    // NextResponse.redirect(PAGES.HOME);
 
     throw error;
   }
 );
 
-export { axiosClassic, axiosWithAuth };
+const isAxiosError = axios.isAxiosError;
+
+export { axiosClassic, axiosWithAuth, isAxiosError };

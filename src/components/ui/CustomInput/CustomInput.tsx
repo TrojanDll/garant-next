@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect, ChangeEvent } from "react";
 import { TInputType } from "@/types/IFieldConfig";
-import { IMaskInput } from 'react-imask';
+import { IMaskInput } from "react-imask";
 
 import InputAsideElement from "../InputAsideElement/InputAsideElement";
 import Calendar from "../Calendar/Calendar";
@@ -13,6 +13,7 @@ import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 
 import styles from "./CustomInput.module.scss";
 import { useValidatePromocode } from "@/hooks/promocode/useValidatePromocode";
+import usePromocodeError from "@/stores/Promocode/promocodeError.store";
 
 interface IProps {
   name: string;
@@ -49,6 +50,7 @@ const CustomInput = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const isAnotherCarVisible = useOsagoApplyCarMark((state) => state.isAnotherCarMark);
+  const isPromocodeErrorStore = usePromocodeError((state) => state.isError);
   // const { isPromocodeLoading, promocodeResult, validatePromocode } =
   //   usePromocodeValidate();
 
@@ -116,7 +118,7 @@ const CustomInput = ({
       )}
 
       <div className={styles.inputWrapper}>
-      {inputType === 'phone' ? (
+        {inputType === "phone" ? (
           <IMaskInput
             id={name}
             mask="+7 (000) 000 00 00"
@@ -133,7 +135,7 @@ const CustomInput = ({
             required={required}
             inputRef={inputRef}
             className={`${styles.input} ${
-              isErrorMessage || isValidationError ? styles.error : ''
+              isErrorMessage || isValidationError ? styles.error : ""
             }`}
           />
         ) : (
@@ -143,19 +145,21 @@ const CustomInput = ({
             onBlur={() => setIsFocused(false)}
             onClick={isPointer ? () => setIsCalendarOpened(true) : undefined}
             readOnly={isPointer}
-            type={inputType === 'password' && !isPasswordVisible ? 'password' : 'text'}
+            type={inputType === "password" && !isPasswordVisible ? "password" : "text"}
             name={name}
             id={name}
             placeholder={placeholder}
             required={required}
-            value={value ?? ''}
+            value={value ?? ""}
             onChange={handleInputChange}
             className={`${styles.input}
-              ${isErrorMessage || isValidationError ? styles.error : ''}
-              ${isPointer ? styles.pointer : ''}
-              ${inputType === 'promocode' ? styles.promocode : ''}
+              ${isErrorMessage || isValidationError ? styles.error : ""}
+              ${isPointer ? styles.pointer : ""}
+              ${inputType === "promocode" ? styles.promocode : ""}
               ${
-                inputType === 'password' && !isPasswordVisible ? styles.passwordHidden : ''
+                inputType === "password" && !isPasswordVisible
+                  ? styles.passwordHidden
+                  : ""
               }`}
           />
         )}
@@ -180,7 +184,7 @@ const CustomInput = ({
         </InputNotification>
       )}
 
-      {isPromocodeError && (
+      {(isPromocodeError || (inputType === "promocode" && isPromocodeErrorStore)) && (
         <InputNotification variant="error">Промокод недействителен</InputNotification>
       )}
 

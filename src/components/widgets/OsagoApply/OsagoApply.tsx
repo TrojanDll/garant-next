@@ -30,6 +30,7 @@ import {
 } from "@/helpers/OsagoApply/pickOsagoApplyFormData";
 import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
 import useCurrientOsagoPolicy from "@/stores/Policy/currientOsagoPolicy";
+import usePromocodeError from "@/stores/Promocode/promocodeError.store";
 
 const OsagoApply = () => {
   const { config, isLoading } = useOsagoFormConfig();
@@ -44,10 +45,7 @@ const OsagoApply = () => {
   const setIsAnotherCarMark = useOsagoApplyCarMark((state) => state.setCarMarkValue);
   const currientPolicy = useCurrientOsagoPolicy((state) => state.policy);
   const setPolicy = useCurrientOsagoPolicy((state) => state.setPolicy);
-
-  useEffect(() => {
-    console.log(currientPolicy);
-  }, [currientPolicy]);
+  const setIsPromocodeError = usePromocodeError(state => state.setError)
 
   const { carsBrands, isLoading: isCarsBrandsLoading } = useGetCarBrands();
   const {
@@ -56,6 +54,7 @@ const OsagoApply = () => {
     isSuccess,
     mutate,
     data: createOsagoPolicyData,
+    isPromocodeError
   } = useCreateOsagoPolicy();
 
   useEffect(() => {
@@ -116,13 +115,15 @@ const OsagoApply = () => {
     if (isError) {
       toast.dismiss();
       toast.error("Ошибка при рассчете");
+      if (isPromocodeError) {
+        setIsPromocodeError(true)
+      }
     } else if (isSuccess) {
       if (createOsagoPolicyData) {
         setPolicy(createOsagoPolicyData.data);
       }
 
       toast.dismiss();
-      // toast.success("Готово");
 
       setTimeout(() => {
         navigateToOsagoConfirm();
@@ -184,7 +185,7 @@ const OsagoApply = () => {
               </div>
 
               <div className={styles.section}>
-                {config.duration && (
+                {config.promocode && (
                   <DynamicFormSection fields={config.promocode} control={control} />
                 )}
               </div>

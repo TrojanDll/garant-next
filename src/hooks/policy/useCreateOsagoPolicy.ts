@@ -1,10 +1,14 @@
+import { axiosWithAuth, isAxiosError } from "@/api/interceptors";
 import { policiesService } from "@/services/policies.service";
 import { ICreateOsagoPolicyRequest } from "@/types/policy.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { useState } from "react";
 
 export function useCreateOsagoPolicy() {
   const queryClient = useQueryClient();
+
+  const [isPromocodeError, setIsPromocodeError] = useState(false);
 
   const { mutate, isPending, data, isSuccess, isError } = useMutation({
     mutationKey: ["createOsagoPolicy"],
@@ -17,7 +21,9 @@ export function useCreateOsagoPolicy() {
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
-        console.log(error);
+        if (error?.response?.status === 422) {
+          setIsPromocodeError(true);
+        }
       }
     },
   });
@@ -28,5 +34,6 @@ export function useCreateOsagoPolicy() {
     data: data?.data,
     isSuccess,
     isError,
+    isPromocodeError,
   };
 }
