@@ -7,6 +7,7 @@ import SvgSelector from "../SvgSelector/SvgSelector";
 import Button from "../Button/Button";
 
 import styles from "./InputAsideElement.module.scss";
+import usePromocodeEvent from "@/stores/Promocode/promocodeEvent.store";
 
 interface IProps {
   inputType: TInputType;
@@ -23,6 +24,15 @@ const InputAsideElement = ({
   isLoading = true,
   isVisible = false,
 }: IProps) => {
+  const callTrigger = usePromocodeEvent((state) => state.callTrigger);
+
+  function handleClick() {
+    callTrigger();
+    if (onClick) {
+      onClick();
+    }
+  }
+
   return (
     <>
       {inputType === "date" && (
@@ -35,7 +45,7 @@ const InputAsideElement = ({
       {inputType === "promocode" && (
         <Button
           isLoading={isLoading}
-          onClickEvent={onClick}
+          onClickEvent={handleClick}
           type="button"
           className={`${className} ${styles.promocode}`}
         >

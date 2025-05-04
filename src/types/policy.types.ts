@@ -73,3 +73,17 @@ export interface IGetOsagoPolicyByCurrientUserResponse {
     NS: null;
   };
 }
+
+export interface IGetOsagoPaymentCalculationRequest {
+  transport_category: string;
+  duration_of_stay: string;
+  promo_code: string;
+}
+
+export interface IGetOsagoPaymentCalculationResponse {
+  status: boolean;
+  data: {
+    tarif: number;
+    discount: number;
+  };
+}

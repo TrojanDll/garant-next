@@ -31,6 +31,8 @@ import {
 import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
 import useCurrientOsagoPolicy from "@/stores/Policy/currientOsagoPolicy";
 import usePromocodeError from "@/stores/Promocode/promocodeError.store";
+import { useGetPaymentCalculation } from "@/hooks/policy/useGetPaymentCalculation";
+import usePromocodeEvent from "@/stores/Promocode/promocodeEvent.store";
 
 const OsagoApply = () => {
   const { config, isLoading } = useOsagoFormConfig();
@@ -40,12 +42,14 @@ const OsagoApply = () => {
     useForm<IOsagoApplyForm>();
 
   const [isCountButtonClicked, setIsCountButtonClicked] = useState<boolean>(false);
+  const [isCalculated, setIsCalculated] = useState<boolean>(false);
 
   const currientCar = useCurrientCar((state) => state.car);
   const setIsAnotherCarMark = useOsagoApplyCarMark((state) => state.setCarMarkValue);
   const currientPolicy = useCurrientOsagoPolicy((state) => state.policy);
   const setPolicy = useCurrientOsagoPolicy((state) => state.setPolicy);
-  const setIsPromocodeError = usePromocodeError(state => state.setError)
+  const setIsPromocodeError = usePromocodeError((state) => state.setError);
+  const setTrigger = usePromocodeEvent((state) => state.setTrigger);
 
   const { carsBrands, isLoading: isCarsBrandsLoading } = useGetCarBrands();
   const {
@@ -54,8 +58,22 @@ const OsagoApply = () => {
     isSuccess,
     mutate,
     data: createOsagoPolicyData,
-    isPromocodeError
+    isPromocodeError,
   } = useCreateOsagoPolicy();
+
+  const {
+    data: paymentCalculationData,
+    isError: isPaymentCalculationError,
+    isPending: isPaymentCalculationPending,
+    isSuccess: isPaymentCalculationSuccess,
+    mutate: mutatePaymentCalculation,
+  } = useGetPaymentCalculation();
+
+  useEffect(() => {
+    if (isPaymentCalculationSuccess && paymentCalculationData) {
+      console.log(paymentCalculationData);
+    }
+  }, [isPaymentCalculationPending]);
 
   useEffect(() => {
     async function resetValues() {
@@ -94,18 +112,38 @@ const OsagoApply = () => {
     mutate(formatedData);
   };
 
+  const watchedFieldsWithPromocode = watch([
+    "transport_category",
+    "duration_of_stay",
+    "promocode",
+  ]);
+  const watchedFields = watch(["transport_category", "duration_of_stay"]);
+
   const handleCountClick = () => {
     setIsCountButtonClicked(true);
+
+    handleMutatePaymentCalculation();
   };
 
-  const watchedFields = watch(["transport_category", "duration_of_stay"]);
+  const handleMutatePaymentCalculation = () => {
+    mutatePaymentCalculation({
+      transport_category: watchedFieldsWithPromocode[0],
+      duration_of_stay: watchedFieldsWithPromocode[1],
+      promo_code: watchedFieldsWithPromocode[2],
+    });
+  };
+
+  useEffect(() => {
+    setTrigger(() => {
+      setIsCountButtonClicked(false);
+    });
+  }, []);
 
   useEffect(() => {
     if (isCountButtonClicked && formState.isDirty) {
-      // Логика изменения цены будет здесь
-      // console.log(watchedFields[0]);
+      handleMutatePaymentCalculation();
     }
-  }, [watchedFields, isCountButtonClicked, formState.isDirty]);
+  }, [JSON.stringify(watchedFields), isCountButtonClicked, formState.isDirty]);
 
   useEffect(() => {
     if (isPending) {
@@ -116,7 +154,7 @@ const OsagoApply = () => {
       toast.dismiss();
       toast.error("Ошибка при рассчете");
       if (isPromocodeError) {
-        setIsPromocodeError(true)
+        setIsPromocodeError(true);
       }
     } else if (isSuccess) {
       if (createOsagoPolicyData) {
@@ -190,10 +228,12 @@ const OsagoApply = () => {
                 )}
               </div>
 
-              {isCountButtonClicked ? (
+              {isCountButtonClicked &&
+              !isPaymentCalculationPending &&
+              paymentCalculationData ? (
                 <CountedPrice
                   discount={100}
-                  finalCost={900}
+                  finalCost={paymentCalculationData.tarif}
                   preliminaryCost={1000}
                   className={styles.priceWrapper}
                 />
@@ -203,6 +243,7 @@ const OsagoApply = () => {
                   className={styles.countButton}
                   variant="wide"
                   onClickEvent={handleCountClick}
+                  isLoading={isPaymentCalculationPending}
                 >
                   Рассчитать
                 </Button>

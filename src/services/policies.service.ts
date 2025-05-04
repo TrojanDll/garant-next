@@ -2,6 +2,8 @@ import { axiosClassic, axiosWithAuth } from "@/api/interceptors";
 import {
   ICreateOsagoPolicyRequest,
   ICreateOsagoPolicyResponse,
+  IGetOsagoPaymentCalculationRequest,
+  IGetOsagoPaymentCalculationResponse,
   IGetOsagoPolicyByCurrientUserResponse,
   IGetOsagoPolicyByIdRequest,
   IGetOsagoPolicyByIdResponse,
@@ -26,6 +28,13 @@ class PoliciesService {
   async getPoliciesByCurrientUser() {
     const response = await axiosWithAuth.get<IGetOsagoPolicyByCurrientUserResponse>(
       "/api/getUserPolicy"
+    );
+    return response;
+  }
+
+  async getPaymentCalculation(data: IGetOsagoPaymentCalculationRequest) {
+    const response = await axiosWithAuth.get<IGetOsagoPaymentCalculationResponse>(
+      `/api/getPaymentCalculation?transport_category=${data.transport_category}&duration_of_stay=${data.duration_of_stay}&promo_code=${data.promo_code}`
     );
     return response;
   }
