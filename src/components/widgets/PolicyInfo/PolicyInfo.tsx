@@ -73,6 +73,7 @@ const PolicyInfo = ({ className }: IProps) => {
   useEffect(() => {
     if (policyType === EPolicyTypes.OSAGO && data) {
       setPolicyNumber(data.osaga_number);
+      console.log(data);
     }
   }, [policyType, isPending, isSuccess]);
 

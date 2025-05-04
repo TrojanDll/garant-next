@@ -232,9 +232,12 @@ const OsagoApply = () => {
               !isPaymentCalculationPending &&
               paymentCalculationData ? (
                 <CountedPrice
-                  discount={100}
-                  finalCost={paymentCalculationData.tarif}
-                  preliminaryCost={1000}
+                  discount={
+                    Number(paymentCalculationData.base_tarif) -
+                    Number(paymentCalculationData.tarif)
+                  }
+                  finalCost={Number(paymentCalculationData.tarif)}
+                  preliminaryCost={Number(paymentCalculationData.base_tarif)}
                   className={styles.priceWrapper}
                 />
               ) : (

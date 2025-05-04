@@ -32,7 +32,7 @@ export interface IOsagoPolicy {
   updated_at: string;
   osaga_number: string; // сори, это бекендер такой грамотный, еще и менять поля отказался
   duration_of_stay: string;
-  discount_amount: string | null;
+  discount_amount: string;
 }
 
 export interface ICreateOsagoPolicyRequest {
@@ -83,7 +83,8 @@ export interface IGetOsagoPaymentCalculationRequest {
 export interface IGetOsagoPaymentCalculationResponse {
   status: boolean;
   data: {
-    tarif: number;
-    discount: number;
+    base_tarif: string;
+    tarif: string;
+    discount: string;
   };
 }

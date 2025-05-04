@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 import styles from "./OsagoConfirm.module.scss";
 
@@ -13,9 +13,30 @@ import Link from "next/link";
 import { PAGES } from "@/config/pages-url.config";
 import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
 
+interface IAmounts {
+  discount: number;
+  finalCost: number;
+  preliminaryCost: number;
+}
+
 const OsagoConfirm = () => {
   const policy = useCurrientOsagoPolicy((state) => state.policy);
-  // const setCurrientPolicy = useCurrientOsagoPolicy((state) => state.setPolicy);
+  // const [amounts, setAmounts] = useState<IAmounts>();
+
+  // function countAmount() {
+  //   let amounts: IAmounts = {
+  //     discount: 0,
+  //     finalCost: 0,
+  //     preliminaryCost: 0,
+  //   };
+
+  //   if (policy) {
+
+  //     amounts.finalCost = +policy.amount_to_be_paid;
+  //     amounts.discount = +policy.
+  //     amounts.preliminaryCost = +policy.amount_to_be_paid / (1 - +policy.discount_amount)
+  //   }
+  // }
 
   return (
     <section>
@@ -36,13 +57,15 @@ const OsagoConfirm = () => {
           </Link>
         </Substrate>
 
-        <CountedPrice
-          isIsolated={true}
-          discount={100}
-          finalCost={900}
-          preliminaryCost={1000}
-          className={styles.priceWrapper}
-        />
+        {policy && (
+          <CountedPrice
+            isIsolated={true}
+            discount={+policy?.discount_amount}
+            finalCost={+policy?.amount_to_be_paid - +policy?.discount_amount}
+            preliminaryCost={+policy?.amount_to_be_paid}
+            className={styles.priceWrapper}
+          />
+        )}
       </ContentContainer>
     </section>
   );
