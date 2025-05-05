@@ -1,0 +1,132 @@
+.root {
+  position: relative;
+  margin-top: 15px;
+  font-size: 16px;
+  font-family: var(--font-family);
+  display: flex;
+  justify-content: flex-start;
+  overflow: visible;
+}
+
+.formWrapper {
+  flex-shrink: 0;
+  padding: 40px 20px 40px 40px;
+  width: 42%;
+  z-index: 1;
+}
+
+.imageWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 58%;
+  z-index: 0;
+  pointer-events: none;
+  border-bottom-left-radius: 22px;
+  border-bottom-right-radius: 22px;
+  overflow: hidden;
+}
+
+.image {
+  height: auto;
+  width: 100%;
+  object-fit: cover;
+  object-position: left;
+}
+
+.osagoImage {
+  transform: translate(67px, 2px);
+}
+
+.nsImage {
+  transform: translate(55px, -14px);
+}
+
+.price {
+  margin-top: 30px;
+}
+
+.descr {
+  margin-top: 20px;
+}
+
+.applyButton {
+  margin-top: 45px;
+}
+
+.required {
+  width: fit-content;
+  margin-bottom: 45px;
+  border: 1px solid var(--red);
+  border-radius: 55px;
+  background: var(--pink);
+  padding: 6px 25px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 128%;
+  color: var(--red);
+}
+
+@media (max-width: 1500px) {
+  .nsImage {
+    width: 120%;
+    height: 120%;
+    transform: translate(55px, 49px);
+  }
+
+  .osagoImage {
+    width: 120%;
+    height: 120%;
+    transform: translate(-16px, 2px);
+  }
+}
+
+@media (max-width: 1149px) {
+  .root {
+    display: block;
+    width: 100%;
+  }
+
+  .formWrapper {
+    width: 100%;
+    max-width: none;
+    padding: 20px;
+    padding-bottom: 0;
+  }
+
+  .imageWrapper {
+    position: relative;
+    width: 100%;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+
+  .image {
+    width: 120%;
+  }
+
+  .nsImage {
+    transform: translateX(-9%) translateY(13%);
+  }
+
+  .osagoImage {
+    transform: translateX(-11%) translateY(13%);
+    width: 130%;
+  }
+
+  .descr {
+    margin-top: 10px;
+  }
+
+  .applyButton {
+    margin: 0 auto;
+    margin-top: 25px;
+  }
+
+  .required {
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+}

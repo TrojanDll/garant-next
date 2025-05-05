@@ -1,4 +1,3 @@
-import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
 import Advantages from "@/components/widgets/Advantages/Advantages";
 import CalculatorPromo from "@/components/widgets/CalculatorPromo/CalculatorPromo";
 import DiscountBanner from "@/components/widgets/DiscountBanner/DiscountBanner";

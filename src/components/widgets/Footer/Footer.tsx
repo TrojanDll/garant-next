@@ -31,7 +31,7 @@ const Footer = () => {
             <Link className={styles.link} href={PAGES.NS}>
               От несчастного случая
             </Link>
-            <Link className={styles.link} href={PAGES.CALCULATOR}>
+            <Link className={styles.link} href={PAGES.HOME}>
               Калькулятор стоимости
             </Link>
             <Link className={styles.link} href={PAGES.DOCUMENTS}>

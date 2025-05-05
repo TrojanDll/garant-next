@@ -1,9 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
-
-import { IFieldConfig } from "@/types/IFieldConfig";
 
 import Substrate from "@/components/ui/Substrate/Substrate";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
