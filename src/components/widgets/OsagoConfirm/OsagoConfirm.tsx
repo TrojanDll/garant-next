@@ -13,30 +13,8 @@ import Link from "next/link";
 import { PAGES } from "@/config/pages-url.config";
 import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
 
-interface IAmounts {
-  discount: number;
-  finalCost: number;
-  preliminaryCost: number;
-}
-
 const OsagoConfirm = () => {
   const policy = useCurrientOsagoPolicy((state) => state.policy);
-  // const [amounts, setAmounts] = useState<IAmounts>();
-
-  // function countAmount() {
-  //   let amounts: IAmounts = {
-  //     discount: 0,
-  //     finalCost: 0,
-  //     preliminaryCost: 0,
-  //   };
-
-  //   if (policy) {
-
-  //     amounts.finalCost = +policy.amount_to_be_paid;
-  //     amounts.discount = +policy.
-  //     amounts.preliminaryCost = +policy.amount_to_be_paid / (1 - +policy.discount_amount)
-  //   }
-  // }
 
   return (
     <section>
