@@ -13,3 +13,16 @@
   column-gap: 40px;
 }
 
+@media (max-width: 1149px) {
+  .substrate {
+    padding: 20px;
+  }
+
+  .items {
+    display: block;
+  }
+
+  .item {
+    margin-top: 40px;
+  }
+}

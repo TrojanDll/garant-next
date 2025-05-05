@@ -19,7 +19,7 @@ export interface IAudienceInfoItemProps {
 
 const AudienceInfoItem = ({ cardInfo, className }: IAudienceInfoItemProps) => {
   return (
-    <div className={styles.root}>
+    <div className={`${styles.root} ${className}`}>
       <Image
         className={styles.image}
         src={cardInfo.imageUrl}
