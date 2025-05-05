@@ -45,7 +45,7 @@ const FAQ = () => {
   return (
     <ContentContainer>
       <section className={styles.root}>
-        <CustomTitle tag="h2" isCentered>Ответы на вопросы</CustomTitle>
+        <CustomTitle tag="h2" isCentered isLarge>Ответы на вопросы</CustomTitle>
 
         <div className={styles.FAQItemsWrapper}>
           {FAQItems.map((item, i) => (

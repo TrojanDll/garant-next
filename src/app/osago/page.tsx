@@ -1,4 +1,5 @@
 import Advantages from "@/components/widgets/Advantages/Advantages";
+import AudienceInfoBlock from "@/components/widgets/AudienceInfoBlock/AudienceInfoBlock";
 import DiscountBanner from "@/components/widgets/DiscountBanner/DiscountBanner";
 import FAQ from "@/components/widgets/FAQ/FAQ";
 import PolicyPromo from "@/components/widgets/PolicyPromo/PolicyPromo";
@@ -13,7 +14,7 @@ export default function OsagoPage() {
     <div>
       <DiscountBanner />
       <PolicyPromo variant="osago" />
-      <Advantages />
+      <AudienceInfoBlock />
       <ReviwesYandex />
       <FAQ />
     </div>

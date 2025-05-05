@@ -16,6 +16,10 @@
   line-height: 123%;
 }
 
+.h2.large {
+  font-size: 36px;
+}
+
 .h3 {
   font-weight: 500;
   font-size: 18px;
@@ -36,6 +40,10 @@
   .h2 {
     font-size: 18px;
     line-height: 128%;
+  }
+
+  .h2.large {
+    font-size: 20px;
   }
 
   .h3 {

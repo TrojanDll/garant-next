@@ -7,7 +7,7 @@ const ReviwesYandex = () => {
   return (
     <ContentContainer>
       <section className={styles.root}>
-        <CustomTitle tag="h2" isCentered>
+        <CustomTitle tag="h2" isCentered className={styles.title} isLarge>
           Отзывы о нас
         </CustomTitle>
 
@@ -23,7 +23,10 @@ const ReviwesYandex = () => {
             }}
             src="https://yandex.ru/maps-reviews-widget/153937465584?comments"
           ></iframe>
-          <a href="https://yandex.ru/maps/org/usadba_izmaylovo/153937465584/" target="_blank">
+          <a
+            href="https://yandex.ru/maps/org/usadba_izmaylovo/153937465584/"
+            target="_blank"
+          >
             Усадьба Измайлово на карте Москвы — Яндекс.Карты
           </a>
         </div>
