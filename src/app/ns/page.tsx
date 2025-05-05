@@ -1,4 +1,3 @@
-import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
 import AudienceInfoBlock from "@/components/widgets/AudienceInfoBlock/AudienceInfoBlock";
 import DiscountBanner from "@/components/widgets/DiscountBanner/DiscountBanner";
 import FAQ from "@/components/widgets/FAQ/FAQ";

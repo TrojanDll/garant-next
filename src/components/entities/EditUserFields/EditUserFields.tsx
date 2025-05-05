@@ -30,12 +30,12 @@ const EditUserFields = ({ control }: IProps) => {
                   message: "Некорректный email",
                 },
               }),
-              ...(isPhone && {
-                pattern: {
-                  value: /^(\+7|7|8)?\d{10}$/,
-                  message: "Неверный формат номера",
-                },
-              }),
+              // ...(isPhone && {
+              //   pattern: {
+              //     value: /^(\+7|7|8)?\d{10}$/,
+              //     message: "Неверный формат номера",
+              //   },
+              // }),
             }}
             render={({ field, fieldState }) => (
               <CustomInput

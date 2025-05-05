@@ -14,6 +14,7 @@ import { useGetCurrientUser } from "@/hooks/user/useGetCurrientUser";
 import {
   formatPhoneNumber,
   formatPhoneNumberToInput,
+  formatPhoneNumberToWithBrackets,
 } from "@/helpers/user/formatPhoneNumber.helper";
 import { useEditCurrientUser } from "@/hooks/user/useEditCurrientUser";
 import toast from "react-hot-toast";
@@ -43,9 +44,7 @@ const EditPersonalData = () => {
   const { navigateToDashboard } = useNavigation();
 
   const onSubmit: SubmitHandler<IEditUserForm> = (data) => {
-    console.log(data);
-
-    const formatedPhone = formatPhoneNumber(data.phone);
+    const formatedPhone = formatPhoneNumberToWithBrackets(data.phone);
     const formatedDateOfBirth = data.date_of_birth ? data.date_of_birth : "";
     mutate({ ...data, phone: formatedPhone, date_of_birth: formatedDateOfBirth });
   };

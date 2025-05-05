@@ -24,6 +24,22 @@ export function formatPhoneNumberToClient(phone: string | undefined): string {
   return `+${country} (${code}) ${part1} ${part2} ${part3}`;
 }
 
+export function formatPhoneNumberToWithBrackets(
+  phone: string | undefined | null
+): string {
+  const digitsOnly = phone ? phone.replace(/\D/g, "") : "";
+
+  if (!digitsOnly.startsWith("7")) {
+    throw new Error("Номер должен начинаться с кода страны 7");
+  }
+
+  const countryCode = digitsOnly.slice(0, 1);
+  const areaCode = digitsOnly.slice(1, 4);
+  const mainNumber = digitsOnly.slice(4);
+
+  return `${countryCode}(${areaCode})${mainNumber}`;
+}
+
 export function formatPhoneNumberToInput(phone: string | undefined): string {
   const digitsOnly = phone ? phone.replace(/\D/g, "") : "";
 
