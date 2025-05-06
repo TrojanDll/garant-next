@@ -9,6 +9,11 @@ export const enum EPolicyStatus {
   EXPIRED = "expired",
 }
 
+export const enum EGenders {
+  MAN = "Мужчина",
+  WOMAN = "Женщина",
+}
+
 export interface IOsagoPolicy {
   id: number;
   transport_category: string;
@@ -87,4 +92,41 @@ export interface IGetOsagoPaymentCalculationResponse {
     tarif: string;
     discount: string;
   };
+}
+
+export interface IInsured {
+  id: number;
+  NS_id: number;
+  fio: string;
+  gender: EGenders;
+  date_of_birth: string;
+  passport_number: string;
+}
+
+export type IInsuredCreationFilelds = Omit<IInsured, "id" | "NS_id">;
+
+export interface ICreateNsPolicyRequest {
+  insured: IInsuredCreationFilelds[];
+  duration_of_stay: string;
+  start_date: string;
+  promocode: string;
+}
+
+export interface ICreateNsPolicyResponseData {
+  id: number;
+  duration_of_stay: string;
+  start_date: string;
+  finish_date: string;
+  amount_to_be_paid: string;
+  NS_number: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+  promocode: string;
+  get_peoples: IInsured[];
+}
+
+export interface ICreateNsPolicyResponse {
+  success: boolean;
+  data: ICreateNsPolicyResponseData;
 }
