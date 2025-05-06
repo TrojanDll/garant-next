@@ -1,5 +1,9 @@
 import { axiosClassic, axiosWithAuth } from "@/api/interceptors";
 import {
+  ICalculateNsPolicyRequest,
+  ICalculateNsPolicyResponse,
+  ICreateNsPolicyRequest,
+  ICreateNsPolicyResponse,
   ICreateOsagoPolicyRequest,
   ICreateOsagoPolicyResponse,
   IGetOsagoPaymentCalculationRequest,
@@ -35,6 +39,22 @@ class PoliciesService {
   async getPaymentCalculation(data: IGetOsagoPaymentCalculationRequest) {
     const response = await axiosWithAuth.get<IGetOsagoPaymentCalculationResponse>(
       `/api/getPaymentCalculation?transport_category=${data.transport_category}&duration_of_stay=${data.duration_of_stay}&promo_code=${data.promo_code}`
+    );
+    return response;
+  }
+
+  async createNsPolicy(data: ICreateNsPolicyRequest) {
+    const response = await axiosWithAuth.post<ICreateNsPolicyResponse>(
+      "/api/add_NS",
+      data
+    );
+    return response;
+  }
+
+  async calculateNsPolicy(data: ICalculateNsPolicyRequest) {
+    const response = await axiosWithAuth.post<ICalculateNsPolicyResponse>(
+      "/api/NS_colculate",
+      data
     );
     return response;
   }
