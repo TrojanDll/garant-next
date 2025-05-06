@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./SelectFilter.module.scss";
 
@@ -20,11 +20,24 @@ interface IProps {
   options: IOption[];
   setValue?: (value: IOption) => void;
   selectedValue?: IOption | null | undefined;
+  defaultValueIndex?: number;
 }
 
-const SelectFilter = ({ className, options, selectedValue, setValue }: IProps) => {
+const SelectFilter = ({
+  className,
+  options,
+  selectedValue,
+  setValue,
+  defaultValueIndex,
+}: IProps) => {
   const [isSelectOpened, setIsSelectOpened] = useState(false);
   const [isJustSelected, setIsJustSelected] = useState(false);
+
+  useEffect(() => {
+    if (defaultValueIndex !== undefined && setValue) {
+      setValue(options[defaultValueIndex]);
+    }
+  }, []);
 
   function handleChange(option: IOption) {
     if (setValue) {
@@ -47,7 +60,6 @@ const SelectFilter = ({ className, options, selectedValue, setValue }: IProps) =
 
   return (
     <div className={`${className}`}>
-      
       <Select
         value={selectedValue ? selectedValue : null}
         isSearchable={false}

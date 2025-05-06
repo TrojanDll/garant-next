@@ -11,6 +11,7 @@ import { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
 const buttonGroupItems: string[] = ["Активные", "Архив", "Ожидают оплаты"];
 
 const options: IOptions[] = [
+  { label: "Все категории", value: "all" },
   { label: "ОСАГО", value: "osago" },
   { label: "НС", value: "ns" },
 ];
@@ -25,6 +26,7 @@ const MyPoliciesFilters = () => {
         options={options}
         selectedValue={value}
         setValue={(value: IOptions) => setValue(value)}
+        defaultValueIndex={0}
       />
     </div>
   );
