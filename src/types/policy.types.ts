@@ -98,7 +98,7 @@ export interface IInsured {
   id: number;
   NS_id: number;
   fio: string;
-  gender: EGenders;
+  gender: string;
   date_of_birth: string;
   passport_number: string;
 }

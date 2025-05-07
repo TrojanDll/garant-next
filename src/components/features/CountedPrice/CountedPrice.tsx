@@ -32,7 +32,7 @@ const CountedPrice = ({
         <div className={styles.preliminaryCost}>{preliminaryCost} ₽</div>
       </div>
 
-      {discount && (
+      {discount !== 0 && (
         <div className={styles.priceRow}>
           <div className={styles.priceRowTitle}>Скидка (промокод)</div>
           <div className={styles.discount}>-{discount} ₽</div>

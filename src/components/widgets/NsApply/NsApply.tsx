@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./NsApply.module.scss";
 
@@ -16,6 +16,13 @@ import {
 import NsApplyInsuredList from "@/components/features/NsApplyInsuredList/NsApplyInsuredList";
 import Button from "@/components/ui/Button/Button";
 import NsApplyStaticFields from "@/components/entities/NsApplyStaticFields/NsApplyStaticFields";
+import { useCalculateNs } from "@/hooks/policy/useCalculateNs";
+import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
+import usePromocodeError from "@/stores/Promocode/promocodeError.store";
+import toast from "react-hot-toast";
+import usePromocodeEvent from "@/stores/Promocode/promocodeEvent.store";
+import { useCreateNsPolicy } from "@/hooks/policy/useCreateNsPolicy";
+import { formatDataToCreateNsPolicy } from "@/helpers/NsApply/formatDataToCreateNsPolicy.helper";
 
 export const defaultInsuredValues: IInsuredCreationFilelds = {
   date_of_birth: "",
@@ -25,7 +32,31 @@ export const defaultInsuredValues: IInsuredCreationFilelds = {
 };
 
 const NsApply = () => {
-  const { control, handleSubmit } = useForm<ICreateNsPolicyRequest>({
+  const [isCalculatedBlockVisible, setIsCalculatedBlockVisible] =
+    useState<boolean>(false);
+
+  const {
+    data: calculateNsData,
+    isError: isCalculateNsError,
+    isPending: isCalculateNsPending,
+    isSuccess: isCalculateNsSuccess,
+    isPromocodeError,
+    mutate: calculateNsMutate,
+  } = useCalculateNs();
+
+  const {
+    data: createPolicyResponseData,
+    isError: isCreatePolicyError,
+    isPending: isCreatePolicyPending,
+    isPromocodeError: isPromocodeErrorPolicy,
+    isSuccess: isCreatePolicySuccess,
+    mutate: createPolicyMutate,
+  } = useCreateNsPolicy();
+
+  const setTrigger = usePromocodeEvent((state) => state.setTrigger);
+  const setPromocodeError = usePromocodeError((state) => state.setError);
+
+  const { control, handleSubmit, watch, formState } = useForm<ICreateNsPolicyRequest>({
     defaultValues: {
       insured: [defaultInsuredValues],
       duration_of_stay: "",
@@ -39,13 +70,73 @@ const NsApply = () => {
     control,
   });
 
-  function onSubmit(data: ICreateNsPolicyRequest): void {
-    console.log("form data:", data);
+  useEffect(() => {
+    setTrigger(() => {
+      setIsCalculatedBlockVisible(false);
+    });
+  }, []);
+
+  const watchedFields = watch(["duration_of_stay", "promocode", "insured"]);
+  const durationOfStayFieldWatch = watch(["duration_of_stay"]);
+
+  function handleCalculateClick() {
+    setPromocodeError(false);
+
+    const calculateNDataToCalculate = {
+      duration_of_stay: watchedFields[0],
+      promocode: watchedFields[1],
+      quantity: watchedFields[2].length,
+    };
+
+    setIsCalculatedBlockVisible(true);
+    calculateNsMutate(calculateNDataToCalculate);
   }
 
   useEffect(() => {
-    console.log(fields);
-  }, [fields]);
+    if (isCalculateNsPending) {
+      toast.loading("Загрузка");
+    } else {
+      toast.dismiss();
+    }
+
+    if (isCalculateNsError && !isPromocodeError) {
+      toast.error("Ошибка. Проверьте заполненные данные");
+    } else if (isCalculateNsError && isPromocodeError) {
+      toast.error("Укажите верный промокод или оставьте поле пустым");
+    }
+  }, [isCalculateNsPending]);
+
+  useEffect(() => {
+    if (isCreatePolicyPending) {
+      toast.loading("Загрузка");
+    } else {
+      toast.dismiss();
+    }
+
+    if (isCreatePolicyError && !isPromocodeErrorPolicy) {
+      toast.error("Ошибка. Проверьте заполненные данные");
+    } else if (isCreatePolicyError && isPromocodeErrorPolicy) {
+      toast.error("Укажите верный промокод или оставьте поле пустым");
+    } else if (isCreatePolicySuccess) {
+      toast.success("Полис успешно создан");
+    }
+  }, [isCreatePolicyPending]);
+
+  useEffect(() => {
+    if (isCalculatedBlockVisible && formState.isDirty) {
+      handleCalculateClick();
+    }
+  }, [
+    JSON.stringify(durationOfStayFieldWatch),
+    isCalculatedBlockVisible,
+    formState.isDirty,
+  ]);
+
+  function onSubmit(data: ICreateNsPolicyRequest): void {
+    console.log("form data:", data);
+
+    createPolicyMutate(formatDataToCreateNsPolicy(data));
+  }
 
   return (
     <section className={styles.root}>
@@ -67,9 +158,24 @@ const NsApply = () => {
               <NsApplyStaticFields control={control} />
             </div>
 
-            <Button type="submit" variant="wide" className={styles.submitButton}>
-              Рассчитать
-            </Button>
+            {calculateNsData && isCalculateNsSuccess && isCalculatedBlockVisible ? (
+              <CountedPrice
+                className={styles.countedPrice}
+                finalCost={calculateNsData.to_be_paid}
+                preliminaryCost={calculateNsData.base_tariff}
+                discount={calculateNsData.discount}
+              />
+            ) : (
+              <Button
+                type="button"
+                variant="wide"
+                className={styles.submitButton}
+                onClickEvent={handleCalculateClick}
+                isLoading={isCalculateNsPending}
+              >
+                Рассчитать
+              </Button>
+            )}
           </Substrate>
         </form>
       </ContentContainer>
