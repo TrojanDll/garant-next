@@ -24,9 +24,35 @@
   margin-top: 40px;
   display: flex;
   align-items: center;
+  column-gap: 7px;
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 18px;
   line-height: 128%;
   color: var(--red2);
+}
+
+@media (max-width: 1149px) {
+  .root {
+    border-radius: 0;
+    padding: 0;
+    padding-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid var(--light-grey-2);
+  }
+
+  .fieldsRow {
+    display: block;
+    margin-top: 0;
+  }
+
+  .input {
+    margin-top: 30px;
+    width: 100%;
+  }
+
+  .inputWrapper {
+    margin-top: 30px;
+    width: 100%;
+  }
 }
