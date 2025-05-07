@@ -1,0 +1,18 @@
+.fieldsRow {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 70px;
+}
+
+.input {
+  width: 50%;
+}
+
+.fieldsRow {
+  margin-top: 40px;
+}
+
+.promocodeInput {
+  margin-top: 100px;
+  width: calc(50% - 35px);
+}

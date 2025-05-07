@@ -18,3 +18,15 @@
 .inputWrapper {
   width: 50%;
 }
+
+.removeButton {
+  margin: 0 auto;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 128%;
+  color: var(--red2);
+}

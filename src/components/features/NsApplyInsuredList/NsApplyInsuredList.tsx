@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { v4 as uuidv4 } from "uuid";
+import styles from "./NsApplyInsuredList.module.scss";
 
 import { ICreateNsPolicyRequest } from "@/types/policy.types";
 import {
@@ -22,39 +22,32 @@ interface IProps {
   remove: UseFieldArrayRemove;
 }
 
-// const insuredIds: string[] = [`${uuidv4()}`];
-
 const NsApplyInsuredList = ({ control, fields, append, remove }: IProps) => {
+  const MAX_INSURED_COUNT = 5;
+
   return (
     <div>
-      {/* {fields.map((field, index) => (
-        <NsApplyInsuredListItem
-          control={control}
-          itemIndex={index}
-          key={field.id}
-        />
-      ))} */}
-      {/* {insuredListItems} */}
-
       {fields.map((field, index) => (
-        <NsApplyInsuredListItem
-          removeItem={() => remove(index)}
-          control={control}
-          itemIndex={index}
-          key={field.id}
-          field={field}
-        />
+        <div key={field.id} className={styles.listItem}>
+          <NsApplyInsuredListItem
+            removeItem={() => remove(index)}
+            control={control}
+            itemIndex={index}
+            field={field}
+          />
+        </div>
       ))}
 
-      <Button
-        type="button"
-        onClickEvent={() => {
-          console.log("click");
-          append(defaultInsuredValues);
-        }}
-      >
-        add
-      </Button>
+      {fields.length < MAX_INSURED_COUNT && (
+        <Button
+          className={styles.appendButton}
+          type="button"
+          onClickEvent={() => append(defaultInsuredValues)}
+          style="outlined"
+        >
+          + Добавить застрахованного
+        </Button>
+      )}
     </div>
   );
 };

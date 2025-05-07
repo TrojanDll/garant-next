@@ -15,6 +15,7 @@ import {
 } from "@/types/policy.types";
 import NsApplyInsuredList from "@/components/features/NsApplyInsuredList/NsApplyInsuredList";
 import Button from "@/components/ui/Button/Button";
+import NsApplyStaticFields from "@/components/entities/NsApplyStaticFields/NsApplyStaticFields";
 
 export const defaultInsuredValues: IInsuredCreationFilelds = {
   date_of_birth: "",
@@ -61,9 +62,15 @@ const NsApply = () => {
               append={append}
               remove={remove}
             />
-          </Substrate>
 
-          <Button type="submit">submit</Button>
+            <div className={styles.staticFieldsWrapper}>
+              <NsApplyStaticFields control={control} />
+            </div>
+
+            <Button type="submit" variant="wide" className={styles.submitButton}>
+              Рассчитать
+            </Button>
+          </Substrate>
         </form>
       </ContentContainer>
     </section>
