@@ -75,8 +75,8 @@ const NsApplyStaticFields = ({ control }: IProps) => {
             setValue={field.onChange}
             value={field.value}
             errorMessage={fieldState.error?.message}
-            label="Дата начала"
-            placeholder="Выберите дату"
+            label="Промокод (если есть)"
+            placeholder="Введите промокод"
             inputType="promocode"
           />
         )}
