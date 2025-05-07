@@ -1,0 +1,20 @@
+.root {
+  border: 1px solid var(--light-grey-2);
+  border-radius: 25px;
+  padding: 30px;
+}
+
+.fieldsRow {
+  margin-top: 40px;
+  display: flex;
+  column-gap: 70px;
+  align-items: flex-end;
+}
+
+.input {
+  width: 50%;
+}
+
+.inputWrapper {
+  width: 50%;
+}

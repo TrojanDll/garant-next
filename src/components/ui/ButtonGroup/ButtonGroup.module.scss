@@ -2,6 +2,7 @@ $button-gap: 25px;
 $button-gap-mobile: 15px;
 
 .container {
+  height: fit-content;
   position: relative;
   display: inline-flex;
   border-radius: 22px;
