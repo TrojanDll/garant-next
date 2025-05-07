@@ -14,10 +14,10 @@ interface IProps {
   control: Control<ICreateNsPolicyRequest, any, ICreateNsPolicyRequest>;
   itemIndex: number;
   removeItem: () => void;
-  id: string;
+  field: FieldArrayWithId<ICreateNsPolicyRequest, "insured", "id">
 }
 
-const NsApplyInsuredListItem = ({ control, itemIndex, removeItem, id }: IProps) => {
+const NsApplyInsuredListItem = ({ control, itemIndex, removeItem, field }: IProps) => {
   function handleChangeButtonGroup(
     buttonGroupRequest: TButtonGroupRequest,
     onChange: (...event: any[]) => void
@@ -34,12 +34,12 @@ const NsApplyInsuredListItem = ({ control, itemIndex, removeItem, id }: IProps) 
 
   return (
     <div className={styles.root}>
-      <CustomTitle tag="h2">Застрахованный {++itemIndex}</CustomTitle>
+      <CustomTitle tag="h2">Застрахованный {itemIndex + 1}</CustomTitle>
 
       <div className={styles.fieldsRow}>
         <Controller
           control={control}
-          key={`insured.fio.${id}`}
+          key={`insured.fio.${itemIndex}`}
           name={`insured.${itemIndex}.fio`}
           rules={{
             required: "Обязательное поле",
@@ -65,7 +65,7 @@ const NsApplyInsuredListItem = ({ control, itemIndex, removeItem, id }: IProps) 
             rules={{
               required: "Обязательное поле",
             }}
-            render={({ field: fieldRender, fieldState }) => (
+            render={({ field: fieldRender }) => (
               <ButtonGroup
                 items={[EGenders.MAN, EGenders.WOMAN]}
                 defaultActiveIndex={0}

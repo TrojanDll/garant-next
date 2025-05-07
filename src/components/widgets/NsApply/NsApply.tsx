@@ -24,14 +24,9 @@ export const defaultInsuredValues: IInsuredCreationFilelds = {
 };
 
 const NsApply = () => {
-  const {
-    control,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ICreateNsPolicyRequest>({
+  const { control, handleSubmit } = useForm<ICreateNsPolicyRequest>({
     defaultValues: {
-      insured: [],
+      insured: [defaultInsuredValues],
       duration_of_stay: "",
       promocode: "",
       start_date: "",
@@ -48,11 +43,6 @@ const NsApply = () => {
   }
 
   useEffect(() => {
-    // append(defaultInsuredValues);
-    // append(defaultInsuredValues);
-  }, []);
-
-  useEffect(() => {
     console.log(fields);
   }, [fields]);
 
@@ -65,7 +55,12 @@ const NsApply = () => {
 
         <form action="" noValidate onSubmit={handleSubmit(onSubmit)}>
           <Substrate withShadow="light" className={styles.substrate}>
-            <NsApplyInsuredList control={control} fields={fields} />
+            <NsApplyInsuredList
+              control={control}
+              fields={fields}
+              append={append}
+              remove={remove}
+            />
           </Substrate>
 
           <Button type="submit">submit</Button>
