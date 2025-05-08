@@ -24,7 +24,7 @@ const OsagoPolicyInfoFields = ({ data, className }: IProps) => {
         <CarInfoItem
           className={styles.contentItem}
           name="Транспортное средство"
-          value={data.brand}
+          value={`${data.brand} ${data.model}`}
         />
         <CarInfoItem
           className={styles.contentItem}
