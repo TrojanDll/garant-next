@@ -25,6 +25,8 @@ import usePromocodeEvent from "@/stores/Promocode/promocodeEvent.store";
 import { useCreateNsPolicy } from "@/hooks/policy/useCreateNsPolicy";
 import { formatDataToCreateNsPolicy } from "@/helpers/NsApply/formatDataToCreateNsPolicy.helper";
 import { useNsApplyFormHandlers } from "@/hooks/policy/useNsApplyFormHandlers";
+import { useNavigation } from "@/hooks/navigation/useNavigation";
+import useCurrientNsPolicy from "@/stores/Policy/currientNsPolicy";
 
 export const defaultInsuredValues: IInsuredCreationFilelds = {
   date_of_birth: "",
@@ -47,6 +49,7 @@ const NsApply = () => {
   } = useCalculateNs();
 
   const {
+    data: createPolicyData,
     isError: isCreatePolicyError,
     isPending: isCreatePolicyPending,
     isPromocodeError: isPromocodeErrorPolicy,
@@ -56,6 +59,12 @@ const NsApply = () => {
 
   const setTrigger = usePromocodeEvent((state) => state.setTrigger);
   const setPromocodeError = usePromocodeError((state) => state.setError);
+  const setCurrientNsPolicy = useCurrientNsPolicy((state) => state.setPolicy);
+  const setCurrientNsPolicyCalculation = useCurrientNsPolicy(
+    (state) => state.setCalculationData
+  );
+
+  const { navigateToNsConfirm } = useNavigation();
 
   const { control, handleSubmit, watch, formState } = useForm<ICreateNsPolicyRequest>({
     defaultValues: {
@@ -106,7 +115,19 @@ const NsApply = () => {
           : "Проверьте данные"
       );
 
-    if (isCreatePolicySuccess) toast.success("Полис успешно создан");
+    if (isCreatePolicySuccess) {
+      toast.success("Полис успешно создан");
+
+      // Полис создан - записываем результат calculation и creation в store,
+      // чтобы на странице confirm эти данные использовать
+      // и избежать лишних запросов
+      setCurrientNsPolicyCalculation(calculateNsData);
+      setCurrientNsPolicy(createPolicyData);
+
+      setTimeout(() => {
+        navigateToNsConfirm();
+      }, 1000);
+    }
   }, [
     isCalculateNsPending,
     isCalculateNsError,

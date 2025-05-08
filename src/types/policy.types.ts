@@ -112,21 +112,24 @@ export interface ICreateNsPolicyRequest {
   promocode: string;
 }
 
+export interface ICreateNsPolicyResponseData {
+  id: number;
+  user_id: string;
+  duration_of_stay: string;
+  start_date: string;
+  finish_date: string;
+  amount_to_be_paid: string;
+  NS_number: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+  promocode: string;
+  get_peoples: IInsured[];
+}
+
 export interface ICreateNsPolicyResponse {
   success: boolean;
-  data: {
-    id: number;
-    duration_of_stay: string;
-    start_date: string;
-    finish_date: string;
-    amount_to_be_paid: string;
-    NS_number: string;
-    status: string;
-    created_at: string;
-    updated_at: string;
-    promocode: string;
-    get_peoples: IInsured[];
-  };
+  data: ICreateNsPolicyResponseData;
 }
 
 export interface ICalculateNsPolicyRequest {
@@ -135,11 +138,13 @@ export interface ICalculateNsPolicyRequest {
   promocode: string;
 }
 
+export interface ICalculateNsPolicyResponseData {
+  base_tariff: number;
+  discount: number;
+  to_be_paid: number;
+}
+
 export interface ICalculateNsPolicyResponse {
   success: boolean;
-  data: {
-    base_tariff: number;
-    discount: number;
-    to_be_paid: number;
-  };
+  data: ICalculateNsPolicyResponseData;
 }

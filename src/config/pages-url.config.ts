@@ -18,6 +18,7 @@ class PAGESCLASS {
   OSAGO_APPLY = `${this.OSAGO}/apply`;
   OSAGO_CONFIRM = `${this.OSAGO}/confirm`;
   NS_APPLY = `${this.NS}/apply`;
+  NS_CONFIRM = `${this.NS}/confirm`;
 
   CARS = `${this.DASHBOARD}/cars`;
   CARS_NEW = `${this.root}new-car`;
