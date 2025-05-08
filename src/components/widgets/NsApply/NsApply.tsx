@@ -10,6 +10,7 @@ import Substrate from "@/components/ui/Substrate/Substrate";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import {
   EGenders,
+  ICalculateNsPolicyRequest,
   ICreateNsPolicyRequest,
   IInsuredCreationFilelds,
 } from "@/types/policy.types";
@@ -23,6 +24,7 @@ import toast from "react-hot-toast";
 import usePromocodeEvent from "@/stores/Promocode/promocodeEvent.store";
 import { useCreateNsPolicy } from "@/hooks/policy/useCreateNsPolicy";
 import { formatDataToCreateNsPolicy } from "@/helpers/NsApply/formatDataToCreateNsPolicy.helper";
+import { useNsApplyFormHandlers } from "@/hooks/policy/useNsApplyFormHandlers";
 
 export const defaultInsuredValues: IInsuredCreationFilelds = {
   date_of_birth: "",
@@ -45,7 +47,6 @@ const NsApply = () => {
   } = useCalculateNs();
 
   const {
-    data: createPolicyResponseData,
     isError: isCreatePolicyError,
     isPending: isCreatePolicyPending,
     isPromocodeError: isPromocodeErrorPolicy,
@@ -76,51 +77,43 @@ const NsApply = () => {
     });
   }, []);
 
-  const watchedFields = watch(["duration_of_stay", "promocode", "insured"]);
   const durationOfStayFieldWatch = watch(["duration_of_stay"]);
 
-  function handleCalculateClick() {
-    setPromocodeError(false);
-
-    const calculateNDataToCalculate = {
-      duration_of_stay: watchedFields[0],
-      promocode: watchedFields[1],
-      quantity: watchedFields[2].length,
-    };
-
-    setIsCalculatedBlockVisible(true);
-    calculateNsMutate(calculateNDataToCalculate);
-  }
+  const { handleCalculateClick } = useNsApplyFormHandlers(
+    watch,
+    (value: ICalculateNsPolicyRequest) => calculateNsMutate(value),
+    (mark: boolean) => setPromocodeError(mark),
+    (value: boolean) => setIsCalculatedBlockVisible(value)
+  );
 
   useEffect(() => {
-    if (isCalculateNsPending) {
-      toast.loading("Загрузка");
-    } else {
-      toast.dismiss();
+    const loading = isCalculateNsPending || isCreatePolicyPending;
+    loading ? toast.loading("Загрузка") : toast.dismiss();
+
+    if (isCalculateNsError) {
+      toast.error(
+        isPromocodeError
+          ? "Введите верный промокод или оставьте поле пустым"
+          : "Проверьте данные"
+      );
+      setIsCalculatedBlockVisible(false);
     }
 
-    if (isCalculateNsError && !isPromocodeError) {
-      toast.error("Ошибка. Проверьте заполненные данные");
-    } else if (isCalculateNsError && isPromocodeError) {
-      toast.error("Укажите верный промокод или оставьте поле пустым");
-    }
-  }, [isCalculateNsPending]);
+    if (isCreatePolicyError)
+      toast.error(
+        isPromocodeErrorPolicy
+          ? "Введите верный промокод или оставьте поле пустым"
+          : "Проверьте данные"
+      );
 
-  useEffect(() => {
-    if (isCreatePolicyPending) {
-      toast.loading("Загрузка");
-    } else {
-      toast.dismiss();
-    }
-
-    if (isCreatePolicyError && !isPromocodeErrorPolicy) {
-      toast.error("Ошибка. Проверьте заполненные данные");
-    } else if (isCreatePolicyError && isPromocodeErrorPolicy) {
-      toast.error("Укажите верный промокод или оставьте поле пустым");
-    } else if (isCreatePolicySuccess) {
-      toast.success("Полис успешно создан");
-    }
-  }, [isCreatePolicyPending]);
+    if (isCreatePolicySuccess) toast.success("Полис успешно создан");
+  }, [
+    isCalculateNsPending,
+    isCalculateNsError,
+    isCreatePolicyPending,
+    isCreatePolicyError,
+    isCreatePolicySuccess,
+  ]);
 
   useEffect(() => {
     if (isCalculatedBlockVisible && formState.isDirty) {
