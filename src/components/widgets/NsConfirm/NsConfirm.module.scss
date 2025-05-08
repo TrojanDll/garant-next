@@ -24,3 +24,15 @@
 .countedPrice {
   margin-top: 15px;
 }
+
+@media (max-width: 1149px) {
+  .substrate {
+    margin-top: 20px;
+    padding: 30px 20px 40px 20px;
+  }
+
+  .editLink {
+    margin-top: 70px;
+    font-size: 14px;
+  }
+}

@@ -7,3 +7,17 @@
 .fileldItem {
   margin-top: 40px;
 }
+
+@media (max-width: 1149px) {
+  .root {
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--light-grey-2);
+  }
+
+  .fileldItem {
+    margin-top: 25px;
+  }
+}
