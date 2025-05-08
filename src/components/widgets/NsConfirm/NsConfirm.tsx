@@ -9,6 +9,9 @@ import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import Substrate from "@/components/ui/Substrate/Substrate";
 import useCurrientNsPolicy from "@/stores/Policy/currientNsPolicy";
 import NsData from "@/components/features/NsData/NsData";
+import Link from "next/link";
+import { PAGES } from "@/config/pages-url.config";
+import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
 
 const NsConfirm = () => {
   const currientNsPolicy = useCurrientNsPolicy((state) => state.policy);
@@ -23,9 +26,23 @@ const NsConfirm = () => {
           Проверьте правильность данных
         </CustomTitle>
 
-        <Substrate className={styles.substrate}>
+        <Substrate withShadow="light" className={styles.substrate}>
           {currientNsPolicy && <NsData policy={currientNsPolicy} />}
+
+          <Link href={PAGES.NS_APPLY} className={styles.editLink}>
+            Изменить
+          </Link>
         </Substrate>
+
+        {currientNsPolicyCalculation && (
+          <CountedPrice
+            className={styles.countedPrice}
+            finalCost={currientNsPolicyCalculation.to_be_paid}
+            preliminaryCost={currientNsPolicyCalculation.base_tariff}
+            discount={currientNsPolicyCalculation.discount}
+            isIsolated
+          />
+        )}
       </ContentContainer>
     </section>
   );
