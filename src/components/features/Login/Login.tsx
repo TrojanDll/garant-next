@@ -35,15 +35,18 @@ const Login = () => {
       toast.loading("Загрузка");
     }
 
+    let timeoutId: NodeJS.Timeout;
     if (isLoginSuccess) {
       toast.dismiss();
       toast.success("Успешный вход");
 
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         toast.dismiss();
         navigateToHome();
       }, 1000);
     }
+
+    return () => clearTimeout(timeoutId);
   }, [isLoginPending]);
 
   return (
