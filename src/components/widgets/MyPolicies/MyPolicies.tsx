@@ -12,6 +12,7 @@ import { useGetPoliciesByCurrientUser } from "@/hooks/policy/useGetPoliciesByCur
 const MyPolicies = () => {
   const { data, isError, isLoading, isSuccess } = useGetPoliciesByCurrientUser();
 
+  // test
   return (
     <div>
       <CustomTitle isCentered className={styles.title}>
