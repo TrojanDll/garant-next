@@ -13,7 +13,6 @@ const MyPolicies = () => {
   const { data, isError, isLoading, isSuccess } = useGetPoliciesByCurrientUser();
 
   // test
-  // test
   return (
     <div>
       <CustomTitle isCentered className={styles.title}>
