@@ -24,6 +24,7 @@ import usePromocodeEvent from "@/stores/Promocode/promocodeEvent.store";
 import { useNsApplyFormHandlers } from "@/hooks/policy/useNsApplyFormHandlers";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
 import useCurrientNsPolicy from "@/stores/Policy/currientNsPolicy";
+import toast from "react-hot-toast";
 
 export const defaultInsuredValues: IInsuredCreationFilelds = {
   date_of_birth: "",
@@ -109,6 +110,19 @@ const NsApply = () => {
 
     navigateToNsConfirm();
   }
+
+  useEffect(() => {
+    if (!isCalculateNsPending) {
+      toast.dismiss();
+    } else {
+      toast.loading("Загрузка");
+    }
+
+    if (isCalculateNsError) {
+      toast.dismiss();
+      toast.error("Ошибка. Проверьте данные");
+    }
+  }, [isCalculateNsPending]);
 
   return (
     <section className={styles.root}>

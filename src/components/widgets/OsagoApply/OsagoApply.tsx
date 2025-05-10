@@ -74,7 +74,6 @@ const OsagoApply = () => {
 
   useEffect(() => {
     async function resetValues() {
-      console.log("resetting values");
       if ((currientCar || currientPolicy) && carsBrands) {
         let pickedData;
 
@@ -135,6 +134,19 @@ const OsagoApply = () => {
       setIsCountButtonClicked(false);
     });
   }, []);
+
+  useEffect(() => {
+    if (!isPaymentCalculationPending) {
+      toast.dismiss();
+    } else {
+      toast.loading("Загрузка");
+    }
+
+    if (isPaymentCalculationError) {
+      toast.dismiss();
+      toast.error("Ошибка. Проверьте данные");
+    }
+  }, [isPaymentCalculationPending]);
 
   return (
     <section className={styles.root}>
