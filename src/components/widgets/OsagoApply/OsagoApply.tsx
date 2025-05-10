@@ -119,8 +119,7 @@ const OsagoApply = () => {
     "duration_of_stay",
     "promocode",
   ]);
-  const watchedFields = watch(["transport_category", "duration_of_stay"]);
-
+  
   const handleCountClick = () => {
     setIsCountButtonClicked(true);
 
@@ -140,12 +139,6 @@ const OsagoApply = () => {
       setIsCountButtonClicked(false);
     });
   }, []);
-
-  useEffect(() => {
-    if (isCountButtonClicked && formState.isDirty) {
-      handleMutatePaymentCalculation();
-    }
-  }, [JSON.stringify(watchedFields), isCountButtonClicked, formState.isDirty]);
 
   return (
     <section className={styles.root}>

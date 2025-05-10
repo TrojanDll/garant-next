@@ -7,7 +7,7 @@ import styles from "./NsApply.module.scss";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
 import Substrate from "@/components/ui/Substrate/Substrate";
-import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import {
   EGenders,
   ICalculateNsPolicyRequest,
@@ -20,10 +20,7 @@ import NsApplyStaticFields from "@/components/entities/NsApplyStaticFields/NsApp
 import { useCalculateNs } from "@/hooks/policy/useCalculateNs";
 import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
 import usePromocodeError from "@/stores/Promocode/promocodeError.store";
-import toast from "react-hot-toast";
 import usePromocodeEvent from "@/stores/Promocode/promocodeEvent.store";
-import { useCreateNsPolicy } from "@/hooks/policy/useCreateNsPolicy";
-import { formatDataToCreateNsPolicy } from "@/helpers/NsApply/formatDataToCreateNsPolicy.helper";
 import { useNsApplyFormHandlers } from "@/hooks/policy/useNsApplyFormHandlers";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
 import useCurrientNsPolicy from "@/stores/Policy/currientNsPolicy";
@@ -48,17 +45,9 @@ const NsApply = () => {
     mutate: calculateNsMutate,
   } = useCalculateNs();
 
-  const {
-    data: createPolicyData,
-    isError: isCreatePolicyError,
-    isPending: isCreatePolicyPending,
-    isPromocodeError: isPromocodeErrorPolicy,
-    isSuccess: isCreatePolicySuccess,
-    mutate: createPolicyMutate,
-  } = useCreateNsPolicy();
-
   const setTrigger = usePromocodeEvent((state) => state.setTrigger);
   const setPromocodeError = usePromocodeError((state) => state.setError);
+  const currientNsPolicy = useCurrientNsPolicy((state) => state.policy);
   const setCurrientNsPolicy = useCurrientNsPolicy((state) => state.setPolicy);
   const setCurrientNsPolicyCalculation = useCurrientNsPolicy(
     (state) => state.setCalculationData
@@ -66,19 +55,26 @@ const NsApply = () => {
 
   const { navigateToNsConfirm } = useNavigation();
 
-  const { control, handleSubmit, watch, formState } = useForm<ICreateNsPolicyRequest>({
-    defaultValues: {
-      insured: [defaultInsuredValues],
-      duration_of_stay: "",
-      promocode: "",
-      start_date: "",
-    },
-  });
+  const { control, handleSubmit, watch, formState, reset } =
+    useForm<ICreateNsPolicyRequest>({
+      defaultValues: {
+        insured: [defaultInsuredValues],
+        duration_of_stay: "",
+        promocode: "",
+        start_date: "",
+      },
+    });
 
   const { fields, append, remove } = useFieldArray({
     name: "insured",
     control,
   });
+
+  useEffect(() => {
+    if (currientNsPolicy) {
+      reset(currientNsPolicy);
+    }
+  }, [currientNsPolicy]);
 
   useEffect(() => {
     setTrigger(() => {
@@ -96,47 +92,6 @@ const NsApply = () => {
   );
 
   useEffect(() => {
-    const loading = isCalculateNsPending || isCreatePolicyPending;
-    loading ? toast.loading("Загрузка") : toast.dismiss();
-
-    if (isCalculateNsError) {
-      toast.error(
-        isPromocodeError
-          ? "Введите верный промокод или оставьте поле пустым"
-          : "Проверьте данные"
-      );
-      setIsCalculatedBlockVisible(false);
-    }
-
-    if (isCreatePolicyError)
-      toast.error(
-        isPromocodeErrorPolicy
-          ? "Введите верный промокод или оставьте поле пустым"
-          : "Проверьте данные"
-      );
-
-    if (isCreatePolicySuccess) {
-      toast.success("Полис успешно создан");
-
-      // Полис создан - записываем результат calculation и creation в store,
-      // чтобы на странице confirm эти данные использовать
-      // и избежать лишних запросов
-      setCurrientNsPolicyCalculation(calculateNsData);
-      setCurrientNsPolicy(createPolicyData);
-
-      setTimeout(() => {
-        navigateToNsConfirm();
-      }, 1000);
-    }
-  }, [
-    isCalculateNsPending,
-    isCalculateNsError,
-    isCreatePolicyPending,
-    isCreatePolicyError,
-    isCreatePolicySuccess,
-  ]);
-
-  useEffect(() => {
     if (isCalculatedBlockVisible && formState.isDirty) {
       handleCalculateClick();
     }
@@ -149,7 +104,10 @@ const NsApply = () => {
   function onSubmit(data: ICreateNsPolicyRequest): void {
     console.log("form data:", data);
 
-    createPolicyMutate(formatDataToCreateNsPolicy(data));
+    setCurrientNsPolicy(data);
+    setCurrientNsPolicyCalculation(calculateNsData);
+
+    navigateToNsConfirm();
   }
 
   return (

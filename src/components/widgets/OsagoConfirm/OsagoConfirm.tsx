@@ -15,6 +15,7 @@ import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
 import { useCreateOsagoPolicy } from "@/hooks/policy/useCreateOsagoPolicy";
 import toast from "react-hot-toast";
 import useCurrientOsagoPolicyCalculation from "@/stores/Policy/currientOsagoPolicyCalculation";
+import { useNavigation } from "@/hooks/navigation/useNavigation";
 
 const OsagoConfirm = () => {
   const policy = useCurrientOsagoPolicy((state) => state.policy);
@@ -25,6 +26,8 @@ const OsagoConfirm = () => {
     (state) => state.setCalculationData
   );
   const setPolicy = useCurrientOsagoPolicy((state) => state.setPolicy);
+
+  const { navigateToPolicies } = useNavigation();
 
   const { data, isError, isPending, isSuccess, mutate } = useCreateOsagoPolicy();
 
@@ -50,10 +53,10 @@ const OsagoConfirm = () => {
       setPolicyCalculation(undefined);
       setPolicy(undefined);
 
-      // setTimeout(() => {
-      //   toast.dismiss();
-      //   navigateToHome();
-      // }, 1000);
+      setTimeout(() => {
+        toast.dismiss();
+        navigateToPolicies();
+      }, 1200);
     }
   }, [isPending]);
 
@@ -84,7 +87,7 @@ const OsagoConfirm = () => {
             preliminaryCost={+policyCalculation?.base_tarif}
             className={styles.priceWrapper}
             onClick={handleCreateOsagoClick}
-            type="ns"
+            type="osago"
           />
         )}
       </ContentContainer>

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 
 import styles from "./NsConfirm.module.scss";
 
@@ -12,12 +12,50 @@ import NsData from "@/components/features/NsData/NsData";
 import Link from "next/link";
 import { PAGES } from "@/config/pages-url.config";
 import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
+import { useCreateNsPolicy } from "@/hooks/policy/useCreateNsPolicy";
+import toast from "react-hot-toast";
+import { useNavigation } from "@/hooks/navigation/useNavigation";
 
 const NsConfirm = () => {
   const currientNsPolicy = useCurrientNsPolicy((state) => state.policy);
   const currientNsPolicyCalculation = useCurrientNsPolicy(
     (state) => state.calculationData
   );
+  const setCurrientNsPolicy = useCurrientNsPolicy((state) => state.setPolicy);
+  const setCurrientNsPolicyCalculation = useCurrientNsPolicy(
+    (state) => state.setCalculationData
+  );
+
+  const { navigateToPolicies } = useNavigation();
+
+  const { data, isError, isPending, isSuccess, mutate } = useCreateNsPolicy();
+
+  function handleCreateNsClick() {
+    if (currientNsPolicy) {
+      mutate(currientNsPolicy);
+    }
+  }
+
+  useEffect(() => {
+    if (!isPending) {
+      toast.dismiss();
+    } else {
+      toast.loading("Загрузка");
+    }
+
+    if (isSuccess) {
+      toast.dismiss();
+      toast.success("Полис создан");
+
+      setCurrientNsPolicyCalculation(undefined);
+      setCurrientNsPolicy(undefined);
+
+      setTimeout(() => {
+        toast.dismiss();
+        navigateToPolicies();
+      }, 1200);
+    }
+  }, [isPending]);
 
   return (
     <section>
@@ -41,6 +79,8 @@ const NsConfirm = () => {
             preliminaryCost={currientNsPolicyCalculation.base_tariff}
             discount={currientNsPolicyCalculation.discount}
             isIsolated
+            onClick={handleCreateNsClick}
+            type="ns"
           />
         )}
       </ContentContainer>

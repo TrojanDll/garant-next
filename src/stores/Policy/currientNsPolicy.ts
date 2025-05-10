@@ -4,14 +4,15 @@ import { immer } from "zustand/middleware/immer";
 import {
   ICalculateNsPolicyResponse,
   ICalculateNsPolicyResponseData,
+  ICreateNsPolicyRequest,
   ICreateNsPolicyResponse,
   ICreateNsPolicyResponseData,
 } from "@/types/policy.types";
 
 interface ICurrientNsPolicy {
-  policy: ICreateNsPolicyResponseData | undefined;
+  policy: ICreateNsPolicyRequest | undefined;
   calculationData: ICalculateNsPolicyResponseData | undefined;
-  setPolicy: (value: ICreateNsPolicyResponseData | undefined) => void;
+  setPolicy: (value: ICreateNsPolicyRequest | undefined) => void;
   setCalculationData: (value: ICalculateNsPolicyResponseData | undefined) => void;
 }
 
@@ -20,15 +21,13 @@ const useCurrientNsPolicy = create<ICurrientNsPolicy>()(
     immer((set) => ({
       policy: undefined,
       calculationData: undefined,
-      setPolicy: (value: ICreateNsPolicyResponseData | undefined) =>
+      setPolicy: (value: ICreateNsPolicyRequest | undefined) =>
         set((state) => {
           state.policy = value;
-          console.log(value);
         }),
       setCalculationData: (value: ICalculateNsPolicyResponseData | undefined) =>
         set((state) => {
           state.calculationData = value;
-          console.log(value);
         }),
     })),
     {
