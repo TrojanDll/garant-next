@@ -21,29 +21,30 @@ const FAQ = ({ className, isIsolated, isBordered }: IProps) => {
   const handleToggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
-  return (
-    <ContentContainer>
-      <section
-        className={`${styles.root} ${className} ${isIsolated ? styles.isolated : ""}`}
-      >
-        <CustomTitle tag="h2" isCentered isLarge>
-          Ответы на вопросы
-        </CustomTitle>
 
-        <div className={styles.FAQItemsWrapper}>
-          {FAQItems.map((item, i) => (
-            <FAQItem
-              key={i}
-              data={item}
-              isOpen={openIndex === i}
-              onToggle={() => handleToggle(i)}
-              isBordered={isBordered}
-            />
-          ))}
-        </div>
-      </section>
-    </ContentContainer>
+  const render = (
+    <section
+      className={`${styles.root} ${className} ${isIsolated ? styles.isolated : ""}`}
+    >
+      <CustomTitle tag="h2" isCentered isLarge>
+        Ответы на вопросы
+      </CustomTitle>
+
+      <div className={styles.FAQItemsWrapper}>
+        {FAQItems.map((item, i) => (
+          <FAQItem
+            key={i}
+            data={item}
+            isOpen={openIndex === i}
+            onToggle={() => handleToggle(i)}
+            isBordered={isBordered}
+          />
+        ))}
+      </div>
+    </section>
   );
+
+  return <>{isIsolated ? <ContentContainer>{render}</ContentContainer> : render}</>;
 };
 
 export default FAQ;

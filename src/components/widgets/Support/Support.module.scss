@@ -29,3 +29,23 @@
 .socialLinks {
   margin-top: 60px;
 }
+
+@media (max-width: 1149px) {
+  .substrate {
+    padding: 30px 20px 40px 20px;
+  }
+
+  .text {
+    margin-top: 40px;
+    font-size: 14px !important;
+  }
+
+  .phone {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+
+  .socialLinks {
+    margin-top: 20px;
+  }
+}
