@@ -15,6 +15,8 @@ import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
 import { useCreateNsPolicy } from "@/hooks/policy/useCreateNsPolicy";
 import toast from "react-hot-toast";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
+import { ICreateNsPolicyRequest } from "@/types/policy.types";
+import { formatDataToCreateNsPolicy } from "@/helpers/NsApply/formatDataToCreateNsPolicy.helper";
 
 const NsConfirm = () => {
   const currientNsPolicy = useCurrientNsPolicy((state) => state.policy);
@@ -32,7 +34,10 @@ const NsConfirm = () => {
 
   function handleCreateNsClick() {
     if (currientNsPolicy) {
-      mutate(currientNsPolicy);
+      const formatedData: ICreateNsPolicyRequest =
+        formatDataToCreateNsPolicy(currientNsPolicy);
+
+      mutate(formatedData);
     }
   }
 
@@ -47,13 +52,12 @@ const NsConfirm = () => {
       toast.dismiss();
       toast.success("Полис создан");
 
-      setCurrientNsPolicyCalculation(undefined);
-      setCurrientNsPolicy(undefined);
-
       setTimeout(() => {
         toast.dismiss();
+        setCurrientNsPolicyCalculation(undefined);
+        setCurrientNsPolicy(undefined);
         navigateToPolicies();
-      }, 1200);
+      }, 1000);
     }
   }, [isPending]);
 

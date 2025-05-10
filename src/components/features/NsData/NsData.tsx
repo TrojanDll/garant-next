@@ -8,7 +8,7 @@ import {
 import { getDaysBetweenDates } from "@/helpers/getDaysBetweenDates";
 import NsInsuredConfirmList from "../NsInsuredConfirmList/NsInsuredConfirmList";
 import { getFinishDate } from "@/helpers/getFinishDate";
-import { getDaysFromDurationOfStayString } from "@/helpers/getDaysFromDurationOfStayString";
+import { getDaysFromNsDurationOfStayString } from "@/helpers/getDaysFromNsDurationOfStayString";
 
 interface IProps {
   policy: ICreateNsPolicyRequest;
@@ -17,7 +17,7 @@ interface IProps {
 const NsData = ({ policy }: IProps) => {
   const finishDate = getFinishDate(
     policy.start_date,
-    getDaysFromDurationOfStayString(policy.duration_of_stay)
+    getDaysFromNsDurationOfStayString(policy.duration_of_stay)
   );
 
   return (

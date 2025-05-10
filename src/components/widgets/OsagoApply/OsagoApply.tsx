@@ -119,14 +119,10 @@ const OsagoApply = () => {
     "duration_of_stay",
     "promocode",
   ]);
-  
+
   const handleCountClick = () => {
     setIsCountButtonClicked(true);
 
-    handleMutatePaymentCalculation();
-  };
-
-  const handleMutatePaymentCalculation = () => {
     mutatePaymentCalculation({
       transport_category: watchedFieldsWithPromocode[0],
       duration_of_stay: watchedFieldsWithPromocode[1],
