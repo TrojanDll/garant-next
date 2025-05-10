@@ -6,7 +6,11 @@ import styles from "./PolicyInfo.module.scss";
 
 import Substrate from "@/components/ui/Substrate/Substrate";
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
-import { EPolicyStatus, EPolicyTypes } from "@/types/policy.types";
+import {
+  EPolicyStatus,
+  EPolicyTypes,
+  ICreateOsagoPolicyRequest,
+} from "@/types/policy.types";
 import PolicyNumber from "@/components/entities/PolicyNumber/PolicyNumber";
 import PolicyStatus from "@/components/ui/PolicyStatus/PolicyStatus";
 import Button from "@/components/ui/Button/Button";
@@ -28,6 +32,7 @@ const PolicyInfo = ({ className }: IProps) => {
   const [policyType, setPolicyType] = useState(EPolicyTypes.OSAGO);
   const [policyStatus, setPolicyStatus] = useState(EPolicyStatus.AWAITING_PAYMENT);
   const [policyNumber, setPolicyNumber] = useState("");
+  const [policyData, setPolicyData] = useState<ICreateOsagoPolicyRequest>();
 
   const { data, isError, isPending, isSuccess, mutate } = useGetOsagoPolicyById();
 
@@ -67,6 +72,22 @@ const PolicyInfo = ({ className }: IProps) => {
       } else if (data.payment_status === "Истек срок действия") {
         setPolicyStatus(EPolicyStatus.EXPIRED);
       }
+
+      setPolicyData({
+        brand: data.brand,
+        car_model: data.model,
+        car_year: data.year,
+        duration_of_stay: data.duration_of_stay,
+        fio: data.fio,
+        owner: data.owner,
+        passport_number: data.passport_number,
+        promo_code: data.promo_code,
+        registration_number: data.registration_number,
+        registration_plate: data.registration_plate,
+        start_date: data.start_date,
+        transport_category: data.transport_category,
+        vin: data.vin,
+      });
     }
   }, [isPending]);
 
@@ -79,7 +100,7 @@ const PolicyInfo = ({ className }: IProps) => {
 
   return (
     <div className={className}>
-      {data ? (
+      {data && policyData ? (
         <ContentContainer className={styles.container}>
           <Substrate className={styles.substrate} withShadow="light">
             <div className={styles.header}>
@@ -99,7 +120,7 @@ const PolicyInfo = ({ className }: IProps) => {
               Скачать полис
             </Button>
 
-            <OsagoPolicyInfoFields className={styles.fields} data={data} />
+            <OsagoPolicyInfoFields className={styles.fields} data={policyData} />
           </Substrate>
 
           {policyStatus === EPolicyStatus.AWAITING_PAYMENT && (
