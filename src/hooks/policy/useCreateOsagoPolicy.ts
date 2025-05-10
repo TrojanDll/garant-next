@@ -1,8 +1,7 @@
-import { axiosWithAuth, isAxiosError } from "@/api/interceptors";
 import { policiesService } from "@/services/policies.service";
 import { ICreateOsagoPolicyRequest } from "@/types/policy.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { useState } from "react";
 
 export function useCreateOsagoPolicy() {

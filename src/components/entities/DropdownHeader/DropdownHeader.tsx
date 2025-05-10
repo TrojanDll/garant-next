@@ -52,7 +52,7 @@ const DropdownHeader = () => {
       text: "НС",
     },
     {
-      href: PAGES.HELP,
+      href: PAGES.SUPPORT,
       text: "Помощь",
     },
     {

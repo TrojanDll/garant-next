@@ -10,6 +10,10 @@
   }
 }
 
+.bordered {
+  border: 1px solid var(--light-grey-2);
+}
+
 .question {
   width: 100%;
   border-radius: 25px;

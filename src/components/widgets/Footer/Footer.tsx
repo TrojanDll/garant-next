@@ -10,6 +10,7 @@ import Substrate from "@/components/ui/Substrate/Substrate";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 
 import styles from "./Footer.module.scss";
+import SocialLinks from "@/components/ui/SocialLinks/SocialLinks";
 
 const Footer = () => {
   return (
@@ -50,7 +51,7 @@ const Footer = () => {
             <Link className={styles.link} href={PAGES.CONTACTS}>
               Контакты
             </Link>
-            <Link className={styles.link} href={PAGES.HELP}>
+            <Link className={styles.link} href={PAGES.SUPPORT}>
               Помощь
             </Link>
           </div>
@@ -63,17 +64,7 @@ const Footer = () => {
               +7 940 990 12 34
             </a>
 
-            <div className={styles.socialLinks}>
-              <a href="">
-                <SvgSelector id={ESvgName.TELEGRAM_ROUNDED} />
-              </a>
-              <a href="">
-                <SvgSelector id={ESvgName.WHATSAPP_ROUNDED} />
-              </a>
-              <a href="">
-                <SvgSelector id={ESvgName.EMAIL_ROUNDED} />
-              </a>
-            </div>
+            <SocialLinks className={styles.socialLinks} />
           </div>
         </div>
 

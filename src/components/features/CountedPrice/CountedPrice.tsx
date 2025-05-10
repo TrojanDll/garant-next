@@ -11,6 +11,7 @@ interface IProps {
   finalCost: number;
   isIsolated?: boolean;
   onClick?: () => void;
+  type?: "osago" | "ns";
 }
 
 const CountedPrice = ({
@@ -20,6 +21,7 @@ const CountedPrice = ({
   className,
   isIsolated = false,
   onClick,
+  type = "osago",
 }: IProps) => {
   return (
     <Substrate
@@ -28,7 +30,9 @@ const CountedPrice = ({
       className={`${className} ${styles.substrate} ${isIsolated && styles.isolated}`}
     >
       <div className={styles.priceRow}>
-        <div className={styles.priceRowTitle}>Полис ОСАГО</div>
+        <div className={styles.priceRowTitle}>
+          Полис {type === "osago" ? "ОСАГО" : "от несчастного случая"}
+        </div>
         <div className={styles.preliminaryCost}>{preliminaryCost} ₽</div>
       </div>
 

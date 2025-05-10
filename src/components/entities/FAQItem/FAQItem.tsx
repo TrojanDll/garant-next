@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import styles from "./FAQItem.module.scss";
+
 import SvgSelector from "@/components/ui/SvgSelector/SvgSelector";
 import { ESvgName } from "@/constants/svg-ids.constants";
 
@@ -16,9 +17,10 @@ interface IProps {
   isOpen: boolean;
   onToggle: () => void;
   className?: string;
+  isBordered?: boolean;
 }
 
-const FAQItem = ({ data, isOpen, onToggle, className }: IProps) => {
+const FAQItem = ({ data, isOpen, onToggle, className, isBordered }: IProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState(0);
 
@@ -29,7 +31,9 @@ const FAQItem = ({ data, isOpen, onToggle, className }: IProps) => {
   }, [isOpen]);
 
   return (
-    <div className={styles.faqItem}>
+    <div
+      className={`${styles.faqItem} ${isBordered ? styles.bordered : ""} ${className}`}
+    >
       <button className={styles.question} onClick={onToggle}>
         {data.question}
         <SvgSelector

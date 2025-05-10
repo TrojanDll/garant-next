@@ -11,7 +11,7 @@ export default function Home() {
       <CalculatorPromo />
       <Advantages />
       <ReviwesYandex />
-      <FAQ />
+      <FAQ isIsolated />
     </div>
   );
 }

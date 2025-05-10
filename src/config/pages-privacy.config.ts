@@ -6,7 +6,7 @@ export const publicPages: string[] = [
   PAGES.CONTACTS,
   PAGES.DOCUMENTS,
   PAGES.DOCUMENTS,
-  PAGES.HELP,
+  PAGES.SUPPORT,
   PAGES.HOME,
   PAGES.NS,
   PAGES.OSAGO,

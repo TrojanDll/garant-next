@@ -52,7 +52,7 @@ const Header = () => {
                   </CustomLink>
                 </li>
                 <li>
-                  <CustomLink href={PAGES.HELP} className={styles.link}>
+                  <CustomLink href={PAGES.SUPPORT} className={styles.link}>
                     Помощь
                   </CustomLink>
                 </li>

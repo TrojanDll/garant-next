@@ -6,7 +6,7 @@ class PAGESCLASS {
   OSAGO = `${this.root}osago`;
   NS = `${this.root}ns`;
   CONTACTS = `${this.root}contacts`;
-  HELP = `${this.root}help`;
+  SUPPORT = `${this.root}support`;
   DASHBOARD = `${this.root}dashboard`;
   DOCUMENTS = `${this.root}documents`;
   ABOUT = `${this.root}about`;

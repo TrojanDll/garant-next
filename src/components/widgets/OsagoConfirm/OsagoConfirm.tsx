@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./OsagoConfirm.module.scss";
 
@@ -12,10 +12,47 @@ import Substrate from "@/components/ui/Substrate/Substrate";
 import Link from "next/link";
 import { PAGES } from "@/config/pages-url.config";
 import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
+import { useCreateOsagoPolicy } from "@/hooks/policy/useCreateOsagoPolicy";
+import toast from "react-hot-toast";
 
 const OsagoConfirm = () => {
   const policy = useCurrientOsagoPolicy((state) => state.policy);
   const policyCalculation = useCurrientOsagoPolicy((state) => state.calculationData);
+  const setPolicyCalculation = useCurrientOsagoPolicy(
+    (state) => state.setCalculationData
+  );
+  const setPolicy = useCurrientOsagoPolicy((state) => state.setPolicy);
+
+  const { data, isError, isPending, isSuccess, mutate } = useCreateOsagoPolicy();
+
+  function handleCreateOsagoClick() {
+    console.log("handleCreateOsagoClick");
+
+    if (policy) {
+      mutate(policy);
+    }
+  }
+
+  useEffect(() => {
+    if (!isPending) {
+      toast.dismiss();
+    } else {
+      toast.loading("Загрузка");
+    }
+
+    if (isSuccess) {
+      toast.dismiss();
+      toast.success("Полис создан");
+
+      setPolicyCalculation(undefined);
+      setPolicy(undefined);
+
+      // setTimeout(() => {
+      //   toast.dismiss();
+      //   navigateToHome();
+      // }, 1000);
+    }
+  }, [isPending]);
 
   return (
     <section>
@@ -43,6 +80,8 @@ const OsagoConfirm = () => {
             finalCost={+policyCalculation?.tarif}
             preliminaryCost={+policyCalculation?.base_tarif}
             className={styles.priceWrapper}
+            onClick={handleCreateOsagoClick}
+            type="ns"
           />
         )}
       </ContentContainer>

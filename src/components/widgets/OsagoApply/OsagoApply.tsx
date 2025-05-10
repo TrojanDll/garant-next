@@ -44,7 +44,6 @@ const OsagoApply = () => {
     useForm<IOsagoApplyForm>();
 
   const [isCountButtonClicked, setIsCountButtonClicked] = useState<boolean>(false);
-  const [isCalculated, setIsCalculated] = useState<boolean>(false);
 
   const currientCar = useCurrientCar((state) => state.car);
   const setIsAnotherCarMark = useOsagoApplyCarMark((state) => state.setCarMarkValue);
@@ -58,27 +57,12 @@ const OsagoApply = () => {
 
   const { carsBrands, isLoading: isCarsBrandsLoading } = useGetCarBrands();
   const {
-    isError,
-    isPending,
-    isSuccess,
-    mutate,
-    data: createOsagoPolicyData,
-    isPromocodeError,
-  } = useCreateOsagoPolicy();
-
-  const {
     data: paymentCalculationData,
     isError: isPaymentCalculationError,
     isPending: isPaymentCalculationPending,
     isSuccess: isPaymentCalculationSuccess,
     mutate: mutatePaymentCalculation,
   } = useGetPaymentCalculation();
-
-  useEffect(() => {
-    if (isPaymentCalculationSuccess && paymentCalculationData) {
-      console.log(paymentCalculationData);
-    }
-  }, [isPaymentCalculationPending]);
 
   useEffect(() => {
     async function resetValues() {
@@ -161,7 +145,7 @@ const OsagoApply = () => {
           Оформить полис ОСАГО в Абхазии
         </CustomTitle>
 
-        {isPending || isLoading ? (
+        {isLoading ? (
           <Loader className={styles.loader} />
         ) : (
           <Substrate withShadow="light" className={styles.substrate}>

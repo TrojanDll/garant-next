@@ -3,40 +3,19 @@
 import React, { useState } from "react";
 
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
-import FAQItem, { IFAQItem } from "@/components/entities/FAQItem/FAQItem";
+import FAQItem from "@/components/entities/FAQItem/FAQItem";
 
 import styles from "./FAQ.module.scss";
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
+import { FAQItems } from "@/helpers/FAQ/FAQData.helper";
 
-const FAQItems: IFAQItem[] = [
-  {
-    question: "От чего зависит стоимость полиса?",
-    answer:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda inventore explicabo vitae? Voluptates corporis enim dolorem quaerat inventore placeat aliquam architecto. Quae aspernatur repudiandae porro quas officia nam fuga doloremque!",
-  },
-  {
-    question: "От чего зависит стоимость полиса?",
-    answer:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda inventore explicabo vitae? Voluptates corporis enim dolorem quaerat inventore placeat aliquam architecto. Quae aspernatur repudiandae porro quas officia nam fuga doloremque!",
-  },
-  {
-    question: "От чего зависит стоимость полиса?",
-    answer:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda inventore explicabo vitae? Voluptates corporis enim dolorem quaerat inventore placeat aliquam architecto. Quae aspernatur repudiandae porro quas officia nam fuga doloremque!",
-  },
-  {
-    question: "От чего зависит стоимость полиса?",
-    answer:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda inventore explicabo vitae? Voluptates corporis enim dolorem quaerat inventore placeat aliquam architecto. Quae aspernatur repudiandae porro quas officia nam fuga doloremque!",
-  },
-  {
-    question: "От чего зависит стоимость полиса?",
-    answer:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda inventore explicabo vitae? Voluptates corporis enim dolorem quaerat inventore placeat aliquam architecto. Quae aspernatur repudiandae porro quas officia nam fuga doloremque!",
-  },
-];
+interface IProps {
+  className?: string;
+  isIsolated?: boolean;
+  isBordered?: boolean;
+}
 
-const FAQ = () => {
+const FAQ = ({ className, isIsolated, isBordered }: IProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const handleToggle = (index: number) => {
@@ -44,8 +23,12 @@ const FAQ = () => {
   };
   return (
     <ContentContainer>
-      <section className={styles.root}>
-        <CustomTitle tag="h2" isCentered isLarge>Ответы на вопросы</CustomTitle>
+      <section
+        className={`${styles.root} ${className} ${isIsolated ? styles.isolated : ""}`}
+      >
+        <CustomTitle tag="h2" isCentered isLarge>
+          Ответы на вопросы
+        </CustomTitle>
 
         <div className={styles.FAQItemsWrapper}>
           {FAQItems.map((item, i) => (
@@ -54,6 +37,7 @@ const FAQ = () => {
               data={item}
               isOpen={openIndex === i}
               onToggle={() => handleToggle(i)}
+              isBordered={isBordered}
             />
           ))}
         </div>
