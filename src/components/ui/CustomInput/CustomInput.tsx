@@ -1,6 +1,9 @@
 "use client";
 
 import React, { useState, useRef, useEffect, ChangeEvent } from "react";
+
+import styles from "./CustomInput.module.scss";
+
 import { TInputType } from "@/types/IFieldConfig";
 import { IMaskInput } from "react-imask";
 
@@ -11,7 +14,6 @@ import { usePromocodeValidate } from "@/hooks/usePromocodeValidate/usePromocodeV
 import InputNotification from "../InputNotification/InputNotification";
 import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 
-import styles from "./CustomInput.module.scss";
 import { useValidatePromocode } from "@/hooks/promocode/useValidatePromocode";
 import usePromocodeError from "@/stores/Promocode/promocodeError.store";
 

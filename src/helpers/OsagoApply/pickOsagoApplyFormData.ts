@@ -2,11 +2,11 @@ import { ICar, ICarBrand } from "@/types/cars.types";
 import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
 import { ICreateOsagoPolicyRequest, IOsagoPolicy } from "@/types/policy.types";
 
-export function pickOsagoApplyFormData(
+export async function pickOsagoApplyFormData(
   data: ICar,
   carBrands: ICarBrand[]
-): Partial<IOsagoApplyForm> {
-  let found = carBrands.find((item) => item.Make_Name === data.brand);
+): Promise<Partial<IOsagoApplyForm>> {
+  let found = await carBrands.find((item) => item.Make_Name === data.brand);
 
   // console.log(data.brand === found?.Make_Name ? data.brand : "");
   return {
@@ -24,12 +24,12 @@ export function pickOsagoApplyFormData(
   };
 }
 
-export function pickOsagoApplyFormDataFromPolicy(
+export async function pickOsagoApplyFormDataFromPolicy(
   data: ICreateOsagoPolicyRequest,
   carBrands: ICarBrand[]
-): Partial<IOsagoApplyForm> {
+): Promise<Partial<IOsagoApplyForm>> {
   console.log(data);
-  let found = carBrands.find((item) => item.Make_Name === data.brand);
+  let found = await carBrands.find((item) => item.Make_Name === data.brand);
 
   // console.log(data.brand === found?.Make_Name ? data.brand : "");
   return {

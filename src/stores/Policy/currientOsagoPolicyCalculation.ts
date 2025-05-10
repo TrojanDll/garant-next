@@ -1,24 +1,24 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import { ICreateOsagoPolicyRequest } from "@/types/policy.types";
+import { IOsagoPaymentCalculation } from "@/types/policy.types";
 
-interface ICurrientOsagoPolicy {
-  policy: ICreateOsagoPolicyRequest | undefined;
-  setPolicy: (value: ICreateOsagoPolicyRequest | undefined) => void;
+interface ICurrientOsagoPolicyCalculation {
+  calculationData: IOsagoPaymentCalculation | undefined;
+  setCalculationData: (value: IOsagoPaymentCalculation | undefined) => void;
 }
 
-const useCurrientOsagoPolicy = create<ICurrientOsagoPolicy>()(
+const useCurrientOsagoPolicyCalculation = create<ICurrientOsagoPolicyCalculation>()(
   persist(
     immer((set) => ({
-      policy: undefined,
-      setPolicy: (value: ICreateOsagoPolicyRequest | undefined) =>
+      calculationData: undefined,
+      setCalculationData: (value: IOsagoPaymentCalculation | undefined) =>
         set((state) => {
-          state.policy = value;
+          state.calculationData = value;
         }),
     })),
     {
-      name: "current-policy-store",
+      name: "current-osago-policy-calculation-store",
       storage: {
         getItem: (key) => {
           const stored = sessionStorage.getItem(key);
@@ -35,4 +35,4 @@ const useCurrientOsagoPolicy = create<ICurrientOsagoPolicy>()(
   )
 );
 
-export default useCurrientOsagoPolicy;
+export default useCurrientOsagoPolicyCalculation;

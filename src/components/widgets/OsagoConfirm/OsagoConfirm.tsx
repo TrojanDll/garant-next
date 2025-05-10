@@ -14,11 +14,14 @@ import { PAGES } from "@/config/pages-url.config";
 import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
 import { useCreateOsagoPolicy } from "@/hooks/policy/useCreateOsagoPolicy";
 import toast from "react-hot-toast";
+import useCurrientOsagoPolicyCalculation from "@/stores/Policy/currientOsagoPolicyCalculation";
 
 const OsagoConfirm = () => {
   const policy = useCurrientOsagoPolicy((state) => state.policy);
-  const policyCalculation = useCurrientOsagoPolicy((state) => state.calculationData);
-  const setPolicyCalculation = useCurrientOsagoPolicy(
+  const policyCalculation = useCurrientOsagoPolicyCalculation(
+    (state) => state.calculationData
+  );
+  const setPolicyCalculation = useCurrientOsagoPolicyCalculation(
     (state) => state.setCalculationData
   );
   const setPolicy = useCurrientOsagoPolicy((state) => state.setPolicy);

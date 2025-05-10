@@ -35,6 +35,7 @@ import {
   pickOsagoApplyFormDataFromPolicy,
 } from "@/helpers/OsagoApply/pickOsagoApplyFormData";
 import OsagoApplyFields from "@/components/features/OsagoApplyFields/OsagoApplyFields";
+import useCurrientOsagoPolicyCalculation from "@/stores/Policy/currientOsagoPolicyCalculation";
 
 const OsagoApply = () => {
   const { config, isLoading } = useOsagoFormConfig();
@@ -43,13 +44,14 @@ const OsagoApply = () => {
   const { handleSubmit, control, reset, setValue, watch, formState } =
     useForm<IOsagoApplyForm>();
 
+  const [isCarsBrandsLoaded, setIsCarsBrandsLoaded] = useState(false);
   const [isCountButtonClicked, setIsCountButtonClicked] = useState<boolean>(false);
 
   const currientCar = useCurrientCar((state) => state.car);
   const setIsAnotherCarMark = useOsagoApplyCarMark((state) => state.setCarMarkValue);
   const currientPolicy = useCurrientOsagoPolicy((state) => state.policy);
   const setPolicy = useCurrientOsagoPolicy((state) => state.setPolicy);
-  const setPolicyCalculationData = useCurrientOsagoPolicy(
+  const setPolicyCalculationData = useCurrientOsagoPolicyCalculation(
     (state) => state.setCalculationData
   );
   const setIsPromocodeError = usePromocodeError((state) => state.setError);
@@ -65,7 +67,14 @@ const OsagoApply = () => {
   } = useGetPaymentCalculation();
 
   useEffect(() => {
+    if (carsBrands && !isCarsBrandsLoaded) {
+      setIsCarsBrandsLoaded(true);
+    }
+  }, [isCarsBrandsLoading]);
+
+  useEffect(() => {
     async function resetValues() {
+      console.log("resetting values");
       if ((currientCar || currientPolicy) && carsBrands) {
         let pickedData;
 
@@ -93,7 +102,7 @@ const OsagoApply = () => {
     }
 
     resetValues();
-  }, [currientCar, isCarsBrandsLoading, currientPolicy]);
+  }, [currientCar, isCarsBrandsLoaded]);
 
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
     const formatedData = formatDataToCreateOsagoRequest(data);
