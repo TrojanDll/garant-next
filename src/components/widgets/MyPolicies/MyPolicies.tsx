@@ -16,7 +16,7 @@ const MyPolicies = () => {
   return (
     <div>
       <CustomTitle isCentered className={styles.title}>
-        Мои полисыы
+        Мои полисы
       </CustomTitle>
       <MyPoliciesFilters />
       {data
