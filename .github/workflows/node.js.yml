@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [22.14.0]
+        node-version: [22.15.0]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -23,8 +23,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'pnpm'
-    - run: pnpm install
-    - run: pnpm run build
     - name: Change Directory
       run: cd /home/garant/actions-runner/_work/garant-next/garant-next
+    - run: pnpm install
+    - run: pnpm run build
     - run: pm2 restart 0
