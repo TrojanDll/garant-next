@@ -85,13 +85,15 @@ export interface IGetOsagoPaymentCalculationRequest {
   promo_code: string;
 }
 
+export interface IOsagoPaymentCalculation {
+  base_tarif: string;
+  tarif: string;
+  discount: string;
+}
+
 export interface IGetOsagoPaymentCalculationResponse {
   status: boolean;
-  data: {
-    base_tarif: string;
-    tarif: string;
-    discount: string;
-  };
+  data: IOsagoPaymentCalculation;
 }
 
 export interface IInsured {

@@ -5,34 +5,36 @@ import React, { useEffect, useState } from "react";
 import styles from "./OsagoApply.module.scss";
 
 import { SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
 
 import { useOsagoFormConfig } from "@/hooks/useOsagoFormConfig";
+import { useGetCarBrands } from "@/hooks/cars/useGetCarBrands";
+import { useCreateOsagoPolicy } from "@/hooks/policy/useCreateOsagoPolicy";
+import { useNavigation } from "@/hooks/navigation/useNavigation";
+import { useGetPaymentCalculation } from "@/hooks/policy/useGetPaymentCalculation";
 
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import Substrate from "@/components/ui/Substrate/Substrate";
 import Button from "@/components/ui/Button/Button";
 import DynamicFormSection from "@/components/entities/DynamicFormSection/DynamicFormSection";
+import Loader from "@/components/ui/Loader/Loader";
+import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
 
-import { useGetCarBrands } from "@/hooks/cars/useGetCarBrands";
 import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 import useCurrientCar from "@/stores/Cars/currientCar";
-import { useCreateOsagoPolicy } from "@/hooks/policy/useCreateOsagoPolicy";
-import toast from "react-hot-toast";
-import { useNavigation } from "@/hooks/navigation/useNavigation";
+import useCurrientOsagoPolicy from "@/stores/Policy/currientOsagoPolicy";
+import usePromocodeError from "@/stores/Promocode/promocodeError.store";
+import usePromocodeEvent from "@/stores/Promocode/promocodeEvent.store";
+
 import { formatDataToCreateOsagoRequest } from "@/helpers/OsagoApply/formatDataToCreateOsagoRequest";
-import Loader from "@/components/ui/Loader/Loader";
 import {
   pickOsagoApplyFormData,
   pickOsagoApplyFormDataFromPolicy,
 } from "@/helpers/OsagoApply/pickOsagoApplyFormData";
-import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
-import useCurrientOsagoPolicy from "@/stores/Policy/currientOsagoPolicy";
-import usePromocodeError from "@/stores/Promocode/promocodeError.store";
-import { useGetPaymentCalculation } from "@/hooks/policy/useGetPaymentCalculation";
-import usePromocodeEvent from "@/stores/Promocode/promocodeEvent.store";
+import OsagoApplyFields from "@/components/features/OsagoApplyFields/OsagoApplyFields";
 
 const OsagoApply = () => {
   const { config, isLoading } = useOsagoFormConfig();
@@ -48,6 +50,9 @@ const OsagoApply = () => {
   const setIsAnotherCarMark = useOsagoApplyCarMark((state) => state.setCarMarkValue);
   const currientPolicy = useCurrientOsagoPolicy((state) => state.policy);
   const setPolicy = useCurrientOsagoPolicy((state) => state.setPolicy);
+  const setPolicyCalculationData = useCurrientOsagoPolicy(
+    (state) => state.setCalculationData
+  );
   const setIsPromocodeError = usePromocodeError((state) => state.setError);
   const setTrigger = usePromocodeEvent((state) => state.setTrigger);
 
@@ -109,7 +114,11 @@ const OsagoApply = () => {
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
     const formatedData = formatDataToCreateOsagoRequest(data);
     console.log(formatedData);
-    mutate(formatedData);
+
+    setPolicy(formatedData);
+    setPolicyCalculationData(paymentCalculationData);
+
+    navigateToOsagoConfirm();
   };
 
   const watchedFieldsWithPromocode = watch([
@@ -145,30 +154,6 @@ const OsagoApply = () => {
     }
   }, [JSON.stringify(watchedFields), isCountButtonClicked, formState.isDirty]);
 
-  useEffect(() => {
-    if (isPending) {
-      toast.loading("Загрузка");
-    }
-
-    if (isError) {
-      toast.dismiss();
-      toast.error("Ошибка при рассчете");
-      if (isPromocodeError) {
-        setIsPromocodeError(true);
-      }
-    } else if (isSuccess) {
-      if (createOsagoPolicyData) {
-        setPolicy(createOsagoPolicyData.data);
-      }
-
-      toast.dismiss();
-
-      setTimeout(() => {
-        navigateToOsagoConfirm();
-      }, 50);
-    }
-  }, [isPending]);
-
   return (
     <section className={styles.root}>
       <ContentContainer>
@@ -181,52 +166,7 @@ const OsagoApply = () => {
         ) : (
           <Substrate withShadow="light" className={styles.substrate}>
             <form noValidate onSubmit={handleSubmit(onSubmit)} action="">
-              <div className={styles.section}>
-                <CustomTitle tag="h2">Транспортное средство</CustomTitle>
-
-                <div className={styles.inputsWrapper}>
-                  {config.vehicle && (
-                    <DynamicFormSection
-                      fields={config.vehicle}
-                      control={control}
-                      className={styles.input}
-                      isTopItemSingle
-                    />
-                  )}
-                </div>
-              </div>
-
-              <div className={styles.section}>
-                <CustomTitle tag="h2" className={styles.sectionTitle}>
-                  Собственник
-                </CustomTitle>
-                <div className={styles.inputsWrapper}>
-                  {config.owner && (
-                    <DynamicFormSection
-                      fields={config.owner}
-                      control={control}
-                      isTopItemSingle
-                    />
-                  )}
-                </div>
-              </div>
-
-              <div className={styles.section}>
-                <CustomTitle tag="h2" className={styles.sectionTitle}>
-                  Срок пребывания
-                </CustomTitle>
-                <div className={styles.inputsWrapper}>
-                  {config.duration && (
-                    <DynamicFormSection fields={config.duration} control={control} />
-                  )}
-                </div>
-              </div>
-
-              <div className={styles.section}>
-                {config.promocode && (
-                  <DynamicFormSection fields={config.promocode} control={control} />
-                )}
-              </div>
+              <OsagoApplyFields config={config} control={control} />
 
               {isCountButtonClicked &&
               !isPaymentCalculationPending &&

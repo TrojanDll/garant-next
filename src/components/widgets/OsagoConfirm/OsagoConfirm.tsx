@@ -15,6 +15,7 @@ import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
 
 const OsagoConfirm = () => {
   const policy = useCurrientOsagoPolicy((state) => state.policy);
+  const policyCalculation = useCurrientOsagoPolicy((state) => state.calculationData);
 
   return (
     <section>
@@ -35,12 +36,12 @@ const OsagoConfirm = () => {
           </Link>
         </Substrate>
 
-        {policy && (
+        {policyCalculation && (
           <CountedPrice
             isIsolated={true}
-            discount={+policy?.discount_amount}
-            finalCost={+policy?.amount_to_be_paid - +policy?.discount_amount}
-            preliminaryCost={+policy?.amount_to_be_paid}
+            discount={+policyCalculation?.discount}
+            finalCost={+policyCalculation?.tarif}
+            preliminaryCost={+policyCalculation?.base_tarif}
             className={styles.priceWrapper}
           />
         )}

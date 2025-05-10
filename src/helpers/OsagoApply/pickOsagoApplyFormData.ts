@@ -1,6 +1,6 @@
 import { ICar, ICarBrand } from "@/types/cars.types";
 import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
-import { IOsagoPolicy } from "@/types/policy.types";
+import { ICreateOsagoPolicyRequest, IOsagoPolicy } from "@/types/policy.types";
 
 export function pickOsagoApplyFormData(
   data: ICar,
@@ -25,7 +25,7 @@ export function pickOsagoApplyFormData(
 }
 
 export function pickOsagoApplyFormDataFromPolicy(
-  data: IOsagoPolicy,
+  data: ICreateOsagoPolicyRequest,
   carBrands: ICarBrand[]
 ): Partial<IOsagoApplyForm> {
   console.log(data);
@@ -35,7 +35,7 @@ export function pickOsagoApplyFormDataFromPolicy(
   return {
     brand: data.brand,
     fio: data.fio,
-    model: data.model,
+    model: data.car_model,
     owner: data.owner === "individual" ? "individual" : "legal_entity",
     passport_number: data.passport_number,
     registration_number: data.registration_number,
@@ -43,7 +43,7 @@ export function pickOsagoApplyFormDataFromPolicy(
     transport_category: data.transport_category,
     vehicle_refined_make: data.brand === found?.Make_Name ? "" : data.brand,
     vin: data.vin,
-    year: data.year,
+    year: data.car_year,
     date_of_start: data.start_date,
     duration_of_stay: data.duration_of_stay,
     promocode: data.promo_code,

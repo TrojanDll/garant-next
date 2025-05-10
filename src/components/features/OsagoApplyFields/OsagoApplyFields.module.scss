@@ -1,0 +1,24 @@
+.section {
+  margin-top: 100px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.inputsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.input {
+  flex-shrink: 0;
+}
+
+
+@media (max-width: 1149px) {
+  .section {
+    margin-top: 80px;
+  }
+}

@@ -1,21 +1,31 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import { IOsagoPolicy } from "@/types/policy.types";
+import {
+  ICreateOsagoPolicyRequest,
+  IOsagoPaymentCalculation,
+  IOsagoPolicy,
+} from "@/types/policy.types";
 
 interface ICurrientOsagoPolicy {
-  policy: IOsagoPolicy | undefined;
-  setPolicy: (value: IOsagoPolicy | undefined) => void;
+  policy: ICreateOsagoPolicyRequest | undefined;
+  calculationData: IOsagoPaymentCalculation | undefined;
+  setPolicy: (value: ICreateOsagoPolicyRequest | undefined) => void;
+  setCalculationData: (value: IOsagoPaymentCalculation | undefined) => void;
 }
 
 const useCurrientOsagoPolicy = create<ICurrientOsagoPolicy>()(
   persist(
     immer((set) => ({
       policy: undefined,
-      setPolicy: (value: IOsagoPolicy | undefined) =>
+      calculationData: undefined,
+      setPolicy: (value: ICreateOsagoPolicyRequest | undefined) =>
         set((state) => {
           state.policy = value;
-          console.log(value);
+        }),
+      setCalculationData: (value: IOsagoPaymentCalculation | undefined) =>
+        set((state) => {
+          state.calculationData = value;
         }),
     })),
     {

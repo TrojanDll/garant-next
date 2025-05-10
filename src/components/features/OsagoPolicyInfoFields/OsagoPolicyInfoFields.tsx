@@ -2,18 +2,25 @@ import React from "react";
 
 import styles from "./OsagoPolicyInfoFields.module.scss";
 
-import { IOsagoPolicy } from "@/types/policy.types";
+import { ICreateOsagoPolicyRequest, IOsagoPolicy } from "@/types/policy.types";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import CarInfoItem from "@/components/entities/CarInfoItem/CarInfoItem";
 import { personTypes } from "@/types/user.types";
 import { getDaysBetweenDates } from "@/helpers/getDaysBetweenDates";
+import { getFinishDate } from "@/helpers/getFinishDate";
+import { getDaysFromDurationOfStayString } from "@/helpers/getDaysFromDurationOfStayString";
 
 interface IProps {
-  data: IOsagoPolicy;
+  data: ICreateOsagoPolicyRequest;
   className?: string;
 }
 
 const OsagoPolicyInfoFields = ({ data, className }: IProps) => {
+  const finishDate = getFinishDate(
+    data.start_date,
+    getDaysFromDurationOfStayString(data.duration_of_stay)
+  );
+
   return (
     <div className={className}>
       <CustomTitle tag="h2" className={styles.title}>
@@ -24,12 +31,12 @@ const OsagoPolicyInfoFields = ({ data, className }: IProps) => {
         <CarInfoItem
           className={styles.contentItem}
           name="Транспортное средство"
-          value={`${data.brand} ${data.model}`}
+          value={`${data.brand} ${data.car_model}`}
         />
         <CarInfoItem
           className={styles.contentItem}
           name="Год выпуска ТС"
-          value={data.year}
+          value={data.car_year}
         />
         <CarInfoItem
           className={styles.contentItem}
@@ -72,13 +79,13 @@ const OsagoPolicyInfoFields = ({ data, className }: IProps) => {
             <div className={`${styles.contentItem} ${styles.contentItemLarge}`}>
               <h3 className={styles.contentItemLargeTitle}>Срок действия</h3>
               <div className={styles.contentItemLargeWrapper}>
-                {data.finish_date && (
+                {data && (
                   <span className={styles.contentItemTitle}>
-                    {getDaysBetweenDates(data.start_date, data.finish_date)} суток
+                    {getDaysBetweenDates(data.start_date, finishDate)} суток
                   </span>
                 )}
                 <span className={styles.contentItemValue}>
-                  с {data.start_date} {data.finish_date && `по ${data.finish_date}`}
+                  с {data.start_date} {finishDate && `по ${finishDate}`}
                 </span>
               </div>
             </div>
