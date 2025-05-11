@@ -4,7 +4,7 @@ import styles from "./NsInsuredConfirmList.module.scss";
 
 import {
   ICreateNsPolicyRequest,
-  ICreateNsPolicyResponseData,
+  INsPolicy,
 } from "@/types/policy.types";
 import NsInsuredConfirmListItem from "../NsInsuredConfirmListItem/NsInsuredConfirmListItem";
 

@@ -6,7 +6,7 @@ import {
   ICalculateNsPolicyResponseData,
   ICreateNsPolicyRequest,
   ICreateNsPolicyResponse,
-  ICreateNsPolicyResponseData,
+  INsPolicy,
 } from "@/types/policy.types";
 
 interface ICurrientNsPolicy {

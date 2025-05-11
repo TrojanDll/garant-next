@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./NsData.module.scss";
 import {
   ICreateNsPolicyRequest,
-  ICreateNsPolicyResponseData,
+  INsPolicy,
 } from "@/types/policy.types";
 import { getDaysBetweenDates } from "@/helpers/getDaysBetweenDates";
 import NsInsuredConfirmList from "../NsInsuredConfirmList/NsInsuredConfirmList";

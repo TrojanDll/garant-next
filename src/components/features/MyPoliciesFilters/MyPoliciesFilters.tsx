@@ -20,13 +20,14 @@ const MyPoliciesFilters = () => {
   const [value, setValue] = useState<IOptions>();
 
   return (
-    <div>
+    <div className={styles.root}>
       <ButtonGroup items={buttonGroupItems} isEquals={false} />
       <SelectFilter
         options={options}
         selectedValue={value}
         setValue={(value: IOptions) => setValue(value)}
         defaultValueIndex={0}
+        className={styles.select}
       />
     </div>
   );

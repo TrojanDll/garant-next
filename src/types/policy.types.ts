@@ -4,9 +4,9 @@ export const enum EPolicyTypes {
 }
 
 export const enum EPolicyStatus {
-  ACTIVE = "active",
-  AWAITING_PAYMENT = "awaiting_payment",
-  EXPIRED = "expired",
+  ACTIVE = "Активный",
+  AWAITING_PAYMENT = "Ожидает оплаты",
+  EXPIRED = "Истек срок действия",
 }
 
 export const enum EGenders {
@@ -71,12 +71,14 @@ export interface IGetOsagoPolicyByIdResponse {
   data: IOsagoPolicy;
 }
 
+export interface IAllPolicies {
+  OSAGO: IOsagoPolicy[];
+  NS: INsPolicy[];
+}
+
 export interface IGetOsagoPolicyByCurrientUserResponse {
   success: boolean;
-  data: {
-    OSAGO: IOsagoPolicy[];
-    NS: null;
-  };
+  data: IAllPolicies;
 }
 
 export interface IGetOsagoPaymentCalculationRequest {
@@ -114,7 +116,7 @@ export interface ICreateNsPolicyRequest {
   promocode: string;
 }
 
-export interface ICreateNsPolicyResponseData {
+export interface INsPolicy {
   id: number;
   user_id: string;
   duration_of_stay: string;
@@ -126,12 +128,13 @@ export interface ICreateNsPolicyResponseData {
   created_at: string;
   updated_at: string;
   promocode: string;
+  n_s: null;
   get_peoples: IInsured[];
 }
 
 export interface ICreateNsPolicyResponse {
   success: boolean;
-  data: ICreateNsPolicyResponseData;
+  data: INsPolicy;
 }
 
 export interface ICalculateNsPolicyRequest {
@@ -149,4 +152,13 @@ export interface ICalculateNsPolicyResponseData {
 export interface ICalculateNsPolicyResponse {
   success: boolean;
   data: ICalculateNsPolicyResponseData;
+}
+
+export interface IPolicyUniversalData {
+  id: number;
+  title: string;
+  policyNumber: string;
+  start_date: string;
+  finish_date: string | null;
+  payment_status: EPolicyStatus;
 }
