@@ -9,7 +9,7 @@ import ButtonGroup, {
 } from "@/components/ui/ButtonGroup/ButtonGroup";
 import SelectFilter from "@/components/ui/SelectFilter/SelectFilter";
 import { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
-import usePolicyFilters from "@/stores/Policy/policyFilters";
+import usePolicyFilters from "@/stores/Policy/policyFilters.store";
 import { EPolicyStatus, EPolicyTypes } from "@/types/policy.types";
 
 const buttonGroupItems: string[] = ["Активные", "Архив", "Ожидают оплаты"];

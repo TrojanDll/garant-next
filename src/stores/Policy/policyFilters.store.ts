@@ -1,11 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import {
-  EPolicyStatus,
-  EPolicyTypes,
-  IOsagoPaymentCalculation,
-} from "@/types/policy.types";
+import { EPolicyStatus, EPolicyTypes } from "@/types/policy.types";
 
 interface IPolicyFilters {
   activityStatus: EPolicyStatus | undefined;
@@ -17,12 +13,13 @@ interface IPolicyFilters {
 const usePolicyFilters = create<IPolicyFilters>()(
   persist(
     immer((set) => ({
-      activityStatus: undefined,
+      activityStatus: EPolicyStatus.ACTIVE,
       policyType: undefined,
       setActivityStatus: (value: EPolicyStatus | undefined) =>
         set((state) => {
           state.activityStatus = value;
         }),
+
       setPolicyType: (value: EPolicyTypes | undefined) =>
         set((state) => {
           state.policyType = value;
