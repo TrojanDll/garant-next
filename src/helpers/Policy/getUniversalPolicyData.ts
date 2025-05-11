@@ -37,7 +37,7 @@ export function getUniversalPolicyData(policies: IParams): IPolicyUniversalData 
       ? policyOsagoData.finish_date
       : "",
     payment_status: policyNsData
-      ? EPolicyStatus.AWAITING_PAYMENT
+      ? getPaymentStatus(policyNsData.status)
       : policyOsagoData
       ? getPaymentStatus(policyOsagoData.payment_status)
       : EPolicyStatus.AWAITING_PAYMENT,
