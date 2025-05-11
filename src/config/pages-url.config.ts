@@ -14,6 +14,8 @@ class PAGESCLASS {
   RECOVERY = `${this.root}recovery`;
   AUTH = `${this.root}auth`;
   POLICY_INFO = `${this.root}policy-info`;
+  POLICY_INFO_OSAGO = `${this.POLICY_INFO}/osago-`;
+  POLICY_INFO_NS = `${this.POLICY_INFO}/ns-`;
 
   OSAGO_APPLY = `${this.OSAGO}/apply`;
   OSAGO_CONFIRM = `${this.OSAGO}/confirm`;

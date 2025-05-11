@@ -1,0 +1,104 @@
+.root {
+  display: block;
+}
+
+.substrate {
+  padding: 20px 30px;
+  display: flex;
+  column-gap: 60px;
+  transition: all 0.2s;
+
+  &:hover {
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25) !important;
+  }
+}
+
+.iconWrapper {
+  width: 176px;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  flex-shrink: 0;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 123%;
+  text-align: center;
+  color: var(--dark-grey);
+}
+
+.icon {
+  width: 70px;
+  height: 70px;
+}
+
+.contentWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mainInfo {
+  width: 33%;
+}
+
+.title {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 125%;
+  color: #000;
+}
+
+.status {
+  margin-top: 10px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 125%;
+}
+
+.active {
+  color: var(--green);
+}
+
+.awaiting {
+  color: var(--orange);
+}
+
+.expired {
+  color: var(--red2);
+}
+
+.duration {
+  margin-top: 10px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 125%;
+  color: #000;
+}
+
+.policyNumber {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 125%;
+  letter-spacing: 0.01em;
+  color: #000;
+
+  & span {
+    display: block;
+    font-weight: 400;
+    margin-bottom: 5px;
+  }
+}
+
+.more {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 125%;
+  color: var(--blue);
+}

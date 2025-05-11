@@ -21,6 +21,9 @@ const MyPolicies = () => {
 
       <MyPoliciesFilters />
       {data && <MyPoliciesList filteredPolicies={data} />}
+      <Button isLink href={PAGES.OSAGO_APPLY} className={styles.buyPolicyButton}>
+        Купить полис
+      </Button>
     </div>
   );
 };

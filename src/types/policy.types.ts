@@ -4,9 +4,9 @@ export const enum EPolicyTypes {
 }
 
 export const enum EPolicyStatus {
-  ACTIVE = "Активный",
-  AWAITING_PAYMENT = "Ожидает оплаты",
-  EXPIRED = "Истек срок действия",
+  ACTIVE = "active",
+  AWAITING_PAYMENT = "awaiting_payment",
+  EXPIRED = "expired",
 }
 
 export const enum EGenders {
