@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:inspect": "cross-env NODE_OPTIONS=--inspect next start"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.74.3",
@@ -32,6 +33,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^7.0.3",
     "typescript": "^5"
   }
 }
