@@ -109,6 +109,8 @@ const CarsEdit = () => {
   };
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     if (isPending) {
       toast.loading("Загрузка");
     }
@@ -120,10 +122,12 @@ const CarsEdit = () => {
       toast.dismiss();
       toast.success("Транспортное средство отредактировано");
 
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         goBack();
       }, 700);
     }
+
+    return () => clearTimeout(timeoutId);
   }, [isPending]);
 
   return (

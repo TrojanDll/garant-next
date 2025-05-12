@@ -40,6 +40,8 @@ const OsagoConfirm = () => {
   }
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     if (!isPending) {
       toast.dismiss();
     } else {
@@ -53,11 +55,14 @@ const OsagoConfirm = () => {
       setPolicyCalculation(undefined);
       setPolicy(undefined);
 
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         toast.dismiss();
         navigateToPolicies();
       }, 1200);
     }
+
+    return () => clearTimeout(timeoutId);
+
   }, [isPending]);
 
   return (

@@ -42,6 +42,8 @@ const NsConfirm = () => {
   }
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     if (!isPending) {
       toast.dismiss();
     } else {
@@ -52,13 +54,15 @@ const NsConfirm = () => {
       toast.dismiss();
       toast.success("Полис создан");
 
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         toast.dismiss();
         setCurrientNsPolicyCalculation(undefined);
         setCurrientNsPolicy(undefined);
         navigateToPolicies();
       }, 1000);
     }
+    return () => clearTimeout(timeoutId);
+
   }, [isPending]);
 
   return (

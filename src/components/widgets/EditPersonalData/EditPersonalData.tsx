@@ -70,6 +70,8 @@ const EditPersonalData = () => {
   }, [isLoading]);
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     if (isPending) {
       toast.loading("Загрузка");
     }
@@ -81,10 +83,12 @@ const EditPersonalData = () => {
       toast.dismiss();
       toast.success("Данные изменены");
 
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         navigateToDashboard();
       }, 300);
     }
+    
+    return () => clearTimeout(timeoutId);
   }, [isPending]);
 
   return (

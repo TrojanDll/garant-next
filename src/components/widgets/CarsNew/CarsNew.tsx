@@ -33,6 +33,8 @@ const CarsNew = () => {
   };
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     if (isPending) {
       toast.loading("Загрузка");
     }
@@ -44,10 +46,12 @@ const CarsNew = () => {
       toast.dismiss();
       toast.success("Транспортное средство добавлено");
 
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         navigateToCars();
       }, 700);
     }
+    return () => clearTimeout(timeoutId);
+
   }, [isPending]);
 
   return (

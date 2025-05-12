@@ -43,6 +43,8 @@ const RecoveryPassword = () => {
   };
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     if (isPending) {
       toast.loading("Загрузка");
     }
@@ -54,10 +56,12 @@ const RecoveryPassword = () => {
       toast.dismiss();
       toast.success("Пароль изменён");
 
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         navigateToAuth();
       }, 700);
     }
+
+    return () => clearTimeout(timeoutId);
   }, [isPending]);
 
   const password = watch("password");
