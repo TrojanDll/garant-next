@@ -22,23 +22,35 @@ const LogoutButton = ({ className }: IProps) => {
   };
 
   useEffect(() => {
+    let isMounted = true;
+
     if (isPending) {
       toast.loading("Загрузка");
+    } else {
+      toast.dismiss();
     }
 
-    if (isError) {
+    if (isError && isMounted) {
       toast.dismiss();
       toast.error("Ошибка");
-    } else if (isSuccess) {
+    } else if (isSuccess && isMounted) {
       toast.dismiss();
       toast.success("Вы вышли из системы");
 
       navigateToAuth();
     }
-  }, [isPending]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [isPending, isSuccess, isError]);
 
   return (
-    <button onClick={handleLogout} type="button" className={`${styles.button} ${className}`}>
+    <button
+      onClick={handleLogout}
+      type="button"
+      className={`${styles.button} ${className}`}
+    >
       <SvgSelector id={ESvgName.LOGOUT} className={styles.svg} />
       Выйти
     </button>

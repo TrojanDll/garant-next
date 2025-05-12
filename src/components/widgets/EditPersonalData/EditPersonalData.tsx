@@ -57,29 +57,38 @@ const EditPersonalData = () => {
   }, [isSuccess, userData]);
 
   useEffect(() => {
+    let isMounted = true;
+
     if (isLoading) {
       toast.loading("Загрузка");
+    } else {
+      toast.dismiss();
     }
 
-    if (isError) {
+    if (isError && isMounted) {
       toast.dismiss();
       toast.error("Ошибка");
-    } else if (isSuccess) {
+    } else if (isSuccess && isMounted) {
       toast.dismiss();
     }
-  }, [isLoading]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [isLoading, isError, isSuccess]);
 
   useEffect(() => {
+    let isMounted = true;
     let timeoutId: NodeJS.Timeout;
 
     if (isPending) {
       toast.loading("Загрузка");
     }
 
-    if (isEditCurrientUserError) {
+    if (isEditCurrientUserError && isMounted) {
       toast.dismiss();
       toast.error("Ошибка");
-    } else if (isEditCurrientUserSuccess) {
+    } else if (isEditCurrientUserSuccess && isMounted) {
       toast.dismiss();
       toast.success("Данные изменены");
 
@@ -87,9 +96,13 @@ const EditPersonalData = () => {
         navigateToDashboard();
       }, 300);
     }
-    
-    return () => clearTimeout(timeoutId);
-  }, [isPending]);
+
+    return () => {
+      isMounted = false;
+
+      clearTimeout(timeoutId);
+    };
+  }, [isPending, isEditCurrientUserSuccess, isEditCurrientUserError]);
 
   return (
     <div>

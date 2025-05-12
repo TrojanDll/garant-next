@@ -27,18 +27,26 @@ const RecoveryEmail = () => {
   };
 
   useEffect(() => {
+    let isMounted = true;
+
     if (isPending) {
       toast.loading("Загрузка");
+    } else {
+      toast.dismiss();
     }
 
-    if (isError) {
+    if (isError && isMounted) {
       toast.dismiss();
       toast.error("Пользователь с такой эл. почтой не зарегистрирован");
-    } else if (isSuccess) {
+    } else if (isSuccess && isMounted) {
       toast.dismiss();
       toast.success("Письмо для восстановления отправлено");
     }
-  }, [isPending]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [isPending, isSuccess, isError]);
 
   return (
     <ContentContainer>

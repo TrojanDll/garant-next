@@ -136,17 +136,23 @@ const OsagoApply = () => {
   }, []);
 
   useEffect(() => {
+    let isMounted = true;
+
     if (!isPaymentCalculationPending) {
       toast.dismiss();
     } else {
       toast.loading("Загрузка");
     }
 
-    if (isPaymentCalculationError) {
+    if (isPaymentCalculationError && isMounted) {
       toast.dismiss();
       toast.error("Ошибка. Проверьте данные");
     }
-  }, [isPaymentCalculationPending]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [isPaymentCalculationPending, isPaymentCalculationError]);
 
   return (
     <section className={styles.root}>

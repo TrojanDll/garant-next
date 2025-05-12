@@ -40,6 +40,7 @@ const OsagoConfirm = () => {
   }
 
   useEffect(() => {
+    let isMounted = true;
     let timeoutId: NodeJS.Timeout;
 
     if (!isPending) {
@@ -48,7 +49,7 @@ const OsagoConfirm = () => {
       toast.loading("Загрузка");
     }
 
-    if (isSuccess) {
+    if (isSuccess && isMounted) {
       toast.dismiss();
       toast.success("Полис создан");
 
@@ -61,9 +62,12 @@ const OsagoConfirm = () => {
       }, 1200);
     }
 
-    return () => clearTimeout(timeoutId);
+    return () => {
+      isMounted = false;
 
-  }, [isPending]);
+      clearTimeout(timeoutId);
+    };
+  }, [isPending, isSuccess]);
 
   return (
     <section>

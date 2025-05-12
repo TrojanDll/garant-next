@@ -42,6 +42,7 @@ const NsConfirm = () => {
   }
 
   useEffect(() => {
+    let isMounted = true;
     let timeoutId: NodeJS.Timeout;
 
     if (!isPending) {
@@ -50,7 +51,7 @@ const NsConfirm = () => {
       toast.loading("Загрузка");
     }
 
-    if (isSuccess) {
+    if (isSuccess && isMounted) {
       toast.dismiss();
       toast.success("Полис создан");
 
@@ -61,9 +62,12 @@ const NsConfirm = () => {
         navigateToPolicies();
       }, 1000);
     }
-    return () => clearTimeout(timeoutId);
-
-  }, [isPending]);
+    
+    return () => {
+      isMounted = false;
+      clearTimeout(timeoutId);
+    };
+  }, [isPending, isSuccess, isError]);
 
   return (
     <section>

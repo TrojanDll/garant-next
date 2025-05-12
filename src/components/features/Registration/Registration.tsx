@@ -42,22 +42,30 @@ const Registration = () => {
   };
 
   useEffect(() => {
+    let isMounted = true;
+
     if (isRegistrationPending) {
       toast.loading("Загрузка");
+    } else {
+      toast.dismiss();
     }
 
-    if (isRegistrationError) {
+    if (isRegistrationError && isMounted) {
       toast.dismiss();
       if (registrationErrors.email === "taken") {
         toast.error("Этот email уже занят");
       } else {
         toast.error("Ошибка регистрации");
       }
-    } else if (isRegistrationSuccess) {
+    } else if (isRegistrationSuccess && isMounted) {
       toast.dismiss();
       toast.success("Регистрация прошла успешно");
     }
-  }, [isRegistrationPending]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [isRegistrationPending, isRegistrationError, isRegistrationSuccess]);
 
   return (
     <Substrate className={styles.substrate}>

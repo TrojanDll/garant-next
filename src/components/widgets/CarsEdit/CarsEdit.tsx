@@ -109,16 +109,19 @@ const CarsEdit = () => {
   };
 
   useEffect(() => {
+    let isMounted = true;
     let timeoutId: NodeJS.Timeout;
 
     if (isPending) {
       toast.loading("Загрузка");
+    } else {
+      toast.dismiss();
     }
 
-    if (isError) {
+    if (isError && isMounted) {
       toast.dismiss();
       toast.error("Ошибка редактирования");
-    } else if (isSuccess) {
+    } else if (isSuccess && isMounted) {
       toast.dismiss();
       toast.success("Транспортное средство отредактировано");
 
@@ -127,8 +130,11 @@ const CarsEdit = () => {
       }, 700);
     }
 
-    return () => clearTimeout(timeoutId);
-  }, [isPending]);
+    return () => {
+      isMounted = false;
+      clearTimeout(timeoutId);
+    };
+  }, [isPending, isSuccess, isError]);
 
   return (
     <div className={styles.root}>

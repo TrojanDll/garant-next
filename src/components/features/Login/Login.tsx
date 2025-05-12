@@ -27,16 +27,20 @@ const Login = () => {
   };
 
   useEffect(() => {
+    let isMounted = true;
+
     if (!isLoginPending) {
       toast.dismiss();
     }
 
     if (isLoginPending) {
       toast.loading("Загрузка");
+    } else {
+      toast.dismiss();
     }
 
     let timeoutId: NodeJS.Timeout;
-    if (isLoginSuccess) {
+    if (isLoginSuccess && isMounted) {
       toast.dismiss();
       toast.success("Успешный вход");
 
@@ -46,8 +50,12 @@ const Login = () => {
       }, 1000);
     }
 
-    return () => clearTimeout(timeoutId);
-  }, [isLoginPending]);
+    return () => {
+      isMounted = false;
+
+      clearTimeout(timeoutId);
+    };
+  }, [isLoginPending, isLoginError, isLoginSuccess]);
 
   return (
     <Substrate className={styles.substrate}>

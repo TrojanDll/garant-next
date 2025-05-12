@@ -112,17 +112,23 @@ const NsApply = () => {
   }
 
   useEffect(() => {
+    let isMounted = true;
+
     if (!isCalculateNsPending) {
       toast.dismiss();
     } else {
       toast.loading("Загрузка");
     }
 
-    if (isCalculateNsError) {
+    if (isCalculateNsError && isMounted) {
       toast.dismiss();
       toast.error("Ошибка. Проверьте данные");
     }
-  }, [isCalculateNsPending]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [isCalculateNsPending, isCalculateNsError]);
 
   return (
     <section className={styles.root}>

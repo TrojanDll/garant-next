@@ -33,16 +33,19 @@ const CarsNew = () => {
   };
 
   useEffect(() => {
+    let isMounted = true;
     let timeoutId: NodeJS.Timeout;
 
     if (isPending) {
       toast.loading("Загрузка");
+    } else {
+      toast.dismiss();
     }
 
-    if (isError) {
+    if (isError && isMounted) {
       toast.dismiss();
       toast.error("Ошибка добавления");
-    } else if (isSuccess) {
+    } else if (isSuccess && isMounted) {
       toast.dismiss();
       toast.success("Транспортное средство добавлено");
 
@@ -50,9 +53,11 @@ const CarsNew = () => {
         navigateToCars();
       }, 700);
     }
-    return () => clearTimeout(timeoutId);
-
-  }, [isPending]);
+    return () => {
+      isMounted = false;
+      clearTimeout(timeoutId);
+    };
+  }, [isPending, isError, isSuccess]);
 
   return (
     <div className={styles.root}>
