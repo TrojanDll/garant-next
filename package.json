@@ -7,13 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:inspect": "cross-env NODE_OPTIONS=--inspect next start"
+    "build:inspect": "cross-env NODE_OPTIONS=--inspect next start",
+    "server": "node server.js"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.74.3",
     "@tanstack/react-query-devtools": "^5.74.4",
     "axios": "^1.8.4",
     "date-fns": "^4.1.0",
+    "heapdump": "^0.3.15",
     "imask": "^7.6.1",
     "immer": "^10.1.1",
     "js-cookie": "^3.0.5",
