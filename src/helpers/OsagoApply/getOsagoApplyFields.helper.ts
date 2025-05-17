@@ -22,9 +22,10 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
   // const fetchedCarBrands = await carsService.getCarBrands();
   const popularBrands = await carsService.getPopularCarBrands();
 
-  const carBrands = storedCarsBrands
-    ? storedCarsBrands
-    : ((await carsService.getCarBrands()).data.brands as ICarBrand[]);
+  const carBrands =
+    storedCarsBrands && storedCarsBrands.length
+      ? storedCarsBrands
+      : ((await carsService.getCarBrands()).data.brands as ICarBrand[]);
 
   if (!storedCarsBrands) {
     saveCarBrandsToSessionStorage(carBrands);
