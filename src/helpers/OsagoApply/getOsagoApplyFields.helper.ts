@@ -4,15 +4,31 @@ import { generateYearOptions } from "../generateYearOptions";
 import { carsService } from "@/services/cars.service";
 import { useGetCarCategories } from "@/hooks/cars/useGetCarCategories";
 import { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
+import useCarBrandsList from "@/stores/Cars/carBrandsList";
+import { ICarBrand } from "@/types/cars.types";
+import {
+  getCarBrandsFromSessionStorage,
+  saveCarBrandsToSessionStorage,
+} from "./saveCarBrandsToSessionStorage";
 
 export interface ISplitFieldConfig {
   [key: string]: IFieldConfig<IOsagoApplyForm>[];
 }
 
 export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> {
+  const storedCarsBrands = getCarBrandsFromSessionStorage();
+
   const carCategories = await carsService.getCarCategories();
-  const carBrands = await carsService.getCarBrands();
+  // const fetchedCarBrands = await carsService.getCarBrands();
   const popularBrands = await carsService.getPopularCarBrands();
+
+  const carBrands = storedCarsBrands
+    ? storedCarsBrands
+    : ((await carsService.getCarBrands()).data.brands as ICarBrand[]);
+
+  if (!storedCarsBrands) {
+    saveCarBrandsToSessionStorage(carBrands);
+  }
 
   // const popularBrands: IOptions[] = [
   //   { label: "Mercedes", value: "Mercedes" },
@@ -44,7 +60,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
   });
 
   const fetchedAndFormatedCarBrands: { label: string; value: string }[] =
-    await carBrands.data.brands.map((brand) => {
+    await carBrands.map((brand) => {
       return {
         label: brand.Make_Name,
         value: brand.Make_Name,

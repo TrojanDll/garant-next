@@ -1,15 +1,16 @@
 import { TAuthType } from "@/types/auth.types";
+import { ICarBrand } from "@/types/cars.types";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
-interface ICarBrand {
-  carBrands: ICarBrand[];
+interface ICarBrandList {
+  carBrands: ICarBrand[] | undefined;
   setCarBrands: (value: ICarBrand[]) => void;
 }
 
-const carBrandsList = create<ICarBrand>()(
+const useCarBrandsList = create<ICarBrandList>()(
   immer((set) => ({
-    carBrands: [],
+    carBrands: undefined,
     setCarBrands: (value: ICarBrand[]) =>
       set((state) => {
         state.carBrands = value;
@@ -17,4 +18,4 @@ const carBrandsList = create<ICarBrand>()(
   }))
 );
 
-export default carBrandsList;
+export default useCarBrandsList;
