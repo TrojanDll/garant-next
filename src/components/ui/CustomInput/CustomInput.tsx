@@ -29,6 +29,7 @@ interface IProps {
   className?: string;
   isError?: boolean;
   inputType?: TInputType;
+  startDate?: Date;
 }
 
 const CustomInput = ({
@@ -43,6 +44,7 @@ const CustomInput = ({
   errorMessage,
   inputType = "text",
   displayErrorMessage = false,
+  startDate,
 }: IProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [selected, setSelected] = useState<Date>();
@@ -203,6 +205,7 @@ const CustomInput = ({
             value={selected}
             setValue={handleDateChange}
             onClose={() => setIsCalendarOpened(false)}
+            startDate={startDate}
           />
         </>
       )}

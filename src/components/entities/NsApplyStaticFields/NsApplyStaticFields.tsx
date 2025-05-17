@@ -67,6 +67,7 @@ const NsApplyStaticFields = ({ control }: IProps) => {
               label="Дата начала"
               placeholder="Выберите дату"
               inputType="date"
+              startDate={new Date()}
             />
           )}
         />

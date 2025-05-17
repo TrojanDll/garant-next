@@ -30,6 +30,7 @@ interface IProps {
   tooltipText?: string;
   popularBrands?: IOptions[];
   owner?: TPersonType;
+  startDate?: Date;
 }
 
 const InputsSelector = ({
@@ -52,6 +53,7 @@ const InputsSelector = ({
   tooltip,
   tooltipText,
   owner = "individual",
+  startDate,
 }: IProps) => {
   const setPersonType = usePersonType((state) => state.setPersonType);
 
@@ -93,6 +95,7 @@ const InputsSelector = ({
           errorMessage={errorMessage}
           className={className}
           inputType={inputType}
+          startDate={startDate}
         />
       ) : type === "radio" ? (
         <ButtonGroup

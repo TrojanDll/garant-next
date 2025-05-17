@@ -13,13 +13,15 @@ interface IProps {
   value: Date | undefined;
   setValue: OnSelectHandler<Date | undefined>;
   onClose?: () => void;
+  startDate?: Date;
   className?: string;
 }
 
-const Calendar = ({ value, setValue, className, onClose }: IProps) => {
+const Calendar = ({ value, setValue, className, onClose, startDate }: IProps) => {
   return (
     <div className={className}>
       <DayPicker
+        disabled={startDate ? { before: startDate } : undefined}
         numberOfMonths={1}
         required={true}
         locale={ru}

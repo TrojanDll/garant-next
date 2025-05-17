@@ -23,11 +23,12 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
   const popularBrands = await carsService.getPopularCarBrands();
 
   const carBrands =
-    storedCarsBrands && storedCarsBrands.length
+    storedCarsBrands && storedCarsBrands.length > 0
       ? storedCarsBrands
       : ((await carsService.getCarBrands()).data.brands as ICarBrand[]);
 
-  if (!storedCarsBrands) {
+  if (!storedCarsBrands || storedCarsBrands.length === 0) {
+    console.log("Запись в store");
     saveCarBrandsToSessionStorage(carBrands);
   }
 
@@ -211,6 +212,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         placeholder: "Выберите дату",
         inputType: "date",
         required: true,
+        startDate: new Date(),
       },
     ],
     promocode: [

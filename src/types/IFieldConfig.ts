@@ -21,4 +21,5 @@ export interface IFieldConfig<T> {
   tooltip?: boolean;
   tooltipText?: string;
   popularBrands?: IOptions[];
+  startDate?: Date;
 }
