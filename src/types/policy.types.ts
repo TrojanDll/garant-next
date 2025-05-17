@@ -162,3 +162,8 @@ export interface IPolicyUniversalData {
   finish_date: string | null;
   payment_status: EPolicyStatus;
 }
+
+export interface IDurationOfStayVariants {
+  success: boolean;
+  data: string[];
+}

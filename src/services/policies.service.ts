@@ -6,6 +6,7 @@ import {
   ICreateNsPolicyResponse,
   ICreateOsagoPolicyRequest,
   ICreateOsagoPolicyResponse,
+  IDurationOfStayVariants,
   IGetOsagoPaymentCalculationRequest,
   IGetOsagoPaymentCalculationResponse,
   IGetOsagoPolicyByCurrientUserResponse,
@@ -55,6 +56,13 @@ class PoliciesService {
     const response = await axiosWithAuth.post<ICalculateNsPolicyResponse>(
       "/api/NS_colculate",
       data
+    );
+    return response;
+  }
+
+  async getDurationOfStayVariants() {
+    const response = await axiosWithAuth.get<IDurationOfStayVariants>(
+      "/api/get_NS_DurationOfStay"
     );
     return response;
   }

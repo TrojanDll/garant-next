@@ -8,39 +8,47 @@ import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import CustomSelect from "@/components/ui/CustomSelect/CustomSelect";
 import { durationOfStayListItems } from "./fields.data";
 import CustomInput from "@/components/ui/CustomInput/CustomInput";
+import { useGetDurationOfStayVariants } from "@/hooks/policy/useGetDurationOfStayVariants";
+import Loader from "@/components/ui/Loader/Loader";
 
 interface IProps {
   control: Control<ICreateNsPolicyRequest, any, ICreateNsPolicyRequest>;
 }
 
 const NsApplyStaticFields = ({ control }: IProps) => {
+  const { data: durationOfStayVariants } = useGetDurationOfStayVariants();
+
   return (
     <div className={styles.root}>
       <CustomTitle>Срок пребывания</CustomTitle>
       <div className={styles.fieldsRow}>
-        <Controller
-          control={control}
-          key="NsApply_duration_of_stay"
-          name="duration_of_stay"
-          rules={{
-            required: "Обязательное поле",
-          }}
-          render={({ field, fieldState }) => (
-            <CustomSelect
-              isSearchable={false}
-              key={field.name}
-              className={styles.input}
-              name={field.name}
-              placeholder="Длительность пребывания"
-              label="Длительность пребывания"
-              required={true}
-              options={durationOfStayListItems}
-              selectedValue={field.value.slice(field.value.indexOf("до"))}
-              setValue={field.onChange}
-              errorMessage={fieldState.error?.message}
-            />
-          )}
-        />
+        {durationOfStayVariants ? (
+          <Controller
+            control={control}
+            key="NsApply_duration_of_stay"
+            name="duration_of_stay"
+            rules={{
+              required: "Обязательное поле",
+            }}
+            render={({ field, fieldState }) => (
+              <CustomSelect
+                isSearchable={false}
+                key={field.name}
+                className={styles.input}
+                name={field.name}
+                placeholder="Длительность пребывания"
+                label="Длительность пребывания"
+                required={true}
+                options={durationOfStayListItems}
+                selectedValue={field.value.slice(field.value.indexOf("до"))}
+                setValue={field.onChange}
+                errorMessage={fieldState.error?.message}
+              />
+            )}
+          />
+        ) : (
+          <Loader />
+        )}
 
         <Controller
           control={control}
