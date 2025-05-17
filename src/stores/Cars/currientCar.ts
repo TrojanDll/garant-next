@@ -14,6 +14,8 @@ const useCurrientCar = create<ICurrientCar>()(
       car: undefined,
       setCar: (value: ICar | undefined) =>
         set((state) => {
+          console.log("Установка car в store");
+          console.log(value);
           state.car = value;
         }),
     })),

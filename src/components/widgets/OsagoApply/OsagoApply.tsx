@@ -46,6 +46,7 @@ const OsagoApply = () => {
 
   const [isCarsBrandsLoaded, setIsCarsBrandsLoaded] = useState(false);
   const [isCountButtonClicked, setIsCountButtonClicked] = useState<boolean>(false);
+  const [isInitialLoaded, setIsInitialLoaded] = useState(false);
 
   const currientCar = useCurrientCar((state) => state.car);
   const setIsAnotherCarMark = useOsagoApplyCarMark((state) => state.setCarMarkValue);
@@ -76,6 +77,8 @@ const OsagoApply = () => {
     async function resetValues() {
       if ((currientCar || currientPolicy) && carsBrands) {
         let pickedData;
+        // console.log("currientCar");
+        // console.log(currientCar);
 
         if (currientCar && !currientPolicy) {
           pickedData = await pickOsagoApplyFormData(currientCar, carsBrands);
@@ -83,20 +86,20 @@ const OsagoApply = () => {
           pickedData = await pickOsagoApplyFormDataFromPolicy(currientPolicy, carsBrands);
         }
 
-        reset(pickedData);
+        await resetForm(pickedData);
 
         let found;
 
         if (currientCar) {
           found = await carsBrands.find((item) => item.Make_Name === currientCar.brand);
-          setValue("brand", Boolean(found) ? currientCar.brand : "Другое ТС");
+          await setValue("brand", Boolean(found) ? currientCar.brand : "Другое ТС");
         } else if (currientPolicy) {
           found = await carsBrands.find(
             (item) => item.Make_Name === currientPolicy.brand
           );
-          setValue("brand", Boolean(found) ? currientPolicy.brand : "Другое ТС");
+          await setValue("brand", Boolean(found) ? currientPolicy.brand : "Другое ТС");
         }
-        setIsAnotherCarMark(!Boolean(found));
+        await setIsAnotherCarMark(!Boolean(found));
       }
     }
 
@@ -119,6 +122,16 @@ const OsagoApply = () => {
     "promocode",
   ]);
 
+  const brandWatch = watch(["brand"]);
+
+  async function resetForm(data?: Partial<IOsagoApplyForm>) {
+    await reset(data);
+    const timeoutId = setTimeout(() => {
+      setIsInitialLoaded(true);
+      clearTimeout(timeoutId);
+    }, 200);
+  }
+
   const handleCountClick = () => {
     setIsCountButtonClicked(true);
 
@@ -132,6 +145,13 @@ const OsagoApply = () => {
   useEffect(() => {
     setIsCountButtonClicked(false);
   }, [JSON.stringify(watchedFieldsWithPromocode)]);
+
+  useEffect(() => {
+    if (isInitialLoaded) {
+      setValue("model", "");
+      setValue("vehicle_refined_make", "");
+    }
+  }, [JSON.stringify(brandWatch)]);
 
   useEffect(() => {
     setTrigger(() => {
