@@ -2,9 +2,6 @@ import axios, { type CreateAxiosDefaults } from "axios";
 
 import { errorCatch } from "./error";
 import { getToken, removeFromStorage } from "@/services/auth-token.service";
-import { authService } from "@/services/auth.service";
-import { NextResponse } from "next/server";
-import { PAGES } from "@/config/pages-url.config";
 
 const options: CreateAxiosDefaults = {
   baseURL: "https://xn----nbck7b7ald8atlv.xn--y9a3aq/strahovanie.loc/public",

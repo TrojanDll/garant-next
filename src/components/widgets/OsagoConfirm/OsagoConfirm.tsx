@@ -91,7 +91,9 @@ const OsagoConfirm = () => {
         {policyCalculation && (
           <CountedPrice
             isIsolated={true}
-            discount={+policyCalculation?.discount}
+            discount={
+              Number(policyCalculation.base_tarif) - Number(policyCalculation.tarif)
+            }
             finalCost={+policyCalculation?.tarif}
             preliminaryCost={+policyCalculation?.base_tarif}
             className={styles.priceWrapper}
