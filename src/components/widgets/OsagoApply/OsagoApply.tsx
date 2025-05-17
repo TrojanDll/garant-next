@@ -130,6 +130,10 @@ const OsagoApply = () => {
   };
 
   useEffect(() => {
+    setIsCountButtonClicked(false);
+  }, [JSON.stringify(watchedFieldsWithPromocode)]);
+
+  useEffect(() => {
     setTrigger(() => {
       setIsCountButtonClicked(false);
     });

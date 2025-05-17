@@ -2,7 +2,7 @@ import { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
 
 export const durationOfStayListItems: IOptions[] = [
   {
-    label: "до 24 часов",
+    label: "Лица, прибывающие на территорию Республики Абхазия на срок до 24 часов",
     value: "Лица, прибывающие на территорию Республики Абхазия на срок до 24 часов",
   },
   {

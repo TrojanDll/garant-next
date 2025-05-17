@@ -93,14 +93,8 @@ const NsApply = () => {
   );
 
   useEffect(() => {
-    if (isCalculatedBlockVisible && formState.isDirty) {
-      handleCalculateClick();
-    }
-  }, [
-    JSON.stringify(durationOfStayFieldWatch),
-    isCalculatedBlockVisible,
-    formState.isDirty,
-  ]);
+    setIsCalculatedBlockVisible(false);
+  }, [JSON.stringify(durationOfStayFieldWatch)]);
 
   function onSubmit(data: ICreateNsPolicyRequest): void {
     console.log("form data:", data);
@@ -122,13 +116,18 @@ const NsApply = () => {
 
     if (isCalculateNsError && isMounted) {
       toast.dismiss();
-      toast.error("Ошибка. Проверьте данные");
+
+      if (isPromocodeError) {
+        toast.error("Введите действующий промокод или оставьте поле пустым");
+      } else {
+        toast.error("Ошибка. Проверьте данные");
+      }
     }
 
     return () => {
       isMounted = false;
     };
-  }, [isCalculateNsPending, isCalculateNsError]);
+  }, [isCalculateNsPending, isCalculateNsError, isPromocodeError]);
 
   return (
     <section className={styles.root}>
@@ -156,6 +155,7 @@ const NsApply = () => {
                 finalCost={calculateNsData.to_be_paid}
                 preliminaryCost={calculateNsData.base_tariff}
                 discount={calculateNsData.discount}
+                type="ns"
               />
             ) : (
               <Button
