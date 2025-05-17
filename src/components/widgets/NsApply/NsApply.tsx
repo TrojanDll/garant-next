@@ -83,7 +83,7 @@ const NsApply = () => {
     });
   }, []);
 
-  const durationOfStayFieldWatch = watch(["duration_of_stay"]);
+  const fieldsToRecolculateWatch = watch(["duration_of_stay", "insured"]);
 
   const { handleCalculateClick } = useNsApplyFormHandlers(
     watch,
@@ -94,7 +94,7 @@ const NsApply = () => {
 
   useEffect(() => {
     setIsCalculatedBlockVisible(false);
-  }, [JSON.stringify(durationOfStayFieldWatch)]);
+  }, [JSON.stringify(fieldsToRecolculateWatch)]);
 
   function onSubmit(data: ICreateNsPolicyRequest): void {
     console.log("form data:", data);
