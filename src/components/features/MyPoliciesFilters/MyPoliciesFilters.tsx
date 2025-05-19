@@ -11,6 +11,11 @@ import SelectFilter from "@/components/ui/SelectFilter/SelectFilter";
 import { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
 import usePolicyFilters from "@/stores/Policy/policyFilters.store";
 import { EPolicyStatus, EPolicyTypes } from "@/types/policy.types";
+import Substrate from "@/components/ui/Substrate/Substrate";
+import SvgSelector from "@/components/ui/SvgSelector/SvgSelector";
+import { ESvgName } from "@/constants/svg-ids.constants";
+import MyPoliciesFiltersWindow from "../MyPoliciesFiltersWindow/MyPoliciesFiltersWindow";
+import useShadow from "@/stores/Shadow/shadow.store";
 
 const buttonGroupItems: string[] = ["Активные", "Архив", "Ожидают оплаты"];
 
@@ -22,6 +27,8 @@ const options: IOptions[] = [
 
 const MyPoliciesFilters = () => {
   const [policyTypeState, setPolicyTypeState] = useState<IOptions>();
+  const [isMobileFilterVisible, setIsMobileFilterVisible] = useState<boolean>(false);
+
   const setActivityStatus = usePolicyFilters((state) => state.setActivityStatus);
   const setPolicyType = usePolicyFilters((state) => state.setPolicyType);
 
@@ -49,17 +56,34 @@ const MyPoliciesFilters = () => {
 
   return (
     <div className={styles.root}>
-      <ButtonGroup
-        items={buttonGroupItems}
-        isEquals={false}
-        onButtonClick={handleButtonGroupClick}
-      />
-      <SelectFilter
-        options={options}
-        selectedValue={policyTypeState}
-        setValue={(value: IOptions) => setPolicyTypeState(value)}
-        defaultValueIndex={0}
-        className={styles.select}
+      <div className={styles.desktopItems}>
+        <ButtonGroup
+          items={buttonGroupItems}
+          isEquals={false}
+          onButtonClick={handleButtonGroupClick}
+        />
+        <SelectFilter
+          options={options}
+          selectedValue={policyTypeState}
+          setValue={(value: IOptions) => setPolicyTypeState(value)}
+          defaultValueIndex={0}
+          className={styles.select}
+        />
+      </div>
+
+      <button
+        className={styles.filtersMobileButton}
+        onClick={() => setIsMobileFilterVisible(true)}
+      >
+        <Substrate withShadow="light" className={styles.filtersMobileButtonSubstrate}>
+          <SvgSelector id={ESvgName.FILTER} />
+          Фильтры
+        </Substrate>
+      </button>
+
+      <MyPoliciesFiltersWindow
+        isVisible={isMobileFilterVisible}
+        setIsVisible={setIsMobileFilterVisible}
       />
     </div>
   );

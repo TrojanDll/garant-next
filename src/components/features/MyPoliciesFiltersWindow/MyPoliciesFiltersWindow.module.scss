@@ -1,0 +1,32 @@
+.root {
+  position: fixed !important;
+  height: 90%;
+  width: 100vw;
+  left: 0;
+  right: 0;
+  top: 100%;
+  bottom: 0;
+  z-index: 1000;
+  padding: 30px 20px 40px 20px;
+
+  transition: all 0.3s;
+}
+
+.visible {
+  top: 10%;
+}
+
+.resetButton {
+  margin-top: 20px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  color: var(--blue);
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 32px;
+}

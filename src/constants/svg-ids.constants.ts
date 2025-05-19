@@ -18,4 +18,6 @@ export enum ESvgName {
   OSAGO = "osago",
   NS = "ns",
   PDF = "pdf",
+  FILTER = "filter",
+  CLOSE_ROUNDED = "close_rounded",
 }

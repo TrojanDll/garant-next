@@ -1,0 +1,13 @@
+.root {
+  border: 1px solid var(--light-grey-2);
+  border-radius: 12px;
+  padding: 8px 15px;
+  width: fit-content;
+}
+
+.active {
+  border: 1px solid var(--blue);
+  background-color: var(--blue);
+  color: var(--white);
+  font-weight: 500;
+}

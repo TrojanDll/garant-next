@@ -1,4 +1,4 @@
-.root {
+.desktopItems {
   display: flex;
   justify-content: space-between;
   column-gap: 70px;
@@ -6,4 +6,31 @@
 
 .select {
   width: 100%;
+}
+
+.filtersMobileButton {
+  display: none;
+}
+
+@media (max-width: 1149px) {
+  .filtersMobileButton {
+    display: block;
+  }
+
+  .desktopItems {
+    display: none;
+  }
+
+  .filtersMobileButtonSubstrate {
+    border-radius: 15px;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 129%;
+    color: var(--dark-grey);
+  }
 }
