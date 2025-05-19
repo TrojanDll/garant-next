@@ -11,6 +11,7 @@ import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 
 import styles from "./Footer.module.scss";
 import SocialLinks from "@/components/ui/SocialLinks/SocialLinks";
+import CustomLink from "@/components/ui/CustomLink/CustomLink";
 
 const Footer = () => {
   return (
@@ -26,18 +27,18 @@ const Footer = () => {
               Страхование в Абхазии
             </CustomTitle>
 
-            <Link className={styles.link} href={PAGES.OSAGO}>
+            <CustomLink className={styles.link} href={PAGES.OSAGO}>
               ОСАГО
-            </Link>
-            <Link className={styles.link} href={PAGES.NS}>
+            </CustomLink>
+            <CustomLink className={styles.link} href={PAGES.NS}>
               От несчастного случая
-            </Link>
-            <Link className={styles.link} href={PAGES.HOME}>
+            </CustomLink>
+            <CustomLink className={styles.link} href={PAGES.HOME}>
               Калькулятор стоимости
-            </Link>
-            <Link className={styles.link} href={PAGES.DOCUMENTS}>
+            </CustomLink>
+            <CustomLink className={styles.link} href={PAGES.DOCUMENTS}>
               Нормативные документы
-            </Link>
+            </CustomLink>
           </div>
 
           <div className={styles.column}>
@@ -45,15 +46,15 @@ const Footer = () => {
               Компания
             </CustomTitle>
 
-            <Link className={styles.link} href={PAGES.ABOUT}>
+            <CustomLink className={styles.link} href={PAGES.ABOUT}>
               О нас
-            </Link>
-            <Link className={styles.link} href={PAGES.CONTACTS}>
+            </CustomLink>
+            <CustomLink className={styles.link} href={PAGES.CONTACTS}>
               Контакты
-            </Link>
-            <Link className={styles.link} href={PAGES.SUPPORT}>
+            </CustomLink>
+            <CustomLink className={styles.link} href={PAGES.SUPPORT}>
               Помощь
-            </Link>
+            </CustomLink>
           </div>
 
           <div className={styles.column}>
