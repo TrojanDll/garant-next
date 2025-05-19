@@ -41,6 +41,10 @@ const Registration = () => {
     registration(formatedData);
   };
 
+  function onFormError() {
+    toast.error("Заполните все обязательные поля");
+  }
+
   useEffect(() => {
     let isMounted = true;
 
@@ -72,7 +76,7 @@ const Registration = () => {
       {isRegistrationSuccess ? (
         <EmailConfirmation />
       ) : (
-        <form action="" noValidate onSubmit={handleSubmit(onSubmit)}>
+        <form action="" noValidate onSubmit={handleSubmit(onSubmit, onFormError)}>
           <CustomTitle tag="h1" isCentered className={styles.title}>
             Регистрация нового пользователя
           </CustomTitle>

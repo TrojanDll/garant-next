@@ -2,6 +2,7 @@ import axios, { type CreateAxiosDefaults } from "axios";
 
 import { errorCatch } from "./error";
 import { getToken, removeFromStorage } from "@/services/auth-token.service";
+import { PAGES } from "@/config/pages-url.config";
 
 const options: CreateAxiosDefaults = {
   baseURL: "https://xn----nbck7b7ald8atlv.xn--y9a3aq/strahovanie.loc/public",
@@ -28,6 +29,10 @@ axiosWithAuth.interceptors.response.use(
     console.log(error);
     if (error?.response?.status === 401 || errorCatch(error) === "Unauthenticated.") {
       removeFromStorage();
+
+      if (typeof window !== "undefined") {
+        window.location.href = PAGES.AUTH;
+      }
     }
 
     // NextResponse.redirect(PAGES.HOME);

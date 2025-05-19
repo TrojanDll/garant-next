@@ -40,7 +40,7 @@ const DropdownHeader = () => {
 
   const dropdownLinks: TDropdownLinks[] = [
     {
-      href: PAGES.CALCULATOR,
+      href: PAGES.HOME,
       text: "Калькулятор стоимости",
     },
     {

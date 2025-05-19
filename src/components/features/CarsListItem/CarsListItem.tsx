@@ -57,7 +57,9 @@ const CarsListItem = ({
         </div>
 
         <div className={styles.moreMobile}>
-          <Button style="outlined">Подробнее</Button>
+          <Button isLink href={`${PAGES.CARS}/${id}`} style="outlined">
+            Подробнее
+          </Button>
         </div>
       </Substrate>
     </div>
