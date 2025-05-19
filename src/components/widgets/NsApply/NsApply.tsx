@@ -105,6 +105,10 @@ const NsApply = () => {
     navigateToNsConfirm();
   }
 
+  function onFormError() {
+    toast.error("Заполните все обязательные поля");
+  }
+
   useEffect(() => {
     let isMounted = true;
 
@@ -136,7 +140,7 @@ const NsApply = () => {
           Оформить полис от несчастного случая в Абхазии
         </CustomTitle>
 
-        <form action="" noValidate onSubmit={handleSubmit(onSubmit)}>
+        <form action="" noValidate onSubmit={handleSubmit(onSubmit, onFormError)}>
           <Substrate withShadow="light" className={styles.substrate}>
             <NsApplyInsuredList
               control={control}

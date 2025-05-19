@@ -11,7 +11,6 @@ import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
 
 import { useOsagoFormConfig } from "@/hooks/useOsagoFormConfig";
 import { useGetCarBrands } from "@/hooks/cars/useGetCarBrands";
-import { useCreateOsagoPolicy } from "@/hooks/policy/useCreateOsagoPolicy";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
 import { useGetPaymentCalculation } from "@/hooks/policy/useGetPaymentCalculation";
 
@@ -19,7 +18,6 @@ import ContentContainer from "@/components/ui/ContentContainer/ContentContainer"
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import Substrate from "@/components/ui/Substrate/Substrate";
 import Button from "@/components/ui/Button/Button";
-import DynamicFormSection from "@/components/entities/DynamicFormSection/DynamicFormSection";
 import Loader from "@/components/ui/Loader/Loader";
 import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
 
@@ -116,6 +114,10 @@ const OsagoApply = () => {
     navigateToOsagoConfirm();
   };
 
+  function onFormError() {
+    toast.error("Заполните все обязательные поля");
+  }
+
   const watchedFieldsWithPromocode = watch([
     "transport_category",
     "duration_of_stay",
@@ -189,7 +191,7 @@ const OsagoApply = () => {
           <Loader className={styles.loader} />
         ) : (
           <Substrate withShadow="light" className={styles.substrate}>
-            <form noValidate onSubmit={handleSubmit(onSubmit)} action="">
+            <form noValidate onSubmit={handleSubmit(onSubmit, onFormError)} action="">
               <OsagoApplyFields config={config} control={control} />
 
               {isCountButtonClicked &&
