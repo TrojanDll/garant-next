@@ -41,7 +41,7 @@ const CarInfo = () => {
 
       {isPending ? (
         <Loader className={styles.loader} />
-      ) : (
+      ) : data ? (
         <Substrate withShadow="light" className={styles.substrate}>
           <div className={styles.wrapper}>
             <CustomTitle tag="h2" className={styles.title}>
@@ -120,6 +120,10 @@ const CarInfo = () => {
             Купить полис
           </Button>
         </Substrate>
+      ) : (
+        <CustomTitle tag="h3" isCentered className={styles.errorMessage}>
+          У вас нет такого транспорта
+        </CustomTitle>
       )}
     </div>
   );

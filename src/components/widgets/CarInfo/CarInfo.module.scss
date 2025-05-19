@@ -44,6 +44,11 @@
   margin-top: 50px;
 }
 
+.errorMessage {
+  margin-top: 32px;
+  color: var(--red2) !important;
+}
+
 @media (max-width: 1149px) {
   .substrate {
     padding: 0;
