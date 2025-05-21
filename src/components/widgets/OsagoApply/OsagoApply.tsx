@@ -72,6 +72,7 @@ const OsagoApply = () => {
   }, [isCarsBrandsLoading]);
 
   useEffect(() => {
+    console.log(currientCar);
     async function resetValues() {
       if ((currientCar || currientPolicy) && carsBrands) {
         let pickedData;
@@ -83,8 +84,6 @@ const OsagoApply = () => {
         } else if (currientPolicy) {
           pickedData = await pickOsagoApplyFormDataFromPolicy(currientPolicy, carsBrands);
         }
-
-        await resetForm(pickedData);
 
         let found;
 
@@ -98,8 +97,9 @@ const OsagoApply = () => {
           await setValue("brand", Boolean(found) ? currientPolicy.brand : "Другое ТС");
         }
         await setIsAnotherCarMark(!Boolean(found));
-      } else {
-        await resetForm();
+
+        await resetForm(pickedData);
+        // setValue("model", pickedData?.model ? pickedData?.model : "");
       }
     }
 
@@ -134,25 +134,40 @@ const OsagoApply = () => {
       setIsInitialLoaded(true);
       console.log("setIsInitialLoaded");
       clearTimeout(timeoutId);
-    }, 200);
+    }, 900);
   }
 
   const handleCountClick = () => {
     setIsCountButtonClicked(true);
 
-    mutatePaymentCalculation({
-      transport_category: watchedFieldsWithPromocode[0],
-      duration_of_stay: watchedFieldsWithPromocode[1],
-      promo_code: watchedFieldsWithPromocode[2],
-    });
+    if (!formState.dirtyFields.duration_of_stay) {
+      toast.error("Заполните данные");
+    } else {
+      mutatePaymentCalculation({
+        transport_category: watchedFieldsWithPromocode[0],
+        duration_of_stay: watchedFieldsWithPromocode[1],
+        promo_code: watchedFieldsWithPromocode[2],
+      });
+    }
   };
 
   useEffect(() => {
     setIsCountButtonClicked(false);
   }, [JSON.stringify(watchedFieldsWithPromocode)]);
 
+  // useEffect(() => {
+  //   const timeoutId = setTimeout(() => {
+  //     if (!isCarsBrandsLoaded) {
+  //       setIsInitialLoaded(true);
+  //     }
+  //   }, 1000);
+
+  //   return () => clearTimeout(timeoutId);
+  // }, []);
+
   useEffect(() => {
-    if (isInitialLoaded) {
+    if (isInitialLoaded || !currientCar && !currientPolicy) {
+      console.log("сброс значений");
       setValue("model", "");
       setValue("vehicle_refined_make", "");
     }
