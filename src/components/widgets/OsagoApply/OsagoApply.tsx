@@ -98,6 +98,8 @@ const OsagoApply = () => {
           await setValue("brand", Boolean(found) ? currientPolicy.brand : "Другое ТС");
         }
         await setIsAnotherCarMark(!Boolean(found));
+      } else {
+        await resetForm();
       }
     }
 
@@ -130,6 +132,7 @@ const OsagoApply = () => {
     await reset(data);
     const timeoutId = setTimeout(() => {
       setIsInitialLoaded(true);
+      console.log("setIsInitialLoaded");
       clearTimeout(timeoutId);
     }, 200);
   }
