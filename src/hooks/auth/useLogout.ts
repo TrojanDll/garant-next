@@ -1,3 +1,4 @@
+import { resetAllCashe } from "@/helpers/resetAllCashe";
 import { authService } from "@/services/auth.service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
@@ -9,12 +10,13 @@ export function useLogout() {
     mutationKey: ["logout"],
     mutationFn: () => authService.logout(),
     onSuccess() {
+      resetAllCashe();
       queryClient.invalidateQueries({
         queryKey: ["logout"],
       });
+
       queryClient.clear();
       window.location.reload();
-
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
