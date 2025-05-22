@@ -62,18 +62,20 @@ const MyPolicyListItem = ({
           className={`${styles.root} ${className}`}
         >
           <Substrate withShadow="light" className={styles.substrate}>
-            <div className={styles.iconWrapper}>
-              {policyType === "osago" ? (
-                <>
-                  <SvgSelector id={ESvgName.OSAGO} className={styles.icon} />
-                  ОСАГО
-                </>
-              ) : (
-                <>
-                  <SvgSelector id={ESvgName.NS} className={styles.icon} />
-                  НС
-                </>
-              )}
+            <div className={styles.iconContainer}>
+              <div className={styles.iconWrapper}>
+                {policyType === "osago" ? (
+                  <>
+                    <SvgSelector id={ESvgName.OSAGO} className={styles.icon} />
+                    ОСАГО
+                  </>
+                ) : (
+                  <>
+                    <SvgSelector id={ESvgName.NS} className={styles.icon} />
+                    НС
+                  </>
+                )}
+              </div>
             </div>
 
             <div className={styles.contentWrapper}>

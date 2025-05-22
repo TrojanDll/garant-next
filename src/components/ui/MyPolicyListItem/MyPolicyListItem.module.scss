@@ -13,6 +13,11 @@
   }
 }
 
+.iconContainer {
+  display: flex;
+  align-items: center;
+}
+
 .iconWrapper {
   width: 176px;
   display: flex;
@@ -101,4 +106,78 @@
   font-size: 20px;
   line-height: 125%;
   color: var(--blue);
+}
+
+@media (max-width: 1149px) {
+  .substrate {
+    padding: 20px;
+    column-gap: 12px;
+  }
+
+  .iconContainer {
+    border-right: 1px solid rgba(130, 129, 129, 0.4);
+    padding-right: 12px;
+  }
+
+  .iconWrapper {
+    flex-wrap: wrap;
+    width: 52px;
+    // height: 100%;
+    gap: 0;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon {
+    margin-bottom: 6px;
+    display: block;
+    width: 36px;
+    height: 36px;
+  }
+
+  .policyNumberTitle {
+    display: none;
+  }
+
+  .policyNumber {
+    order: 1;
+    font-size: 14px;
+    font-weight: 500;
+
+    & span {
+      display: none;
+    }
+  }
+
+  .more {
+    display: none;
+  }
+
+  .title {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .status {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+
+  .duration {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+
+  .mainInfo {
+    margin-top: 20px;
+    width: auto;
+    order: 2;
+  }
+
+  .contentWrapper {
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
