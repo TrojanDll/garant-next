@@ -125,7 +125,6 @@ const OsagoApply = () => {
     "duration_of_stay",
     "promocode",
   ]);
-
   const brandWatch = watch(["brand"]);
 
   async function resetForm(data?: Partial<IOsagoApplyForm>) {
@@ -140,7 +139,7 @@ const OsagoApply = () => {
   const handleCountClick = () => {
     setIsCountButtonClicked(true);
 
-    if (!formState.dirtyFields.duration_of_stay) {
+    if (!formState.dirtyFields.duration_of_stay || watchedFieldsWithPromocode[1] === "") {
       toast.error("Заполните данные");
     } else {
       mutatePaymentCalculation({
@@ -155,18 +154,8 @@ const OsagoApply = () => {
     setIsCountButtonClicked(false);
   }, [JSON.stringify(watchedFieldsWithPromocode)]);
 
-  // useEffect(() => {
-  //   const timeoutId = setTimeout(() => {
-  //     if (!isCarsBrandsLoaded) {
-  //       setIsInitialLoaded(true);
-  //     }
-  //   }, 1000);
-
-  //   return () => clearTimeout(timeoutId);
-  // }, []);
-
   useEffect(() => {
-    if (isInitialLoaded || !currientCar && !currientPolicy) {
+    if (isInitialLoaded || (!currientCar && !currientPolicy)) {
       console.log("сброс значений");
       setValue("model", "");
       setValue("vehicle_refined_make", "");
