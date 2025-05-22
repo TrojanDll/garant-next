@@ -8,7 +8,7 @@
   bottom: 0;
   z-index: 1000;
   padding: 30px 20px 40px 20px;
-
+  overflow-y: scroll;
   transition: all 0.3s;
 }
 
@@ -42,4 +42,10 @@
 
 .filterProducer {
   margin-top: 15px;
+}
+
+.doneBtn {
+  position: absolute !important;
+  bottom: 40px;
+  width: calc(100% - 40px) !important;
 }

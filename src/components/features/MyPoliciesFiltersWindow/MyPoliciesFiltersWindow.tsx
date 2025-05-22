@@ -23,6 +23,7 @@ import { EPolicyStatus, EPolicyTypes } from "@/types/policy.types";
 import usePolicyFilters from "@/stores/Policy/policyFilters.store";
 import { compareStringAndEPolicyStatus } from "@/stores/Policy/compareStringAndEPolicyStatus";
 import { compareStringAndEPolicyTypes } from "@/stores/Policy/compareStringAndEPolicyTypes";
+import Button from "@/components/ui/Button/Button";
 
 const policyTypeFilterOptions: IFilterOptionItem[] = [
   {
@@ -188,6 +189,10 @@ const MyPoliciesFiltersWindow = ({ isVisible, setIsVisible }: IProps) => {
           activeItemProp={activeFilterItems.policyStatus}
         />
       </div>
+
+      <Button className={styles.doneBtn} onClickEvent={handleCloseButtonClick}>
+        Готово
+      </Button>
     </Substrate>
   );
 };
