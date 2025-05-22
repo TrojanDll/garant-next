@@ -14,6 +14,9 @@ importers:
       '@tanstack/react-query-devtools':
         specifier: ^5.74.4
         version: 5.74.4(@tanstack/react-query@5.74.3(react@19.1.0))(react@19.1.0)
+      '@types/body-scroll-lock':
+        specifier: ^3.1.2
+        version: 3.1.2
       axios:
         specifier: ^1.8.4
         version: 1.8.4
@@ -466,6 +469,9 @@ packages:
     resolution: {integrity: sha512-QrycUn0wxjVPzITvQvOxFRdhlAwIoOQSuav7qWD4SWCoKCdLbyRZ2vji2GuBq/glaxbF4wBx3fqcYRDOt8KDTA==}
     peerDependencies:
       react: ^18 || ^19
+
+  '@types/body-scroll-lock@3.1.2':
+    resolution: {integrity: sha512-ELhtuphE/YbhEcpBf/rIV9Tl3/O0A0gpCVD+oYFSS8bWstHFJUgA4nNw1ZakVlRC38XaQEIsBogUZKWIPBvpfQ==}
 
   '@types/js-cookie@3.0.6':
     resolution: {integrity: sha512-wkw9yd1kEXOPnvEeEV1Go1MmxtBJL0RR79aOTAApecWFVu7w0NNXNqhcWgvw2YgZDYadliXkl14pa3WXw5jlCQ==}
@@ -1363,6 +1369,8 @@ snapshots:
     dependencies:
       '@tanstack/query-core': 5.74.3
       react: 19.1.0
+
+  '@types/body-scroll-lock@3.1.2': {}
 
   '@types/js-cookie@3.0.6': {}
 

@@ -1,8 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks,
+} from "body-scroll-lock";
 
 import styles from "./MyPoliciesFiltersWindow.module.scss";
 
@@ -59,6 +63,8 @@ interface IProps {
 }
 
 const MyPoliciesFiltersWindow = ({ isVisible, setIsVisible }: IProps) => {
+  const rootRef = useRef<HTMLDivElement>(null);
+
   const [activeFilterItems, setActiveFilterItems] = useState<IActiveFilterItems>({
     policyStatus: null,
     policyType: null,
@@ -84,9 +90,18 @@ const MyPoliciesFiltersWindow = ({ isVisible, setIsVisible }: IProps) => {
   }, []);
 
   useEffect(() => {
+    const el = rootRef.current;
+
+    if (!el) return;
+
     if (isVisible) {
       setIsShadowVisible(true);
+      disableBodyScroll(el);
+    } else {
+      enableBodyScroll(el);
     }
+
+    return () => enableBodyScroll(el);
   }, [isVisible]);
 
   useEffect(() => {
@@ -97,8 +112,8 @@ const MyPoliciesFiltersWindow = ({ isVisible, setIsVisible }: IProps) => {
 
   useEffect(() => {
     setPolicyStatusFilter(
-      activeFilterItems.policyType
-        ? compareStringAndEPolicyStatus(activeFilterItems.policyType.value)
+      activeFilterItems.policyStatus
+        ? compareStringAndEPolicyStatus(activeFilterItems.policyStatus.value)
         : undefined
     );
 
@@ -136,7 +151,10 @@ const MyPoliciesFiltersWindow = ({ isVisible, setIsVisible }: IProps) => {
   }
 
   return (
-    <Substrate className={`${styles.root} ${isVisible ? styles.visible : ""}`}>
+    <Substrate
+      ref={rootRef}
+      className={`${styles.root} ${isVisible ? styles.visible : ""}`}
+    >
       <button className={styles.close} onClick={handleCloseButtonClick}>
         <SvgSelector id={ESvgName.CLOSE_ROUNDED} />
       </button>
@@ -164,6 +182,10 @@ const MyPoliciesFiltersWindow = ({ isVisible, setIsVisible }: IProps) => {
         <FilterOptionsProducer
           className={styles.filterProducer}
           options={policyStatusFilterOptions}
+          getActiveItem={(value: IFilterOptionItem | null) =>
+            handleChangeFilterOption(value, "policyStatus")
+          }
+          activeItemProp={activeFilterItems.policyStatus}
         />
       </div>
     </Substrate>

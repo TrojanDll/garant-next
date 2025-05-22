@@ -1,8 +1,8 @@
 import { EPolicyStatus } from "@/types/policy.types";
 
-export function compareStringAndEPolicyStatus(value: string): EPolicyStatus {
+export function compareStringAndEPolicyStatus(value: string): EPolicyStatus | undefined {
   const values = Object.values(EPolicyStatus);
   const match = values.find((status) => status === value);
 
-  return match ? (match as EPolicyStatus) : EPolicyStatus.ACTIVE;
+  return match ? (match as EPolicyStatus) : undefined;
 }
