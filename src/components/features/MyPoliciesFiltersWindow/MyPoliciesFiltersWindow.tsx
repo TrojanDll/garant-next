@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 import styles from "./MyPoliciesFiltersWindow.module.scss";
 
@@ -10,6 +12,46 @@ import useShadow from "@/stores/Shadow/shadow.store";
 import SvgSelector from "@/components/ui/SvgSelector/SvgSelector";
 import { ESvgName } from "@/constants/svg-ids.constants";
 import FilterOptionButton from "@/components/ui/FilterOptionButton/FilterOptionButton";
+import FilterOptionsProducer, {
+  IFilterOptionItem,
+} from "@/components/entities/FilterOptionsProducer/FilterOptionsProducer";
+import { EPolicyStatus, EPolicyTypes } from "@/types/policy.types";
+import usePolicyFilters from "@/stores/Policy/policyFilters.store";
+import { compareStringAndEPolicyStatus } from "@/stores/Policy/compareStringAndEPolicyStatus";
+import { compareStringAndEPolicyTypes } from "@/stores/Policy/compareStringAndEPolicyTypes";
+
+const policyTypeFilterOptions: IFilterOptionItem[] = [
+  {
+    label: "ОСАГО",
+    value: EPolicyTypes.OSAGO,
+  },
+  {
+    label: "НС",
+    value: EPolicyTypes.NS,
+  },
+];
+
+const policyStatusFilterOptions: IFilterOptionItem[] = [
+  {
+    label: "Активный",
+    value: EPolicyStatus.ACTIVE,
+  },
+  {
+    label: "Ожидает оплаты",
+    value: EPolicyStatus.AWAITING_PAYMENT,
+  },
+  {
+    label: "Истек срок действия",
+    value: EPolicyStatus.EXPIRED,
+  },
+];
+
+type TFilterProducerType = "policyType" | "policyStatus";
+
+interface IActiveFilterItems {
+  policyType: IFilterOptionItem | null;
+  policyStatus: IFilterOptionItem | null;
+}
 
 interface IProps {
   isVisible: boolean;
@@ -17,8 +59,29 @@ interface IProps {
 }
 
 const MyPoliciesFiltersWindow = ({ isVisible, setIsVisible }: IProps) => {
+  const [activeFilterItems, setActiveFilterItems] = useState<IActiveFilterItems>({
+    policyStatus: null,
+    policyType: null,
+  });
+
   const isShadowVisible = useShadow((state) => state.isShadowVisible);
   const setIsShadowVisible = useShadow((state) => state.setIsShadowVisible);
+
+  const policyTypeFilter = usePolicyFilters((state) => state.policyType);
+  const policyStatusFilter = usePolicyFilters((state) => state.activityStatus);
+  const setPolicyTypeFilter = usePolicyFilters((state) => state.setPolicyType);
+  const setPolicyStatusFilter = usePolicyFilters((state) => state.setActivityStatus);
+
+  useEffect(() => {
+    if (isVisible) {
+      setPolicyTypeFilter(undefined);
+      setPolicyStatusFilter(undefined);
+      setActiveFilterItems({
+        policyStatus: null,
+        policyType: null,
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (isVisible) {
@@ -32,9 +95,44 @@ const MyPoliciesFiltersWindow = ({ isVisible, setIsVisible }: IProps) => {
     }
   }, [isShadowVisible]);
 
+  useEffect(() => {
+    setPolicyStatusFilter(
+      activeFilterItems.policyType
+        ? compareStringAndEPolicyStatus(activeFilterItems.policyType.value)
+        : undefined
+    );
+
+    setPolicyTypeFilter(
+      activeFilterItems.policyType
+        ? compareStringAndEPolicyTypes(activeFilterItems.policyType.value)
+        : undefined
+    );
+  }, [activeFilterItems]);
+
   function handleCloseButtonClick() {
     setIsShadowVisible(false);
     setIsVisible(false);
+  }
+
+  function handleChangeFilterOption(
+    option: IFilterOptionItem | null,
+    producerType: TFilterProducerType
+  ) {
+    if (producerType === "policyType") {
+      setActiveFilterItems((prev) => {
+        return {
+          ...prev,
+          policyType: option,
+        };
+      });
+    } else if (producerType === "policyStatus") {
+      setActiveFilterItems((prev) => {
+        return {
+          ...prev,
+          policyStatus: option,
+        };
+      });
+    }
   }
 
   return (
@@ -51,7 +149,22 @@ const MyPoliciesFiltersWindow = ({ isVisible, setIsVisible }: IProps) => {
 
       <div className={styles.filterParam}>
         <h5 className={styles.filterParamTitle}>Тип полиса</h5>
-        <FilterOptionButton>ОСАГО</FilterOptionButton>
+        <FilterOptionsProducer
+          className={styles.filterProducer}
+          options={policyTypeFilterOptions}
+          getActiveItem={(value: IFilterOptionItem | null) =>
+            handleChangeFilterOption(value, "policyType")
+          }
+          activeItemProp={activeFilterItems.policyType}
+        />
+      </div>
+
+      <div className={styles.filterParam}>
+        <h5 className={styles.filterParamTitle}>Статус</h5>
+        <FilterOptionsProducer
+          className={styles.filterProducer}
+          options={policyStatusFilterOptions}
+        />
       </div>
     </Substrate>
   );

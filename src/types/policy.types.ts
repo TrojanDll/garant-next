@@ -1,15 +1,15 @@
-export const enum EPolicyTypes {
+export enum EPolicyTypes {
   OSAGO = "osago",
   NS = "ns",
 }
 
-export const enum EPolicyStatus {
+export enum EPolicyStatus {
   ACTIVE = "active",
   AWAITING_PAYMENT = "awaiting_payment",
   EXPIRED = "expired",
 }
 
-export const enum EGenders {
+export enum EGenders {
   MAN = "Мужчина",
   WOMAN = "Женщина",
 }
