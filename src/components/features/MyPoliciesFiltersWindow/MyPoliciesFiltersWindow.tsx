@@ -112,17 +112,19 @@ const MyPoliciesFiltersWindow = ({ isVisible, setIsVisible }: IProps) => {
   }, [isShadowVisible]);
 
   useEffect(() => {
-    setPolicyStatusFilter(
-      activeFilterItems.policyStatus
-        ? compareStringAndEPolicyStatus(activeFilterItems.policyStatus.value)
-        : undefined
-    );
+    if (isVisible) {
+      setPolicyStatusFilter(
+        activeFilterItems.policyStatus
+          ? compareStringAndEPolicyStatus(activeFilterItems.policyStatus.value)
+          : undefined
+      );
 
-    setPolicyTypeFilter(
-      activeFilterItems.policyType
-        ? compareStringAndEPolicyTypes(activeFilterItems.policyType.value)
-        : undefined
-    );
+      setPolicyTypeFilter(
+        activeFilterItems.policyType
+          ? compareStringAndEPolicyTypes(activeFilterItems.policyType.value)
+          : undefined
+      );
+    }
   }, [activeFilterItems]);
 
   function handleCloseButtonClick() {
