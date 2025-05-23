@@ -62,7 +62,7 @@ const Header = () => {
                 className={styles.dashboardButtonDesktop}
                 variant="dashboard"
                 isLink={true}
-                href={PAGES.DASHBOARD}
+                href={PAGES.MY_POLICIES}
               >
                 <SvgSelector id={ESvgName.PROFILE} />
 

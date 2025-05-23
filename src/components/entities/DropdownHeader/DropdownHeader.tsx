@@ -74,7 +74,11 @@ const DropdownHeader = () => {
     >
       <Substrate className={`${styles.dropdown} ${isDropdownOpened ? styles.open : ""}`}>
         <div>
-          <button className={styles.close} onClick={() => setIsDropdownOpened(false)} type="button">
+          <button
+            className={styles.close}
+            onClick={() => setIsDropdownOpened(false)}
+            type="button"
+          >
             <SvgSelector id={ESvgName.CLOSE} />
           </button>
 
@@ -98,7 +102,7 @@ const DropdownHeader = () => {
               className={styles.dropdownDasboard}
               variant="dashboard"
               isLink={true}
-              href={PAGES.DASHBOARD}
+              href={PAGES.MY_POLICIES}
               onClickEvent={() => setIsDropdownOpened(false)}
             >
               <SvgSelector id={ESvgName.PROFILE} />
