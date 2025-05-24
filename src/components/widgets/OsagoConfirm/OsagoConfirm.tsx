@@ -16,6 +16,7 @@ import { useCreateOsagoPolicy } from "@/hooks/policy/useCreateOsagoPolicy";
 import toast from "react-hot-toast";
 import useCurrientOsagoPolicyCalculation from "@/stores/Policy/currientOsagoPolicyCalculation";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
+import useCurrientCar from "@/stores/Cars/currientCar";
 
 const OsagoConfirm = () => {
   const policy = useCurrientOsagoPolicy((state) => state.policy);
@@ -26,6 +27,7 @@ const OsagoConfirm = () => {
     (state) => state.setCalculationData
   );
   const setPolicy = useCurrientOsagoPolicy((state) => state.setPolicy);
+  const setCurrientCar = useCurrientCar((state) => state.setCar);
 
   const { navigateToPolicies } = useNavigation();
 
@@ -55,6 +57,7 @@ const OsagoConfirm = () => {
 
       setPolicyCalculation(undefined);
       setPolicy(undefined);
+      setCurrientCar(undefined);
 
       timeoutId = setTimeout(() => {
         toast.dismiss();
