@@ -10,6 +10,7 @@ import {
   EPolicyStatus,
   EPolicyTypes,
   ICreateOsagoPolicyRequest,
+  INsPolicy,
 } from "@/types/policy.types";
 import PolicyNumber from "@/components/entities/PolicyNumber/PolicyNumber";
 import PolicyStatus from "@/components/ui/PolicyStatus/PolicyStatus";
@@ -22,6 +23,9 @@ import { useGetOsagoPolicyById } from "@/hooks/policy/useGetOsagoPolicyById";
 import { useParams } from "next/navigation";
 import Loader from "@/components/ui/Loader/Loader";
 import OsagoPolicyInfoFields from "@/components/features/OsagoPolicyInfoFields/OsagoPolicyInfoFields";
+import { useGetNsPolicyById } from "@/hooks/policy/useGetNsPolicyById";
+import { getPaymentStatus } from "@/helpers/Policy/getPaymentStatus";
+import NsData from "@/components/features/NsData/NsData";
 
 interface IProps {
   className?: string;
@@ -32,9 +36,18 @@ const PolicyInfo = ({ className }: IProps) => {
   const [policyType, setPolicyType] = useState(EPolicyTypes.OSAGO);
   const [policyStatus, setPolicyStatus] = useState(EPolicyStatus.AWAITING_PAYMENT);
   const [policyNumber, setPolicyNumber] = useState("");
+  const [price, setPrice] = useState<number>(0);
   const [policyData, setPolicyData] = useState<ICreateOsagoPolicyRequest>();
+  // const [nsPolicyData, setNsPolicyData] = useState<INsPolicy>();
 
   const { data, isError, isPending, isSuccess, mutate } = useGetOsagoPolicyById();
+  const {
+    data: nsPolicyFetchedData,
+    isError: isNsError,
+    isPending: isNsPending,
+    isSuccess: isNsSuccess,
+    mutate: nsMutate,
+  } = useGetNsPolicyById();
 
   useEffect(() => {
     let slug = "";
@@ -55,23 +68,17 @@ const PolicyInfo = ({ className }: IProps) => {
 
       if (type === "osago") {
         setPolicyType(EPolicyTypes.OSAGO);
+        mutate({ osago_id: id });
       } else if (type === "ns") {
         setPolicyType(EPolicyTypes.NS);
+        nsMutate({ ns_id: id });
       }
-
-      mutate({ osago_id: id });
     }
   }, []);
 
   useEffect(() => {
     if (isSuccess && data) {
-      if (data.payment_status === "Активный") {
-        setPolicyStatus(EPolicyStatus.ACTIVE);
-      } else if (data.payment_status === "Ожидает оплаты") {
-        setPolicyStatus(EPolicyStatus.AWAITING_PAYMENT);
-      } else if (data.payment_status === "Истек срок действия") {
-        setPolicyStatus(EPolicyStatus.EXPIRED);
-      }
+      setPolicyStatus(getPaymentStatus(data.payment_status));
 
       setPolicyData({
         brand: data.brand,
@@ -89,18 +96,27 @@ const PolicyInfo = ({ className }: IProps) => {
         vin: data.vin,
       });
     }
-  }, [isPending]);
+
+    if (isNsSuccess && nsPolicyFetchedData) {
+      setPolicyStatus(getPaymentStatus(nsPolicyFetchedData.status));
+    }
+  }, [isPending, isNsPending]);
 
   useEffect(() => {
     if (policyType === EPolicyTypes.OSAGO && data) {
       setPolicyNumber(data.osaga_number);
-      console.log(data);
+      setPrice(data.for_payment);
     }
-  }, [policyType, isPending, isSuccess]);
+
+    if (policyType === EPolicyTypes.NS && nsPolicyFetchedData) {
+      setPolicyNumber(nsPolicyFetchedData.NS_number);
+      setPrice(+nsPolicyFetchedData.amount_to_be_paid);
+    }
+  }, [policyType, isPending, isSuccess, isNsPending, isNsSuccess]);
 
   return (
     <div className={className}>
-      {data && policyData ? (
+      {(data && policyData) || nsPolicyFetchedData ? (
         <ContentContainer className={styles.container}>
           <Substrate className={styles.substrate} withShadow="light">
             <div className={styles.header}>
@@ -120,14 +136,26 @@ const PolicyInfo = ({ className }: IProps) => {
               Скачать полис
             </Button>
 
-            <OsagoPolicyInfoFields className={styles.fields} data={policyData} />
+            {data && (
+              <OsagoPolicyInfoFields className={styles.fields} data={policyData} />
+            )}
+
+            {nsPolicyFetchedData && (
+              <div className={styles.nsDataWrapper}>
+                <NsData
+                  policy={{
+                    duration_of_stay: nsPolicyFetchedData.duration_of_stay,
+                    insured: nsPolicyFetchedData.get_peoples,
+                    promocode: nsPolicyFetchedData.promocode,
+                    start_date: nsPolicyFetchedData.start_date,
+                  }}
+                />
+              </div>
+            )}
           </Substrate>
 
           {policyStatus === EPolicyStatus.AWAITING_PAYMENT && (
-            <AwaitingPayment
-              ammount={+data.for_payment}
-              className={styles.awaitingPayment}
-            />
+            <AwaitingPayment amount={price} className={styles.awaitingPayment} />
           )}
         </ContentContainer>
       ) : !isError ? (

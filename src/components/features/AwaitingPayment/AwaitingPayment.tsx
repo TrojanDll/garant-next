@@ -7,14 +7,14 @@ import Button from "@/components/ui/Button/Button";
 
 interface IProps {
   className?: string;
-  ammount: number;
+  amount: number;
 }
 
-const AwaitingPayment = ({ ammount, className }: IProps) => {
+const AwaitingPayment = ({ amount, className }: IProps) => {
   return (
     <Substrate className={`${className} ${styles.substrate}`} withShadow="light">
       <p className={styles.title}>Полис ожидает оплаты</p>
-      <p className={styles.ammount}>{ammount}₽</p>
+      <p className={styles.amount}>{amount}₽</p>
       <Button className={styles.button} variant="wide">
         Оплатить
       </Button>

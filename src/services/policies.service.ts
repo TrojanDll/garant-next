@@ -7,6 +7,8 @@ import {
   ICreateOsagoPolicyRequest,
   ICreateOsagoPolicyResponse,
   IDurationOfStayVariants,
+  IGetNsPolicyByIdRequest,
+  IGetNsPolicyByIdResponse,
   IGetOsagoPaymentCalculationRequest,
   IGetOsagoPaymentCalculationResponse,
   IGetOsagoPolicyByCurrientUserResponse,
@@ -56,6 +58,13 @@ class PoliciesService {
     const response = await axiosWithAuth.post<ICalculateNsPolicyResponse>(
       "/api/NS_colculate",
       data
+    );
+    return response;
+  }
+
+  async getNsPolicyById(data: IGetNsPolicyByIdRequest) {
+    const response = await axiosWithAuth.get<IGetNsPolicyByIdResponse>(
+      `/api/getNS_by_id?ns_id=${data.ns_id}`
     );
     return response;
   }

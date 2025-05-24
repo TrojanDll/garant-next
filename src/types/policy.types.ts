@@ -72,6 +72,15 @@ export interface IGetOsagoPolicyByIdResponse {
   data: IOsagoPolicy;
 }
 
+export interface IGetNsPolicyByIdRequest {
+  ns_id: number;
+}
+
+export interface IGetNsPolicyByIdResponse {
+  success: boolean;
+  data: INsPolicy;
+}
+
 export interface IAllPolicies {
   OSAGO: IOsagoPolicy[];
   NS: INsPolicy[];
