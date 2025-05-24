@@ -80,12 +80,30 @@ const SidebarDashboard = ({ className }: IProps) => {
       className={`${styles.substrate} ${className} ${isOpened ? styles.opened : ""}`}
     >
       <nav>
-        <button onClick={handleSidebarMenuButtonClick} className={styles.sidebarMenuButton}>
-          <SvgSelector
+        <button
+          onClick={handleSidebarMenuButtonClick}
+          className={styles.sidebarMenuButton}
+        >
+          {/* <SvgSelector
             id={ESvgName.CHEVRON_DOWN}
             className={`${styles.titleChevron} ${isOpened ? styles.titleChevronOpened : ""}`}
           />
-          <h2 className={styles.sidebarTitle}>Меню</h2>
+          <h2 className={styles.sidebarTitle}>Меню</h2> */}
+          <svg
+            width="21"
+            height="17"
+            viewBox="0 0 21 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1.125 1.625H19.875M1.125 8.5H19.875M1.125 15.375H19.875"
+              stroke="black"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </button>
 
         {sidebarLinks.map((item, i) => (
