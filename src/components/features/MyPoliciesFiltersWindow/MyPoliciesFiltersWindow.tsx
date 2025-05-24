@@ -153,6 +153,11 @@ const MyPoliciesFiltersWindow = ({ isVisible, setIsVisible }: IProps) => {
     }
   }
 
+  function resetAllFilters() {
+    handleChangeFilterOption(null, "policyStatus");
+    handleChangeFilterOption(null, "policyType");
+  }
+
   return (
     <Substrate
       ref={rootRef}
@@ -166,7 +171,9 @@ const MyPoliciesFiltersWindow = ({ isVisible, setIsVisible }: IProps) => {
         Фильтры
       </CustomTitle>
 
-      <button className={styles.resetButton}>Сбросить</button>
+      <button className={styles.resetButton} onClick={resetAllFilters}>
+        Сбросить
+      </button>
 
       <div className={styles.filterParam}>
         <h5 className={styles.filterParamTitle}>Тип полиса</h5>
