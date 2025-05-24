@@ -38,6 +38,7 @@ export interface IOsagoPolicy {
   osaga_number: string; // сори, это бекендер такой грамотный, еще и менять поля отказался
   duration_of_stay: string;
   discount_amount: string;
+  for_payment: number;
 }
 
 export interface ICreateOsagoPolicyRequest {

@@ -125,7 +125,7 @@ const PolicyInfo = ({ className }: IProps) => {
 
           {policyStatus === EPolicyStatus.AWAITING_PAYMENT && (
             <AwaitingPayment
-              ammount={+data.amount_to_be_paid}
+              ammount={+data.for_payment}
               className={styles.awaitingPayment}
             />
           )}
