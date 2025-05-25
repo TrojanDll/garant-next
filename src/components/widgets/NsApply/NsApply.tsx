@@ -56,15 +56,22 @@ const NsApply = () => {
 
   const { navigateToNsConfirm } = useNavigation();
 
-  const { control, handleSubmit, watch, formState, reset } =
-    useForm<ICreateNsPolicyRequest>({
-      defaultValues: {
-        insured: [defaultInsuredValues],
-        duration_of_stay: "",
-        promocode: "",
-        start_date: "",
-      },
-    });
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState,
+    reset,
+    trigger: formValidationTrigger,
+    clearErrors,
+  } = useForm<ICreateNsPolicyRequest>({
+    defaultValues: {
+      insured: [defaultInsuredValues],
+      duration_of_stay: "",
+      promocode: "",
+      start_date: "",
+    },
+  });
 
   const { fields, append, remove } = useFieldArray({
     name: "insured",
@@ -85,12 +92,21 @@ const NsApply = () => {
 
   const fieldsToRecolculateWatch = watch(["duration_of_stay", "insured"]);
 
-  const { handleCalculateClick } = useNsApplyFormHandlers(
-    watch,
-    (value: ICalculateNsPolicyRequest) => calculateNsMutate(value),
-    (mark: boolean) => setPromocodeError(mark),
-    (value: boolean) => setIsCalculatedBlockVisible(value)
-  );
+  const watchedFields = watch(["duration_of_stay", "promocode", "insured"]);
+
+  function handleCalculateClick() {
+    const isValid = formValidationTrigger();
+
+    if (!isValid) return;
+
+    setPromocodeError(false);
+    setIsCalculatedBlockVisible(true);
+    calculateNsMutate({
+      duration_of_stay: watchedFields[0],
+      promocode: watchedFields[1],
+      quantity: watchedFields[2].length,
+    });
+  }
 
   useEffect(() => {
     setIsCalculatedBlockVisible(false);
@@ -147,10 +163,11 @@ const NsApply = () => {
               fields={fields}
               append={append}
               remove={remove}
+              clearErrors={clearErrors}
             />
 
             <div className={styles.staticFieldsWrapper}>
-              <NsApplyStaticFields control={control} />
+              <NsApplyStaticFields clearErrors={clearErrors} control={control} />
             </div>
 
             {calculateNsData && isCalculateNsSuccess && isCalculatedBlockVisible ? (

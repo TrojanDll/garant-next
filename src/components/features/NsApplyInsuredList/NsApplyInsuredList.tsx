@@ -10,6 +10,7 @@ import {
   FieldArrayWithId,
   UseFieldArrayAppend,
   UseFieldArrayRemove,
+  UseFormClearErrors,
 } from "react-hook-form";
 import NsApplyInsuredListItem from "@/components/entities/NsApplyInsuredListItem/NsApplyInsuredListItem";
 import Button from "@/components/ui/Button/Button";
@@ -20,9 +21,10 @@ interface IProps {
   fields: FieldArrayWithId<ICreateNsPolicyRequest, "insured", "id">[];
   append: UseFieldArrayAppend<ICreateNsPolicyRequest, "insured">;
   remove: UseFieldArrayRemove;
+  clearErrors?: UseFormClearErrors<ICreateNsPolicyRequest>;
 }
 
-const NsApplyInsuredList = ({ control, fields, append, remove }: IProps) => {
+const NsApplyInsuredList = ({ control, fields, append, remove, clearErrors }: IProps) => {
   const MAX_INSURED_COUNT = 5;
 
   return (
@@ -34,6 +36,7 @@ const NsApplyInsuredList = ({ control, fields, append, remove }: IProps) => {
             control={control}
             itemIndex={index}
             field={field}
+            clearErrors={clearErrors}
           />
         </div>
       ))}

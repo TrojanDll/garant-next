@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./NsApplyStaticFields.module.scss";
 
-import { Control, Controller } from "react-hook-form";
+import { Control, Controller, UseFormClearErrors } from "react-hook-form";
 import { ICreateNsPolicyRequest } from "@/types/policy.types";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import CustomSelect from "@/components/ui/CustomSelect/CustomSelect";
@@ -13,9 +13,10 @@ import Loader from "@/components/ui/Loader/Loader";
 
 interface IProps {
   control: Control<ICreateNsPolicyRequest, any, ICreateNsPolicyRequest>;
+  clearErrors?: UseFormClearErrors<ICreateNsPolicyRequest>;
 }
 
-const NsApplyStaticFields = ({ control }: IProps) => {
+const NsApplyStaticFields = ({ control, clearErrors }: IProps) => {
   const { data: durationOfStayVariants } = useGetDurationOfStayVariants();
 
   return (
@@ -41,7 +42,12 @@ const NsApplyStaticFields = ({ control }: IProps) => {
                 required={true}
                 options={durationOfStayListItems}
                 selectedValue={field.value.slice(field.value.indexOf("до"))}
-                setValue={field.onChange}
+                setValue={(value) => {
+                  if (clearErrors) {
+                    clearErrors(field.name);
+                  }
+                  field.onChange(value);
+                }}
                 errorMessage={fieldState.error?.message}
               />
             )}
@@ -61,7 +67,12 @@ const NsApplyStaticFields = ({ control }: IProps) => {
             <CustomInput
               className={styles.input}
               name={field.name}
-              setValue={field.onChange}
+              setValue={(value) => {
+                if (clearErrors) {
+                  clearErrors(field.name);
+                }
+                field.onChange(value);
+              }}
               value={field.value}
               errorMessage={fieldState.error?.message}
               label="Дата начала"
@@ -81,7 +92,12 @@ const NsApplyStaticFields = ({ control }: IProps) => {
           <CustomInput
             className={styles.promocodeInput}
             name={field.name}
-            setValue={field.onChange}
+            setValue={(value) => {
+              if (clearErrors) {
+                clearErrors(field.name);
+              }
+              field.onChange(value);
+            }}
             value={field.value}
             errorMessage={fieldState.error?.message}
             label="Промокод"

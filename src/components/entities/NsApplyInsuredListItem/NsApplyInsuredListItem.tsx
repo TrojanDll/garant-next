@@ -3,7 +3,12 @@ import React from "react";
 import styles from "./NsApplyInsuredListItem.module.scss";
 
 import { EGenders, ICreateNsPolicyRequest } from "@/types/policy.types";
-import { Control, Controller, FieldArrayWithId } from "react-hook-form";
+import {
+  Control,
+  Controller,
+  FieldArrayWithId,
+  UseFormClearErrors,
+} from "react-hook-form";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import CustomInput from "@/components/ui/CustomInput/CustomInput";
 import ButtonGroup, {
@@ -15,9 +20,16 @@ interface IProps {
   itemIndex: number;
   removeItem: () => void;
   field: FieldArrayWithId<ICreateNsPolicyRequest, "insured", "id">;
+  clearErrors?: UseFormClearErrors<ICreateNsPolicyRequest>;
 }
 
-const NsApplyInsuredListItem = ({ control, itemIndex, removeItem, field }: IProps) => {
+const NsApplyInsuredListItem = ({
+  control,
+  itemIndex,
+  removeItem,
+  field,
+  clearErrors,
+}: IProps) => {
   function handleChangeButtonGroup(
     buttonGroupRequest: TButtonGroupRequest,
     onChange: (...event: any[]) => void
@@ -48,7 +60,12 @@ const NsApplyInsuredListItem = ({ control, itemIndex, removeItem, field }: IProp
             <CustomInput
               className={styles.input}
               name={fieldRender.name}
-              setValue={fieldRender.onChange}
+              setValue={(value) => {
+                if (clearErrors) {
+                  clearErrors(fieldRender.name);
+                }
+                fieldRender.onChange(value);
+              }}
               value={fieldRender.value}
               errorMessage={fieldState.error?.message}
               placeholder="Введите поле"
@@ -93,7 +110,12 @@ const NsApplyInsuredListItem = ({ control, itemIndex, removeItem, field }: IProp
             <CustomInput
               className={styles.input}
               name={fieldRender.name}
-              setValue={fieldRender.onChange}
+              setValue={(value) => {
+                if (clearErrors) {
+                  clearErrors(fieldRender.name);
+                }
+                fieldRender.onChange(value);
+              }}
               value={fieldRender.value}
               errorMessage={fieldState.error?.message}
               label="Дата рождения"
@@ -114,7 +136,12 @@ const NsApplyInsuredListItem = ({ control, itemIndex, removeItem, field }: IProp
             <CustomInput
               className={styles.input}
               name={fieldRender.name}
-              setValue={fieldRender.onChange}
+              setValue={(value) => {
+                if (clearErrors) {
+                  clearErrors(fieldRender.name);
+                }
+                fieldRender.onChange(value);
+              }}
               value={fieldRender.value}
               errorMessage={fieldState.error?.message}
               label="Серия и номер паспорта"

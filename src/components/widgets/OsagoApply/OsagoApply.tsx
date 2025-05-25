@@ -84,9 +84,7 @@ const OsagoApply = () => {
     async function resetValues() {
       if ((currientCar || currientPolicy) && carsBrands) {
         let pickedData;
-        // console.log("currientCar");
-        // console.log(currientCar);
-
+        
         if (currientCar && !currientPolicy) {
           pickedData = await pickOsagoApplyFormData(currientCar, carsBrands);
         } else if (currientPolicy) {
