@@ -4,16 +4,17 @@ import styles from "./OsagoApplyFields.module.scss";
 
 import { ISplitFieldConfig } from "@/helpers/OsagoApply/getOsagoApplyFields.helper";
 import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
-import { Control } from "react-hook-form";
+import { Control, UseFormClearErrors, UseFormTrigger } from "react-hook-form";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import DynamicFormSection from "@/components/entities/DynamicFormSection/DynamicFormSection";
 
 interface IProps {
   config: ISplitFieldConfig;
   control: Control<IOsagoApplyForm, any, IOsagoApplyForm>;
+  clearErrors?: UseFormClearErrors<IOsagoApplyForm>;
 }
 
-const OsagoApplyFields = ({ config, control }: IProps) => {
+const OsagoApplyFields = ({ config, control, clearErrors }: IProps) => {
   return (
     <>
       <div className={styles.section}>
@@ -22,6 +23,7 @@ const OsagoApplyFields = ({ config, control }: IProps) => {
         <div className={styles.inputsWrapper}>
           {config.vehicle && (
             <DynamicFormSection
+              clearErrors={clearErrors}
               fields={config.vehicle}
               control={control}
               className={styles.input}
@@ -37,7 +39,12 @@ const OsagoApplyFields = ({ config, control }: IProps) => {
         </CustomTitle>
         <div className={styles.inputsWrapper}>
           {config.owner && (
-            <DynamicFormSection fields={config.owner} control={control} isTopItemSingle />
+            <DynamicFormSection
+              clearErrors={clearErrors}
+              fields={config.owner}
+              control={control}
+              isTopItemSingle
+            />
           )}
         </div>
       </div>
@@ -48,14 +55,22 @@ const OsagoApplyFields = ({ config, control }: IProps) => {
         </CustomTitle>
         <div className={styles.inputsWrapper}>
           {config.duration && (
-            <DynamicFormSection fields={config.duration} control={control} />
+            <DynamicFormSection
+              clearErrors={clearErrors}
+              fields={config.duration}
+              control={control}
+            />
           )}
         </div>
       </div>
 
       <div className={styles.section}>
         {config.promocode && (
-          <DynamicFormSection fields={config.promocode} control={control} />
+          <DynamicFormSection
+            clearErrors={clearErrors}
+            fields={config.promocode}
+            control={control}
+          />
         )}
       </div>
     </>

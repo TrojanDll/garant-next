@@ -39,8 +39,16 @@ const OsagoApply = () => {
   const { config, isLoading } = useOsagoFormConfig();
   const { navigateToOsagoConfirm } = useNavigation();
 
-  const { handleSubmit, control, reset, setValue, watch, formState } =
-    useForm<IOsagoApplyForm>();
+  const {
+    handleSubmit,
+    control,
+    reset,
+    setValue,
+    watch,
+    formState,
+    trigger: formValidationTrigger,
+    clearErrors,
+  } = useForm<IOsagoApplyForm>();
 
   const [isCarsBrandsLoaded, setIsCarsBrandsLoaded] = useState(false);
   const [isCountButtonClicked, setIsCountButtonClicked] = useState<boolean>(false);
@@ -139,6 +147,10 @@ const OsagoApply = () => {
   const handleCountClick = () => {
     setIsCountButtonClicked(true);
 
+    const isValid = formValidationTrigger();
+
+    if (!isValid) return;
+
     if (!formState.dirtyFields.duration_of_stay || watchedFieldsWithPromocode[1] === "") {
       toast.error("Заполните данные");
     } else {
@@ -199,7 +211,11 @@ const OsagoApply = () => {
         ) : (
           <Substrate withShadow="light" className={styles.substrate}>
             <form noValidate onSubmit={handleSubmit(onSubmit, onFormError)} action="">
-              <OsagoApplyFields config={config} control={control} />
+              <OsagoApplyFields
+                config={config}
+                control={control}
+                clearErrors={clearErrors}
+              />
 
               {isCountButtonClicked &&
               !isPaymentCalculationPending &&

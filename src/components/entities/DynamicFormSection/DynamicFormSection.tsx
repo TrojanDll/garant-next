@@ -1,4 +1,4 @@
-import { Controller, Control } from "react-hook-form";
+import { Controller, Control, UseFormTrigger, UseFormClearErrors } from "react-hook-form";
 import InputsSelector from "@/components/ui/InputsSelector/InputsSelector";
 import { IFieldConfig } from "@/types/IFieldConfig";
 import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
@@ -17,6 +17,8 @@ interface Props {
   className?: string;
   isTopItemSingle?: boolean;
   owner?: TPersonType;
+  formValidationTrigger?: UseFormTrigger<IOsagoApplyForm>;
+  clearErrors?: UseFormClearErrors<IOsagoApplyForm>;
 }
 
 const DynamicFormSection = ({
@@ -25,6 +27,7 @@ const DynamicFormSection = ({
   className,
   isTopItemSingle = false,
   owner,
+  clearErrors,
 }: Props) => {
   const isAnotherCarVisible = useOsagoApplyCarMark((state) => state.isAnotherCarMark);
   const personType = usePersonType((state) => state.personType);
@@ -77,7 +80,13 @@ const DynamicFormSection = ({
               <InputsSelector
                 owner={owner}
                 value={field.value}
-                setValue={field.onChange}
+                setValue={(value) => {
+                  if (clearErrors) {
+                    clearErrors(config.name);
+                  }
+
+                  field.onChange(value);
+                }}
                 errorMessage={fieldState.error?.message}
                 className={`${styles.input} ${className}  `}
                 {...config}
