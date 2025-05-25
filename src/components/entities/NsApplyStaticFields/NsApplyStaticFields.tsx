@@ -41,7 +41,10 @@ const NsApplyStaticFields = ({ control, clearErrors }: IProps) => {
                 label="Длительность пребывания"
                 required={true}
                 options={durationOfStayListItems}
-                selectedValue={field.value.slice(field.value.indexOf("до"))}
+                selectedValue={{
+                  label: field.value.slice(field.value.indexOf("до")),
+                  value: field.value,
+                }}
                 setValue={(value) => {
                   if (clearErrors) {
                     clearErrors(field.name);
