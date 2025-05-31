@@ -17,7 +17,8 @@ import { EPolicyTypes, IAllPolicies } from "@/types/policy.types";
 import { filterPolicies } from "@/helpers/Policy/filterPolicies";
 
 const MyPolicies = () => {
-  const { data, isError, isLoading, isSuccess } = useGetPoliciesByCurrientUser();
+  const { data, isError, isLoading, isSuccess } =
+    useGetPoliciesByCurrientUser();
 
   const policyActivityStatusFilter = usePolicyFilters((state) => state.activityStatus);
   const policyTypeFilter = usePolicyFilters((state) => state.policyType);

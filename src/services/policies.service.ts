@@ -1,4 +1,4 @@
-import { axiosClassic, axiosWithAuth } from "@/api/interceptors";
+import { axiosWithAuth } from "@/api/interceptors";
 import {
   ICalculateNsPolicyRequest,
   ICalculateNsPolicyResponse,

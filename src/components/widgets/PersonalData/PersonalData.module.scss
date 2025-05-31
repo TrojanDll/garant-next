@@ -27,6 +27,10 @@
   justify-content: center;
 }
 
+.logout {
+  display: none !important;
+}
+
 @media (max-width: 1149px) {
   .substrate {
     margin-top: 20px;
@@ -45,5 +49,19 @@
   .toggleEdit {
     margin-top: 70px;
     font-size: 14px;
+  }
+
+  .divider {
+    margin-top: 40px;
+    width: 100%;
+    height: 1px;
+    background-color: var(--light-grey-2);
+  }
+
+  .logout {
+    margin: 0 auto;
+    margin-top: 40px;
+    display: flex !important;
+    padding: 0 !important;
   }
 }

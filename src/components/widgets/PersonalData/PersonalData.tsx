@@ -12,6 +12,7 @@ import Link from "next/link";
 import { PAGES } from "@/config/pages-url.config";
 import Loader from "@/components/ui/Loader/Loader";
 import { formatPhoneNumberToClient } from "@/helpers/user/formatPhoneNumber.helper";
+import LogoutButton from "@/components/ui/LogoutButton/LogoutButton";
 
 const PersonalData = () => {
   const { userData } = useGetCurrientUser();
@@ -29,14 +30,22 @@ const PersonalData = () => {
       ) : (
         <Substrate withShadow="light" className={styles.substrate}>
           <ul className={styles.dataList}>
-            <UserDataItem className={styles.dataItem} title="Фамилия" value={userData.surname} />
+            <UserDataItem
+              className={styles.dataItem}
+              title="Фамилия"
+              value={userData.surname}
+            />
             <UserDataItem className={styles.dataItem} title="Имя" value={userData.name} />
             <UserDataItem
               className={styles.dataItem}
               title="Отчество"
               value={userData.patronymic}
             />
-            <UserDataItem className={styles.dataItem} title="Email" value={userData.email} />
+            <UserDataItem
+              className={styles.dataItem}
+              title="Email"
+              value={userData.email}
+            />
             <UserDataItem
               className={styles.dataItem}
               title="Номер телефона"
@@ -52,6 +61,10 @@ const PersonalData = () => {
           <Link href={PAGES.EDIT_PERSONAL_DATA} className={styles.toggleEdit}>
             Изменить данные
           </Link>
+
+          <div className={styles.divider}></div>
+
+          <LogoutButton className={styles.logout} />
         </Substrate>
       )}
     </div>
