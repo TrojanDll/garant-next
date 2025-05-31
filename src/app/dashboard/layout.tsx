@@ -3,6 +3,7 @@ import SidebarDashboard from "@/components/widgets/SidebarDashboard/SidebarDashb
 import type { Metadata } from "next";
 
 import styles from "./layout.module.scss";
+import BottomNavigationPanel from "@/components/widgets/BottomNavigationPanel/BottomNavigationPanel";
 
 export const metadata: Metadata = {
   description: "Garant личный кабинет",
@@ -17,6 +18,7 @@ export default function DashboardLayout({
     <ContentContainer className={styles.container}>
       <div className={styles.sidebar}>
         <SidebarDashboard className={styles.sidebarNav} />
+        <BottomNavigationPanel />
       </div>
       <div className={styles.content}>{children}</div>
     </ContentContainer>

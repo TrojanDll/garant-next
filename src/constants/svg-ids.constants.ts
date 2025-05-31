@@ -20,4 +20,7 @@ export enum ESvgName {
   PDF = "pdf",
   FILTER = "filter",
   CLOSE_ROUNDED = "close_rounded",
+  CAR = "car",
+  POLICY = "policy",
+  PROFILE_ROUNDED = "profile_rounded",
 }

@@ -1,0 +1,15 @@
+.root {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 86px;
+  z-index: 1001;
+}
+
+.substrate {
+  height: 100%;
+  border-radius: 0 !important;
+  border-top: 1px solid var(--light-grey-2);
+  padding: 10px 40px 30px 40px;
+}
