@@ -13,8 +13,6 @@ interface IProps {
 }
 
 const BottomNavigationButton = ({ Icon, label, active, href, className }: IProps) => {
-  // console.log(active);
-
   return (
     <Link
       href={href}

@@ -59,8 +59,6 @@ const BottomNavigationPanel = ({ className }: IProps) => {
       activeIndex = CARS_INDEX;
     }
 
-    console.log(activeIndex);
-
     setActivePageIndex(activeIndex);
   });
 
