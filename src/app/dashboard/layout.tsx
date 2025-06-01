@@ -18,7 +18,7 @@ export default function DashboardLayout({
     <ContentContainer className={styles.container}>
       <div className={styles.sidebar}>
         <SidebarDashboard className={styles.sidebarNav} />
-        <BottomNavigationPanel />
+        <BottomNavigationPanel className={styles.bottomNav} />
       </div>
       <div className={styles.content}>{children}</div>
     </ContentContainer>

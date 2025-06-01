@@ -1,6 +1,7 @@
 import React from "react";
 
 import styles from "./BottomNavigationButton.module.scss";
+
 import Link from "next/link";
 
 interface IProps {
@@ -12,10 +13,15 @@ interface IProps {
 }
 
 const BottomNavigationButton = ({ Icon, label, active, href, className }: IProps) => {
+  // console.log(active);
+
   return (
-    <Link href={href} className={`${styles.root} ${className}`}>
-      <Icon className={`${styles.icon} ${active ? "activeIcon" : ""}`} />
-      <div className={`${styles.text} ${active ? "activeLabel" : ""}`}>{label}</div>
+    <Link
+      href={href}
+      className={`${styles.root} ${active ? `${styles.active}` : ""} ${className}`}
+    >
+      <Icon className={`${styles.icon}`} />
+      <div className={`${styles.text}`}>{label}</div>
     </Link>
   );
 };

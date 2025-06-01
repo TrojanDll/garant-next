@@ -45,7 +45,21 @@ const BottomNavigationPanel = ({ className }: IProps) => {
   const pathName = usePathname();
 
   useEffect(() => {
-    let activeIndex = getActivePageIndex(pathName);
+    const CARS_INDEX = 0;
+    const MY_POLICIES_INDEX = 1;
+    const DASHBOARD_INDEX = 2;
+
+    let activeIndex = 0;
+
+    if (pathName === PAGES.MY_POLICIES) {
+      activeIndex = MY_POLICIES_INDEX;
+    } else if (pathName === PAGES.DASHBOARD || pathName === PAGES.EDIT_PERSONAL_DATA) {
+      activeIndex = DASHBOARD_INDEX;
+    } else if (pathName.startsWith(PAGES.CARS)) {
+      activeIndex = CARS_INDEX;
+    }
+
+    console.log(activeIndex);
 
     setActivePageIndex(activeIndex);
   });
