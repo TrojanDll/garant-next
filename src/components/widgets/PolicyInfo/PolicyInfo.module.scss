@@ -25,6 +25,12 @@
   }
 }
 
+.downloadButtonContent {
+  display: flex !important;
+  align-items: center;
+  column-gap: 10px;
+}
+
 .title {
   margin-top: 80px;
 }

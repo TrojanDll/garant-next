@@ -26,6 +26,8 @@ import OsagoPolicyInfoFields from "@/components/features/OsagoPolicyInfoFields/O
 import { useGetNsPolicyById } from "@/hooks/policy/useGetNsPolicyById";
 import { getPaymentStatus } from "@/helpers/Policy/getPaymentStatus";
 import NsData from "@/components/features/NsData/NsData";
+import { useFetchAndDownloadOsagoPDFById } from "@/hooks/pdf/useFetchAndDownloadOsagoPDFById";
+import toast from "react-hot-toast";
 
 interface IProps {
   className?: string;
@@ -48,6 +50,33 @@ const PolicyInfo = ({ className }: IProps) => {
     isSuccess: isNsSuccess,
     mutate: nsMutate,
   } = useGetNsPolicyById();
+
+  const {
+    mutate: fetchAndDownloadOsagoPdfById,
+    isPending: isPdfPending,
+    isError: isPdfError,
+    isSuccess: isPdfSuccess,
+  } = useFetchAndDownloadOsagoPDFById();
+
+  function handleDownloadPolicy() {
+    if (data) {
+      fetchAndDownloadOsagoPdfById({ osago_id: data.id });
+    }
+  }
+
+  useEffect(() => {
+    if (isPdfPending) {
+      toast.loading("Формируем PDF");
+    } else {
+      toast.dismiss();
+    }
+
+    if (isPdfSuccess) {
+      toast.success("Готово");
+    } else if (isPdfError) {
+      toast.error("Ошибка при создании PDF");
+    }
+  }, [isPdfPending]);
 
   useEffect(() => {
     let slug = "";
@@ -125,12 +154,11 @@ const PolicyInfo = ({ className }: IProps) => {
             </div>
 
             <Button
-              isLink
-              href="/files/example.pdf"
-              type="download"
+              onClickEvent={handleDownloadPolicy}
               style="outlined"
               variant="small"
               className={styles.downloadButton}
+              contentClassName={styles.downloadButtonContent}
             >
               <SvgSelector id={ESvgName.PDF} className={styles.pdfSvg} />
               Скачать полис

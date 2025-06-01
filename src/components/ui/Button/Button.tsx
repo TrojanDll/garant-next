@@ -14,6 +14,7 @@ interface IProps {
   className?: string;
   fileName?: string;
   isLoading?: boolean;
+  contentClassName?: string;
 }
 
 const Button = ({
@@ -27,6 +28,7 @@ const Button = ({
   variant,
   fileName = "example.pdf",
   isLoading = false,
+  contentClassName,
 }: PropsWithChildren<IProps>) => {
   const classNames = `${styles.button} ${style ? styles[style] : ""} ${
     variant ? styles[variant] : ""
@@ -62,7 +64,10 @@ const Button = ({
         className={`${classNames} ${className}`}
         onClick={onClickEvent ? onClickEvent : () => {}}
       >
-        <span className={styles.text} style={{ opacity: isLoading ? 0 : 1 }}>
+        <span
+          className={`${styles.text} ${contentClassName}`}
+          style={{ opacity: isLoading ? 0 : 1 }}
+        >
           {children}
         </span>
 
