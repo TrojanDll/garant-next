@@ -12,6 +12,7 @@ import SvgSelector from "@/components/ui/SvgSelector/SvgSelector";
 import { ESvgName } from "@/constants/svg-ids.constants";
 import useShadow from "@/stores/Shadow/shadow.store";
 import { usePathname } from "next/navigation";
+import { getActivePageIndex } from "@/helpers/getActivePageIndex";
 
 interface ISidebarLink {
   text: string;
@@ -62,15 +63,8 @@ const SidebarDashboard = ({ className }: IProps) => {
   }, [isShadowVisible]);
 
   useEffect(() => {
-    let activeIndex = 0;
+    let activeIndex = getActivePageIndex(pathname);
 
-    if (pathname === PAGES.MY_POLICIES) {
-      activeIndex = 0;
-    } else if (pathname === PAGES.DASHBOARD || pathname === PAGES.EDIT_PERSONAL_DATA) {
-      activeIndex = 1;
-    } else if (pathname.startsWith(PAGES.CARS)) {
-      activeIndex = 2;
-    }
     setActive(activeIndex);
   }, [pathname]);
 
@@ -84,11 +78,6 @@ const SidebarDashboard = ({ className }: IProps) => {
           onClick={handleSidebarMenuButtonClick}
           className={styles.sidebarMenuButton}
         >
-          {/* <SvgSelector
-            id={ESvgName.CHEVRON_DOWN}
-            className={`${styles.titleChevron} ${isOpened ? styles.titleChevronOpened : ""}`}
-          />
-          <h2 className={styles.sidebarTitle}>Меню</h2> */}
           <svg
             width="21"
             height="17"

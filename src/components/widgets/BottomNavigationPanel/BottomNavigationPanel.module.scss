@@ -13,3 +13,11 @@
   border-top: 1px solid var(--light-grey-2);
   padding: 10px 40px 30px 40px;
 }
+
+.menuItems {
+  margin: 0 auto;
+  max-width: 350px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
