@@ -15,7 +15,6 @@ import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import useShadow from "@/stores/Shadow/shadow.store";
 import SvgSelector from "@/components/ui/SvgSelector/SvgSelector";
 import { ESvgName } from "@/constants/svg-ids.constants";
-import FilterOptionButton from "@/components/ui/FilterOptionButton/FilterOptionButton";
 import FilterOptionsProducer, {
   IFilterOptionItem,
 } from "@/components/entities/FilterOptionsProducer/FilterOptionsProducer";
@@ -73,9 +72,6 @@ const MyPoliciesFiltersWindow = ({ isVisible, setIsVisible }: IProps) => {
 
   const isShadowVisible = useShadow((state) => state.isShadowVisible);
   const setIsShadowVisible = useShadow((state) => state.setIsShadowVisible);
-
-  const policyTypeFilter = usePolicyFilters((state) => state.policyType);
-  const policyStatusFilter = usePolicyFilters((state) => state.activityStatus);
   const setPolicyTypeFilter = usePolicyFilters((state) => state.setPolicyType);
   const setPolicyStatusFilter = usePolicyFilters((state) => state.setActivityStatus);
 
@@ -163,40 +159,42 @@ const MyPoliciesFiltersWindow = ({ isVisible, setIsVisible }: IProps) => {
       ref={rootRef}
       className={`${styles.root} ${isVisible ? styles.visible : ""}`}
     >
-      <button className={styles.close} onClick={handleCloseButtonClick}>
-        <SvgSelector id={ESvgName.CLOSE_ROUNDED} />
-      </button>
+      <div className={styles.content}>
+        <button className={styles.close} onClick={handleCloseButtonClick}>
+          <SvgSelector id={ESvgName.CLOSE_ROUNDED} />
+        </button>
 
-      <CustomTitle tag="h4" isCentered>
-        Фильтры
-      </CustomTitle>
+        <CustomTitle tag="h4" isCentered>
+          Фильтры
+        </CustomTitle>
 
-      <button className={styles.resetButton} onClick={resetAllFilters}>
-        Сбросить
-      </button>
+        <button className={styles.resetButton} onClick={resetAllFilters}>
+          Сбросить
+        </button>
 
-      <div className={styles.filterParam}>
-        <h5 className={styles.filterParamTitle}>Тип полиса</h5>
-        <FilterOptionsProducer
-          className={styles.filterProducer}
-          options={policyTypeFilterOptions}
-          getActiveItem={(value: IFilterOptionItem | null) =>
-            handleChangeFilterOption(value, "policyType")
-          }
-          activeItemProp={activeFilterItems.policyType}
-        />
-      </div>
+        <div className={styles.filterParam}>
+          <h5 className={styles.filterParamTitle}>Тип полиса</h5>
+          <FilterOptionsProducer
+            className={styles.filterProducer}
+            options={policyTypeFilterOptions}
+            getActiveItem={(value: IFilterOptionItem | null) =>
+              handleChangeFilterOption(value, "policyType")
+            }
+            activeItemProp={activeFilterItems.policyType}
+          />
+        </div>
 
-      <div className={styles.filterParam}>
-        <h5 className={styles.filterParamTitle}>Статус</h5>
-        <FilterOptionsProducer
-          className={styles.filterProducer}
-          options={policyStatusFilterOptions}
-          getActiveItem={(value: IFilterOptionItem | null) =>
-            handleChangeFilterOption(value, "policyStatus")
-          }
-          activeItemProp={activeFilterItems.policyStatus}
-        />
+        <div className={styles.filterParam}>
+          <h5 className={styles.filterParamTitle}>Статус</h5>
+          <FilterOptionsProducer
+            className={styles.filterProducer}
+            options={policyStatusFilterOptions}
+            getActiveItem={(value: IFilterOptionItem | null) =>
+              handleChangeFilterOption(value, "policyStatus")
+            }
+            activeItemProp={activeFilterItems.policyStatus}
+          />
+        </div>
       </div>
 
       <Button className={styles.doneBtn} onClickEvent={handleCloseButtonClick}>
