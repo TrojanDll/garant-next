@@ -93,9 +93,9 @@ const MyPoliciesFiltersWindow = ({ isVisible, setIsVisible }: IProps) => {
 
     if (isVisible) {
       setIsShadowVisible(true);
-      disableBodyScroll(el);
+      // disableBodyScroll(el);
     } else {
-      enableBodyScroll(el);
+      // enableBodyScroll(el);
     }
 
     return () => enableBodyScroll(el);
