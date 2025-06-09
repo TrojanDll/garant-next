@@ -1,11 +1,11 @@
 .root {
   position: fixed !important;
-  height: 90vh;
-  width: 100vw;
+  height: calc(100vh - 100px);
+  width: 100%;
   left: 0;
   right: 0;
-  top: 100%;
-  bottom: 0;
+  // top: 0;
+  bottom: -100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -16,7 +16,8 @@
 }
 
 .visible {
-  top: 10%;
+  // top: 100px;
+  bottom: 0;
 }
 
 .resetButton {
