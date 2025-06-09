@@ -7,6 +7,7 @@ export enum EPolicyStatus {
   ACTIVE = "active",
   AWAITING_PAYMENT = "awaiting_payment",
   EXPIRED = "expired",
+  ARCHIVE = "archive",
 }
 
 export enum EGenders {
