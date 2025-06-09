@@ -93,13 +93,9 @@ const RegistrationFields = ({ control, password }: IProps) => {
         />
 
         <div className={styles.checkboxText}>
-          Я согласен на обработку{" "}
+          Я даю согласие на обработку персональных данных в соответствии с{" "}
           <Link className={styles.checkboxLink} href={PAGES.POLICY}>
-            персональных данных (ПД)
-          </Link>{" "}
-          и ознакомился с{" "}
-          <Link className={styles.checkboxLink} href={PAGES.POLICY}>
-            политикой обработки ПД
+            политикой конфиденциальности
           </Link>
         </div>
       </div>

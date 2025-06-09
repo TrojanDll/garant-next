@@ -10,7 +10,6 @@ import {
   EPolicyStatus,
   EPolicyTypes,
   ICreateOsagoPolicyRequest,
-  INsPolicy,
 } from "@/types/policy.types";
 import PolicyNumber from "@/components/entities/PolicyNumber/PolicyNumber";
 import PolicyStatus from "@/components/ui/PolicyStatus/PolicyStatus";
@@ -40,12 +39,10 @@ const PolicyInfo = ({ className }: IProps) => {
   const [policyNumber, setPolicyNumber] = useState("");
   const [price, setPrice] = useState<number>(0);
   const [policyData, setPolicyData] = useState<ICreateOsagoPolicyRequest>();
-  // const [nsPolicyData, setNsPolicyData] = useState<INsPolicy>();
 
   const { data, isError, isPending, isSuccess, mutate } = useGetOsagoPolicyById();
   const {
     data: nsPolicyFetchedData,
-    isError: isNsError,
     isPending: isNsPending,
     isSuccess: isNsSuccess,
     mutate: nsMutate,
@@ -143,6 +140,13 @@ const PolicyInfo = ({ className }: IProps) => {
     }
   }, [policyType, isPending, isSuccess, isNsPending, isNsSuccess]);
 
+  function isDownloadButtonVisible(): boolean {
+    return (
+      // policyStatus === EPolicyStatus.ACTIVE || policyStatus === EPolicyStatus.ARCHIVE
+      true
+    );
+  }
+
   return (
     <div className={className}>
       {(data && policyData) || nsPolicyFetchedData ? (
@@ -153,16 +157,18 @@ const PolicyInfo = ({ className }: IProps) => {
               <PolicyStatus className={styles.status} status={policyStatus} />
             </div>
 
-            <Button
-              onClickEvent={handleDownloadPolicy}
-              style="outlined"
-              variant="small"
-              className={styles.downloadButton}
-              contentClassName={styles.downloadButtonContent}
-            >
-              <SvgSelector id={ESvgName.PDF} className={styles.pdfSvg} />
-              Скачать полис
-            </Button>
+            {isDownloadButtonVisible() && (
+              <Button
+                onClickEvent={handleDownloadPolicy}
+                style="outlined"
+                variant="small"
+                className={styles.downloadButton}
+                contentClassName={styles.downloadButtonContent}
+              >
+                <SvgSelector id={ESvgName.PDF} className={styles.pdfSvg} />
+                Скачать полис
+              </Button>
+            )}
 
             {data && (
               <OsagoPolicyInfoFields className={styles.fields} data={policyData} />
