@@ -1,10 +1,7 @@
 import React from "react";
 
 import styles from "./NsData.module.scss";
-import {
-  ICreateNsPolicyRequest,
-  INsPolicy,
-} from "@/types/policy.types";
+import { ICreateNsPolicyRequest, INsPolicy } from "@/types/policy.types";
 import { getDaysBetweenDates } from "@/helpers/getDaysBetweenDates";
 import NsInsuredConfirmList from "../NsInsuredConfirmList/NsInsuredConfirmList";
 import { getFinishDate } from "@/helpers/getFinishDate";
@@ -17,7 +14,7 @@ interface IProps {
 const NsData = ({ policy }: IProps) => {
   const finishDate = getFinishDate(
     policy.start_date,
-    getDaysFromNsDurationOfStayString(policy.duration_of_stay)
+    getDaysFromNsDurationOfStayString(policy.duration_of_stay) - 1
   );
 
   return (
@@ -29,7 +26,7 @@ const NsData = ({ policy }: IProps) => {
         <div className={styles.contentItemLargeWrapper}>
           {policy && (
             <span className={styles.contentItemTitle}>
-              {getDaysBetweenDates(policy.start_date, finishDate)} суток
+              {getDaysBetweenDates(policy.start_date, finishDate) + 1} суток
             </span>
           )}
           <span className={styles.contentItemValue}>
