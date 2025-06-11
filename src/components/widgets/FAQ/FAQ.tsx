@@ -83,7 +83,7 @@ const FAQItems: IFAQItem[] = [
     question: "Что делать, если я ошибся в данных при оформлении?",
     answer: (
       <>
-        <CustomLink variant="underline" href="https://wa.me/79407411000)">
+        <CustomLink variant="underline" href="https://wa.me/79407411000">
           Напишите нам в WhatsApp
         </CustomLink>{" "}
         по номеру +7 (940) 741-10-00 — мы оперативно исправим данные и вышлем вам
