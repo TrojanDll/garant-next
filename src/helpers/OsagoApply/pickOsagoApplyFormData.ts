@@ -11,7 +11,7 @@ export async function pickOsagoApplyFormData(
   // console.log(data.brand === found?.Make_Name ? data.brand : "");
   return {
     brand: data.brand,
-    fio: data.fio,
+    fio: data?.fio,
     model: data.model,
     owner: data.owner === "individual" ? "individual" : "legal_entity",
     passport_number: data.passport_number,
@@ -34,7 +34,7 @@ export async function pickOsagoApplyFormDataFromPolicy(
   // console.log(data.brand === found?.Make_Name ? data.brand : "");
   return {
     brand: data.brand,
-    fio: data.fio,
+    fio: data?.fio,
     model: data.car_model,
     owner: data.owner === "individual" ? "individual" : "legal_entity",
     passport_number: data.passport_number,

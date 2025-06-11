@@ -6,7 +6,7 @@ import { selectCarModel } from "./selectCarModel";
 export function formatNewCarDataToRequest(data: IOsagoApplyForm): INewCarForm {
   const formatedData: INewCarForm = {
     brand: selectCarModel(data.brand, data.vehicle_refined_make),
-    fio: data.fio,
+    fio: data?.fio,
     model: data.model,
     owner: convertPersonType(data.owner) as string,
     passport_number: data.passport_number,

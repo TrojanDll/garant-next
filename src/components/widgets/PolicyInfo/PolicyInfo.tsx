@@ -107,19 +107,19 @@ const PolicyInfo = ({ className }: IProps) => {
       setPolicyStatus(getPaymentStatus(data.payment_status));
 
       setPolicyData({
-        brand: data.brand,
-        car_model: data.model,
-        car_year: data.year,
-        duration_of_stay: data.duration_of_stay,
-        fio: data.fio,
-        owner: data.owner,
-        passport_number: data.passport_number,
-        promo_code: data.promo_code,
-        registration_number: data.registration_number,
-        registration_plate: data.registration_plate,
-        start_date: data.start_date,
-        transport_category: data.transport_category,
-        vin: data.vin,
+        brand: data?.brand,
+        car_model: data?.model,
+        car_year: data?.year,
+        duration_of_stay: data?.duration_of_stay,
+        fio: data?.fio,
+        owner: data?.owner,
+        passport_number: data?.passport_number,
+        promo_code: data?.promo_code,
+        registration_number: data?.registration_number,
+        registration_plate: data?.registration_plate,
+        start_date: data?.start_date,
+        transport_category: data?.transport_category,
+        vin: data?.vin,
       });
     }
 

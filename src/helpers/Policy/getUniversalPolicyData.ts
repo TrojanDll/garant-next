@@ -17,7 +17,7 @@ export function getUniversalPolicyData(policies: IParams): IPolicyUniversalData 
   return {
     id: policyNsData ? policyNsData.id : policyOsagoData ? policyOsagoData.id : 1,
     title: policyNsData
-      ? policyNsData.get_peoples[0].fio
+      ? policyNsData.get_peoples[0]?.fio
       : policyOsagoData
       ? `${policyOsagoData.brand} ${policyOsagoData.model} | ${policyOsagoData.registration_plate}`
       : "",

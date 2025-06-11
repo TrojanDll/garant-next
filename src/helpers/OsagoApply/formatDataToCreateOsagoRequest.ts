@@ -11,7 +11,7 @@ export function formatDataToCreateOsagoRequest(
     car_model: data.model,
     car_year: data.year,
     duration_of_stay: data.duration_of_stay,
-    fio: data.fio,
+    fio: data?.fio,
     owner: convertPersonType(data.owner),
     passport_number: data.passport_number,
     promo_code: data.promocode,

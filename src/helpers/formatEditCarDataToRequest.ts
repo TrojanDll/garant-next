@@ -3,11 +3,14 @@ import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
 import { convertPersonType } from "./convertPersonType";
 import { selectCarModel } from "./selectCarModel";
 
-export function formatEditCarDataToRequest(data: IOsagoApplyForm, id: number): IEditCarInfoForm {
+export function formatEditCarDataToRequest(
+  data: IOsagoApplyForm,
+  id: number
+): IEditCarInfoForm {
   const formatedData: IEditCarInfoForm = {
     transport_id: id,
     brand: selectCarModel(data.brand, data.vehicle_refined_make),
-    fio: data.fio,
+    fio: data?.fio,
     model: data.model,
     owner: convertPersonType(data.owner) as string,
     passport_number: data.passport_number,
