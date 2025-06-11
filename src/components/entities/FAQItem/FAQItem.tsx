@@ -9,7 +9,7 @@ import { ESvgName } from "@/constants/svg-ids.constants";
 
 export interface IFAQItem {
   question: string;
-  answer: string;
+  answer: string | React.ReactNode;
 }
 
 interface IProps {

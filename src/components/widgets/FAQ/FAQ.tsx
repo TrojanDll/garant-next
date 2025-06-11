@@ -3,11 +3,20 @@
 import React, { useState } from "react";
 
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
-import FAQItem from "@/components/entities/FAQItem/FAQItem";
+import FAQItem, { IFAQItem } from "@/components/entities/FAQItem/FAQItem";
 
 import styles from "./FAQ.module.scss";
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
-import { FAQItems } from "@/helpers/FAQ/FAQData.helper";
+// import { FAQItems } from "@/helpers/FAQ/FAQData.helper";
+
+const FAQItems: IFAQItem[] = [
+  {
+    question: "Как оформить полис ОСАГО онлайн?",
+    answer: <>
+    
+    </>
+  }
+]
 
 interface IProps {
   className?: string;
