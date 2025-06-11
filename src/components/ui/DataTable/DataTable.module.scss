@@ -1,0 +1,42 @@
+.container {
+  overflow-x: auto;
+  padding: 1rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.row {
+  vertical-align: top;
+  border-top: 1px solid #ccc;
+}
+
+.title {
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  white-space: nowrap;
+  font-weight: normal;
+  // color: #333;
+  font-size: 18px;
+  width: 30%;
+}
+
+.content {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 18px;
+  // color: #444;
+
+  ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    list-style-type: disc;
+
+    li {
+      margin-bottom: 0.25rem;
+    }
+  }
+}

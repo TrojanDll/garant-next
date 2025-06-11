@@ -1,0 +1,23 @@
+.substrate {
+  margin-top: 50px;
+  padding: 50px;
+}
+
+.content {
+  margin-top: 60px;
+}
+
+.text {
+  line-height: 28px !important;
+}
+
+.title {
+  margin-top: 24px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
