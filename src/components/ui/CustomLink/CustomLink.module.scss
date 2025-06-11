@@ -12,12 +12,24 @@
 }
 
 .underline {
+  position: relative;
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 18px;
   line-height: 128%;
-  text-decoration: underline;
+  // text-decoration: underline;
   color: var(--blue);
+
+  &::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: var(--blue);
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
 }
 
 .centered {

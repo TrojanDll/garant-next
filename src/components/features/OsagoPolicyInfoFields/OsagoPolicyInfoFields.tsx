@@ -19,7 +19,7 @@ const OsagoPolicyInfoFields = ({ data, className }: IProps) => {
   const finishDate = data
     ? getFinishDate(
         data.start_date,
-        getDaysFromDurationOfStayString(data.duration_of_stay)
+        getDaysFromDurationOfStayString(data.duration_of_stay) - 1
       )
     : "";
 
@@ -85,7 +85,7 @@ const OsagoPolicyInfoFields = ({ data, className }: IProps) => {
                   <div className={styles.contentItemLargeWrapper}>
                     {data && (
                       <span className={styles.contentItemTitle}>
-                        {getDaysBetweenDates(data.start_date, finishDate)} суток
+                        {getDaysBetweenDates(data.start_date, finishDate) + 1} суток
                       </span>
                     )}
                     <span className={styles.contentItemValue}>
