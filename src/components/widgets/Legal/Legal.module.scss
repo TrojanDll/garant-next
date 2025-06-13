@@ -24,3 +24,23 @@
 .text {
   line-height: 156% !important;
 }
+
+@media (max-width: 1149px) {
+  .title {
+    margin-top: 30px;
+  }
+
+  .substrate {
+    margin-top: 20px;
+    padding: 25px;
+  }
+
+  .subtitle {
+    margin-top: 20px;
+    font-size: 14px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
