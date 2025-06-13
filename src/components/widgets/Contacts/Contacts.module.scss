@@ -12,3 +12,15 @@
   width: 32%;
   min-width: 465px;
 }
+
+@media (max-width: 1149px) {
+  .widgetsWrapper {
+    display: block;
+  }
+
+  .contactUs {
+    min-width: unset;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}

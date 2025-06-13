@@ -28,7 +28,7 @@ const ContactCard = ({
         <p className={styles.title}>{title}</p>
 
         <div className={styles.contentWrapper}>
-          <Image alt="" src={icon} />
+          <Image alt="" src={icon} className={styles.icon} />
           <p className={`${styles.text} ${title === "Email" ? styles.emailText : ""}`}>
             {text}
           </p>

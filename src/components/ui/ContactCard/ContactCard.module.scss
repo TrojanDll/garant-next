@@ -54,3 +54,32 @@
     color: var(--red);
   }
 }
+
+@media (max-width: 1149px) {
+  .root {
+    padding: 20px 25px;
+    border-radius: 25px;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+
+  .icon {
+    width: 25px;
+    height: 25px;
+  }
+
+  .contentWrapper {
+    margin-top: 10px;
+    gap: 10px;
+  }
+
+  .text {
+    font-size: 20px;
+  }
+
+  .emailText {
+    font-size: 18px;
+  }
+}
