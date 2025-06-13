@@ -15,10 +15,10 @@ import Loader from "@/components/ui/Loader/Loader";
 import usePolicyFilters from "@/stores/Policy/policyFilters.store";
 import { EPolicyTypes, IAllPolicies } from "@/types/policy.types";
 import { filterPolicies } from "@/helpers/Policy/filterPolicies";
+import { sortByNewestPolicy } from "@/helpers/Policy/sortByNewestPolicy";
 
 const MyPolicies = () => {
-  const { data, isError, isLoading, isSuccess } =
-    useGetPoliciesByCurrientUser();
+  const { data, isError, isLoading, isSuccess } = useGetPoliciesByCurrientUser();
 
   const policyActivityStatusFilter = usePolicyFilters((state) => state.activityStatus);
   const policyTypeFilter = usePolicyFilters((state) => state.policyType);
@@ -52,7 +52,7 @@ const MyPolicies = () => {
       <div className={styles.listWrapper}>
         {filteredPolicies ? (
           filteredPolicies.NS.length !== 0 || filteredPolicies.OSAGO.length !== 0 ? (
-            <MyPoliciesList filteredPolicies={filteredPolicies} />
+            <MyPoliciesList filteredPolicies={sortByNewestPolicy(filteredPolicies)} />
           ) : (
             <Text className={styles.noDataText}>Здесь пусто</Text>
           )

@@ -3,7 +3,13 @@ import { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
 
 export type TFieldType = "input" | "select" | "checkbox" | "radio";
 
-export type TInputType = "text" | "date" | "promocode" | "password" | "phone";
+export type TInputType =
+  | "text"
+  | "date"
+  | "promocode"
+  | "password"
+  | "phone"
+  | "registration_plate";
 
 export interface IFieldConfig<T> {
   name: keyof T;

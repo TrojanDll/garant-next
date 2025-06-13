@@ -69,7 +69,7 @@ const CustomInput = ({
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setIsValidationError(false);
 
-    if (inputType === "promocode") {
+    if (inputType === "promocode" || inputType === "registration_plate") {
       setValue(e.target.value.toUpperCase());
     } else {
       setValue(e.target.value);

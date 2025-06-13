@@ -138,6 +138,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         label: "Регистрационный знак",
         placeholder: "А123АА | 999",
         required: true,
+        inputType: "registration_plate"
       },
       {
         type: "input",
