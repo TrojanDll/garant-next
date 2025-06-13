@@ -3,11 +3,38 @@ import { generateNsOptions } from "@/helpers/CalculatorPromo/generateNsOptions";
 import { ICalculatorNsForm, ICalculatorOsagoForm } from "@/types/ICalculatorForms";
 import { IFieldConfig } from "@/types/IFieldConfig";
 
-export const calculatorPromoDurationOptions: IOptions[] = [
+export const calculatorPromoNsDurationOptions: IOptions[] = [
   {
-    label: "До 3 суток",
+    label: "До 24 часов",
     value: "category_1",
   },
+  {
+    label: "До 7 суток",
+    value: "category_2",
+  },
+  {
+    label: "До 15 суток",
+    value: "category_3",
+  },
+  {
+    label: "До 30 суток",
+    value: "category_4",
+  },
+  {
+    label: "До 90 суток",
+    value: "category_5",
+  },
+  {
+    label: "До 183 суток",
+    value: "category_6",
+  },
+  {
+    label: "До 1 года",
+    value: "category_7",
+  },
+];
+
+export const calculatorPromoOsagoDurationOptions: IOptions[] = [
   {
     label: "До 15 суток",
     value: "category_2",
@@ -72,7 +99,7 @@ export const selectsOsagoProps: IFieldConfig<ICalculatorOsagoForm>[] = [
     label: "Выберите срок пребывания",
     placeholder: "Выберите срок пребывания",
     required: true,
-    options: calculatorPromoDurationOptions,
+    options: calculatorPromoOsagoDurationOptions,
   },
 ];
 
@@ -83,7 +110,7 @@ export const selectsNSProps: IFieldConfig<ICalculatorNsForm>[] = [
     label: "Количество человек",
     placeholder: "Количество человек",
     required: true,
-    options: generateNsOptions(30),
+    options: generateNsOptions(5),
   },
   {
     type: "select",
@@ -91,6 +118,6 @@ export const selectsNSProps: IFieldConfig<ICalculatorNsForm>[] = [
     label: "Выберите срок пребывания",
     placeholder: "Выберите срок пребывания",
     required: true,
-    options: calculatorPromoDurationOptions,
+    options: calculatorPromoNsDurationOptions,
   },
 ];
