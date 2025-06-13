@@ -25,7 +25,7 @@ const DiscountBanner = () => {
             </div>
 
             <div className={styles.textWrapper}>
-              <p className={styles.descr}>при оформлении до 31 июня</p>
+              <p className={styles.descr}>при оформлении до 31 июля</p>
             </div>
           </div>
         </div>

@@ -142,8 +142,8 @@ const PolicyInfo = ({ className }: IProps) => {
 
   function isDownloadButtonVisible(): boolean {
     return (
-      // policyStatus === EPolicyStatus.ACTIVE || policyStatus === EPolicyStatus.ARCHIVE
-      true
+      policyStatus === EPolicyStatus.ACTIVE || policyStatus === EPolicyStatus.ARCHIVE
+      // true
     );
   }
 

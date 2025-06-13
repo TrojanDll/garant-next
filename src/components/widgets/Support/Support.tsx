@@ -25,7 +25,7 @@ const Support = () => {
           </Text>
 
           <Link href="tel:79409901234" className={styles.phone}>
-            +7 940 990 12 34
+            +7 940 741 10 00
           </Link>
 
           <SocialLinks className={styles.socialLinks} />

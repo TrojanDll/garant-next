@@ -59,7 +59,7 @@ const Footer = () => {
 
           <div className={styles.column}>
             <a className={styles.linkLarge} href="mailto:garant@strah.ru">
-              garant@strah.ru
+              info@garant-abh.com
             </a>
             <a className={styles.linkLarge} href="tel:79407411000">
               +7 940 741 10 00
@@ -74,7 +74,7 @@ const Footer = () => {
             Правовая информация
           </Link>
 
-          <Link href={PAGES.LEGAL} className={styles.bottomLink}>
+          <Link href={PAGES.POLICY} className={styles.bottomLink}>
             Политика конфиденциальности
           </Link>
         </p>

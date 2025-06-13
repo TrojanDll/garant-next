@@ -47,13 +47,14 @@
 }
 
 .linkLarge {
-  margin-top: 23px;
+  margin-top: 34px;
   display: block;
   font-family: var(--font-family);
   font-weight: 400;
-  font-size: 36px;
+  font-size: 30px;
   line-height: 125%;
   color: var(--dark-grey);
+  text-align: right;
 
   &:first-child {
     margin-top: 0;
@@ -61,7 +62,7 @@
 }
 
 .socialLinks {
-  margin-top: 30px;
+  margin-top: 34px;
 }
 
 .bottomLinks {
@@ -87,7 +88,7 @@
   margin-top: 20px;
   font-family: var(--font-family);
   font-weight: 400;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 125%;
   color: var(--dark-grey);
   text-align: center;
@@ -97,7 +98,7 @@
   margin-top: 30px;
   font-family: var(--font-family);
   font-weight: 400;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 125%;
   color: var(--dark-grey);
   text-align: center;
