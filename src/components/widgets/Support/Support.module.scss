@@ -11,6 +11,15 @@
   text-align: center;
 }
 
+.whatsappLink {
+  color: var(--dark-grey);
+  // text-decoration: underline;
+
+  &:hover {
+    color: var(--blue);
+  }
+}
+
 .textBold {
   font-weight: 500 !important;
 }
