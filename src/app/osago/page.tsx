@@ -1,4 +1,3 @@
-import Advantages from "@/components/widgets/Advantages/Advantages";
 import AudienceInfoBlock from "@/components/widgets/AudienceInfoBlock/AudienceInfoBlock";
 import DiscountBanner from "@/components/widgets/DiscountBanner/DiscountBanner";
 import FAQ from "@/components/widgets/FAQ/FAQ";
@@ -16,7 +15,7 @@ export default function OsagoPage() {
       <PolicyPromo variant="osago" />
       <AudienceInfoBlock />
       <ReviwesYandex />
-      <FAQ />
+      <FAQ isIsolated/>
     </div>
   );
 }

@@ -15,7 +15,7 @@ export default function NsPage() {
       <PolicyPromo variant="ns" />
       <AudienceInfoBlock />
       <ReviwesYandex />
-      <FAQ />
+      <FAQ isIsolated />
     </div>
   );
 }
