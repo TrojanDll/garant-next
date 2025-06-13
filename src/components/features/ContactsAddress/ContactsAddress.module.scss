@@ -53,3 +53,36 @@
 .map {
   margin-top: 60px;
 }
+
+@media (max-width: 1149px) {
+  .root {
+    padding: 25px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .description {
+    font-size: 18px;
+  }
+
+  .addressTitle {
+    margin-top: 30px;
+    font-size: 14px;
+  }
+
+  .addressItem {
+    margin-top: 20px;
+    font-size: 14px;
+    gap: 7px;
+  }
+
+  .legalLink {
+    font-size: 14px;
+  }
+
+  .map {
+    margin-top: 30px;
+  }
+}
