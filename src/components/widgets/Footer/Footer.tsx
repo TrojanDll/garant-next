@@ -61,13 +61,23 @@ const Footer = () => {
             <a className={styles.linkLarge} href="mailto:garant@strah.ru">
               garant@strah.ru
             </a>
-            <a className={styles.linkLarge} href="tel:79409901234">
-              +7 940 990 12 34
+            <a className={styles.linkLarge} href="tel:79407411000">
+              +7 940 741 10 00
             </a>
 
             <SocialLinks className={styles.socialLinks} />
           </div>
         </div>
+
+        <p className={styles.bottomLinks}>
+          <Link href={PAGES.LEGAL} className={styles.bottomLink}>
+            Правовая информация
+          </Link>
+
+          <Link href={PAGES.LEGAL} className={styles.bottomLink}>
+            Политика конфиденциальности
+          </Link>
+        </p>
 
         <p className={styles.address}>Республика Абхазия, г. Сухум, проспект Леона, 9</p>
 
