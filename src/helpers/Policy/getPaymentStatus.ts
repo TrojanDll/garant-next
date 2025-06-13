@@ -8,7 +8,7 @@ export function getPaymentStatus(status: string): EPolicyStatus {
       ? EPolicyStatus.AWAITING_PAYMENT
       : status === "Истек срок действия"
       ? EPolicyStatus.EXPIRED
-      : EPolicyStatus.AWAITING_PAYMENT;
+      : EPolicyStatus.ARCHIVE;
 
   return statusEnumValue;
 }

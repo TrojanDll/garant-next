@@ -12,15 +12,25 @@ export function filterPolicies(
   };
 
   if (!policyType || policyType === EPolicyTypes.OSAGO) {
-    filtered.OSAGO = allPolicies.OSAGO.filter((policy) =>
-      matchesStatus(policy.payment_status, activityStatus)
-    );
+    filtered.OSAGO = allPolicies.OSAGO.filter((policy) => {
+      if (
+        matchesStatus(policy.payment_status, activityStatus) &&
+        getPaymentStatus(policy.payment_status) !== EPolicyStatus.ARCHIVE
+      ) {
+        return true;
+      }
+    });
   }
 
   if (!policyType || policyType === EPolicyTypes.NS) {
-    filtered.NS = allPolicies.NS.filter((policy) =>
-      matchesStatus(policy.status, activityStatus)
-    );
+    filtered.NS = allPolicies.NS.filter((policy) => {
+      if (
+        matchesStatus(policy.status, activityStatus) &&
+        getPaymentStatus(policy.status) !== EPolicyStatus.ARCHIVE
+      ) {
+        return true;
+      }
+    });
   }
 
   return filtered;
