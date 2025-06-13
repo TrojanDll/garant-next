@@ -58,7 +58,7 @@ const Footer = () => {
           </div>
 
           <div className={styles.column}>
-            <a className={styles.linkLarge} href="mailto:garant@strah.ru">
+            <a className={styles.linkLarge} href="mailto:info@garant-abh.com">
               info@garant-abh.com
             </a>
             <a className={styles.linkLarge} href="tel:79407411000">
