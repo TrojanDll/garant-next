@@ -1,0 +1,26 @@
+.title {
+  margin-top: 50px;
+}
+
+.substrate {
+  margin-top: 50px;
+  padding: 50px;
+}
+
+.subtitle {
+  margin-top: 30px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 128%;
+  letter-spacing: 0.01em;
+  color: var(--dark-grey);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.text {
+  line-height: 156% !important;
+}
