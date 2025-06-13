@@ -1,0 +1,55 @@
+.root {
+  padding: 50px;
+}
+
+.title {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 127%;
+  color: var(--fill-color-2---dark-grey);
+}
+
+.description {
+  margin-top: 10px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 127%;
+  color: var(--dark-grey);
+}
+
+.addressTitle {
+  margin-top: 60px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 125%;
+  color: var(--dark-grey);
+}
+
+.addressItem {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 125%;
+  color: var(--dark-grey);
+}
+
+.legalLink {
+  display: block;
+  width: fit-content;
+  margin-top: 20px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 128%;
+}
+
+.map {
+  margin-top: 60px;
+}

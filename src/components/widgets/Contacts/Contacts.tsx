@@ -4,6 +4,7 @@ import styles from "./Contacts.module.scss";
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import ContactUs from "@/components/features/ContactUs/ContactUs";
+import ContactsAddress from "@/components/features/ContactsAddress/ContactsAddress";
 
 const Contacts = () => {
   return (
@@ -14,6 +15,7 @@ const Contacts = () => {
 
       <div className={styles.widgetsWrapper}>
         <ContactUs className={styles.contactUs} />
+        <ContactsAddress />
       </div>
     </ContentContainer>
   );
