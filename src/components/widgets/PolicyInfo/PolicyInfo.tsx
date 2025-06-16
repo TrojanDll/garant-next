@@ -27,6 +27,7 @@ import { getPaymentStatus } from "@/helpers/Policy/getPaymentStatus";
 import NsData from "@/components/features/NsData/NsData";
 import { useFetchAndDownloadOsagoPDFById } from "@/hooks/pdf/useFetchAndDownloadOsagoPDFById";
 import toast from "react-hot-toast";
+import { useNsFetchAndDownloadPDFById } from "@/hooks/pdf/useNsFetchAndDownloadPDFByID";
 
 interface IProps {
   className?: string;
@@ -55,14 +56,24 @@ const PolicyInfo = ({ className }: IProps) => {
     isSuccess: isPdfSuccess,
   } = useFetchAndDownloadOsagoPDFById();
 
+  const {
+    mutate: nsFetchAndDownloadOsagoPdfById,
+    isPending: isNsPdfPending,
+    isError: isNsPdfError,
+    isSuccess: isNsPdfSuccess,
+  } = useNsFetchAndDownloadPDFById();
+
   function handleDownloadPolicy() {
     if (data) {
       fetchAndDownloadOsagoPdfById({ osago_id: data.id });
+    } else if (nsPolicyFetchedData) {
+      console.log(nsPolicyFetchedData);
+      nsFetchAndDownloadOsagoPdfById({ ns_id: nsPolicyFetchedData.id });
     }
   }
 
   useEffect(() => {
-    if (isPdfPending) {
+    if (isPdfPending || isNsPdfPending) {
       toast.loading("Формируем PDF");
     } else {
       toast.dismiss();
@@ -73,7 +84,13 @@ const PolicyInfo = ({ className }: IProps) => {
     } else if (isPdfError) {
       toast.error("Ошибка при создании PDF");
     }
-  }, [isPdfPending]);
+
+    if (isNsPdfSuccess) {
+      toast.success("Готово");
+    } else if (isNsPdfError) {
+      toast.error("Ошибка при создании PDF");
+    }
+  }, [isPdfPending, isNsPdfPending]);
 
   useEffect(() => {
     let slug = "";
