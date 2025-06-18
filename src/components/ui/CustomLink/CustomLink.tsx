@@ -9,6 +9,7 @@ interface IProps {
   variant?: "underline" | "primary";
   isCentered?: boolean;
   download?: any;
+  target?: React.HTMLAttributeAnchorTarget;
 }
 
 const CustomLink = ({
@@ -19,6 +20,7 @@ const CustomLink = ({
   variant,
   isCentered = false,
   download,
+  target,
 }: PropsWithChildren<IProps>) => {
   return (
     <Link
@@ -28,7 +30,7 @@ const CustomLink = ({
       } ${isCentered ? styles.centered : ""}`}
       href={href}
       download={download}
-      
+      target={target}
     >
       {children}
     </Link>

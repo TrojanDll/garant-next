@@ -5,6 +5,7 @@ import React from "react";
 import styles from "./Documents.module.scss";
 import Substrate from "@/components/ui/Substrate/Substrate";
 import CustomLink from "@/components/ui/CustomLink/CustomLink";
+import Link from "next/link";
 
 const Documents = () => {
   return (
@@ -16,69 +17,69 @@ const Documents = () => {
       <Substrate className={styles.substrate}>
         <h2 className={styles.subtitle}>Лицензия</h2>
 
-        <a
+        <CustomLink
           href="/documents/Лицензия.pdf"
-          download="Лицензия на осуществление страховой деятельности.pdf"
+          target="_blank"
           className={styles.downloadLink}
         >
           Лицензия на осуществление страховой деятельности
-        </a>
+        </CustomLink>
 
-        <a
+        <CustomLink
           href="/documents/Лицензия - приложение.pdf"
-          download="Лицензия на осуществление страховой деятельности, приложение.pdf"
+          target="_blank"
           className={styles.downloadLink}
         >
           Лицензия на осуществление страховой деятельности, приложение
-        </a>
+        </CustomLink>
 
         <h2 className={styles.subtitle}>Нормативные документы</h2>
 
-        <a
+        <CustomLink
           href="/documents/О страховании.pdf"
-          download="Закон Республики Абхазия «О страховании» от 27 апреля 2004г., N884-с-XIV.pdf"
+          target="_blank"
           className={styles.downloadLink}
         >
           Закон Республики Абхазия «О страховании» от 27 апреля 2004г., N884-с-XIV
-        </a>
+        </CustomLink>
 
-        <a
+        <CustomLink
           href="/documents/Об обязательном страховании.pdf"
-          download="Закон Республики Абхазия «Об обязательном страховании» 12 июля 2006 г., N 1406-с-XIV.pdf"
+          target="_blank"
           className={styles.downloadLink}
         >
           Закон Республики Абхазия «Об обязательном страховании» 12 июля 2006 г., N
           1406-с-XIV
-        </a>
+        </CustomLink>
 
-        <a
-          href="/documents/Об обязательном страховании.pdf"
-          download="Закон Республики Абхазия «Об обязательном страховании от несчастных случаев иностранных граждан и лиц без гражданства, прибывающих на территорию Республики Абхазия» от 12 июля 2006 г., N 1408-с-XIV.pdf"
+        <CustomLink
+          href="/documents/От несчастных случаев.pdf"
+          target="_blank"
           className={styles.downloadLink}
         >
           Закон Республики Абхазия «Об обязательном страховании от несчастных случаев
           иностранных граждан и лиц без гражданства, прибывающих на территорию Республики
           Абхазия» от 12 июля 2006 г., N 1408-с-XIV
-        </a>
+        </CustomLink>
 
-        <a
-          href="/documents/Об гражданской ответственности.pdf"
-          download="Закон Республики Абхазия «Об обязательном страховании гражданской ответственности владельцев транспортных средств, иностранных физических и юридических лиц» от 12 июня 2006 г. N 1407-с-XIV.pdf"
+        <CustomLink
+          href="/documents/О гражданской ответственности.pdf"
+          target="_blank"
           className={styles.downloadLink}
         >
           Закон Республики Абхазия «Об обязательном страховании гражданской
           ответственности владельцев транспортных средств, иностранных физических и
           юридических лиц» от 12 июня 2006 г. N 1407-с-XIV
-        </a>
+        </CustomLink>
 
-        <a
+        <CustomLink
           href="/documents/Постановление.pdf"
-          download="Постановление Кабинета Министров Республики Абхазия «Об утверждении правил, тарифов и форм документов обязательного страхования» от 28 июля 2006 г. N 189.pdf"
+          target="_blank"
           className={styles.downloadLink}
         >
           Постановление Кабинета Министров Республики Абхазия «Об утверждении правил,
           тарифов и форм документов обязательного страхования» от 28 июля 2006 г. N 189
-        </a>
+        </CustomLink>
       </Substrate>
     </ContentContainer>
   );
