@@ -24,6 +24,14 @@
   display: block;
   margin-top: 15px;
   width: fit-content;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  color: var(--blue);
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 128%;
 }
 
 @media (max-width: 1149px) {

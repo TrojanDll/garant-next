@@ -8,7 +8,7 @@ interface IProps {
   onClick?: () => void;
   variant?: "underline" | "primary";
   isCentered?: boolean;
-  download?: boolean;
+  download?: any;
 }
 
 const CustomLink = ({
@@ -28,6 +28,7 @@ const CustomLink = ({
       } ${isCentered ? styles.centered : ""}`}
       href={href}
       download={download}
+      
     >
       {children}
     </Link>
