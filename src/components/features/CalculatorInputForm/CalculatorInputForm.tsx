@@ -18,6 +18,7 @@ import CalculatorPolicyPrice from "../CalculatorPolicyPrice/CalculatorPolicyPric
 import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
 import { calculatorPromoCategories, osagoTable } from "./tables.data";
 import { useGetCarCategories } from "@/hooks/cars/useGetCarCategories";
+import { useGetPaymentCalculation } from "@/hooks/policy/useGetPaymentCalculation";
 
 interface FormData {
   [key: string]: any;
@@ -69,6 +70,7 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
   const [isMinimalDaysSelected, setIsMinimalDaysSelected] = useState<boolean>(false);
 
   const { categoriesData, isError, isLoading } = useGetCarCategories();
+  const { data, mutate, isPending } = useGetPaymentCalculation();
 
   useEffect(() => {
     if (categoriesData) {
@@ -211,8 +213,21 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
     if (isSubmittedOnce && formState.isDirty) {
       let value = findValue(variant, watchedFields);
       setFoundPrice(value ? +value : 0);
+      console.log("recount");
+      mutate({
+        duration_of_stay: watchedFields.duration_of_stay_osago.label,
+        promo_code: "",
+        transport_category: watchedFields.car_category.label,
+      });
     }
-  }, [watchedFields, isSubmittedOnce, formState.isDirty]);
+  }, [
+    watchedFields?.car_category?.label,
+    watchedFields?.duration_of_stay_ns?.label,
+    watchedFields?.duration_of_stay_osago?.label,
+    watchedFields?.number_of_people?.label,
+    isSubmittedOnce,
+    formState.isDirty,
+  ]);
 
   useEffect(() => {
     console.log("watchedFields");
@@ -237,16 +252,27 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
     // return
   }, [isFilteredOsagoDurationChanged]);
 
-  const onSubmit: SubmitHandler<ICalculatorOsagoFormFields & ICalculatorNsFormFields> = (
-    data
-  ) => {
-    let value = findValue(variant, data);
+  const onSubmit: SubmitHandler<
+    ICalculatorOsagoFormFields & ICalculatorNsFormFields
+  > = () => {
+    // let value = findValue(variant, data);
 
-    setFoundPrice(value ? +value : 0);
+    // setFoundPrice(value ? +value : 0);
+
+    console.log("handleSubmit");
+    mutate({
+      duration_of_stay: watchedFields.duration_of_stay_osago.label,
+      promo_code: "",
+      transport_category: watchedFields.car_category.label,
+    });
 
     setIsCorrect(true);
     setIsSubmittedOnce(true);
   };
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   const renderField = (
     config: IFieldConfig<ICalculatorOsagoForm & ICalculatorNsForm>
@@ -297,16 +323,17 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)} action="">
       {config.fields.map((field) => renderField(field))}
       <Button
-        className={`${styles.submit} ${isCorrect ? styles.submitHidden : ""}`}
+        className={`${styles.submit} ${data ? styles.submitHidden : ""}`}
         type="submit"
+        isLoading={isPending}
       >
         Рассчитать
       </Button>
-      {isCorrect && (
+      {isCorrect && data && (
         <CalculatorPolicyPrice
           className={styles.price}
           policyType={variant}
-          price={foundPrice}
+          price={Number(data.base_tarif)}
         />
       )}
     </form>
