@@ -8,6 +8,7 @@ interface IProps {
   onClick?: () => void;
   variant?: "underline" | "primary";
   isCentered?: boolean;
+  download?: boolean;
 }
 
 const CustomLink = ({
@@ -17,6 +18,7 @@ const CustomLink = ({
   onClick,
   variant,
   isCentered = false,
+  download,
 }: PropsWithChildren<IProps>) => {
   return (
     <Link
@@ -25,6 +27,7 @@ const CustomLink = ({
         variant === "underline" ? styles.underline : ""
       } ${isCentered ? styles.centered : ""}`}
       href={href}
+      download={download}
     >
       {children}
     </Link>

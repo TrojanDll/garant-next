@@ -1,13 +1,9 @@
-import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
+import Documents from "@/components/widgets/Documents/Documents";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "О нас",
 };
 export default function DocumentsPage() {
-  return (
-    <ContentContainer>
-      <div>DocumentsPage</div>
-    </ContentContainer>
-  );
+  return <Documents />;
 }

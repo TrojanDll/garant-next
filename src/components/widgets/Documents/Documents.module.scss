@@ -1,0 +1,27 @@
+.title {
+  margin-top: 50px;
+}
+
+.substrate {
+  margin-top: 50px;
+  padding: 50px;
+}
+
+.subtitle {
+  margin-top: 50px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 123%;
+  color: var(--dark-grey);
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.downloadLink {
+  display: block;
+  margin-top: 15px;
+  width: fit-content;
+}
