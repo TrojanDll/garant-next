@@ -10,7 +10,6 @@ import Substrate from "@/components/ui/Substrate/Substrate";
 import { useFieldArray, useForm } from "react-hook-form";
 import {
   EGenders,
-  ICalculateNsPolicyRequest,
   ICreateNsPolicyRequest,
   IInsuredCreationFilelds,
 } from "@/types/policy.types";
@@ -21,7 +20,6 @@ import { useCalculateNs } from "@/hooks/policy/useCalculateNs";
 import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
 import usePromocodeError from "@/stores/Promocode/promocodeError.store";
 import usePromocodeEvent from "@/stores/Promocode/promocodeEvent.store";
-import { useNsApplyFormHandlers } from "@/hooks/policy/useNsApplyFormHandlers";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
 import useCurrientNsPolicy from "@/stores/Policy/currientNsPolicy";
 import toast from "react-hot-toast";

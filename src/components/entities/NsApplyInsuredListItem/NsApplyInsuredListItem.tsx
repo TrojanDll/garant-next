@@ -68,7 +68,7 @@ const NsApplyInsuredListItem = ({
               }}
               value={fieldRender.value}
               errorMessage={fieldState.error?.message}
-              placeholder="Введите поле"
+              placeholder="Введите ФИО"
               label="ФИО"
             />
           )}
@@ -119,7 +119,7 @@ const NsApplyInsuredListItem = ({
               value={fieldRender.value}
               errorMessage={fieldState.error?.message}
               label="Дата рождения"
-              placeholder="Выберите дату"
+              placeholder="Выберите дату рождения"
               inputType="date"
             />
           )}
@@ -145,7 +145,7 @@ const NsApplyInsuredListItem = ({
               value={fieldRender.value}
               errorMessage={fieldState.error?.message}
               label="Серия и номер паспорта"
-              placeholder="Введите поле"
+              placeholder="Введите серию и номер"
             />
           )}
         />
