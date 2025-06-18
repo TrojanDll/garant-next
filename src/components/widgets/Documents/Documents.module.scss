@@ -25,3 +25,19 @@
   margin-top: 15px;
   width: fit-content;
 }
+
+@media (max-width: 1149px) {
+  .title {
+    margin-top: 30px;
+  }
+
+  .substrate {
+    margin-top: 20px;
+    padding: 25px;
+  }
+
+  .subtitle {
+    margin-top: 40px;
+    font-size: 18px;
+  }
+}
