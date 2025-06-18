@@ -10,6 +10,7 @@ import usePersonType from "@/stores/OsagoApply/personType.store";
 import styles from "./DynamicFormSection.module.scss";
 import useCarBrand from "@/stores/Cars/carBrand.store";
 import { TPersonType } from "@/types/user.types";
+import useCurrientCarCategoryAndDuration from "@/stores/Policy/currientCarCategoryAndDuration.store";
 
 interface Props {
   fields: IFieldConfig<IOsagoApplyForm>[];
@@ -32,6 +33,17 @@ const DynamicFormSection = ({
   const isAnotherCarVisible = useOsagoApplyCarMark((state) => state.isAnotherCarMark);
   const personType = usePersonType((state) => state.personType);
 
+  const setCarCategoryOsago = useCurrientCarCategoryAndDuration(
+    (state) => state.setCarCategory
+  );
+  const setDurationOsago = useCurrientCarCategoryAndDuration(
+    (state) => state.setDuration
+  );
+  const carCategoryOsago = useCurrientCarCategoryAndDuration(
+    (state) => state.carCategory
+  );
+  const durationOsago = useCurrientCarCategoryAndDuration((state) => state.duration);
+
   const fieldText = (
     field: IFieldConfig<IOsagoApplyForm>
   ): { label: string; placeholder: string | undefined } => {
@@ -48,6 +60,100 @@ const DynamicFormSection = ({
 
     return { label, placeholder };
   };
+
+  function handleDurationOptions(
+    options:
+      | {
+          value: string;
+          label: string;
+        }[]
+      | undefined
+  ):
+    | {
+        value: string;
+        label: string;
+      }[]
+    | undefined {
+    let newOptions:
+      | {
+          value: string;
+          label: string;
+        }[]
+      | undefined = undefined;
+
+    if (
+      carCategoryOsago ===
+      "Автотранспортные средства , исползуемые в качестве такси и по найму"
+    ) {
+      newOptions = options?.filter((option) => option.label !== "До 15 суток");
+    } else {
+      let isContains: boolean = false;
+      options?.forEach((option) => {
+        if (option.label === "До 15 суток") {
+          isContains = true;
+        }
+      });
+
+      newOptions = options;
+
+      if (!isContains) {
+        newOptions?.unshift({
+          label: "До 15 суток",
+          value: "До 15 суток",
+        });
+      }
+    }
+    return newOptions ? newOptions : options;
+  }
+
+  function handleTransportCategoryOptions(
+    options:
+      | {
+          value: string;
+          label: string;
+        }[]
+      | undefined
+  ):
+    | {
+        value: string;
+        label: string;
+      }[]
+    | undefined {
+    let newOptions:
+      | {
+          value: string;
+          label: string;
+        }[]
+      | undefined = undefined;
+
+    if (durationOsago === "До 15 суток") {
+      newOptions = options?.filter(
+        (option) =>
+          option.label !==
+          "Автотранспортные средства , исползуемые в качестве такси и по найму"
+      );
+    } else {
+      let isContains: boolean = false;
+      options?.forEach((option) => {
+        if (
+          option.label ===
+          "Автотранспортные средства , исползуемые в качестве такси и по найму"
+        ) {
+          isContains = true;
+        }
+      });
+
+      newOptions = options;
+
+      if (!isContains) {
+        newOptions?.push({
+          label: "Автотранспортные средства , исползуемые в качестве такси и по найму",
+          value: "Автотранспортные средства , исползуемые в качестве такси и по найму",
+        });
+      }
+    }
+    return newOptions ? newOptions : options;
+  }
 
   return (
     <>
@@ -85,6 +191,14 @@ const DynamicFormSection = ({
                     clearErrors(config.name);
                   }
 
+                  if (config.name === "transport_category") {
+                    setCarCategoryOsago(value);
+                  }
+
+                  if (config.name === "duration_of_stay") {
+                    setDurationOsago(value);
+                  }
+
                   field.onChange(value);
                 }}
                 errorMessage={fieldState.error?.message}
@@ -95,6 +209,13 @@ const DynamicFormSection = ({
                 }
                 label={fieldText(config).label}
                 placeholder={fieldText(config).placeholder}
+                options={
+                  config.name === "duration_of_stay"
+                    ? handleDurationOptions(config.options)
+                    : config.name === "transport_category"
+                    ? handleTransportCategoryOptions(config.options)
+                    : config.options
+                }
               />
             )}
           />

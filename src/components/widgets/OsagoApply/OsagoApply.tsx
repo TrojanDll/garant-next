@@ -33,6 +33,7 @@ import {
 } from "@/helpers/OsagoApply/pickOsagoApplyFormData";
 import OsagoApplyFields from "@/components/features/OsagoApplyFields/OsagoApplyFields";
 import useCurrientOsagoPolicyCalculation from "@/stores/Policy/currientOsagoPolicyCalculation";
+import useCurrientCarCategoryAndDuration from "@/stores/Policy/currientCarCategoryAndDuration.store";
 
 const OsagoApply = () => {
   const { config, isLoading } = useOsagoFormConfig();
@@ -61,6 +62,10 @@ const OsagoApply = () => {
     (state) => state.setCalculationData
   );
   const setTrigger = usePromocodeEvent((state) => state.setTrigger);
+  const carCategoryOsago = useCurrientCarCategoryAndDuration(
+    (state) => state.carCategory
+  );
+  const durationOsago = useCurrientCarCategoryAndDuration((state) => state.duration);
 
   const { carsBrands, isLoading: isCarsBrandsLoading } = useGetCarBrands();
   const {
@@ -70,6 +75,24 @@ const OsagoApply = () => {
     isSuccess: isPaymentCalculationSuccess,
     mutate: mutatePaymentCalculation,
   } = useGetPaymentCalculation();
+
+  useEffect(() => {
+    if (
+      carCategoryOsago ===
+      "Автотранспортные средства , исползуемые в качестве такси и по найму"
+    ) {
+      setValue("duration_of_stay", "До 30 суток");
+    }
+  }, [carCategoryOsago]);
+
+  useEffect(() => {
+    if (durationOsago === "До 15 суток") {
+      setValue(
+        "transport_category",
+        "Легковые автомобили, микроавтобусы с числом посадочных мест до 8 включительно"
+      );
+    }
+  }, [durationOsago]);
 
   useEffect(() => {
     if (carsBrands && !isCarsBrandsLoaded) {
