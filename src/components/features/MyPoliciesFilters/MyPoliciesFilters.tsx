@@ -24,7 +24,7 @@ const policyStatusOptions: IOptions[] = [
   { label: "Все статусы", value: "all" },
   { label: "Активные", value: `${EPolicyStatus.ACTIVE}` },
   { label: "Ожидают оплаты", value: `${EPolicyStatus.AWAITING_PAYMENT}` },
-  { label: "Архив", value: `${EPolicyStatus.ARCHIVE}` },
+  { label: "Истек срок действия", value: `${EPolicyStatus.EXPIRED}` },
 ];
 
 const MyPoliciesFilters = () => {
@@ -58,8 +58,10 @@ const MyPoliciesFilters = () => {
   }, [policyTypeState]);
 
   useEffect(() => {
+    console.log(policyStatusState);
+
     if (policyStatusState?.value === "all") {
-      setPolicyType(undefined);
+      setActivityStatus(undefined);
     } else {
       setActivityStatus(policyStatusState?.value as EPolicyStatus);
     }
