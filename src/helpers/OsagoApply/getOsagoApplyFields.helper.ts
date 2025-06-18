@@ -138,7 +138,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         label: "Регистрационный знак",
         placeholder: "А123АА | 999",
         required: true,
-        inputType: "registration_plate"
+        inputType: "registration_plate",
       },
       {
         type: "input",
@@ -180,10 +180,6 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         isSearchable: false,
         required: true,
         options: [
-          {
-            label: "До 3 суток",
-            value: "До 3 суток",
-          },
           {
             label: "До 15 суток",
             value: "До 15 суток",

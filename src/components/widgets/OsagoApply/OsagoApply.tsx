@@ -24,7 +24,6 @@ import CountedPrice from "@/components/features/CountedPrice/CountedPrice";
 import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 import useCurrientCar from "@/stores/Cars/currientCar";
 import useCurrientOsagoPolicy from "@/stores/Policy/currientOsagoPolicy";
-import usePromocodeError from "@/stores/Promocode/promocodeError.store";
 import usePromocodeEvent from "@/stores/Promocode/promocodeEvent.store";
 
 import { formatDataToCreateOsagoRequest } from "@/helpers/OsagoApply/formatDataToCreateOsagoRequest";
@@ -61,7 +60,6 @@ const OsagoApply = () => {
   const setPolicyCalculationData = useCurrientOsagoPolicyCalculation(
     (state) => state.setCalculationData
   );
-  const setIsPromocodeError = usePromocodeError((state) => state.setError);
   const setTrigger = usePromocodeEvent((state) => state.setTrigger);
 
   const { carsBrands, isLoading: isCarsBrandsLoading } = useGetCarBrands();
@@ -84,7 +82,7 @@ const OsagoApply = () => {
     async function resetValues() {
       if ((currientCar || currientPolicy) && carsBrands) {
         let pickedData;
-        
+
         if (currientCar && !currientPolicy) {
           pickedData = await pickOsagoApplyFormData(currientCar, carsBrands);
         } else if (currientPolicy) {
