@@ -29,9 +29,9 @@ const contactsCardsInfo: IContactCardInfo[] = [
   },
   {
     title: "Страховой случай",
-    href: "tel:79407411000",
+    href: "tel:79407704863",
     icon: lightningSvg,
-    text: "+7 940 741 10 00",
+    text: "+7 940 770 48 63",
     variant: "red",
   },
   {
