@@ -66,6 +66,7 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
   const [isFilteredOsagoDurationChanged, setIsFilteredOsagoDurationChanged] =
     useState<boolean>(false);
   const [isTaxiSelected, setIsTaxiSelected] = useState<boolean>(false);
+  const [isMinimalDaysSelected, setIsMinimalDaysSelected] = useState<boolean>(false);
 
   const { categoriesData, isError, isLoading } = useGetCarCategories();
 
@@ -88,7 +89,7 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
     return acc;
   }, {} as FormData);
 
-  const { control, handleSubmit, reset, watch, formState } = useForm<
+  const { control, handleSubmit, reset, watch, formState, setValue } = useForm<
     ICalculatorOsagoFormFields & ICalculatorNsFormFields
   >({
     defaultValues,
@@ -98,10 +99,7 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
   const watchedFields = watch();
 
   useEffect(() => {
-    if (isSubmittedOnce && formState.isDirty) {
-      let value = findValue(variant, watchedFields);
-      setFoundPrice(value ? +value : 0);
-    }
+    console.log("carCategoryWatch");
     if (
       watchedFields?.car_category?.value ===
         "Автотранспортные средства , исползуемые в качестве такси и по найму" &&
@@ -118,6 +116,11 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
 
       setIsTaxiSelected(true);
       setIsFilteredOsagoDurationChanged(true);
+
+      setValue("duration_of_stay_osago", {
+        label: "До 30 суток",
+        value: "До 30 суток",
+      });
     } else if (
       watchedFields?.car_category?.value !==
         "Автотранспортные средства , исползуемые в качестве такси и по найму" &&
@@ -149,11 +152,79 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
 
       setIsTaxiSelected(false);
     }
+  }, [watchedFields?.car_category?.value]);
+
+  useEffect(() => {
+    if (watchedFields?.duration_of_stay_osago?.label === "До 15 суток") {
+      console.log("seccess");
+      setFormatedCarCategories((prev) => {
+        if (prev) {
+          const result = prev.filter(
+            (item) =>
+              item.label !==
+              "Автотранспортные средства , исползуемые в качестве такси и по найму"
+          );
+          return result;
+        }
+        return prev;
+      });
+
+      setIsMinimalDaysSelected(true);
+    } else if (
+      watchedFields?.car_category?.value !==
+        "Автотранспортные средства , исползуемые в качестве такси и по найму" &&
+      isMinimalDaysSelected
+    ) {
+      console.log("taxiActive");
+      setFormatedCarCategories((prev) => {
+        const prevCopy = prev;
+        let isValueContains: boolean = false;
+
+        if (prevCopy) {
+          prevCopy.forEach((item) => {
+            if (
+              item.label ===
+              "Автотранспортные средства , исползуемые в качестве такси и по найму"
+            ) {
+              isValueContains = true;
+            }
+          });
+
+          if (!isValueContains) {
+            prevCopy.push({
+              label:
+                "Автотранспортные средства , исползуемые в качестве такси и по найму",
+              value:
+                "Автотранспортные средства , исползуемые в качестве такси и по найму",
+            });
+          }
+          return prevCopy;
+        }
+        return prev;
+      });
+
+      setIsMinimalDaysSelected(false);
+    }
+  }, [watchedFields?.duration_of_stay_osago?.value]);
+
+  useEffect(() => {
+    if (isSubmittedOnce && formState.isDirty) {
+      let value = findValue(variant, watchedFields);
+      setFoundPrice(value ? +value : 0);
+    }
   }, [watchedFields, isSubmittedOnce, formState.isDirty]);
 
   useEffect(() => {
-    console.log("event");
-  }, [watchedFields, isSubmittedOnce, formState.isDirty]);
+    console.log("watchedFields");
+  }, [watchedFields]);
+
+  useEffect(() => {
+    console.log("isSubmittedOnce");
+  }, [isSubmittedOnce]);
+
+  useEffect(() => {
+    console.log("formState.isDirty");
+  }, [formState.isDirty]);
 
   useEffect(() => {
     console.log("isFilteredOsagoDurationChanged");
