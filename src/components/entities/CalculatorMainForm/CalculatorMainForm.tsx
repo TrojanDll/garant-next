@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 import Substrate from "@/components/ui/Substrate/Substrate";
@@ -9,6 +9,8 @@ import CalculatorInputForm from "@/components/features/CalculatorInputForm/Calcu
 
 import styles from "./CalculatorMainForm.module.scss";
 import { selectsNSProps, selectsOsagoProps } from "./fields.data";
+import { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
+import { useGetCarCategories } from "@/hooks/cars/useGetCarCategories";
 
 export interface ICalculatorMainFormProps {
   variant: "osago" | "ns";
@@ -20,6 +22,7 @@ const titles = {
 };
 
 const CalculatorMainForm = ({ variant }: ICalculatorMainFormProps) => {
+
   return (
     <Substrate withShadow="light" className={styles.root}>
       <div className={styles.formWrapper}>

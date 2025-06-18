@@ -17,6 +17,7 @@ import { IFieldConfig } from "@/types/IFieldConfig";
 import CalculatorPolicyPrice from "../CalculatorPolicyPrice/CalculatorPolicyPrice";
 import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
 import { calculatorPromoCategories, osagoTable } from "./tables.data";
+import { useGetCarCategories } from "@/hooks/cars/useGetCarCategories";
 
 interface FormData {
   [key: string]: any;
@@ -57,6 +58,29 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
   const [isCorrect, setIsCorrect] = useState(false);
   const [foundPrice, setFoundPrice] = useState(0);
   const [isSubmittedOnce, setIsSubmittedOnce] = useState(false);
+  const [formatedCarCategories, setFormatedCarCategories] = useState<IOptions[]>();
+  const [filteredOsagoDuration, setFilteredOsagoDuration] = useState<
+    IOptions[] | undefined
+  >(config.fields[1].options);
+
+  const [isFilteredOsagoDurationChanged, setIsFilteredOsagoDurationChanged] =
+    useState<boolean>(false);
+  const [isTaxiSelected, setIsTaxiSelected] = useState<boolean>(false);
+
+  const { categoriesData, isError, isLoading } = useGetCarCategories();
+
+  useEffect(() => {
+    if (categoriesData) {
+      let formatedCategories: IOptions[] = [];
+
+      formatedCategories = categoriesData.map((item) => ({
+        label: item.Category,
+        value: item.Category,
+      }));
+
+      setFormatedCarCategories(formatedCategories);
+    }
+  }, [isLoading]);
 
   const defaultValues = config.fields.reduce((acc, field) => {
     acc[field.name] =
@@ -78,7 +102,69 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
       let value = findValue(variant, watchedFields);
       setFoundPrice(value ? +value : 0);
     }
+    if (
+      watchedFields?.car_category?.value ===
+        "Автотранспортные средства , исползуемые в качестве такси и по найму" &&
+      !isFilteredOsagoDurationChanged
+    ) {
+      console.log("seccess");
+      setFilteredOsagoDuration((prev) => {
+        if (prev) {
+          const result = prev.filter((item) => item.label !== "До 15 суток");
+          return result;
+        }
+        return prev;
+      });
+
+      setIsTaxiSelected(true);
+      setIsFilteredOsagoDurationChanged(true);
+    } else if (
+      watchedFields?.car_category?.value !==
+        "Автотранспортные средства , исползуемые в качестве такси и по найму" &&
+      !isFilteredOsagoDurationChanged &&
+      isTaxiSelected
+    ) {
+      console.log("taxiActive");
+      setFilteredOsagoDuration((prev) => {
+        const prevCopy = prev;
+        let isValueContains: boolean = false;
+
+        if (prevCopy) {
+          prevCopy.forEach((item) => {
+            if (item.label === "До 15 суток") {
+              isValueContains = true;
+            }
+          });
+
+          if (!isValueContains) {
+            prevCopy.unshift({
+              label: "До 15 суток",
+              value: "category_3",
+            });
+          }
+          return prevCopy;
+        }
+        return prev;
+      });
+
+      setIsTaxiSelected(false);
+    }
   }, [watchedFields, isSubmittedOnce, formState.isDirty]);
+
+  useEffect(() => {
+    console.log("event");
+  }, [watchedFields, isSubmittedOnce, formState.isDirty]);
+
+  useEffect(() => {
+    console.log("isFilteredOsagoDurationChanged");
+    console.log(isFilteredOsagoDurationChanged);
+
+    let timoutId = setTimeout(() => {
+      setIsFilteredOsagoDurationChanged(false);
+    }, 200);
+
+    // return
+  }, [isFilteredOsagoDurationChanged]);
 
   const onSubmit: SubmitHandler<ICalculatorOsagoFormFields & ICalculatorNsFormFields> = (
     data
@@ -116,7 +202,13 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
                 placeholder={config.placeholder}
                 label={config.label}
                 required={config.required}
-                options={config.options as IOptions[]}
+                options={
+                  config.name === "car_category"
+                    ? formatedCarCategories || []
+                    : config.name === "duration_of_stay_osago"
+                    ? filteredOsagoDuration || []
+                    : config.options || []
+                }
                 selectedValue={field.value}
                 setFullValue={(value: IOptions) => field.onChange(value)}
                 errorMessage={fieldState.error?.message}
