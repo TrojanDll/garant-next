@@ -159,7 +159,9 @@ const PolicyInfo = ({ className }: IProps) => {
 
   function isDownloadButtonVisible(): boolean {
     return (
-      policyStatus === EPolicyStatus.ACTIVE || policyStatus === EPolicyStatus.ARCHIVE
+      policyStatus === EPolicyStatus.ACTIVE ||
+      policyStatus === EPolicyStatus.ARCHIVE ||
+      policyStatus === EPolicyStatus.EXPIRED
       // true
     );
   }
