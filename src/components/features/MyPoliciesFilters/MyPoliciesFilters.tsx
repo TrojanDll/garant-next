@@ -34,6 +34,8 @@ const MyPoliciesFilters = () => {
 
   const setActivityStatus = usePolicyFilters((state) => state.setActivityStatus);
   const setPolicyType = usePolicyFilters((state) => state.setPolicyType);
+  const activityStatus = usePolicyFilters((state) => state.activityStatus);
+  const policyType = usePolicyFilters((state) => state.policyType);
 
   function handleButtonGroupClick(buttonGroupRequest: TButtonGroupRequest) {
     if (buttonGroupRequest.value === "Активные") {
@@ -91,7 +93,11 @@ const MyPoliciesFilters = () => {
         onClick={() => setIsMobileFilterVisible(true)}
       >
         <Substrate withShadow="light" className={styles.filtersMobileButtonSubstrate}>
-          <SvgSelector id={ESvgName.FILTER} />
+          {policyType === undefined && activityStatus === undefined ? (
+            <SvgSelector id={ESvgName.FILTER} />
+          ) : (
+            <SvgSelector id={ESvgName.CHECKMARK_ROUNDED} />
+          )}
           Фильтры
         </Substrate>
       </button>

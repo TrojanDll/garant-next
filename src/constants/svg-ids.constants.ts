@@ -23,4 +23,5 @@ export enum ESvgName {
   CAR = "car",
   POLICY = "policy",
   PROFILE_ROUNDED = "profile_rounded",
+  CHECKMARK_ROUNDED = "checkmark_rounded",
 }
