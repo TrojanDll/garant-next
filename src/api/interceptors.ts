@@ -5,7 +5,7 @@ import { getToken, removeFromStorage } from "@/services/auth-token.service";
 import { PAGES } from "@/config/pages-url.config";
 
 const options: CreateAxiosDefaults = {
-  baseURL: "https://xn----nbck7b7ald8atlv.xn--y9a3aq/strahovanie.loc/public",
+  baseURL: "http://46.149.69.195:7777/garant-abh-admin.com",
   headers: {
     "Content-Type": "application/json",
   },
@@ -18,7 +18,8 @@ const axiosWithAuth = axios.create(options);
 axiosWithAuth.interceptors.request.use((config) => {
   const token = getToken();
 
-  if (config?.headers && token) config.headers.Authorization = `Bearer ${token}`;
+  if (config?.headers && token)
+    config.headers.Authorization = `Bearer ${token}`;
 
   return config;
 });
@@ -27,7 +28,10 @@ axiosWithAuth.interceptors.response.use(
   (config) => config,
   async (error) => {
     console.log(error);
-    if (error?.response?.status === 401 || errorCatch(error) === "Unauthenticated.") {
+    if (
+      error?.response?.status === 401 ||
+      errorCatch(error) === "Unauthenticated."
+    ) {
       removeFromStorage();
 
       if (typeof window !== "undefined") {
