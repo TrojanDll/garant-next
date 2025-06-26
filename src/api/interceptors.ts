@@ -5,7 +5,7 @@ import { getToken, removeFromStorage } from "@/services/auth-token.service";
 import { PAGES } from "@/config/pages-url.config";
 
 const options: CreateAxiosDefaults = {
-  baseURL: "http://46.149.69.195:7777/garant-abh-admin.com",
+  baseURL: "https://46.149.69.195:7777/garant-abh-admin.com",
   headers: {
     "Content-Type": "application/json",
   },
