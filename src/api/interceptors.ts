@@ -5,11 +5,11 @@ import { getToken, removeFromStorage } from "@/services/auth-token.service";
 import { PAGES } from "@/config/pages-url.config";
 
 const options: CreateAxiosDefaults = {
-  baseURL: "https://46.149.69.195:7777/garant-abh-admin.com",
+  baseURL: "https://xn----nbck7b7ald8atlv.xn--y9a3aq/strahovanie.loc/public",
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: true,
+  // withCredentials: true,
 };
 
 const axiosClassic = axios.create(options);
