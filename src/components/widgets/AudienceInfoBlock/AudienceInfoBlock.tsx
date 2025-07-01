@@ -10,14 +10,15 @@ import { IAudienceInfoItem } from "@/components/entities/AudienceInfoItem/audien
 
 interface IProps {
   audienceItems: IAudienceInfoItem[];
+  title: string;
 }
 
-const AudienceInfoBlock = ({ audienceItems = [] }: IProps) => {
+const AudienceInfoBlock = ({ audienceItems = [], title }: IProps) => {
   return (
     <section className={styles.root}>
       <ContentContainer>
         <Substrate withShadow="light" className={styles.substrate}>
-          <CustomTitle tag="h2">Кому может пригодиться полис?</CustomTitle>
+          <CustomTitle tag="h2">{title}</CustomTitle>
 
           <div className={styles.items}>
             {audienceItems.map((item, i) => (

@@ -37,7 +37,10 @@ export default function OsagoPage() {
     <div>
       <DiscountBanner />
       <PolicyPromo variant="osago" />
-      <AudienceInfoBlock audienceItems={audienceItems} />
+      <AudienceInfoBlock
+        title="Почему нужно оформить ОСАГО?"
+        audienceItems={audienceItems}
+      />
       <ReviwesYandex />
       <FAQ isIsolated />
     </div>

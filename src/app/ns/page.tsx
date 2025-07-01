@@ -36,7 +36,7 @@ export default function NsPage() {
     <div>
       <DiscountBanner />
       <PolicyPromo variant="ns" />
-      <AudienceInfoBlock audienceItems={audienceItems} />
+      <AudienceInfoBlock title="Кому может пригодиться полис?" audienceItems={audienceItems} />
       <ReviwesYandex />
       <FAQ isIsolated />
     </div>
