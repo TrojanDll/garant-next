@@ -24,8 +24,8 @@ const Support = () => {
             по номеру:
           </Text>
 
-          <Link href="tel:79407704863" className={styles.phone}>
-            +7 940 770 48 63
+          <Link href="tel:79407411000" className={styles.phone}>
+            +7 940 741 10 00
           </Link>
 
           <SocialLinks className={styles.socialLinks} />
