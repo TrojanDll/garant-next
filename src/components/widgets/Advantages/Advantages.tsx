@@ -1,10 +1,9 @@
-import AdvantagesCard, {
-  IAdvantageCards,
-} from "@/components/entities/AdvantagesCard/AdvantagesCard";
+import AdvantagesCard from "@/components/entities/AdvantagesCard/AdvantagesCard";
 import React from "react";
 
 import styles from "./Advantages.module.scss";
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
+import { IAdvantageCards } from "@/components/entities/AdvantagesCard/advantages-card.types";
 
 const advantageCards: IAdvantageCards[] = [
   {
@@ -32,7 +31,11 @@ const Advantages = () => {
     <ContentContainer>
       <section className={styles.root}>
         {advantageCards.map((card, idx) => (
-          <AdvantagesCard className={styles.card} key={`advCard${idx}`} cardInfo={card} />
+          <AdvantagesCard
+            className={styles.card}
+            key={`advCard${idx}`}
+            cardInfo={card}
+          />
         ))}
       </section>
     </ContentContainer>
