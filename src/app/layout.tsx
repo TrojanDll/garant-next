@@ -14,6 +14,8 @@ import "./globals.scss";
 import Head from "next/head";
 import { Providers } from "./providers";
 import Shadow from "@/components/ui/Shadow/Shadow";
+import YandexMetrika from "@/utils/YandexMetrika";
+import TrackPageView from "@/utils/TrackPageView";
 
 export const metadata: Metadata = {
   title: {
@@ -60,6 +62,10 @@ export default function RootLayout({
         <link rel="manifest" href="/favicon/site.webmanifest" />
       </Head>
       <body>
+        <YandexMetrika
+          ymid={Number(process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID)}
+        />
+        <TrackPageView ymId={Number(process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID)} />
         <Providers>
           <Header />
           {children}
