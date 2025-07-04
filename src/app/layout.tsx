@@ -68,12 +68,8 @@ export default function RootLayout({
           <Shadow />
         </Providers>
 
-        <YandexMetrika
-          ymid={Number(process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID)}
-        />
-        <TrackPageView
-          ymId={Number(process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID)}
-        />
+        <YandexMetrika ymid={103203587} />
+        <TrackPageView ymId={103203587} />
       </body>
     </html>
   );
