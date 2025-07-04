@@ -2,6 +2,7 @@
 
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
+import { Suspense } from 'react';
 
 declare global {
   interface Window {
@@ -9,7 +10,7 @@ declare global {
   }
 }
 
-export default function TrackPageView({ ymId }: { ymId: number }) {
+function TrackPageViewInner({ ymId }: { ymId: number }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -21,4 +22,12 @@ export default function TrackPageView({ ymId }: { ymId: number }) {
   }, [pathname, searchParams, ymId]);
 
   return null;
+}
+
+export default function TrackPageView({ ymId }: { ymId: number }) {
+  return (
+    <Suspense fallback={null}>
+      <TrackPageViewInner ymId={ymId} />
+    </Suspense>
+  );
 }

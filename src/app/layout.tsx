@@ -62,10 +62,6 @@ export default function RootLayout({
         <link rel="manifest" href="/favicon/site.webmanifest" />
       </Head>
       <body>
-        <YandexMetrika
-          ymid={Number(process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID)}
-        />
-        <TrackPageView ymId={Number(process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID)} />
         <Providers>
           <Header />
           {children}
@@ -73,6 +69,13 @@ export default function RootLayout({
           <Toaster />
           <Shadow />
         </Providers>
+
+        <YandexMetrika
+          ymid={Number(process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID)}
+        />
+        <TrackPageView
+          ymId={Number(process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID)}
+        />
       </body>
     </html>
   );
