@@ -9,8 +9,6 @@ import Footer from "@/components/widgets/Footer/Footer";
 
 import "./globals.scss";
 
-// import "react-day-picker/style.css";
-
 import Head from "next/head";
 import { Providers } from "./providers";
 import Shadow from "@/components/ui/Shadow/Shadow";
