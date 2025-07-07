@@ -1,12 +1,16 @@
 import { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
 import { generateNsOptions } from "@/helpers/CalculatorPromo/generateNsOptions";
-import { ICalculatorNsForm, ICalculatorOsagoForm } from "@/types/ICalculatorForms";
+import {
+  ICalculatorNsForm,
+  ICalculatorOsagoForm,
+} from "@/types/ICalculatorForms";
 import { IFieldConfig } from "@/types/IFieldConfig";
+import { durationOfStayListItems } from "../NsApplyStaticFields/fields.data";
 
 export const calculatorPromoNsDurationOptions: IOptions[] = [
   {
     label: "До 24 часов",
-    value: "category_1",
+    value: "Лица, прибывающие на территории республики Абхазия до 24 часов",
   },
   {
     label: "До 7 суток",
@@ -118,6 +122,6 @@ export const selectsNSProps: IFieldConfig<ICalculatorNsForm>[] = [
     label: "Выберите срок пребывания",
     placeholder: "Выберите срок пребывания",
     required: true,
-    options: calculatorPromoNsDurationOptions,
+    options: durationOfStayListItems,
   },
 ];

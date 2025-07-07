@@ -2,7 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 
-import CustomSelect, { IOptions } from "@/components/ui/CustomSelect/CustomSelect";
+import CustomSelect, {
+  IOptions,
+} from "@/components/ui/CustomSelect/CustomSelect";
 import Button from "@/components/ui/Button/Button";
 
 import styles from "./CalculatorInputForm.module.scss";
@@ -19,6 +21,7 @@ import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
 import { calculatorPromoCategories, osagoTable } from "./tables.data";
 import { useGetCarCategories } from "@/hooks/cars/useGetCarCategories";
 import { useGetPaymentCalculation } from "@/hooks/policy/useGetPaymentCalculation";
+import { useCalculateNs } from "@/hooks/policy/useCalculateNs";
 
 interface FormData {
   [key: string]: any;
@@ -59,7 +62,8 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
   const [isCorrect, setIsCorrect] = useState(false);
   const [foundPrice, setFoundPrice] = useState(0);
   const [isSubmittedOnce, setIsSubmittedOnce] = useState(false);
-  const [formatedCarCategories, setFormatedCarCategories] = useState<IOptions[]>();
+  const [formatedCarCategories, setFormatedCarCategories] =
+    useState<IOptions[]>();
   const [filteredOsagoDuration, setFilteredOsagoDuration] = useState<
     IOptions[] | undefined
   >(config.fields[1].options);
@@ -67,10 +71,16 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
   const [isFilteredOsagoDurationChanged, setIsFilteredOsagoDurationChanged] =
     useState<boolean>(false);
   const [isTaxiSelected, setIsTaxiSelected] = useState<boolean>(false);
-  const [isMinimalDaysSelected, setIsMinimalDaysSelected] = useState<boolean>(false);
+  const [isMinimalDaysSelected, setIsMinimalDaysSelected] =
+    useState<boolean>(false);
 
   const { categoriesData, isError, isLoading } = useGetCarCategories();
   const { data, mutate, isPending } = useGetPaymentCalculation();
+  const {
+    data: calculateNsData,
+    mutate: calculateNs,
+    isPending: isCalculateNsPending,
+  } = useCalculateNs();
 
   useEffect(() => {
     if (categoriesData) {
@@ -211,14 +221,33 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
 
   useEffect(() => {
     if (isSubmittedOnce && formState.isDirty) {
-      let value = findValue(variant, watchedFields);
-      setFoundPrice(value ? +value : 0);
-      console.log("recount");
-      mutate({
-        duration_of_stay: watchedFields.duration_of_stay_osago.label,
-        promo_code: "",
-        transport_category: watchedFields.car_category.label,
-      });
+      // let value = findValue(variant, watchedFields);
+      // setFoundPrice(value ? +value : 0);
+      // console.log("recount");
+      // console.log({
+      //   duration_of_stay: watchedFields?.duration_of_stay_osago?.label,
+      //   promo_code: "",
+      //   transport_category: watchedFields?.car_category?.label,
+      // });
+
+      if (variant === "ns") {
+        console.log({
+          duration_of_stay: watchedFields?.duration_of_stay_ns?.value,
+          promocode: "",
+          quantity: Number(watchedFields?.number_of_people?.value) || 1,
+        });
+        calculateNs({
+          duration_of_stay: watchedFields?.duration_of_stay_ns?.value,
+          promocode: "",
+          quantity: Number(watchedFields?.number_of_people?.value) || 1,
+        });
+      } else {
+        mutate({
+          duration_of_stay: watchedFields?.duration_of_stay_osago?.label,
+          promo_code: "",
+          transport_category: watchedFields?.car_category?.label,
+        });
+      }
     }
   }, [
     watchedFields?.car_category?.label,
@@ -255,16 +284,19 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
   const onSubmit: SubmitHandler<
     ICalculatorOsagoFormFields & ICalculatorNsFormFields
   > = () => {
-    // let value = findValue(variant, data);
-
-    // setFoundPrice(value ? +value : 0);
-
-    console.log("handleSubmit");
-    mutate({
-      duration_of_stay: watchedFields.duration_of_stay_osago.label,
-      promo_code: "",
-      transport_category: watchedFields.car_category.label,
-    });
+    if (variant === "ns") {
+      calculateNs({
+        duration_of_stay: watchedFields?.duration_of_stay_ns?.value,
+        promocode: "",
+        quantity: Number(watchedFields?.number_of_people?.value) || 1,
+      });
+    } else {
+      mutate({
+        duration_of_stay: watchedFields?.duration_of_stay_osago?.label,
+        promo_code: "",
+        transport_category: watchedFields?.car_category?.label,
+      });
+    }
 
     setIsCorrect(true);
     setIsSubmittedOnce(true);
@@ -325,15 +357,15 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
       <Button
         className={`${styles.submit} ${data ? styles.submitHidden : ""}`}
         type="submit"
-        isLoading={isPending}
+        isLoading={isPending || isCalculateNsPending}
       >
         Рассчитать
       </Button>
-      {isCorrect && data && (
+      {((isCorrect && data) || (isCorrect && calculateNsData)) && (
         <CalculatorPolicyPrice
           className={styles.price}
           policyType={variant}
-          price={Number(data.base_tarif)}
+          price={Number(data ? data.base_tarif : calculateNsData?.base_tariff)}
         />
       )}
     </form>
