@@ -5,7 +5,7 @@ import { getToken, removeFromStorage } from "@/services/auth-token.service";
 import { PAGES } from "@/config/pages-url.config";
 
 const options: CreateAxiosDefaults = {
-  baseURL: "https://garantcp.ru",
+  baseURL: "https://xn----nbck7b7ald8atlv.xn--y9a3aq/strahovanie.loc/public",
   headers: {
     "Content-Type": "application/json",
   },
