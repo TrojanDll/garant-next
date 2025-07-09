@@ -36,17 +36,32 @@ interface IProps {
 const PolicyInfo = ({ className }: IProps) => {
   const params = useParams();
   const [policyType, setPolicyType] = useState(EPolicyTypes.OSAGO);
-  const [policyStatus, setPolicyStatus] = useState(EPolicyStatus.AWAITING_PAYMENT);
+  const [policyStatus, setPolicyStatus] = useState(
+    EPolicyStatus.AWAITING_PAYMENT
+  );
   const [policyNumber, setPolicyNumber] = useState("");
   const [price, setPrice] = useState<number>(0);
   const [policyData, setPolicyData] = useState<ICreateOsagoPolicyRequest>();
+  const [currientPolicyId, setCurrientPolicyId] = useState<number>();
 
-  const { data, isError, isPending, isSuccess, mutate } = useGetOsagoPolicyById();
+  const { data, isError, isPending, isSuccess, mutate } =
+    useGetOsagoPolicyById();
+
+  const {
+    data: osagoPolicyWithoutRender,
+    mutate: getOsagoPolicyByIdWithoutRender,
+  } = useGetOsagoPolicyById();
+
   const {
     data: nsPolicyFetchedData,
     isPending: isNsPending,
     isSuccess: isNsSuccess,
     mutate: nsMutate,
+  } = useGetNsPolicyById();
+
+  const {
+    data: nsPolicyDataWithoutRender,
+    mutate: getNsPolicyByIdWithoutRender,
   } = useGetNsPolicyById();
 
   const {
@@ -94,6 +109,7 @@ const PolicyInfo = ({ className }: IProps) => {
 
   useEffect(() => {
     let slug = "";
+    let intervalId: NodeJS.Timeout;
 
     if (typeof params.slug === "string") {
       slug = params.slug;
@@ -108,6 +124,7 @@ const PolicyInfo = ({ className }: IProps) => {
     if (match && match[1] && match[2]) {
       const type = match[1];
       const id = parseInt(match[2], 10);
+      setCurrientPolicyId(id);
 
       if (type === "osago") {
         setPolicyType(EPolicyTypes.OSAGO);
@@ -116,8 +133,30 @@ const PolicyInfo = ({ className }: IProps) => {
         setPolicyType(EPolicyTypes.NS);
         nsMutate({ ns_id: id });
       }
+
+      if (policyStatus === EPolicyStatus.AWAITING_PAYMENT) {
+        intervalId = setInterval(() => {
+          console.log("interval");
+          if (type === "osago") {
+            getOsagoPolicyByIdWithoutRender({ osago_id: id });
+          } else if (type === "ns") {
+            getNsPolicyByIdWithoutRender({ ns_id: id });
+          }
+        }, 1000);
+      }
     }
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
+
+  
+  useEffect(() => {
+    if (policyStatus && currientPolicyId) {
+      
+    }
+  }, [currientPolicyId, policyStatus]);
 
   useEffect(() => {
     if (isSuccess && data) {
@@ -172,7 +211,10 @@ const PolicyInfo = ({ className }: IProps) => {
         <ContentContainer className={styles.container}>
           <Substrate className={styles.substrate} withShadow="light">
             <div className={styles.header}>
-              <PolicyNumber policyNumber={policyNumber} policyType={policyType} />
+              <PolicyNumber
+                policyNumber={policyNumber}
+                policyType={policyType}
+              />
               <PolicyStatus className={styles.status} status={policyStatus} />
             </div>
 
@@ -190,7 +232,10 @@ const PolicyInfo = ({ className }: IProps) => {
             )}
 
             {data && (
-              <OsagoPolicyInfoFields className={styles.fields} data={policyData} />
+              <OsagoPolicyInfoFields
+                className={styles.fields}
+                data={policyData}
+              />
             )}
 
             {nsPolicyFetchedData && (
@@ -208,7 +253,10 @@ const PolicyInfo = ({ className }: IProps) => {
           </Substrate>
 
           {policyStatus === EPolicyStatus.AWAITING_PAYMENT && (
-            <AwaitingPayment amount={price} className={styles.awaitingPayment} />
+            <AwaitingPayment
+              amount={price}
+              className={styles.awaitingPayment}
+            />
           )}
         </ContentContainer>
       ) : !isError ? (
