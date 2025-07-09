@@ -8,14 +8,17 @@ import {
 class RecoveryService {
   async sendRecoveryLinkByEmail(data: IRecoveryEmailForm) {
     const response = await axiosClassic.post<IRecoveryEmailResponse>(
-      "/api/password_recovery",
+      "/api/forgot-password",
       data
     );
     return response;
   }
 
   async recoveryPasswordByHash(data: IRecoveryPasswordApiData) {
-    const response = await axiosClassic.patch<IRecoveryEmailResponse>("/api/change_password", data);
+    const response = await axiosClassic.patch<IRecoveryEmailResponse>(
+      "/api/change_password",
+      data
+    );
     return response;
   }
 }
