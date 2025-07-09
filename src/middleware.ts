@@ -8,6 +8,7 @@ export async function middleware(request: NextRequest, response: NextResponse) {
   const { url, cookies, nextUrl } = request;
 
   const token = cookies.get(EnumTokens.TOKEN)?.value;
+  console.log(token);
   let isPublicPage = true;
 
   for (let i = 0; i < privatePages.length; i++) {
