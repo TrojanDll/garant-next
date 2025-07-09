@@ -32,7 +32,7 @@ axiosWithAuth.interceptors.response.use(
       error?.response?.status === 401 ||
       errorCatch(error) === "Unauthenticated."
     ) {
-      removeFromStorage();
+      // removeFromStorage();
 
       if (typeof window !== "undefined") {
         window.location.href = PAGES.AUTH;
