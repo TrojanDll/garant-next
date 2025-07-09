@@ -44,16 +44,16 @@ const Login = () => {
       toast.dismiss();
       toast.success("Успешный вход");
 
-      timeoutId = setTimeout(() => {
-        toast.dismiss();
-        navigateToHome();
-      }, 1000);
+      // timeoutId = setTimeout(() => {
+      //   toast.dismiss();
+      //   navigateToHome();
+      // }, 1000);
     }
 
     return () => {
       isMounted = false;
 
-      clearTimeout(timeoutId);
+      // clearTimeout(timeoutId);
     };
   }, [isLoginPending, isLoginError, isLoginSuccess]);
 
