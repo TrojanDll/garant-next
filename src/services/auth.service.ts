@@ -24,7 +24,7 @@ class AuthService {
   async login(data: ILoginForm) {
     const response = await axiosClassic.post<ILoginResponse>("/api/login", data);
 
-    saveTokenToStorage(response.data.token);
+    // saveTokenToStorage(response.data.token);
 
     return response;
   }
@@ -32,7 +32,7 @@ class AuthService {
   async logout() {
     const response = await axiosWithAuth.get<ILogoutResponse>("/api/logout");
 
-    if (response.data) removeFromStorage();
+    // if (response.data) removeFromStorage();
 
     return response;
   }
