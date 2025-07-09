@@ -16,6 +16,7 @@ import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 
 import { useValidatePromocode } from "@/hooks/promocode/useValidatePromocode";
 import usePromocodeError from "@/stores/Promocode/promocodeError.store";
+import { formatDate } from "@/helpers/formatDate";
 
 interface IProps {
   name: string;
@@ -84,7 +85,7 @@ const CustomInput = ({
   const handleDateChange = (date?: Date) => {
     if (date) {
       setSelected(date);
-      setValue(date.toLocaleDateString());
+      setValue(formatDate(date));
     } else {
       setValue("");
       setSelected(undefined);
