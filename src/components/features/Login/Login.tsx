@@ -18,7 +18,8 @@ import LoginFields from "@/components/entities/LoginFields/LoginFields";
 
 const Login = () => {
   const { handleSubmit, control } = useForm<ILoginForm>();
-  const { login, isLoginSuccess, isLoginError, isLoginPending, loginError } = useLogin();
+  const { login, isLoginSuccess, isLoginError, isLoginPending, loginError } =
+    useLogin();
   const { navigateToHome } = useNavigation();
 
   const onSubmit: SubmitHandler<ILoginForm> = (data) => {
@@ -44,16 +45,16 @@ const Login = () => {
       toast.dismiss();
       toast.success("Успешный вход");
 
-      // timeoutId = setTimeout(() => {
-      //   toast.dismiss();
-      //   navigateToHome();
-      // }, 1000);
+      timeoutId = setTimeout(() => {
+        toast.dismiss();
+        navigateToHome();
+      }, 1000);
     }
 
     return () => {
       isMounted = false;
 
-      // clearTimeout(timeoutId);
+      clearTimeout(timeoutId);
     };
   }, [isLoginPending, isLoginError, isLoginSuccess]);
 
