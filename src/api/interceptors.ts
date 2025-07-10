@@ -18,8 +18,8 @@ const axiosWithAuth = axios.create(options);
 axiosWithAuth.interceptors.request.use((config) => {
   const token = getToken();
 
-  if (config?.headers && token)
-    config.headers.Authorization = `Bearer ${token}`;
+  // if (config?.headers && token)
+  //   config.headers.Authorization = `Bearer ${token}`;
 
   return config;
 });
@@ -34,9 +34,9 @@ axiosWithAuth.interceptors.response.use(
     ) {
       // removeFromStorage();
 
-      if (typeof window !== "undefined") {
-        window.location.href = PAGES.AUTH;
-      }
+      // if (typeof window !== "undefined") {
+      //   window.location.href = PAGES.AUTH;
+      // }
     }
 
     // NextResponse.redirect(PAGES.HOME);

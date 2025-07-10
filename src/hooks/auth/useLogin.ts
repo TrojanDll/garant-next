@@ -1,3 +1,4 @@
+import { saveTokenToStorage } from "@/services/auth-token.service";
 import { authService } from "@/services/auth.service";
 import { ILoginForm } from "@/types/auth.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -21,6 +22,7 @@ export function useLogin() {
     mutationKey: ["login"],
     mutationFn: (data: ILoginForm) => authService.login(data),
     onSuccess() {
+      saveTokenToStorage("123");
       queryClient.invalidateQueries({
         queryKey: ["login"],
       });

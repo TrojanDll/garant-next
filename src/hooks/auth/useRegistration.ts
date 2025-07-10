@@ -1,4 +1,5 @@
 import { scrollToTop } from "@/helpers/scrollToTop";
+import { saveTokenToStorage } from "@/services/auth-token.service";
 import { authService } from "@/services/auth.service";
 import { IRegistrationFormApiData } from "@/types/auth.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -36,8 +37,11 @@ export function useRegistration() {
     isError: isRegistrationError,
   } = useMutation({
     mutationKey: ["registration"],
-    mutationFn: (data: IRegistrationFormApiData) => authService.registration(data),
+    mutationFn: (data: IRegistrationFormApiData) =>
+      authService.registration(data),
     onSuccess() {
+      saveTokenToStorage("123");
+
       queryClient.invalidateQueries({
         queryKey: ["registration"],
       });

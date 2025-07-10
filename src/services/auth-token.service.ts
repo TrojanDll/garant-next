@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 
 export enum EnumTokens {
-  "TOKEN" = "token",
+  "TOKEN" = "token2",
 }
 
 export const getToken = () => {
