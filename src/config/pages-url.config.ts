@@ -11,7 +11,7 @@ class PAGESCLASS {
   DOCUMENTS = `${this.root}documents`;
   ABOUT = `${this.root}about`;
   POLICY = `${this.root}policy`;
-  RECOVERY = `${this.root}recovery`;
+  RECOVERY = `${this.root}password`;
   AUTH = `${this.root}auth`;
   POLICY_INFO = `${this.root}policy-info`;
   LEGAL = `${this.root}legal`;

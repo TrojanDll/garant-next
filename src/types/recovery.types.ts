@@ -13,7 +13,8 @@ export interface IRecoveryPasswordForm {
 }
 
 export interface IRecoveryPasswordApiData {
-  hash_email: string;
+  email: string;
+  token: string;
   password: string;
   password_confirmation: string;
 }

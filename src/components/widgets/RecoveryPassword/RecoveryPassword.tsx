@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./RecoveryPassword.module.scss";
 
@@ -8,10 +8,13 @@ import Substrate from "@/components/ui/Substrate/Substrate";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import Text from "@/components/ui/Text/Text";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { IRecoveryPasswordApiData, IRecoveryPasswordForm } from "@/types/recovery.types";
+import {
+  IRecoveryPasswordApiData,
+  IRecoveryPasswordForm,
+} from "@/types/recovery.types";
 import RecoveryPasswordFields from "@/components/entities/RecoveryPasswordFields/RecoveryPasswordFields";
 import Button from "@/components/ui/Button/Button";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
 import { useRecoveryPassword } from "@/hooks/recovery/useRecoveryPassword";
 import toast from "react-hot-toast";
@@ -21,22 +24,21 @@ const RecoveryPassword = () => {
   const { handleSubmit, control, watch } = useForm<IRecoveryPasswordForm>();
   const { isError, isPending, isSuccess, mutate } = useRecoveryPassword();
   const { navigateToAuth } = useNavigation();
-  const params = useParams();
+  const params = useSearchParams();
+
+  const [emailParams, setEmailParams] = useState<string | null>(null);
+  const [tokenParams, setTokenParams] = useState<string | null>(null);
+
+  useEffect(() => {
+    setEmailParams(params.get("email"));
+    setTokenParams(params.get("token"));
+  }, []);
 
   const onSubmit: SubmitHandler<IRecoveryPasswordForm> = (data) => {
-    let slug: string = "";
-
-    if (typeof params.slug === "string") {
-      slug = params.slug;
-    } else if (Array.isArray(params.slug)) {
-      slug = params.slug[0];
-    }
-
-    slug = decodeURIComponent(slug);
-
     const formatedData: IRecoveryPasswordApiData = {
       ...data,
-      hash_email: slug,
+      email: emailParams ? emailParams : "",
+      token: tokenParams ? tokenParams : "",
     };
     console.log(formatedData);
     mutate(formatedData);
@@ -75,7 +77,11 @@ const RecoveryPassword = () => {
 
   return (
     <ContentContainer>
-      <Substrate withShadow="light" widthType="window" className={styles.substrate}>
+      <Substrate
+        withShadow="light"
+        widthType="window"
+        className={styles.substrate}
+      >
         <CustomTitle tag="h1" isCentered type="small" className={styles.title}>
           Создайте новый пароль
         </CustomTitle>

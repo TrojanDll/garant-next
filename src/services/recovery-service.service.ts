@@ -15,8 +15,8 @@ class RecoveryService {
   }
 
   async recoveryPasswordByHash(data: IRecoveryPasswordApiData) {
-    const response = await axiosClassic.patch<IRecoveryEmailResponse>(
-      "/api/change_password",
+    const response = await axiosClassic.post<IRecoveryEmailResponse>(
+      "/api/reset-password",
       data
     );
     return response;
