@@ -17,12 +17,9 @@ const options: CreateAxiosDefaults = {
 const axiosClassic = axios.create(options);
 const axiosWithAuth = axios.create(options);
 
-// Добавляем CSRF-интерцептор для axiosClassic (для неавторизованных запросов)
 axiosClassic.interceptors.request.use(async (config) => {
-  // Пропускаем для самого запроса за CSRF-токеном
   if (config.url?.includes("sanctum/csrf-cookie")) return config;
 
-  // Для всех остальных запросов сначала получаем CSRF
   await axios.get(`${BASE_URL}/sanctum/csrf-cookie`, {
     withCredentials: true,
   });
@@ -32,7 +29,6 @@ axiosClassic.interceptors.request.use(async (config) => {
 axiosWithAuth.interceptors.request.use(async (config) => {
   // const token = getToken();
 
-  // Получаем CSRF-токен перед авторизованными запросами
   await axios.get(`${BASE_URL}/sanctum/csrf-cookie`, {
     withCredentials: true,
   });
@@ -43,6 +39,7 @@ axiosWithAuth.interceptors.request.use(async (config) => {
 
   return config;
 });
+
 axiosWithAuth.interceptors.response.use(
   (config) => config,
   async (error) => {
