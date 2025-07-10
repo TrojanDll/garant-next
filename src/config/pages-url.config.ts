@@ -17,7 +17,7 @@ class PAGESCLASS {
   LEGAL = `${this.root}legal`;
   POLICY_INFO_OSAGO = `${this.POLICY_INFO}/osago-`;
   POLICY_INFO_NS = `${this.POLICY_INFO}/ns-`;
-  // EMAIL_
+  EMAIL_VERIFY = `${this.root}/email-verify-result`;
 
   OSAGO_APPLY = `${this.OSAGO}/apply`;
   OSAGO_CONFIRM = `${this.OSAGO}/confirm`;
@@ -30,8 +30,6 @@ class PAGESCLASS {
 
   MY_POLICIES = `${this.DASHBOARD}/my-policies`;
   EDIT_PERSONAL_DATA = `${this.DASHBOARD}/edit-personal-data`;
-
-  
 }
 
 export const PAGES = new PAGESCLASS();
