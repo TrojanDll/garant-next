@@ -23,6 +23,9 @@ importers:
       body-scroll-lock:
         specifier: 4.0.0-beta.0
         version: 4.0.0-beta.0
+      cookies-next:
+        specifier: ^6.0.0
+        version: 6.0.0(next@15.2.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.3))(react@19.1.0)
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -65,6 +68,9 @@ importers:
       sass:
         specifier: ^1.86.2
         version: 1.86.3
+      universal-cookie:
+        specifier: ^8.0.1
+        version: 8.0.1
       zustand:
         specifier: ^5.0.3
         version: 5.0.3(@types/react@19.1.0)(immer@10.1.1)(react@19.1.0)
@@ -555,6 +561,16 @@ packages:
   convert-source-map@1.9.0:
     resolution: {integrity: sha512-ASFBup0Mz1uyiIjANan1jzLQami9z1PoYSZCiiYW2FczPbenXc45FZdBZLzOT+r6+iciuEModtmCti+hjaAk0A==}
 
+  cookie@1.0.2:
+    resolution: {integrity: sha512-9Kr/j4O16ISv8zBBhJoi4bXOYNTkFLOqSL3UDB0njXxCXNezjeyVrJyGOWtgfs/q2km1gwBcfH8q1yEGoMYunA==}
+    engines: {node: '>=18'}
+
+  cookies-next@6.0.0:
+    resolution: {integrity: sha512-Xq87TPIe7faqluf7gr3mobzO2JRe65oX+pnv4nrnDE/ak49Ic6QhNZSLCk+E5xOKtpVm1EoEazu0iBNyr5TXTA==}
+    peerDependencies:
+      next: '>=15.0.0'
+      react: '>= 16.8.0'
+
   core-js-pure@3.42.0:
     resolution: {integrity: sha512-007bM04u91fF4kMgwom2I5cQxAFIy8jVulgr9eozILl/SZE53QOqnW/+vviC+wQWLv+AunBG+8Q0TLoeSsSxRQ==}
 
@@ -989,6 +1005,9 @@ packages:
 
   undici-types@6.19.8:
     resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
+
+  universal-cookie@8.0.1:
+    resolution: {integrity: sha512-B6ks9FLLnP1UbPPcveOidfvB9pHjP+wekP2uRYB9YDfKVpvcjKgy1W5Zj+cEXJ9KTPnqOKGfVDQBmn8/YCQfRg==}
 
   use-isomorphic-layout-effect@1.2.0:
     resolution: {integrity: sha512-q6ayo8DWoPZT0VdG4u3D3uxcgONP3Mevx2i2b0434cwWBoL+aelL1DzkXI6w3PhTZzUeR2kaVlZn70iCiseP6w==}
@@ -1460,6 +1479,14 @@ snapshots:
 
   convert-source-map@1.9.0: {}
 
+  cookie@1.0.2: {}
+
+  cookies-next@6.0.0(next@15.2.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.3))(react@19.1.0):
+    dependencies:
+      cookie: 1.0.2
+      next: 15.2.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.3)
+      react: 19.1.0
+
   core-js-pure@3.42.0: {}
 
   cosmiconfig@7.1.0:
@@ -1877,6 +1904,10 @@ snapshots:
   typescript@5.8.3: {}
 
   undici-types@6.19.8: {}
+
+  universal-cookie@8.0.1:
+    dependencies:
+      cookie: 1.0.2
 
   use-isomorphic-layout-effect@1.2.0(@types/react@19.1.0)(react@19.1.0):
     dependencies:

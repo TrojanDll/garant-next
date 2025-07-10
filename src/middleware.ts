@@ -9,6 +9,7 @@ export async function middleware(request: NextRequest, response: NextResponse) {
 
   const token = cookies.get("token2");
   // console.log(token);
+  console.log(cookies.getAll());
   let isPublicPage = true;
 
   for (let i = 0; i < privatePages.length; i++) {
