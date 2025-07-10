@@ -17,6 +17,7 @@ import RegistrationFields from "@/components/entities/RegistrationFields/Registr
 
 import styles from "./Registration.module.scss";
 import EmailConfirmation from "@/components/entities/EmailConfirmation/EmailConfirmation";
+import { saveTokenToStorage } from "@/services/auth-token.service";
 
 const Registration = () => {
   const { handleSubmit, control, watch } = useForm<IRegistrationForm>();
@@ -26,6 +27,7 @@ const Registration = () => {
     isRegistrationError,
     isRegistrationSuccess,
     registrationErrors,
+    registrationResponse,
   } = useRegistration();
 
   const password = watch("password");
@@ -64,6 +66,7 @@ const Registration = () => {
     } else if (isRegistrationSuccess && isMounted) {
       toast.dismiss();
       toast.success("Регистрация прошла успешно");
+      // saveTokenToStorage(registrationResponse?.data.token || "");
     }
 
     return () => {
@@ -76,7 +79,11 @@ const Registration = () => {
       {isRegistrationSuccess ? (
         <EmailConfirmation />
       ) : (
-        <form action="" noValidate onSubmit={handleSubmit(onSubmit, onFormError)}>
+        <form
+          action=""
+          noValidate
+          onSubmit={handleSubmit(onSubmit, onFormError)}
+        >
           <CustomTitle tag="h1" isCentered className={styles.title}>
             Регистрация нового пользователя
           </CustomTitle>

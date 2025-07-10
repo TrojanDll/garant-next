@@ -22,11 +22,11 @@ export function useLogin() {
     mutationKey: ["login"],
     mutationFn: (data: ILoginForm) => authService.login(data),
     onSuccess() {
-      saveTokenToStorage("123");
+      // saveTokenToStorage("123");
       queryClient.invalidateQueries({
         queryKey: ["login"],
       });
-      window.location.reload();
+      // window.location.reload();
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {

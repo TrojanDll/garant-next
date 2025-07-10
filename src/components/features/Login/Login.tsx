@@ -15,11 +15,18 @@ import toast from "react-hot-toast";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
 import { useLogin } from "@/hooks/auth/useLogin";
 import LoginFields from "@/components/entities/LoginFields/LoginFields";
+import { saveTokenToStorage } from "@/services/auth-token.service";
 
 const Login = () => {
   const { handleSubmit, control } = useForm<ILoginForm>();
-  const { login, isLoginSuccess, isLoginError, isLoginPending, loginError } =
-    useLogin();
+  const {
+    login,
+    isLoginSuccess,
+    isLoginError,
+    isLoginPending,
+    loginError,
+    loginResponse,
+  } = useLogin();
   const { navigateToHome } = useNavigation();
 
   const onSubmit: SubmitHandler<ILoginForm> = (data) => {
@@ -44,6 +51,7 @@ const Login = () => {
     if (isLoginSuccess && isMounted) {
       toast.dismiss();
       toast.success("Успешный вход");
+      // saveTokenToStorage(loginResponse?.data.token || "");
 
       timeoutId = setTimeout(() => {
         toast.dismiss();

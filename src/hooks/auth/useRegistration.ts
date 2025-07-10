@@ -40,7 +40,7 @@ export function useRegistration() {
     mutationFn: (data: IRegistrationFormApiData) =>
       authService.registration(data),
     onSuccess() {
-      saveTokenToStorage("123");
+      // saveTokenToStorage("123");
 
       queryClient.invalidateQueries({
         queryKey: ["registration"],

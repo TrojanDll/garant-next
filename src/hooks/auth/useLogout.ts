@@ -11,7 +11,7 @@ export function useLogout() {
     mutationKey: ["logout"],
     mutationFn: () => authService.logout(),
     onSuccess() {
-      removeFromStorage();
+      // removeFromStorage();
       resetAllCashe();
       queryClient.invalidateQueries({
         queryKey: ["logout"],

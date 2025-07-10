@@ -7,9 +7,9 @@ import { privatePages, publicPages } from "./config/pages-privacy.config";
 export async function middleware(request: NextRequest, response: NextResponse) {
   const { url, cookies, nextUrl } = request;
 
-  const token = cookies.get("token2");
+  const token = cookies.get("token");
   // console.log(token);
-  console.log(cookies.getAll());
+  // console.log(cookies.getAll());
   let isPublicPage = true;
 
   for (let i = 0; i < privatePages.length; i++) {

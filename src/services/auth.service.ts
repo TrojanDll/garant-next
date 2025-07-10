@@ -7,6 +7,7 @@ import {
   IRegistrationFormApiData,
   IRegistrationResponse,
 } from "@/types/auth.types";
+import { removeFromStorage, saveTokenToStorage } from "./auth-token.service";
 
 class AuthService {
   async registration(data: IRegistrationFormApiData) {
@@ -14,6 +15,8 @@ class AuthService {
       "/api/registration",
       data
     );
+
+    saveTokenToStorage(response.data.token);
 
     return response;
   }
@@ -24,11 +27,15 @@ class AuthService {
       data
     );
 
+    saveTokenToStorage(response.data.token);
+
     return response;
   }
 
   async logout() {
     const response = await axiosWithAuth.get<ILogoutResponse>("/api/logout");
+
+    if (response.data) removeFromStorage();
 
     return response;
   }
