@@ -17,7 +17,7 @@ class PAGESCLASS {
   LEGAL = `${this.root}legal`;
   POLICY_INFO_OSAGO = `${this.POLICY_INFO}/osago-`;
   POLICY_INFO_NS = `${this.POLICY_INFO}/ns-`;
-  EMAIL_VERIFY = `${this.root}/email-verify-result`;
+  EMAIL_VERIFY_RESULT = `${this.root}/email-verify-result`;
 
   OSAGO_APPLY = `${this.OSAGO}/apply`;
   OSAGO_CONFIRM = `${this.OSAGO}/confirm`;
