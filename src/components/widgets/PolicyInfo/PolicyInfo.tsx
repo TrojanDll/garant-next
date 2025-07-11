@@ -107,9 +107,12 @@ const PolicyInfo = ({ className }: IProps) => {
     }
   }, [isPdfPending, isNsPdfPending]);
 
+  let intervalId: NodeJS.Timeout;
+
   useEffect(() => {
     let slug = "";
-    let intervalId: NodeJS.Timeout;
+
+    console.log(params);
 
     if (typeof params.slug === "string") {
       slug = params.slug;
@@ -134,28 +137,30 @@ const PolicyInfo = ({ className }: IProps) => {
         nsMutate({ ns_id: id });
       }
 
-      // if (policyStatus === EPolicyStatus.AWAITING_PAYMENT) {
-      //   intervalId = setInterval(() => {
-      //     console.log("interval");
-      //     if (type === "osago") {
-      //       getOsagoPolicyByIdWithoutRender({ osago_id: id });
-      //     } else if (type === "ns") {
-      //       getNsPolicyByIdWithoutRender({ ns_id: id });
-      //     }
-      //   }, 1000);
-      // }
+      if (policyStatus === EPolicyStatus.AWAITING_PAYMENT) {
+        intervalId = setInterval(() => {
+          console.log("interval");
+          if (type === "osago") {
+            getOsagoPolicyByIdWithoutRender({ osago_id: id });
+          } else if (type === "ns") {
+            getNsPolicyByIdWithoutRender({ ns_id: id });
+          }
+        }, 5000);
+      }
     }
 
-    // return () => {
-    //   clearInterval(intervalId);
-    // };
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
-  // useEffect(() => {
-  //   if (policyStatus && currientPolicyId) {
-
-  //   }
-  // }, [currientPolicyId, policyStatus]);
+  useEffect(() => {
+    if (policyStatus && currientPolicyId) {
+      if (policyStatus !== EPolicyStatus.AWAITING_PAYMENT) {
+        clearInterval(intervalId);
+      }
+    }
+  }, [currientPolicyId, policyStatus]);
 
   useEffect(() => {
     if (isSuccess && data) {
