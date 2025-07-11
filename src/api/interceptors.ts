@@ -4,7 +4,7 @@ import { errorCatch } from "./error";
 import { getToken, removeFromStorage } from "@/services/auth-token.service";
 import { PAGES } from "@/config/pages-url.config";
 
-const BASE_URL = "https://garantcp.ru";
+export const BASE_URL = "https://garantcp.ru";
 
 const options: CreateAxiosDefaults = {
   baseURL: BASE_URL,

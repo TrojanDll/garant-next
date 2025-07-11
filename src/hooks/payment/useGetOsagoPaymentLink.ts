@@ -1,6 +1,4 @@
-import { carsService } from "@/services/cars.service";
 import { paymentService } from "@/services/payment.service";
-import { INewCarForm } from "@/types/cars.types";
 import { IGetOsagoPaymentLinkRequest } from "@/types/payment.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";

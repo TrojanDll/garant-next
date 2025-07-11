@@ -52,7 +52,7 @@ const AwaitingPayment = ({
       // window.location.href = "";
       if (data?.data.link) {
         // console.log(data?.data.link);
-        window.open(data?.data.link, "_blank", "noopener,noreferrer");
+        // window.open(data?.data.link, "_blank", "noopener,noreferrer");
       }
     }
   }, [isPending]);
