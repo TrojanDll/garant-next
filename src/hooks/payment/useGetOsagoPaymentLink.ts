@@ -27,7 +27,7 @@ export function useGetOsagoPaymentLink() {
   return {
     mutate,
     isPending,
-    data,
+    data: data?.data,
     isSuccess,
     isError,
   };

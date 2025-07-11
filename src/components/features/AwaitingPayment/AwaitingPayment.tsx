@@ -42,14 +42,18 @@ const AwaitingPayment = ({
       toast.loading("Создаём ссылку для оплаты");
     }
 
-    if (isError) {
+    if (isError || (!data?.data.status && data)) {
       toast.error("Ошибка при создании ссылки");
     }
 
-    if (data) {
+    if (data?.data.status) {
       toast.success("Ссылка создана");
       console.log(data);
       // window.location.href = "";
+      if (data?.data.link) {
+        // console.log(data?.data.link);
+        window.open(data?.data.link, "_blank", "noopener,noreferrer");
+      }
     }
   }, [isPending]);
 

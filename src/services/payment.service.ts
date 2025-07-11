@@ -1,5 +1,8 @@
 import { axiosWithAuth } from "@/api/interceptors";
-import { IGetOsagoPaymentLinkRequest } from "@/types/payment.types";
+import {
+  IGetOsagoPaymentLinkRequest,
+  IGetOsagoPaymentLinkResponse,
+} from "@/types/payment.types";
 
 class PaymentService {
   // async getCurrientUserCars() {
@@ -10,7 +13,7 @@ class PaymentService {
   // }
 
   async getOsagoPaymentLink(data: IGetOsagoPaymentLinkRequest) {
-    const response = await axiosWithAuth.post<IGetOsagoPaymentLinkRequest>(
+    const response = await axiosWithAuth.post<IGetOsagoPaymentLinkResponse>(
       "/api/osago/buy",
       data
     );
