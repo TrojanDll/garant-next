@@ -29,6 +29,8 @@ import { useFetchAndDownloadOsagoPDFById } from "@/hooks/pdf/useFetchAndDownload
 import toast from "react-hot-toast";
 import { useNsFetchAndDownloadPDFById } from "@/hooks/pdf/useNsFetchAndDownloadPDFByID";
 import echo from "@/api/socket";
+import { useGetCurrientUser } from "@/hooks/user/useGetCurrientUser";
+import useCurrientUser from "@/stores/user/currientUser";
 
 interface IProps {
   className?: string;
@@ -45,6 +47,7 @@ const PolicyInfo = ({ className }: IProps) => {
   const [policyData, setPolicyData] = useState<ICreateOsagoPolicyRequest>();
   const [currientPolicyId, setCurrientPolicyId] = useState<string | null>(null);
   const [paymentParam, setPaymentParam] = useState<string | null>(null);
+  const currientUser = useCurrientUser((state) => state.user);
 
   const { data, isError, isPending, isSuccess, mutate } =
     useGetOsagoPolicyById();
@@ -165,10 +168,9 @@ const PolicyInfo = ({ className }: IProps) => {
   }
 
   useEffect(() => {
-    const channel = echo.channel(`OsagoStatusUpdated`);
+    const channel = echo.channel(`osago.${currientUser?.id}`);
     console.log(channel);
     channel.listen("OsagoStatusUpdated", () => {
-      // setPaymentStatus('paid'); // Обновляем состояние
       console.log("OsagoStatusUpdated");
     });
     return () => {

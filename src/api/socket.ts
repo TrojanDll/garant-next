@@ -1,46 +1,22 @@
-import Echo from "laravel-echo";
-import Pusher from "pusher-js";
 import { getToken } from "@/services/auth-token.service";
+import Echo from "laravel-echo";
+import { io } from "socket.io-client";
 
-const isBrowser = typeof window !== "undefined";
-
-let echo: Echo<"pusher"> | null = null;
-
-if (isBrowser) {
-  // Важно! Не задаём `cluster`, а только локальные опции
-  const pusher = new Pusher("k9nryj9wfsbb9ukbitjb", {
-    cluster: "mt1",
-    // wsHost: "garantcp.ru",
-    // wsPort: 8080,
-    // forceTLS: false,
-    // disableStats: true,
-    // enabledTransports: ["ws", "wss"],
-    // authEndpoint: "https://garantcp.ru/broadcasting/auth",
-    // auth: {
-    //   headers: {
-    //     Authorization: `Bearer ${getToken()}`,
-    //   },
-    // },
-  });
-
-  // Обязательно прокидываем в window (Laravel Echo требует)
-  // window.Pusher = Pusher;
-
-  echo = new Echo({
-    broadcaster: "pusher",
-    client: pusher, // 👈 вот ключ
-    auth: {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    },
-    wsHost: "garantcp.ru",
-    wsPort: 8080,
-    forceTLS: false,
-    disableStats: true,
-    enabledTransports: ["ws", "wss"],
-    authEndpoint: "https://garantcp.ru/broadcasting/auth",
-  });
+if (typeof window !== "undefined") {
+  window.io = io;
 }
 
-export default echo as Echo<"pusher">;
+const echo = new Echo({
+  broadcaster: "reverb",
+  host: "ws://garantcp.ru:6001", // ws:// və ya https:// uyğun olmalıdır
+  withCredentials: true,
+  authEndpoint: "https://garantcp.ru/broadcasting/auth",
+  auth: {
+    headers: {
+      Authorization: `Bearer ${getToken()}`, // əgər bearer token ilə auth edirsənsə
+    },
+  },
+  transports: ["websocket"],
+});
+
+export default echo;
