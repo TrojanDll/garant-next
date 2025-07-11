@@ -16,14 +16,28 @@ import usePolicyFilters from "@/stores/Policy/policyFilters.store";
 import { EPolicyTypes, IAllPolicies } from "@/types/policy.types";
 import { filterPolicies } from "@/helpers/Policy/filterPolicies";
 import { sortByNewestPolicy } from "@/helpers/Policy/sortByNewestPolicy";
+import Substrate from "@/components/ui/Substrate/Substrate";
+import SvgSelector from "@/components/ui/SvgSelector/SvgSelector";
+import { ESvgName } from "@/constants/svg-ids.constants";
+import Link from "next/link";
+import CustomLink from "@/components/ui/CustomLink/CustomLink";
+import useShadow from "@/stores/Shadow/shadow.store";
 
 const MyPolicies = () => {
-  const { data, isError, isLoading, isSuccess } = useGetPoliciesByCurrientUser();
+  const setIsShadowVisible = useShadow((state) => state.setIsShadowVisible);
+  const isShadowVisible = useShadow((state) => state.isShadowVisible);
 
-  const policyActivityStatusFilter = usePolicyFilters((state) => state.activityStatus);
+  const { data, isError, isLoading, isSuccess } =
+    useGetPoliciesByCurrientUser();
+
+  const policyActivityStatusFilter = usePolicyFilters(
+    (state) => state.activityStatus
+  );
   const policyTypeFilter = usePolicyFilters((state) => state.policyType);
 
-  const [filteredPolicies, setFilteredPolicies] = useState<IAllPolicies | undefined>();
+  const [filteredPolicies, setFilteredPolicies] = useState<
+    IAllPolicies | undefined
+  >();
 
   useEffect(() => {
     async function filter() {
@@ -41,8 +55,34 @@ const MyPolicies = () => {
     filter();
   }, [isLoading, policyActivityStatusFilter, policyTypeFilter]);
 
+  useEffect(() => {
+    setIsShadowVisible(true);
+  }, []);
+
+  function handleCloseBanner() {
+    setIsShadowVisible(false);
+  }
+
   return (
     <div>
+      <Substrate
+        className={`${styles.attentionBanner} ${
+          isShadowVisible ? "" : styles.hidden
+        }`}
+      >
+        <button
+          onClick={handleCloseBanner}
+          className={styles.attentionBannerClose}
+        >
+          <SvgSelector id={ESvgName.CLOSE} />
+        </button>
+        <CustomTitle tag="h2">
+          Внимание! Сайт в разработке. После оплаты писать в What’sApp по номеру
+        </CustomTitle>
+        <CustomLink href="tel:79407411000" variant="underline">
+          +79407411000
+        </CustomLink>
+      </Substrate>
       <CustomTitle isCentered className={styles.title}>
         Мои полисы
       </CustomTitle>
@@ -51,8 +91,11 @@ const MyPolicies = () => {
 
       <div className={styles.listWrapper}>
         {filteredPolicies ? (
-          filteredPolicies.NS.length !== 0 || filteredPolicies.OSAGO.length !== 0 ? (
-            <MyPoliciesList filteredPolicies={sortByNewestPolicy(filteredPolicies)} />
+          filteredPolicies.NS.length !== 0 ||
+          filteredPolicies.OSAGO.length !== 0 ? (
+            <MyPoliciesList
+              filteredPolicies={sortByNewestPolicy(filteredPolicies)}
+            />
           ) : (
             <Text className={styles.noDataText}>Здесь пусто</Text>
           )
@@ -60,7 +103,11 @@ const MyPolicies = () => {
           <Loader className={styles.loader} />
         )}
       </div>
-      <Button isLink href={PAGES.OSAGO_APPLY} className={styles.buyPolicyButton}>
+      <Button
+        isLink
+        href={PAGES.OSAGO_APPLY}
+        className={styles.buyPolicyButton}
+      >
         Купить полис
       </Button>
     </div>
