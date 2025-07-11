@@ -2,18 +2,18 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { ICar } from "@/types/cars.types";
-import { IUser } from "@/types/user.types";
+import { ICurrientUser, IUser } from "@/types/user.types";
 
 interface ICurrientCar {
-  user: IUser | undefined;
-  setUser: (value: IUser | undefined) => void;
+  user: ICurrientUser | undefined;
+  setUser: (value: ICurrientUser | undefined) => void;
 }
 
 const useCurrientUser = create<ICurrientCar>()(
   persist(
     immer((set) => ({
       user: undefined,
-      setUser: (value: IUser | undefined) =>
+      setUser: (value: ICurrientUser | undefined) =>
         set((state) => {
           state.user = value;
         }),

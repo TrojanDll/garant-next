@@ -15,7 +15,8 @@ import toast from "react-hot-toast";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
 import { useLogin } from "@/hooks/auth/useLogin";
 import LoginFields from "@/components/entities/LoginFields/LoginFields";
-import { useGetCurrientUser } from "@/hooks/user/useGetCurrientUser";
+import { useGetCurrientUserMutate } from "@/hooks/user/useGetCurrientUserMutate";
+import useCurrientUser from "@/stores/user/currientUser";
 
 const Login = () => {
   const { handleSubmit, control } = useForm<ILoginForm>();
@@ -28,8 +29,6 @@ const Login = () => {
     loginResponse,
   } = useLogin();
   const { navigateToDashboard } = useNavigation();
-
-  const {} = useGetCurrientUser();
 
   const onSubmit: SubmitHandler<ILoginForm> = (data) => {
     console.log(data);
@@ -58,7 +57,7 @@ const Login = () => {
       timeoutId = setTimeout(() => {
         toast.dismiss();
         navigateToDashboard();
-      }, 1000);
+      }, 50);
     }
 
     return () => {
