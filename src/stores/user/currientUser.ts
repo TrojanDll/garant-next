@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import { ICar } from "@/types/cars.types";
 import { ICurrientUser, IUser } from "@/types/user.types";
 
 interface ICurrientCar {
@@ -22,14 +21,14 @@ const useCurrientUser = create<ICurrientCar>()(
       name: "current-user-store",
       storage: {
         getItem: (key) => {
-          const stored = sessionStorage.getItem(key);
+          const stored = localStorage.getItem(key);
           return stored ? JSON.parse(stored) : null;
         },
         setItem: (key, value) => {
-          sessionStorage.setItem(key, JSON.stringify(value));
+          localStorage.setItem(key, JSON.stringify(value));
         },
         removeItem: (key) => {
-          sessionStorage.removeItem(key);
+          localStorage.removeItem(key);
         },
       },
     }

@@ -55,7 +55,9 @@ export function useLogin() {
     if (currientUserData) {
       console.log(currientUserData);
       setCurrientUser(currientUserData);
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 100);
     }
   }, [isCurrientUserPending]);
 

@@ -28,7 +28,7 @@ const Login = () => {
     loginError,
     loginResponse,
   } = useLogin();
-  const { navigateToDashboard } = useNavigation();
+  const { navigateToPolicies } = useNavigation();
 
   const onSubmit: SubmitHandler<ILoginForm> = (data) => {
     console.log(data);
@@ -54,17 +54,17 @@ const Login = () => {
       toast.success("Успешный вход");
       // saveTokenToStorage(loginResponse?.data.token || "");
 
-      timeoutId = setTimeout(() => {
-        toast.dismiss();
-        navigateToDashboard();
-      }, 50);
+      // timeoutId = setTimeout(() => {
+      //   toast.dismiss();
+      //   navigateToPolicies();
+      // }, 50);
     }
 
-    return () => {
-      isMounted = false;
+    // return () => {
+    //   isMounted = false;
 
-      clearTimeout(timeoutId);
-    };
+    //   clearTimeout(timeoutId);
+    // };
   }, [isLoginPending, isLoginError, isLoginSuccess]);
 
   return (
