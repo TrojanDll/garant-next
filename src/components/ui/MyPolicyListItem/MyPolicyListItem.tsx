@@ -32,8 +32,10 @@ const MyPolicyListItem = ({
   policyOsagoData,
   className,
 }: IProps) => {
-  const [universalPolicyData, setUniversalPolicyData] = useState<IPolicyUniversalData>();
-  const [paymentStatusClassName, setPaymentStatusClassName] = useState<string>("");
+  const [universalPolicyData, setUniversalPolicyData] =
+    useState<IPolicyUniversalData>();
+  const [paymentStatusClassName, setPaymentStatusClassName] =
+    useState<string>("");
 
   useEffect(() => {
     const universalData = getUniversalPolicyData({
@@ -45,7 +47,9 @@ const MyPolicyListItem = ({
 
     if (universalData.payment_status === EPolicyStatus.ACTIVE) {
       setPaymentStatusClassName("active");
-    } else if (universalData.payment_status === EPolicyStatus.AWAITING_PAYMENT) {
+    } else if (
+      universalData.payment_status === EPolicyStatus.AWAITING_PAYMENT
+    ) {
       setPaymentStatusClassName("awaiting");
     } else if (universalData.payment_status === EPolicyStatus.EXPIRED) {
       setPaymentStatusClassName("expired");
@@ -56,9 +60,7 @@ const MyPolicyListItem = ({
     <>
       {universalPolicyData && (
         <Link
-          href={`${
-            policyType === "osago" ? PAGES.POLICY_INFO_OSAGO : PAGES.POLICY_INFO_NS
-          }${universalPolicyData.id}`}
+          href={`${PAGES.POLICY_INFO}?type=${policyType}&id=${universalPolicyData.id}`}
           className={`${styles.root} ${className}`}
         >
           <Substrate withShadow="light" className={styles.substrate}>
@@ -82,12 +84,15 @@ const MyPolicyListItem = ({
               <div className={styles.mainInfo}>
                 <h2 className={styles.title}>{universalPolicyData.title}</h2>
 
-                <div className={`${styles.status} ${styles[paymentStatusClassName]}`}>
+                <div
+                  className={`${styles.status} ${styles[paymentStatusClassName]}`}
+                >
                   {getPaymentStatusText(universalPolicyData.payment_status)}
                 </div>
 
                 <div className={styles.duration}>
-                  {universalPolicyData.start_date} - {universalPolicyData.finish_date}
+                  {universalPolicyData.start_date} -{" "}
+                  {universalPolicyData.finish_date}
                 </div>
               </div>
 

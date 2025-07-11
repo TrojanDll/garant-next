@@ -19,7 +19,7 @@ import { ESvgName } from "@/constants/svg-ids.constants";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import AwaitingPayment from "@/components/features/AwaitingPayment/AwaitingPayment";
 import { useGetOsagoPolicyById } from "@/hooks/policy/useGetOsagoPolicyById";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import Loader from "@/components/ui/Loader/Loader";
 import OsagoPolicyInfoFields from "@/components/features/OsagoPolicyInfoFields/OsagoPolicyInfoFields";
 import { useGetNsPolicyById } from "@/hooks/policy/useGetNsPolicyById";
@@ -34,7 +34,7 @@ interface IProps {
 }
 
 const PolicyInfo = ({ className }: IProps) => {
-  const params = useParams();
+  const params = useSearchParams();
   const [policyType, setPolicyType] = useState(EPolicyTypes.OSAGO);
   const [policyStatus, setPolicyStatus] = useState(
     EPolicyStatus.AWAITING_PAYMENT
@@ -42,26 +42,17 @@ const PolicyInfo = ({ className }: IProps) => {
   const [policyNumber, setPolicyNumber] = useState("");
   const [price, setPrice] = useState<number>(0);
   const [policyData, setPolicyData] = useState<ICreateOsagoPolicyRequest>();
-  const [currientPolicyId, setCurrientPolicyId] = useState<number>();
+  const [currientPolicyId, setCurrientPolicyId] = useState<string | null>(null);
+  const [paymentParam, setPaymentParam] = useState<string | null>(null);
 
   const { data, isError, isPending, isSuccess, mutate } =
     useGetOsagoPolicyById();
-
-  const {
-    data: osagoPolicyWithoutRender,
-    mutate: getOsagoPolicyByIdWithoutRender,
-  } = useGetOsagoPolicyById();
 
   const {
     data: nsPolicyFetchedData,
     isPending: isNsPending,
     isSuccess: isNsSuccess,
     mutate: nsMutate,
-  } = useGetNsPolicyById();
-
-  const {
-    data: nsPolicyDataWithoutRender,
-    mutate: getNsPolicyByIdWithoutRender,
   } = useGetNsPolicyById();
 
   const {
@@ -82,7 +73,6 @@ const PolicyInfo = ({ className }: IProps) => {
     if (data) {
       fetchAndDownloadOsagoPdfById({ osago_id: data.id });
     } else if (nsPolicyFetchedData) {
-      console.log(nsPolicyFetchedData);
       nsFetchAndDownloadOsagoPdfById({ ns_id: nsPolicyFetchedData.id });
     }
   }
@@ -107,60 +97,24 @@ const PolicyInfo = ({ className }: IProps) => {
     }
   }, [isPdfPending, isNsPdfPending]);
 
-  let intervalId: NodeJS.Timeout;
-
   useEffect(() => {
-    let slug = "";
+    const paymentParam = params.get("payment");
+    const typeParam = params.get("type");
+    const idParam = params.get("id");
 
-    console.log(params);
+    setPaymentParam(paymentParam);
+    setCurrientPolicyId(idParam);
 
-    if (typeof params.slug === "string") {
-      slug = params.slug;
-    } else if (Array.isArray(params.slug)) {
-      slug = params.slug[0];
-    }
-
-    slug = decodeURIComponent(slug);
-
-    const match = slug.match(/(osago|ns)-(\d+)/);
-
-    if (match && match[1] && match[2]) {
-      const type = match[1];
-      const id = parseInt(match[2], 10);
-      setCurrientPolicyId(id);
-
-      if (type === "osago") {
+    if (idParam) {
+      if (typeParam === "osago") {
         setPolicyType(EPolicyTypes.OSAGO);
-        mutate({ osago_id: id });
-      } else if (type === "ns") {
+        mutate({ osago_id: Number(idParam) });
+      } else if (typeParam === "ns") {
         setPolicyType(EPolicyTypes.NS);
-        nsMutate({ ns_id: id });
-      }
-
-      if (policyStatus === EPolicyStatus.AWAITING_PAYMENT) {
-        intervalId = setInterval(() => {
-          console.log("interval");
-          if (type === "osago") {
-            getOsagoPolicyByIdWithoutRender({ osago_id: id });
-          } else if (type === "ns") {
-            getNsPolicyByIdWithoutRender({ ns_id: id });
-          }
-        }, 5000);
+        nsMutate({ ns_id: Number(idParam) });
       }
     }
-
-    return () => {
-      clearInterval(intervalId);
-    };
   }, []);
-
-  useEffect(() => {
-    if (policyStatus && currientPolicyId) {
-      if (policyStatus !== EPolicyStatus.AWAITING_PAYMENT) {
-        clearInterval(intervalId);
-      }
-    }
-  }, [currientPolicyId, policyStatus]);
 
   useEffect(() => {
     if (isSuccess && data) {
@@ -219,7 +173,14 @@ const PolicyInfo = ({ className }: IProps) => {
                 policyNumber={policyNumber}
                 policyType={policyType}
               />
-              <PolicyStatus className={styles.status} status={policyStatus} />
+              <PolicyStatus
+                className={styles.status}
+                status={
+                  paymentParam === "success"
+                    ? EPolicyStatus.ACTIVE
+                    : policyStatus
+                }
+              />
             </div>
 
             {isDownloadButtonVisible() && (
