@@ -255,7 +255,7 @@ const PolicyInfo = ({ className }: IProps) => {
             <AwaitingPayment
               amount={price}
               className={styles.awaitingPayment}
-              policyId={policyNumber}
+              policyId={currientPolicyId}
               policyType={policyType}
             />
           )}

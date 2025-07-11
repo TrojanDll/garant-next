@@ -11,7 +11,7 @@ import { EPolicyTypes } from "@/types/policy.types";
 interface IProps {
   className?: string;
   amount: number;
-  policyId: string | undefined;
+  policyId: number | undefined;
   policyType: EPolicyTypes;
 }
 
@@ -27,7 +27,7 @@ const AwaitingPayment = ({
     if (policyId) {
       if (policyType === EPolicyTypes.OSAGO) {
         console.log({ osago_id: policyId });
-        mutate({ osago_id: policyId });
+        mutate({ osago_id: String(policyId) });
       }
     }
     // window.location.href = "";

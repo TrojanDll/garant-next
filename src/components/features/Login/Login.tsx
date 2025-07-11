@@ -27,7 +27,7 @@ const Login = () => {
     loginError,
     loginResponse,
   } = useLogin();
-  const { navigateToHome } = useNavigation();
+  const { navigateToDashboard } = useNavigation();
 
   const onSubmit: SubmitHandler<ILoginForm> = (data) => {
     console.log(data);
@@ -55,7 +55,7 @@ const Login = () => {
 
       timeoutId = setTimeout(() => {
         toast.dismiss();
-        navigateToHome();
+        navigateToDashboard();
       }, 1000);
     }
 
