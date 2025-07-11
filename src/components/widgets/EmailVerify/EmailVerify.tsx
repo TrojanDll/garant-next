@@ -36,7 +36,7 @@ export default function EmailVerify() {
     const timeoutId = setTimeout(() => {
       refreshPageAndNavigateToAuth();
     }, 4000);
-    
+
     return () => {
       clearTimeout(timeoutId);
     };
@@ -79,7 +79,7 @@ export default function EmailVerify() {
             className={styles.redirectButton}
             onClick={refreshPageAndNavigateToAuth}
           >
-            Личный кабинет
+            Войти
           </button>
         )}
       </Substrate>
