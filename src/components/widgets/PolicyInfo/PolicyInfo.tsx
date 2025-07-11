@@ -39,15 +39,13 @@ interface IProps {
 const PolicyInfo = ({ className }: IProps) => {
   const params = useSearchParams();
   const [policyType, setPolicyType] = useState(EPolicyTypes.OSAGO);
-  const [policyStatus, setPolicyStatus] = useState(
-    EPolicyStatus.AWAITING_PAYMENT
-  );
+  const [policyStatus, setPolicyStatus] = useState<EPolicyStatus | null>(null);
   const [policyNumber, setPolicyNumber] = useState("");
   const [price, setPrice] = useState<number>(0);
   const [policyData, setPolicyData] = useState<ICreateOsagoPolicyRequest>();
   const [currientPolicyId, setCurrientPolicyId] = useState<string | null>(null);
   const [paymentParam, setPaymentParam] = useState<string | null>(null);
-  const currientUser = useCurrientUser((state) => state.user);
+  const [isIntervalSetted, setIsIntervalSetted] = useState<boolean>(false);
 
   const { data, isError, isPending, isSuccess, mutate } =
     useGetOsagoPolicyById();
@@ -121,6 +119,32 @@ const PolicyInfo = ({ className }: IProps) => {
   }, []);
 
   useEffect(() => {
+    let intervalId: NodeJS.Timeout;
+    console.log("useEffect");
+    console.log(policyStatus);
+    if (policyStatus === EPolicyStatus.AWAITING_PAYMENT) {
+      if (!isIntervalSetted) {
+        console.log(policyStatus);
+        intervalId = setInterval(() => {
+          console.log("interval setted");
+          if (policyType === EPolicyTypes.OSAGO) {
+            console.log(data);
+            mutate({ osago_id: Number(data?.id) });
+          } else {
+            nsMutate({ ns_id: Number(nsPolicyFetchedData?.id) });
+          }
+        }, 15000);
+      } else {
+        setIsIntervalSetted(true);
+      }
+    }
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [data, nsPolicyFetchedData, policyStatus]);
+
+  useEffect(() => {
     if (isSuccess && data) {
       setPolicyStatus(getPaymentStatus(data.payment_status));
 
@@ -167,17 +191,6 @@ const PolicyInfo = ({ className }: IProps) => {
     );
   }
 
-  useEffect(() => {
-    const channel = echo.channel(`osago.${currientUser?.id}`);
-    console.log(channel);
-    channel.listen("OsagoStatusUpdated", () => {
-      console.log("OsagoStatusUpdated");
-    });
-    return () => {
-      channel.stopListening("OsagoStatusUpdated");
-    };
-  }, []);
-
   return (
     <div className={className}>
       {(data && policyData) || nsPolicyFetchedData ? (
@@ -194,6 +207,8 @@ const PolicyInfo = ({ className }: IProps) => {
                   paymentParam === "success"
                     ? EPolicyStatus.ACTIVE
                     : policyStatus
+                    ? policyStatus
+                    : EPolicyStatus.AWAITING_PAYMENT
                 }
               />
             </div>
