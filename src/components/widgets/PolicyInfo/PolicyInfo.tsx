@@ -134,29 +134,28 @@ const PolicyInfo = ({ className }: IProps) => {
         nsMutate({ ns_id: id });
       }
 
-      if (policyStatus === EPolicyStatus.AWAITING_PAYMENT) {
-        intervalId = setInterval(() => {
-          console.log("interval");
-          if (type === "osago") {
-            getOsagoPolicyByIdWithoutRender({ osago_id: id });
-          } else if (type === "ns") {
-            getNsPolicyByIdWithoutRender({ ns_id: id });
-          }
-        }, 1000);
-      }
+      // if (policyStatus === EPolicyStatus.AWAITING_PAYMENT) {
+      //   intervalId = setInterval(() => {
+      //     console.log("interval");
+      //     if (type === "osago") {
+      //       getOsagoPolicyByIdWithoutRender({ osago_id: id });
+      //     } else if (type === "ns") {
+      //       getNsPolicyByIdWithoutRender({ ns_id: id });
+      //     }
+      //   }, 1000);
+      // }
     }
 
-    return () => {
-      clearInterval(intervalId);
-    };
+    // return () => {
+    //   clearInterval(intervalId);
+    // };
   }, []);
 
-  
-  useEffect(() => {
-    if (policyStatus && currientPolicyId) {
-      
-    }
-  }, [currientPolicyId, policyStatus]);
+  // useEffect(() => {
+  //   if (policyStatus && currientPolicyId) {
+
+  //   }
+  // }, [currientPolicyId, policyStatus]);
 
   useEffect(() => {
     if (isSuccess && data) {
@@ -256,6 +255,8 @@ const PolicyInfo = ({ className }: IProps) => {
             <AwaitingPayment
               amount={price}
               className={styles.awaitingPayment}
+              policyId={policyNumber}
+              policyType={policyType}
             />
           )}
         </ContentContainer>
