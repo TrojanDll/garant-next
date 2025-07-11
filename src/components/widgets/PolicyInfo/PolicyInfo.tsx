@@ -253,6 +253,13 @@ const PolicyInfo = ({ className }: IProps) => {
               className={styles.awaitingPayment}
               policyId={currientPolicyId}
               policyType={policyType}
+              paymentUrl={
+                nsPolicyFetchedData
+                  ? nsPolicyFetchedData.payment_url
+                  : data
+                  ? data.payment_url
+                  : ""
+              }
             />
           )}
         </ContentContainer>

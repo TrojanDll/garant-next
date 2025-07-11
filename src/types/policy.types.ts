@@ -40,6 +40,7 @@ export interface IOsagoPolicy {
   duration_of_stay: string;
   discount_amount: string;
   for_payment: number;
+  payment_url: string;
 }
 
 export interface ICreateOsagoPolicyRequest {
@@ -141,6 +142,7 @@ export interface INsPolicy {
   promocode: string;
   n_s: null;
   get_peoples: IInsured[];
+  payment_url: string;
 }
 
 export interface ICreateNsPolicyResponse {

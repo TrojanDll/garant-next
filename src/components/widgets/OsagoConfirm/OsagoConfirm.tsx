@@ -31,7 +31,8 @@ const OsagoConfirm = () => {
 
   const { navigateToPolicies } = useNavigation();
 
-  const { data, isError, isPending, isSuccess, mutate } = useCreateOsagoPolicy();
+  const { data, isError, isPending, isSuccess, mutate } =
+    useCreateOsagoPolicy();
 
   function handleCreateOsagoClick() {
     console.log("handleCreateOsagoClick");
@@ -42,35 +43,64 @@ const OsagoConfirm = () => {
   }
 
   useEffect(() => {
-    let isMounted = true;
-    let timeoutId: NodeJS.Timeout;
-
     if (!isPending) {
       toast.dismiss();
-    } else {
-      toast.loading("Загрузка");
     }
 
-    if (isSuccess && isMounted) {
-      toast.dismiss();
-      toast.success("Полис создан");
+    if (isPending) {
+      toast.loading("Создаём ссылку для оплаты");
+    }
 
+    if (isError || (!data?.data.payment_url && data)) {
+      toast.error("Ошибка при создании ссылки");
+    }
+
+    if (data?.data.payment_url) {
+      // toast.success("Ссылка создана");
+      toast.success("Сайт в разработке. Оплата будет доступна с 13 июля");
+      console.log(data);
+      // window.location.href = "";
+      // console.log(data?.data.link);
+      // window.open(data?.data.link, "_blank", "noopener,noreferrer");
+    }
+
+    if (data) {
       setPolicyCalculation(undefined);
       setPolicy(undefined);
       setCurrientCar(undefined);
-
-      timeoutId = setTimeout(() => {
-        toast.dismiss();
-        navigateToPolicies();
-      }, 1200);
     }
+  }, [isPending]);
 
-    return () => {
-      isMounted = false;
+  // useEffect(() => {
+  //   let isMounted = true;
+  //   let timeoutId: NodeJS.Timeout;
 
-      clearTimeout(timeoutId);
-    };
-  }, [isPending, isSuccess]);
+  //   if (!isPending) {
+  //     toast.dismiss();
+  //   } else {
+  //     toast.loading("Загрузка");
+  //   }
+
+  //   if (isSuccess && isMounted) {
+  //     toast.dismiss();
+  //     toast.success("Полис создан");
+
+  //     setPolicyCalculation(undefined);
+  //     setPolicy(undefined);
+  //     setCurrientCar(undefined);
+
+  //     timeoutId = setTimeout(() => {
+  //       toast.dismiss();
+  //       navigateToPolicies();
+  //     }, 1200);
+  //   }
+
+  //   return () => {
+  //     isMounted = false;
+
+  //     clearTimeout(timeoutId);
+  //   };
+  // }, [isPending, isSuccess]);
 
   return (
     <section>
@@ -95,7 +125,8 @@ const OsagoConfirm = () => {
           <CountedPrice
             isIsolated={true}
             discount={
-              Number(policyCalculation.base_tarif) - Number(policyCalculation.tarif)
+              Number(policyCalculation.base_tarif) -
+              Number(policyCalculation.tarif)
             }
             finalCost={+policyCalculation?.tarif}
             preliminaryCost={+policyCalculation?.base_tarif}

@@ -42,32 +42,60 @@ const NsConfirm = () => {
   }
 
   useEffect(() => {
-    let isMounted = true;
-    let timeoutId: NodeJS.Timeout;
-
     if (!isPending) {
       toast.dismiss();
-    } else {
-      toast.loading("Загрузка");
     }
 
-    if (isSuccess && isMounted) {
-      toast.dismiss();
-      toast.success("Полис создан");
-
-      timeoutId = setTimeout(() => {
-        toast.dismiss();
-        setCurrientNsPolicyCalculation(undefined);
-        setCurrientNsPolicy(undefined);
-        navigateToPolicies();
-      }, 1000);
+    if (isPending) {
+      toast.loading("Создаём ссылку для оплаты");
     }
-    
-    return () => {
-      isMounted = false;
-      clearTimeout(timeoutId);
-    };
-  }, [isPending, isSuccess, isError]);
+
+    if (isError || (!data?.payment_url && data)) {
+      toast.error("Ошибка при создании ссылки");
+    }
+
+    if (data?.payment_url) {
+      // toast.success("Ссылка создана");
+      toast.success("Сайт в разработке. Оплата будет доступна с 13 июля");
+      console.log(data);
+      // window.location.href = "";
+      // console.log(data?.data.link);
+      // window.open(data?.data.link, "_blank", "noopener,noreferrer");
+    }
+
+    if (data) {
+      setCurrientNsPolicyCalculation(undefined);
+      setCurrientNsPolicy(undefined);
+    }
+  }, [isPending]);
+
+  // useEffect(() => {
+  //   let isMounted = true;
+  //   let timeoutId: NodeJS.Timeout;
+
+  //   if (!isPending) {
+  //     toast.dismiss();
+  //   } else {
+  //     toast.loading("Загрузка");
+  //   }
+
+  //   if (isSuccess && isMounted) {
+  //     toast.dismiss();
+  //     toast.success("Полис создан");
+
+  //     timeoutId = setTimeout(() => {
+  //       toast.dismiss();
+  //       setCurrientNsPolicyCalculation(undefined);
+  //       setCurrientNsPolicy(undefined);
+  //       navigateToPolicies();
+  //     }, 1000);
+  //   }
+
+  //   return () => {
+  //     isMounted = false;
+  //     clearTimeout(timeoutId);
+  //   };
+  // }, [isPending, isSuccess, isError]);
 
   return (
     <section>

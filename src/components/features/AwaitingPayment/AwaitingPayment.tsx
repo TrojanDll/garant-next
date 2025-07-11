@@ -13,6 +13,7 @@ interface IProps {
   amount: number;
   policyId: string | null;
   policyType: EPolicyTypes;
+  paymentUrl: string;
 }
 
 const AwaitingPayment = ({
@@ -20,6 +21,7 @@ const AwaitingPayment = ({
   className,
   policyId,
   policyType,
+  paymentUrl,
 }: IProps) => {
   const { data, isError, isPending, mutate } = useGetOsagoPaymentLink();
 
@@ -66,9 +68,10 @@ const AwaitingPayment = ({
       <p className={styles.title}>Полис ожидает оплаты</p>
       <p className={styles.amount}>{amount}₽</p>
       <Button
-        onClickEvent={handleClick}
         className={styles.button}
         variant="wide"
+        isLink
+        href={paymentUrl}
       >
         Оплатить
       </Button>
