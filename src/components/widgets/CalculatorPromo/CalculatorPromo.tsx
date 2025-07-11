@@ -1,12 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import CalculatorMainForm from "@/components/entities/CalculatorMainForm/CalculatorMainForm";
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
-import ButtonGroup, { TButtonGroupRequest } from "@/components/ui/ButtonGroup/ButtonGroup";
+import ButtonGroup, {
+  TButtonGroupRequest,
+} from "@/components/ui/ButtonGroup/ButtonGroup";
 
 import styles from "./CalculatorPromo.module.scss";
+import toast from "react-hot-toast";
 
 const content = [
   {
@@ -22,13 +25,21 @@ const CalculatorPromo = () => {
 
   const buttons = ["ОСАГО", "НС"];
 
+  useEffect(() => {
+    toast.success(
+      "Внимание! Сайт в разработке. Оплата станет доступна 13 июля"
+    );
+  }, []);
+
   return (
     <ContentContainer>
       <section className={styles.root}>
         <ButtonGroup
           items={buttons}
           defaultActiveIndex={0}
-          onButtonClick={(value: TButtonGroupRequest) => setCurrentTab(value.index)}
+          onButtonClick={(value: TButtonGroupRequest) =>
+            setCurrentTab(value.index)
+          }
         />
         {content[currentTab].value}
       </section>

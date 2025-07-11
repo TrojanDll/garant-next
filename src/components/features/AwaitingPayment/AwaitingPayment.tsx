@@ -47,7 +47,8 @@ const AwaitingPayment = ({
     }
 
     if (data?.data.status) {
-      toast.success("Ссылка создана");
+      // toast.success("Ссылка создана");
+      toast.success("Сайт в разработке. Оплата будет доступна с 13 июля");
       console.log(data);
       // window.location.href = "";
       if (data?.data.link) {
