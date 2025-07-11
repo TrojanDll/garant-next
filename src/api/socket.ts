@@ -1,20 +1,46 @@
-import { getToken } from "@/services/auth-token.service";
 import Echo from "laravel-echo";
-import { BASE_URL } from "./interceptors";
+import Pusher from "pusher-js";
+import { getToken } from "@/services/auth-token.service";
 
-export const echo = new Echo({
-  broadcaster: "pusher",
-  key: process.env.NEXT_PUBLIC_REVERB_APP_KEY,
-  wsHost: process.env.NEXT_PUBLIC_REVERB_HOST || "localhost",
-  wsPort: Number(process.env.NEXT_PUBLIC_REVERB_PORT) || 8080,
-  forceTLS: false,
-  enabledTransports: ["ws", "wss"],
-  auth: {
-    headers: {
-      Authorization: `Bearer ${getToken()}`,
+const isBrowser = typeof window !== "undefined";
+
+let echo: Echo<"pusher"> | null = null;
+
+if (isBrowser) {
+  // Важно! Не задаём `cluster`, а только локальные опции
+  const pusher = new Pusher("k9nryj9wfsbb9ukbitjb", {
+    cluster: "mt1",
+    // wsHost: "garantcp.ru",
+    // wsPort: 8080,
+    // forceTLS: false,
+    // disableStats: true,
+    // enabledTransports: ["ws", "wss"],
+    // authEndpoint: "https://garantcp.ru/broadcasting/auth",
+    // auth: {
+    //   headers: {
+    //     Authorization: `Bearer ${getToken()}`,
+    //   },
+    // },
+  });
+
+  // Обязательно прокидываем в window (Laravel Echo требует)
+  // window.Pusher = Pusher;
+
+  echo = new Echo({
+    broadcaster: "pusher",
+    client: pusher, // 👈 вот ключ
+    auth: {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
     },
-  },
-  authEndpoint: `${BASE_URL}/broadcasting/auth`,
-  disableStats: true,
-  encrypted: true,
-});
+    wsHost: "garantcp.ru",
+    wsPort: 8080,
+    forceTLS: false,
+    disableStats: true,
+    enabledTransports: ["ws", "wss"],
+    authEndpoint: "https://garantcp.ru/broadcasting/auth",
+  });
+}
+
+export default echo as Echo<"pusher">;

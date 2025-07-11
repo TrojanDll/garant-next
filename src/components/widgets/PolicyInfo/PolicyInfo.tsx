@@ -28,7 +28,7 @@ import NsData from "@/components/features/NsData/NsData";
 import { useFetchAndDownloadOsagoPDFById } from "@/hooks/pdf/useFetchAndDownloadOsagoPDFById";
 import toast from "react-hot-toast";
 import { useNsFetchAndDownloadPDFById } from "@/hooks/pdf/useNsFetchAndDownloadPDFByID";
-import { echo } from "@/api/socket";
+import echo from "@/api/socket";
 
 interface IProps {
   className?: string;
@@ -164,16 +164,17 @@ const PolicyInfo = ({ className }: IProps) => {
     );
   }
 
-//   useEffect(() => {
-// const channel = echo.channel(`OsagoStatusUpdated`);
-//   channel.listen('PaymentConfirmed', () => {
-//     setPaymentStatus('paid'); // Обновляем состояние
-//   });
-//   return () => {
-//     channel.stopListening('PaymentConfirmed');
-//   };
-
-//   }, [])
+  useEffect(() => {
+    const channel = echo.channel(`OsagoStatusUpdated`);
+    console.log(channel);
+    channel.listen("OsagoStatusUpdated", () => {
+      // setPaymentStatus('paid'); // Обновляем состояние
+      console.log("OsagoStatusUpdated");
+    });
+    return () => {
+      channel.stopListening("OsagoStatusUpdated");
+    };
+  }, []);
 
   return (
     <div className={className}>
