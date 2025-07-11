@@ -16,3 +16,17 @@
   display: block;
   text-align: center;
 }
+
+.redirectButton {
+  display: block;
+  margin: 0 auto;
+  margin-top: 40px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 128%;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-align: center;
+  color: var(--blue);
+}

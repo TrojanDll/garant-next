@@ -26,7 +26,7 @@ export function useLogin() {
       queryClient.invalidateQueries({
         queryKey: ["login"],
       });
-      // window.location.reload();
+      window.location.reload();
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {

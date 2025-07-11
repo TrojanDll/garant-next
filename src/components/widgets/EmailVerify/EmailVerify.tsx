@@ -10,6 +10,7 @@ import Text from "@/components/ui/Text/Text";
 import CustomLink from "@/components/ui/CustomLink/CustomLink";
 import { PAGES } from "@/config/pages-url.config";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
+import Button from "@/components/ui/Button/Button";
 
 export default function EmailVerify() {
   const [isVerified, setIsVerified] = useState<boolean>(false);
@@ -18,7 +19,7 @@ export default function EmailVerify() {
 
   const params = useSearchParams();
 
-  const { navigateToDashboard } = useNavigation();
+  const { navigateToPolicies } = useNavigation();
 
   useEffect(() => {
     setIsVerified(params.get("verified") === "true" ? true : false);
@@ -26,11 +27,16 @@ export default function EmailVerify() {
     setIsProcessed(true);
   }, []);
 
+  function refreshPageAndNavigateToAuth() {
+    navigateToPolicies();
+    // window.location.reload();
+  }
+
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      navigateToDashboard();
+      refreshPageAndNavigateToAuth();
     }, 4000);
-
+    
     return () => {
       clearTimeout(timeoutId);
     };
@@ -51,7 +57,7 @@ export default function EmailVerify() {
   function confirmationDescription(): string {
     if (isProcessed) {
       if (isVerified) {
-        return "Вы будете автоматически направлены в личный кабинет. Либо нажмите на ссылку ниже.";
+        return "Вы будете автоматически направлены на страницу входа через несколько секунд. Либо нажмите на ссылку ниже.";
       } else {
         return "Что-то пошло не так при подтверждении почты.";
       }
@@ -69,13 +75,12 @@ export default function EmailVerify() {
         <Text className={styles.description}>{confirmationDescription()}</Text>
 
         {isVerified && (
-          <CustomLink
-            href={PAGES.DASHBOARD}
-            variant="underline"
-            className={styles.redirectLink}
+          <button
+            className={styles.redirectButton}
+            onClick={refreshPageAndNavigateToAuth}
           >
             Личный кабинет
-          </CustomLink>
+          </button>
         )}
       </Substrate>
     </ContentContainer>
