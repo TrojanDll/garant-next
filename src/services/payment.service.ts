@@ -11,7 +11,8 @@ class PaymentService {
 
   async getOsagoPaymentLink(data: IGetOsagoPaymentLinkRequest) {
     const response = await axiosWithAuth.post<IGetOsagoPaymentLinkRequest>(
-      "/api/osago/buy"
+      "/api/osago/buy",
+      data
     );
     return response;
   }
