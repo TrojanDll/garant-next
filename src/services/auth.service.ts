@@ -16,7 +16,7 @@ class AuthService {
       data
     );
 
-    saveTokenToStorage(response.data.token);
+    // saveTokenToStorage(response.data.token);
 
     return response;
   }
