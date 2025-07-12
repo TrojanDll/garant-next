@@ -15,6 +15,7 @@ interface IProps {
   fileName?: string;
   isLoading?: boolean;
   contentClassName?: string;
+  target?: React.HTMLAttributeAnchorTarget;
 }
 
 const Button = ({
@@ -29,12 +30,15 @@ const Button = ({
   fileName = "example.pdf",
   isLoading = false,
   contentClassName,
+  target,
 }: PropsWithChildren<IProps>) => {
   const classNames = `${styles.button} ${style ? styles[style] : ""} ${
     variant ? styles[variant] : ""
   }`;
 
-  const handleDownload = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  const handleDownload = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
     e.preventDefault();
     const a = document.createElement("a");
     a.href = href ? href : "";
@@ -46,7 +50,12 @@ const Button = ({
 
   const content =
     isLink && href ? (
-      <Link onClick={onClickEvent} className={`${classNames} ${className}`} href={href}>
+      <Link
+        target={target}
+        onClick={onClickEvent}
+        className={`${classNames} ${className}`}
+        href={href}
+      >
         {children}
       </Link>
     ) : type === "download" && href ? (

@@ -191,6 +191,23 @@ const PolicyInfo = ({ className }: IProps) => {
     );
   }
 
+  function getPaymentUrl(): string {
+    if (
+      !data?.payment.payment_url &&
+      !nsPolicyFetchedData?.payment.payment_url
+    ) {
+      toast.error(
+        "Ошибка. Ссылки на оплату нет или истёк срок жизни. Создайте новый полис"
+      );
+    }
+
+    return nsPolicyFetchedData
+      ? nsPolicyFetchedData.payment.payment_url
+      : data
+      ? data.payment.payment_url
+      : "";
+  }
+
   return (
     <div className={className}>
       {(data && policyData) || nsPolicyFetchedData ? (
@@ -253,13 +270,7 @@ const PolicyInfo = ({ className }: IProps) => {
               className={styles.awaitingPayment}
               policyId={currientPolicyId}
               policyType={policyType}
-              paymentUrl={
-                nsPolicyFetchedData
-                  ? nsPolicyFetchedData.payment.payment_url
-                  : data
-                  ? data.payment.payment_url
-                  : ""
-              }
+              paymentUrl={getPaymentUrl()}
             />
           )}
         </ContentContainer>

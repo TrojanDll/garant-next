@@ -13,6 +13,7 @@ export const publicPages: string[] = [
   PAGES.POLICY,
   PAGES.RECOVERY,
   PAGES.LEGAL,
+  PAGES.POLICY_INFO,
 ];
 
 export const privatePages: string[] = [
@@ -22,7 +23,6 @@ export const privatePages: string[] = [
   PAGES.CARS_EDIT,
   PAGES.EDIT_PERSONAL_DATA,
   PAGES.MY_POLICIES,
-  PAGES.POLICY_INFO,
   PAGES.OSAGO_APPLY,
   PAGES.OSAGO_CONFIRM,
   PAGES.NS_APPLY,

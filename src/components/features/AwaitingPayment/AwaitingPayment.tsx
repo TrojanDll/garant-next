@@ -72,6 +72,7 @@ const AwaitingPayment = ({
         variant="wide"
         isLink
         href={paymentUrl}
+        target="_blank"
       >
         Оплатить
       </Button>
