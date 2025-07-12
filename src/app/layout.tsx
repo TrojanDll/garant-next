@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     // template: `%s | ${SITE_NAME}`,
     absolute: "Страховка в Абхазии – ОСАГО и автострахование онлайн",
   },
-  description: "Полис ОСАГО в Абхазии",
+  description: "Оформите полис ОСАГО онлайн за пару минут.!",
 };
 
 export default function RootLayout({

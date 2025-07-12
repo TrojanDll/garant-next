@@ -59,7 +59,7 @@ const NsConfirm = () => {
 
     if (data?.payment.payment_url) {
       // toast.success("Ссылка создана");
-      toast.success("Сайт в разработке. Оплата будет доступна с 13 июля");
+      // toast.success("Сайт в разработке. Оплата будет доступна с 13 июля");
       console.log(data);
       window.location.href = `${data?.payment.payment_url}`;
 
