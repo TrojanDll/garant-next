@@ -51,11 +51,14 @@ const OsagoApply = () => {
   } = useForm<IOsagoApplyForm>();
 
   const [isCarsBrandsLoaded, setIsCarsBrandsLoaded] = useState(false);
-  const [isCountButtonClicked, setIsCountButtonClicked] = useState<boolean>(false);
+  const [isCountButtonClicked, setIsCountButtonClicked] =
+    useState<boolean>(false);
   const [isInitialLoaded, setIsInitialLoaded] = useState(false);
 
   const currientCar = useCurrientCar((state) => state.car);
-  const setIsAnotherCarMark = useOsagoApplyCarMark((state) => state.setCarMarkValue);
+  const setIsAnotherCarMark = useOsagoApplyCarMark(
+    (state) => state.setCarMarkValue
+  );
   const currientPolicy = useCurrientOsagoPolicy((state) => state.policy);
   const setPolicy = useCurrientOsagoPolicy((state) => state.setPolicy);
   const setPolicyCalculationData = useCurrientOsagoPolicyCalculation(
@@ -65,7 +68,9 @@ const OsagoApply = () => {
   const carCategoryOsago = useCurrientCarCategoryAndDuration(
     (state) => state.carCategory
   );
-  const durationOsago = useCurrientCarCategoryAndDuration((state) => state.duration);
+  const durationOsago = useCurrientCarCategoryAndDuration(
+    (state) => state.duration
+  );
 
   const { carsBrands, isLoading: isCarsBrandsLoading } = useGetCarBrands();
   const {
@@ -109,19 +114,30 @@ const OsagoApply = () => {
         if (currientCar && !currientPolicy) {
           pickedData = await pickOsagoApplyFormData(currientCar, carsBrands);
         } else if (currientPolicy) {
-          pickedData = await pickOsagoApplyFormDataFromPolicy(currientPolicy, carsBrands);
+          pickedData = await pickOsagoApplyFormDataFromPolicy(
+            currientPolicy,
+            carsBrands
+          );
         }
 
         let found;
 
         if (currientCar) {
-          found = await carsBrands.find((item) => item.Make_Name === currientCar.brand);
-          await setValue("brand", Boolean(found) ? currientCar.brand : "Другое ТС");
+          found = await carsBrands.find(
+            (item) => item.Make_Name === currientCar.brand
+          );
+          await setValue(
+            "brand",
+            Boolean(found) ? currientCar.brand : "Другое ТС"
+          );
         } else if (currientPolicy) {
           found = await carsBrands.find(
             (item) => item.Make_Name === currientPolicy.brand
           );
-          await setValue("brand", Boolean(found) ? currientPolicy.brand : "Другое ТС");
+          await setValue(
+            "brand",
+            Boolean(found) ? currientPolicy.brand : "Другое ТС"
+          );
         }
         await setIsAnotherCarMark(!Boolean(found));
 
@@ -170,7 +186,12 @@ const OsagoApply = () => {
 
     if (!isValid) return;
 
-    if (!formState.dirtyFields.duration_of_stay || watchedFieldsWithPromocode[1] === "") {
+    console.log(watchedFieldsWithPromocode);
+
+    if (
+      !formState.dirtyFields.duration_of_stay ||
+      watchedFieldsWithPromocode[1] === ""
+    ) {
       toast.error("Заполните данные");
     } else {
       mutatePaymentCalculation({
@@ -229,7 +250,11 @@ const OsagoApply = () => {
           <Loader className={styles.loader} />
         ) : (
           <Substrate withShadow="light" className={styles.substrate}>
-            <form noValidate onSubmit={handleSubmit(onSubmit, onFormError)} action="">
+            <form
+              noValidate
+              onSubmit={handleSubmit(onSubmit, onFormError)}
+              action=""
+            >
               <OsagoApplyFields
                 config={config}
                 control={control}

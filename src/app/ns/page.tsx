@@ -29,14 +29,18 @@ const audienceItems: IAudienceInfoItem[] = [
 ];
 
 export const metadata: Metadata = {
-  title: "НС",
+  title: "Страховка от несчастного случая в Абхазии",
 };
+
 export default function NsPage() {
   return (
     <div>
       <DiscountBanner />
       <PolicyPromo variant="ns" />
-      <AudienceInfoBlock title="Кому может пригодиться полис?" audienceItems={audienceItems} />
+      <AudienceInfoBlock
+        title="Кому может пригодиться полис?"
+        audienceItems={audienceItems}
+      />
       <ReviwesYandex />
       <FAQ isIsolated />
     </div>

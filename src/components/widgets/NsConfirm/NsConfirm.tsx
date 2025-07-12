@@ -61,10 +61,11 @@ const NsConfirm = () => {
       // toast.success("Ссылка создана");
       toast.success("Сайт в разработке. Оплата будет доступна с 13 июля");
       console.log(data);
-      // window.location.href = "";
+      window.location.href = `${data?.payment.payment_url}`;
+
       // console.log(data?.data.link);
-      window.open(data?.payment.payment_url, "_blank", "noopener,noreferrer");
-      router.push(`${PAGES.POLICY_INFO}?type=ns&id=${data.id}`);
+      // window.open(data?.payment.payment_url, "_blank", "noopener,noreferrer");
+      // router.push(`${PAGES.POLICY_INFO}?type=ns&id=${data.id}`);
     }
 
     if (data) {

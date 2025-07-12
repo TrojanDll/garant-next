@@ -67,13 +67,7 @@ const AwaitingPayment = ({
     >
       <p className={styles.title}>Полис ожидает оплаты</p>
       <p className={styles.amount}>{amount}₽</p>
-      <Button
-        className={styles.button}
-        variant="wide"
-        isLink
-        href={paymentUrl}
-        target="_blank"
-      >
+      <Button className={styles.button} variant="wide" isLink href={paymentUrl}>
         Оплатить
       </Button>
     </Substrate>

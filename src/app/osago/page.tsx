@@ -30,8 +30,9 @@ const audienceItems: IAudienceInfoItem[] = [
 ];
 
 export const metadata: Metadata = {
-  title: "Осаго",
+  title: "ОСАГО в Абхазии – страховка онлайн для граждан РФ",
 };
+
 export default function OsagoPage() {
   return (
     <div>

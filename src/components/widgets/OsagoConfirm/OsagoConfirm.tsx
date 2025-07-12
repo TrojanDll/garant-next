@@ -38,6 +38,7 @@ const OsagoConfirm = () => {
   function handleCreateOsagoClick() {
     console.log("handleCreateOsagoClick");
 
+    console.log(policy);
     if (policy) {
       mutate(policy);
     }
@@ -62,15 +63,11 @@ const OsagoConfirm = () => {
       // toast.success("Ссылка создана");
       toast.success("Сайт в разработке. Оплата будет доступна с 13 июля");
       console.log(data);
-      // window.location.href = "";
+      window.location.href = `${data?.data.payment.payment_url}`;
       // console.log(data?.data.link);
 
-      window.open(
-        data?.data.payment.payment_url,
-        "_blank",
-        "noopener,noreferrer"
-      );
-      router.push(`${PAGES.POLICY_INFO}?type=osago&id=${data.data.id}`);
+      // window.open(data?.data.payment.payment_url);
+      // router.push(`${PAGES.POLICY_INFO}?type=osago&id=${data.data.id}`);
     }
 
     if (data) {

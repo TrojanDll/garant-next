@@ -17,8 +17,9 @@ import TrackPageView from "@/utils/TrackPageView";
 
 export const metadata: Metadata = {
   title: {
-    default: SITE_NAME,
-    template: `%s | ${SITE_NAME}`,
+    // default: SITE_NAME,
+    // template: `%s | ${SITE_NAME}`,
+    absolute: "Страховка в Абхазии – ОСАГО и автострахование онлайн",
   },
   description: "Полис ОСАГО в Абхазии",
 };
