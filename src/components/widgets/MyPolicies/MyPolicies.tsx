@@ -55,17 +55,17 @@ const MyPolicies = () => {
     filter();
   }, [isLoading, policyActivityStatusFilter, policyTypeFilter]);
 
-  useEffect(() => {
-    setIsShadowVisible(true);
-  }, []);
+  // useEffect(() => {
+  //   setIsShadowVisible(true);
+  // }, []);
 
-  function handleCloseBanner() {
-    setIsShadowVisible(false);
-  }
+  // function handleCloseBanner() {
+  //   setIsShadowVisible(false);
+  // }
 
   return (
     <div>
-      <Substrate
+      {/* <Substrate
         className={`${styles.attentionBanner} ${
           isShadowVisible ? "" : styles.hidden
         }`}
@@ -85,7 +85,7 @@ const MyPolicies = () => {
       </Substrate>
       <CustomTitle isCentered className={styles.title}>
         Мои полисы
-      </CustomTitle>
+      </CustomTitle> */}
 
       <MyPoliciesFilters />
 

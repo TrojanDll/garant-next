@@ -25,14 +25,14 @@ const CalculatorPromo = () => {
 
   const buttons = ["ОСАГО", "НС"];
 
-  useEffect(() => {
-    toast.success(
-      "Внимание! Сайт в разработке. Оплата станет доступна 13 июля",
-      {
-        duration: 6000,
-      }
-    );
-  }, []);
+  // useEffect(() => {
+  //   toast.success(
+  //     "Внимание! Сайт в разработке. Оплата станет доступна 13 июля",
+  //     {
+  //       duration: 6000,
+  //     }
+  //   );
+  // }, []);
 
   return (
     <ContentContainer>
