@@ -17,6 +17,7 @@ import toast from "react-hot-toast";
 import useCurrientOsagoPolicyCalculation from "@/stores/Policy/currientOsagoPolicyCalculation";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
 import useCurrientCar from "@/stores/Cars/currientCar";
+import { useRouter } from "next/navigation";
 
 const OsagoConfirm = () => {
   const policy = useCurrientOsagoPolicy((state) => state.policy);
@@ -42,6 +43,8 @@ const OsagoConfirm = () => {
     }
   }
 
+  const router = useRouter();
+
   useEffect(() => {
     if (!isPending) {
       toast.dismiss();
@@ -51,17 +54,23 @@ const OsagoConfirm = () => {
       toast.loading("Создаём ссылку для оплаты");
     }
 
-    if (isError || (!data?.data.payment_url && data)) {
+    if (isError || (!data?.data.payment.payment_url && data)) {
       toast.error("Ошибка при создании ссылки");
     }
 
-    if (data?.data.payment_url) {
+    if (data?.data.payment.payment_url) {
       // toast.success("Ссылка создана");
       toast.success("Сайт в разработке. Оплата будет доступна с 13 июля");
       console.log(data);
       // window.location.href = "";
       // console.log(data?.data.link);
-      // window.open(data?.data.link, "_blank", "noopener,noreferrer");
+
+      window.open(
+        data?.data.payment.payment_url,
+        "_blank",
+        "noopener,noreferrer"
+      );
+      router.push(`${PAGES.POLICY_INFO}?type=osago&id=${data.data.id}`);
     }
 
     if (data) {

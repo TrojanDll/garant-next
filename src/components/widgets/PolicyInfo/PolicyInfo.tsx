@@ -255,9 +255,9 @@ const PolicyInfo = ({ className }: IProps) => {
               policyType={policyType}
               paymentUrl={
                 nsPolicyFetchedData
-                  ? nsPolicyFetchedData.payment_url
+                  ? nsPolicyFetchedData.payment.payment_url
                   : data
-                  ? data.payment_url
+                  ? data.payment.payment_url
                   : ""
               }
             />

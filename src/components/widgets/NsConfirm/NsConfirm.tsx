@@ -17,6 +17,7 @@ import toast from "react-hot-toast";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
 import { ICreateNsPolicyRequest } from "@/types/policy.types";
 import { formatDataToCreateNsPolicy } from "@/helpers/NsApply/formatDataToCreateNsPolicy.helper";
+import { useRouter } from "next/navigation";
 
 const NsConfirm = () => {
   const currientNsPolicy = useCurrientNsPolicy((state) => state.policy);
@@ -29,6 +30,8 @@ const NsConfirm = () => {
   );
 
   const { navigateToPolicies } = useNavigation();
+
+  const router = useRouter();
 
   const { data, isError, isPending, isSuccess, mutate } = useCreateNsPolicy();
 
@@ -50,17 +53,18 @@ const NsConfirm = () => {
       toast.loading("Создаём ссылку для оплаты");
     }
 
-    if (isError || (!data?.payment_url && data)) {
+    if (isError || (!data?.payment.payment_url && data)) {
       toast.error("Ошибка при создании ссылки");
     }
 
-    if (data?.payment_url) {
+    if (data?.payment.payment_url) {
       // toast.success("Ссылка создана");
       toast.success("Сайт в разработке. Оплата будет доступна с 13 июля");
       console.log(data);
       // window.location.href = "";
       // console.log(data?.data.link);
-      // window.open(data?.data.link, "_blank", "noopener,noreferrer");
+      window.open(data?.payment.payment_url, "_blank", "noopener,noreferrer");
+      router.push(`${PAGES.POLICY_INFO}?type=ns&id=${data.id}`);
     }
 
     if (data) {
