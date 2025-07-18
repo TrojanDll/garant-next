@@ -31,6 +31,7 @@ const audienceItems: IAudienceInfoItem[] = [
 
 export const metadata: Metadata = {
   title: "ОСАГО в Абхазии – страховка онлайн для граждан РФ",
+  description: "Оформить страховку для поездки в Абхазию. Получите полис Гарант-Страхования на вашу почту. Рассчитать цену со скидкой 10%."
 };
 
 export default function OsagoPage() {
