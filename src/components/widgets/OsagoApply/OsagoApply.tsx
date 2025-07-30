@@ -106,6 +106,7 @@ const OsagoApply = () => {
   }, [isCarsBrandsLoading]);
 
   useEffect(() => {
+    console.log("Текущий автомобиль");
     console.log(currientCar);
     async function resetValues() {
       if ((currientCar || currientPolicy) && carsBrands) {
@@ -171,10 +172,18 @@ const OsagoApply = () => {
   const brandWatch = watch(["brand"]);
 
   async function resetForm(data?: Partial<IOsagoApplyForm>) {
+    console.log("Данные для подстановки");
+    console.log(data);
     await reset(data);
+
+    setValue(
+      "duration_of_stay",
+      data?.duration_of_stay ? data?.duration_of_stay : ""
+    );
+
     const timeoutId = setTimeout(() => {
       setIsInitialLoaded(true);
-      console.log("setIsInitialLoaded");
+      // console.log("setIsInitialLoaded");
       clearTimeout(timeoutId);
     }, 900);
   }
@@ -186,12 +195,10 @@ const OsagoApply = () => {
 
     if (!isValid) return;
 
+    console.log("watchedFieldsWithPromocode");
     console.log(watchedFieldsWithPromocode);
 
-    if (
-      !formState.dirtyFields.duration_of_stay ||
-      watchedFieldsWithPromocode[1] === ""
-    ) {
+    if (watchedFieldsWithPromocode[1] === "") {
       toast.error("Заполните данные");
     } else {
       mutatePaymentCalculation({
