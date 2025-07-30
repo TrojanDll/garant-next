@@ -13,7 +13,7 @@ import { PAGES } from "@/config/pages-url.config";
 import useCurrientCar from "@/stores/Cars/currientCar";
 
 const Cars = () => {
-  const { carsData, isError, isLoading, isSuccess } = useGetCurrientUserCars();
+  const { carsData } = useGetCurrientUserCars();
   const setCar = useCurrientCar((state) => state.setCar);
 
   const handleClick = (index: number) => {

@@ -14,10 +14,12 @@ import { personTypes } from "@/types/user.types";
 import Link from "next/link";
 import { PAGES } from "@/config/pages-url.config";
 import Button from "@/components/ui/Button/Button";
+import useCurrientCar from "@/stores/Cars/currientCar";
 
 const CarInfo = () => {
   const params = useParams();
   const { data, isError, isPending, isSuccess, mutate } = useGetCarInfoById();
+  const setCar = useCurrientCar((state) => state.setCar);
 
   useEffect(() => {
     let slug: string = "";
@@ -32,6 +34,12 @@ const CarInfo = () => {
 
     mutate(slug);
   }, []);
+
+  function handleClick() {
+    if (data) {
+      setCar(data);
+    }
+  }
 
   return (
     <div>
@@ -100,7 +108,9 @@ const CarInfo = () => {
                   <CarInfoItem
                     className={styles.contentItem}
                     name={
-                      data.owner === personTypes[0] ? "Серия и номер паспорта" : "ИНН"
+                      data.owner === personTypes[0]
+                        ? "Серия и номер паспорта"
+                        : "ИНН"
                     }
                     value={data.passport_number}
                   />
@@ -116,7 +126,12 @@ const CarInfo = () => {
             </Link>
           </div>
 
-          <Button isLink href={PAGES.OSAGO_APPLY} className={styles.buyPolicyButton}>
+          <Button
+            onClickEvent={handleClick}
+            isLink
+            href={PAGES.OSAGO_APPLY}
+            className={styles.buyPolicyButton}
+          >
             Купить полис
           </Button>
         </Substrate>
