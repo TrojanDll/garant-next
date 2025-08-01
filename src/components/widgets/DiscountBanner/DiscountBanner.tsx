@@ -20,7 +20,7 @@ const DiscountBanner = () => {
             <div className={styles.textWrapper}>
               <p className={styles.title}>скидка на осаго</p>
               <p className={styles.subTitle}>
-                по промокоду <span className={styles.promocode}>РИЦА10</span>
+                по промокоду <span className={styles.promocode}>ГАГРА10</span>
               </p>
             </div>
 
