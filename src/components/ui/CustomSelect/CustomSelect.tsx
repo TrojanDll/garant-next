@@ -63,15 +63,23 @@ const CustomSelect = ({
   const [isJustSelected, setIsJustSelected] = useState(false);
   const [carModelOptions, setCarModelOptions] = useState<IOptions[]>([]);
 
-  const { getCarModelByBrandName, isError, isPending, isSuccess, carModelData } =
-    useGetCarModelByBrandId();
+  const {
+    getCarModelByBrandName,
+    isError,
+    isPending,
+    isSuccess,
+    carModelData,
+  } = useGetCarModelByBrandId();
 
-  const isModelSelect = options.map((item) => item.value).indexOf("thumbnail") !== -1;
+  const isModelSelect =
+    options.map((item) => item.value).indexOf("thumbnail") !== -1;
 
   const carBrand = useCarBrand((state) => state.carBrand);
   const setCarBrand = useCarBrand((state) => state.setCarBrand);
 
-  const setIsAnotherCarMark = useOsagoApplyCarMark((state) => state.setCarMarkValue);
+  const setIsAnotherCarMark = useOsagoApplyCarMark(
+    (state) => state.setCarMarkValue
+  );
 
   const handleMenuOpen = () => {
     setIsSelectOpened(true);
@@ -149,13 +157,13 @@ const CustomSelect = ({
         ]);
       }
 
-      if (inputValue.length === 0 && popularBrands) {
+      if (inputValue.length === 0 && allOptions) {
         setFilteredOptions([
           {
             label: "Другое ТС",
             value: "another_vehicle",
           },
-          ...popularBrands,
+          ...allOptions,
         ]);
       }
 
@@ -170,10 +178,12 @@ const CustomSelect = ({
         setCarModelOptions(filteredOptions);
       } else {
         if (carModelData) {
-          const carModelOptions: IOptions[] = await carModelData.map((item) => ({
-            label: item.Model_Name,
-            value: item.Model_Name,
-          }));
+          const carModelOptions: IOptions[] = await carModelData.map(
+            (item) => ({
+              label: item.Model_Name,
+              value: item.Model_Name,
+            })
+          );
           setCarModelOptions(carModelOptions);
         }
       }
@@ -181,6 +191,11 @@ const CustomSelect = ({
 
     search();
   }, [inputValue, allOptions]);
+
+  useEffect(() => {
+    console.log("filteredOptions.length");
+    console.log(filteredOptions.length);
+  }, [filteredOptions]);
 
   useEffect(() => {
     if (setValue) {
@@ -193,6 +208,8 @@ const CustomSelect = ({
       );
     }
   }, []);
+
+  // console.log(filteredOptions.length);
 
   return (
     <div className={`${className}`}>
@@ -208,7 +225,9 @@ const CustomSelect = ({
           selectedValue
             ? {
                 value:
-                  typeof selectedValue === "string" ? selectedValue : selectedValue.value,
+                  typeof selectedValue === "string"
+                    ? selectedValue
+                    : selectedValue.value,
                 label:
                   typeof selectedValue === "string"
                     ? selectedValue === "another_vehicle"
@@ -254,7 +273,7 @@ const CustomSelect = ({
           isModelSelect && carModelData
             ? carModelOptions
             : name === "brand"
-            ? filteredOptions.slice(0, 50)
+            ? filteredOptions
             : options
         }
       />
