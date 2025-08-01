@@ -159,11 +159,11 @@ const CustomSelect = ({
 
       if (inputValue.length === 0 && allOptions) {
         setFilteredOptions([
-          {
-            label: "Другое ТС",
-            value: "another_vehicle",
-          },
-          ...allOptions,
+          // {
+          //   label: "Другое ТС",
+          //   value: "another_vehicle",
+          // },
+          ...allOptions.slice(0, 400),
         ]);
       }
 
