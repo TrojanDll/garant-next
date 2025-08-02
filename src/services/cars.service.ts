@@ -45,7 +45,7 @@ class CarsService {
       "api/cars/all",
       {
         headers: {
-          token: process.env.NEXT_PUBLIC_CARS_API_TOKEN,
+          token: "mxZL8d7CaqTNywEFgBQzKxAvDU6WMobG",
         },
       }
     );
@@ -59,7 +59,7 @@ class CarsService {
       }`,
       {
         headers: {
-          token: process.env.NEXT_PUBLIC_CARS_API_TOKEN,
+          token: "mxZL8d7CaqTNywEFgBQzKxAvDU6WMobG",
         },
       }
     );
