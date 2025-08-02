@@ -12,6 +12,8 @@ import styles from "./CustomSelect.module.scss";
 import useOsagoApplyCarMark from "@/stores/OsagoApply/osagoApplyCarMark.store";
 import useCarBrand from "@/stores/Cars/carBrand.store";
 import { useGetCarModelByBrandId } from "@/hooks/cars/useGetCarModelByBrandId";
+import { getCarModelsByBrandName } from "@/helpers/OsagoApply/getCarModelByBrandName.helper";
+import { ICarModelV2 } from "@/types/cars.types";
 
 export interface IOptions {
   value: string;
@@ -62,14 +64,15 @@ const CustomSelect = ({
   const [isSelectOpened, setIsSelectOpened] = useState(false);
   const [isJustSelected, setIsJustSelected] = useState(false);
   const [carModelOptions, setCarModelOptions] = useState<IOptions[]>([]);
+  const [carModelData, setCarModelData] = useState<ICarModelV2[] | null>(null);
 
-  const {
-    getCarModelByBrandName,
-    isError,
-    isPending,
-    isSuccess,
-    carModelData,
-  } = useGetCarModelByBrandId();
+  // const {
+  //   getCarModelByBrandName,
+  //   isError,
+  //   isPending,
+  //   isSuccess,
+  //   carModelData,
+  // } = useGetCarModelByBrandId();
 
   const isModelSelect =
     options.map((item) => item.value).indexOf("thumbnail") !== -1;
@@ -119,21 +122,26 @@ const CustomSelect = ({
 
   useEffect(() => {
     if (isModelSelect && carBrand?.length !== 0) {
-      getCarModelByBrandName(carBrand);
+      async function getModels() {
+        const models = await getCarModelsByBrandName(carBrand);
+        setCarModelData(models);
+      }
+
+      getModels();
     }
   }, [carBrand]);
 
   useEffect(() => {
-    if (isSuccess && carModelData) {
+    if (carModelData) {
       const newData: IOptions[] = carModelData.map((item) => {
         return {
-          label: item.Model_Name,
-          value: item.Model_Name,
+          label: item.name,
+          value: item.name,
         };
       });
       setCarModelOptions(newData);
     }
-  }, [isPending]);
+  }, [carModelData]);
 
   useEffect(() => {
     async function search() {
@@ -169,19 +177,19 @@ const CustomSelect = ({
 
       if (inputValue.length >= 2 && carModelData) {
         const filtered = await carModelData.filter((option) =>
-          option.Model_Name.toLowerCase().includes(inputValue.toLowerCase())
+          option.name.toLowerCase().includes(inputValue.toLowerCase())
         );
         const filteredOptions: IOptions[] = await filtered.map((item) => ({
-          label: item.Model_Name,
-          value: item.Model_Name,
+          label: item.name,
+          value: item.name,
         }));
         setCarModelOptions(filteredOptions);
       } else {
         if (carModelData) {
           const carModelOptions: IOptions[] = await carModelData.map(
             (item) => ({
-              label: item.Model_Name,
-              value: item.Model_Name,
+              label: item.name,
+              value: item.name,
             })
           );
           setCarModelOptions(carModelOptions);
@@ -192,10 +200,10 @@ const CustomSelect = ({
     search();
   }, [inputValue, allOptions]);
 
-  useEffect(() => {
-    console.log("filteredOptions.length");
-    console.log(filteredOptions.length);
-  }, [filteredOptions]);
+  // useEffect(() => {
+  //   console.log("filteredOptions.length");
+  //   console.log(filteredOptions.length);
+  // }, [filteredOptions]);
 
   useEffect(() => {
     if (setValue) {

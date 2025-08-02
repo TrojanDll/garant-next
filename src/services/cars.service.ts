@@ -49,9 +49,6 @@ class CarsService {
         },
       }
     );
-
-    console.log("process.env.NEXT_PUBLIC_CARS_API_TOKEN");
-    console.log(process.env.NEXT_PUBLIC_CARS_API_TOKEN);
     return response;
   }
 
@@ -62,13 +59,10 @@ class CarsService {
       }`,
       {
         headers: {
-          token: process.env.CARS_API_TOKEN,
+          token: process.env.NEXT_PUBLIC_CARS_API_TOKEN,
         },
       }
     );
-
-    console.log("process.env.CARS_API_TOKEN");
-    console.log(process.env.CARS_API_TOKEN);
     return response;
   }
 
