@@ -10,6 +10,7 @@ import {
   INewCarForm,
   INewCarResponse,
   IPopularCarBrandResponse,
+  TCarBrandResponseV2,
 } from "@/types/cars.types";
 
 class CarsService {
@@ -28,7 +29,9 @@ class CarsService {
   }
 
   async getCarCategories() {
-    const response = await axiosClassic.get<ICarCategoryResponse>("/api/transport_category");
+    const response = await axiosClassic.get<ICarCategoryResponse>(
+      "/api/transport_category"
+    );
     return response;
   }
 
@@ -37,18 +40,57 @@ class CarsService {
     return response;
   }
 
+  async getCarBrandsV2() {
+    const response = await axiosClassic.get<TCarBrandResponseV2>(
+      "api/cars/all",
+      {
+        headers: {
+          token: process.env.NEXT_PUBLIC_CARS_API_TOKEN,
+        },
+      }
+    );
+
+    console.log("process.env.NEXT_PUBLIC_CARS_API_TOKEN");
+    console.log(process.env.NEXT_PUBLIC_CARS_API_TOKEN);
+    return response;
+  }
+
+  async getCarBrandsLazy(limit?: number, page?: number) {
+    const response = await axiosClassic.get<TCarBrandResponseV2>(
+      `/api/cars/lazy${limit ? `?limit=${limit}` : ""}${
+        page ? `&page=${page}` : ""
+      }`,
+      {
+        headers: {
+          token: process.env.CARS_API_TOKEN,
+        },
+      }
+    );
+
+    console.log("process.env.CARS_API_TOKEN");
+    console.log(process.env.CARS_API_TOKEN);
+    return response;
+  }
+
   async getPopularCarBrands() {
-    const response = await axiosWithAuth.get<IPopularCarBrandResponse>("/api/getTopTransport");
+    const response = await axiosWithAuth.get<IPopularCarBrandResponse>(
+      "/api/getTopTransport"
+    );
     return response;
   }
 
   async getCarModelByBrandName(name: string) {
-    const response = await axiosClassic.get<ICarModelResponse>(`/api/car_model?brand=${name}`);
+    const response = await axiosClassic.get<ICarModelResponse>(
+      `/api/car_model?brand=${name}`
+    );
     return response;
   }
 
   async addNewCar(data: INewCarForm) {
-    const response = await axiosWithAuth.post<INewCarResponse>(`/api/add_transport`, data);
+    const response = await axiosWithAuth.post<INewCarResponse>(
+      `/api/add_transport`,
+      data
+    );
     return response;
   }
 
@@ -60,7 +102,10 @@ class CarsService {
   }
 
   async editCarInfo(data: IEditCarInfoForm) {
-    const response = await axiosWithAuth.post<IEditCarInfoResponse>("/api/editTransportById", data);
+    const response = await axiosWithAuth.post<IEditCarInfoResponse>(
+      "/api/editTransportById",
+      data
+    );
     return response;
   }
 }

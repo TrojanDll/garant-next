@@ -78,7 +78,10 @@ export interface INewCarResponse {
   data?: any;
 }
 
-export type INewCarForm = Omit<ICar, "updated_at" | "created_at" | "id" | "user_id">;
+export type INewCarForm = Omit<
+  ICar,
+  "updated_at" | "created_at" | "id" | "user_id"
+>;
 
 export interface IEditCarInfoForm extends INewCarForm {
   transport_id: number;
@@ -89,3 +92,23 @@ export interface IEditCarInfoResponse {
   message: string;
   data?: any;
 }
+
+export interface ICarModelV2 {
+  external_id: string;
+  name: string;
+  cyrillic_name: string;
+  year_from: number;
+  year_to: number | null;
+  class: string;
+}
+
+export interface ICarBrandV2 {
+  external_id: string;
+  name: string;
+  country: string;
+  cyrillic_name: string;
+  popular: number;
+  models: ICarModelV2[];
+}
+
+export type TCarBrandResponseV2 = ICarBrandV2[];

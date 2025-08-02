@@ -1,12 +1,12 @@
-import { ICar, ICarBrand } from "@/types/cars.types";
+import { ICar, ICarBrand, ICarBrandV2 } from "@/types/cars.types";
 import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
 import { ICreateOsagoPolicyRequest, IOsagoPolicy } from "@/types/policy.types";
 
 export async function pickOsagoApplyFormData(
   data: ICar,
-  carBrands: ICarBrand[]
+  carBrands: ICarBrandV2[]
 ): Promise<Partial<IOsagoApplyForm>> {
-  let found = await carBrands.find((item) => item.Make_Name === data.brand);
+  let found = await carBrands.find((item) => item.name === data.brand);
 
   // console.log(data.brand === found?.Make_Name ? data.brand : "");
   return {
@@ -18,7 +18,7 @@ export async function pickOsagoApplyFormData(
     registration_number: data.registration_number,
     registration_plate: data.registration_plate,
     transport_category: data.transport_category,
-    vehicle_refined_make: data.brand === found?.Make_Name ? "" : data.brand,
+    vehicle_refined_make: data.brand === found?.name ? "" : data.brand,
     vin: data.vin,
     year: data.year,
   };
@@ -26,10 +26,10 @@ export async function pickOsagoApplyFormData(
 
 export async function pickOsagoApplyFormDataFromPolicy(
   data: ICreateOsagoPolicyRequest,
-  carBrands: ICarBrand[]
+  carBrands: ICarBrandV2[]
 ): Promise<Partial<IOsagoApplyForm>> {
   console.log(data);
-  let found = await carBrands.find((item) => item.Make_Name === data.brand);
+  let found = await carBrands.find((item) => item.name === data.brand);
 
   // console.log(data.brand === found?.Make_Name ? data.brand : "");
   return {
@@ -41,7 +41,7 @@ export async function pickOsagoApplyFormDataFromPolicy(
     registration_number: data.registration_number,
     registration_plate: data.registration_plate,
     transport_category: data.transport_category,
-    vehicle_refined_make: data.brand === found?.Make_Name ? "" : data.brand,
+    vehicle_refined_make: data.brand === found?.name ? "" : data.brand,
     vin: data.vin,
     year: data.car_year,
     date_of_start: data.start_date,

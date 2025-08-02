@@ -20,39 +20,33 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
 
   const carCategories = await carsService.getCarCategories();
   // const fetchedCarBrands = await carsService.getCarBrands();
-  const popularBrands = await carsService.getPopularCarBrands();
+  // const popularBrands = await carsService.getPopularCarBrands();
 
   const carBrands =
-    storedCarsBrands && storedCarsBrands.length > 0
+    (await storedCarsBrands) && storedCarsBrands.length > 0
       ? storedCarsBrands
-      : ((await carsService.getCarBrands()).data.brands as ICarBrand[]);
+      : (await carsService.getCarBrandsV2()).data;
 
   if (!storedCarsBrands || storedCarsBrands.length === 0) {
     console.log("Запись в store");
     saveCarBrandsToSessionStorage(carBrands);
   }
 
-  // const popularBrands: IOptions[] = [
-  //   { label: "Mercedes", value: "Mercedes" },
-  //   { label: "bmw", value: "bmw" },
-  //   { label: "nissan", value: "nissan" },
-  //   { label: "Ford", value: "Ford" },
-  //   { label: "mazeratti", value: "mazeratti" },
-  // ];
-
-  let formatedPopularBrands: IOptions[] = await popularBrands.data.data.map((item) => {
+  let formatedPopularBrands: IOptions[] = await carBrands.map((item) => {
     return {
-      label: item.title.toUpperCase(),
-      value: item.title.toUpperCase(),
+      label: item.name,
+      value: item.name,
     };
   });
 
-  const formatedCarCategories = await carCategories.data.data.map((category) => {
-    return {
-      label: category.Category,
-      value: category.Category,
-    };
-  });
+  const formatedCarCategories = await carCategories.data.data.map(
+    (category) => {
+      return {
+        label: category.Category,
+        value: category.Category,
+      };
+    }
+  );
 
   let formatedCarBrands: { label: string; value: string }[] = [];
 
@@ -64,8 +58,8 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
   const fetchedAndFormatedCarBrands: { label: string; value: string }[] =
     await carBrands.map((brand) => {
       return {
-        label: brand.Make_Name,
-        value: brand.Make_Name,
+        label: brand.name,
+        value: brand.name,
       };
     });
 
@@ -91,7 +85,8 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         placeholder: "Начните вводить марку",
         required: true,
         tooltip: true,
-        tooltipText: "Если вашего ТС нет в списке, в поле «Марка» выберите «Другое ТС»",
+        tooltipText:
+          "Если вашего ТС нет в списке, в поле «Марка» выберите «Другое ТС»",
         options: formatedCarBrands,
         popularBrands: formatedPopularBrands,
       },
@@ -108,7 +103,8 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         label: "Модель",
         placeholder: "Модель",
         tooltip: true,
-        tooltipText: "Если вашего ТС нет в списке, в поле «Марка» выберите «Другое ТС»",
+        tooltipText:
+          "Если вашего ТС нет в списке, в поле «Марка» выберите «Другое ТС»",
         required: true,
         options: [
           {

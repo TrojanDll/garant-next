@@ -34,6 +34,7 @@ import {
 import OsagoApplyFields from "@/components/features/OsagoApplyFields/OsagoApplyFields";
 import useCurrientOsagoPolicyCalculation from "@/stores/Policy/currientOsagoPolicyCalculation";
 import useCurrientCarCategoryAndDuration from "@/stores/Policy/currientCarCategoryAndDuration.store";
+import { useGetCarBrandsV2 } from "@/hooks/cars/useGetCarBrandsV2";
 
 const OsagoApply = () => {
   const { config, isLoading } = useOsagoFormConfig();
@@ -72,7 +73,7 @@ const OsagoApply = () => {
     (state) => state.duration
   );
 
-  const { carsBrands, isLoading: isCarsBrandsLoading } = useGetCarBrands();
+  const { carsBrands, isLoading: isCarsBrandsLoading } = useGetCarBrandsV2();
   const {
     data: paymentCalculationData,
     isError: isPaymentCalculationError,
@@ -125,7 +126,7 @@ const OsagoApply = () => {
 
         if (currientCar) {
           found = await carsBrands.find(
-            (item) => item.Make_Name === currientCar.brand
+            (item) => item.name === currientCar.brand
           );
           await setValue(
             "brand",
@@ -133,7 +134,7 @@ const OsagoApply = () => {
           );
         } else if (currientPolicy) {
           found = await carsBrands.find(
-            (item) => item.Make_Name === currientPolicy.brand
+            (item) => item.name === currientPolicy.brand
           );
           await setValue(
             "brand",

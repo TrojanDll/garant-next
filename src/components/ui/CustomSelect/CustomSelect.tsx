@@ -118,7 +118,7 @@ const CustomSelect = ({
   };
 
   useEffect(() => {
-    if (isModelSelect && carBrand.length !== 0) {
+    if (isModelSelect && carBrand?.length !== 0) {
       getCarModelByBrandName(carBrand);
     }
   }, [carBrand]);
@@ -137,7 +137,7 @@ const CustomSelect = ({
 
   useEffect(() => {
     async function search() {
-      if (inputValue.length >= 2 && allOptions) {
+      if (inputValue.length >= 1 && allOptions) {
         const filtered = await allOptions.filter((option) =>
           option.label.toLowerCase().includes(inputValue.toLowerCase())
         );
