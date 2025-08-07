@@ -35,6 +35,7 @@ import OsagoApplyFields from "@/components/features/OsagoApplyFields/OsagoApplyF
 import useCurrientOsagoPolicyCalculation from "@/stores/Policy/currientOsagoPolicyCalculation";
 import useCurrientCarCategoryAndDuration from "@/stores/Policy/currientCarCategoryAndDuration.store";
 import { useGetCarBrandsV2 } from "@/hooks/cars/useGetCarBrandsV2";
+import { isAuthorized } from "@/helpers/auth/isAuthorized.helper";
 
 const OsagoApply = () => {
   const { config, isLoading } = useOsagoFormConfig();
@@ -46,7 +47,6 @@ const OsagoApply = () => {
     reset,
     setValue,
     watch,
-    formState,
     trigger: formValidationTrigger,
     clearErrors,
   } = useForm<IOsagoApplyForm>();
@@ -152,13 +152,17 @@ const OsagoApply = () => {
   }, [currientCar, isCarsBrandsLoaded]);
 
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
-    const formatedData = formatDataToCreateOsagoRequest(data);
-    console.log(formatedData);
+    if (!isAuthorized()) {
+      toast.success("Войдите, чтобы продолжить");
+    } else {
+      const formatedData = formatDataToCreateOsagoRequest(data);
+      console.log(formatedData);
 
-    setPolicy(formatedData);
-    setPolicyCalculationData(paymentCalculationData);
+      setPolicy(formatedData);
+      setPolicyCalculationData(paymentCalculationData);
 
-    navigateToOsagoConfirm();
+      navigateToOsagoConfirm();
+    }
   };
 
   function onFormError() {

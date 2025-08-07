@@ -15,20 +15,11 @@ import toast from "react-hot-toast";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
 import { useLogin } from "@/hooks/auth/useLogin";
 import LoginFields from "@/components/entities/LoginFields/LoginFields";
-import { useGetCurrientUserMutate } from "@/hooks/user/useGetCurrientUserMutate";
-import useCurrientUser from "@/stores/user/currientUser";
 
 const Login = () => {
   const { handleSubmit, control } = useForm<ILoginForm>();
-  const {
-    login,
-    isLoginSuccess,
-    isLoginError,
-    isLoginPending,
-    loginError,
-    loginResponse,
-  } = useLogin();
-  const { navigateToPolicies } = useNavigation();
+  const { login, isLoginSuccess, isLoginError, isLoginPending, loginError } =
+    useLogin();
 
   const onSubmit: SubmitHandler<ILoginForm> = (data) => {
     console.log(data);
