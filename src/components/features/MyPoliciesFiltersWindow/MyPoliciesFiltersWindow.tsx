@@ -2,12 +2,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-import {
-  disableBodyScroll,
-  enableBodyScroll,
-  clearAllBodyScrollLocks,
-} from "body-scroll-lock";
-
 import styles from "./MyPoliciesFiltersWindow.module.scss";
 
 import Substrate from "@/components/ui/Substrate/Substrate";
@@ -63,17 +57,18 @@ interface IProps {
 }
 
 const MyPoliciesFiltersWindow = ({ isVisible, setIsVisible }: IProps) => {
-  const rootRef = useRef<HTMLDivElement>(null);
-
-  const [activeFilterItems, setActiveFilterItems] = useState<IActiveFilterItems>({
-    policyStatus: null,
-    policyType: null,
-  });
+  const [activeFilterItems, setActiveFilterItems] =
+    useState<IActiveFilterItems>({
+      policyStatus: null,
+      policyType: null,
+    });
 
   const isShadowVisible = useShadow((state) => state.isShadowVisible);
   const setIsShadowVisible = useShadow((state) => state.setIsShadowVisible);
   const setPolicyTypeFilter = usePolicyFilters((state) => state.setPolicyType);
-  const setPolicyStatusFilter = usePolicyFilters((state) => state.setActivityStatus);
+  const setPolicyStatusFilter = usePolicyFilters(
+    (state) => state.setActivityStatus
+  );
 
   useEffect(() => {
     if (isVisible) {
@@ -87,18 +82,9 @@ const MyPoliciesFiltersWindow = ({ isVisible, setIsVisible }: IProps) => {
   }, []);
 
   useEffect(() => {
-    const el = rootRef.current;
-
-    if (!el) return;
-
     if (isVisible) {
       setIsShadowVisible(true);
-      // disableBodyScroll(el);
-    } else {
-      // enableBodyScroll(el);
     }
-
-    return () => enableBodyScroll(el);
   }, [isVisible]);
 
   useEffect(() => {
@@ -155,10 +141,7 @@ const MyPoliciesFiltersWindow = ({ isVisible, setIsVisible }: IProps) => {
   }
 
   return (
-    <Substrate
-      ref={rootRef}
-      className={`${styles.root} ${isVisible ? styles.visible : ""}`}
-    >
+    <Substrate className={`${styles.root} ${isVisible ? styles.visible : ""}`}>
       <div className={styles.content}>
         <button className={styles.close} onClick={handleCloseButtonClick}>
           <SvgSelector id={ESvgName.CLOSE_ROUNDED} />

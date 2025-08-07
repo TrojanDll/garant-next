@@ -28,9 +28,6 @@ import NsData from "@/components/features/NsData/NsData";
 import { useFetchAndDownloadOsagoPDFById } from "@/hooks/pdf/useFetchAndDownloadOsagoPDFById";
 import toast from "react-hot-toast";
 import { useNsFetchAndDownloadPDFById } from "@/hooks/pdf/useNsFetchAndDownloadPDFByID";
-import echo from "@/api/socket";
-import { useGetCurrientUser } from "@/hooks/user/useGetCurrientUser";
-import useCurrientUser from "@/stores/user/currientUser";
 
 interface IProps {
   className?: string;
