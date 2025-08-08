@@ -8,8 +8,6 @@ import { useRegistration } from "@/hooks/auth/useRegistration";
 
 import { IRegistrationForm } from "@/types/auth.types";
 
-import { formatPhoneNumber } from "@/helpers/user/formatPhoneNumber.helper";
-
 import Substrate from "@/components/ui/Substrate/Substrate";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import Button from "@/components/ui/Button/Button";
@@ -17,9 +15,13 @@ import RegistrationFields from "@/components/entities/RegistrationFields/Registr
 
 import styles from "./Registration.module.scss";
 import EmailConfirmation from "@/components/entities/EmailConfirmation/EmailConfirmation";
-import { saveTokenToStorage } from "@/services/auth-token.service";
 
-const Registration = () => {
+interface IProps {
+  variant?: "default" | "modal";
+  onCloseEvent?: () => void;
+}
+
+const Registration = ({ onCloseEvent, variant = "default" }: IProps) => {
   const { handleSubmit, control, watch } = useForm<IRegistrationForm>();
   const {
     registration,
@@ -27,7 +29,6 @@ const Registration = () => {
     isRegistrationError,
     isRegistrationSuccess,
     registrationErrors,
-    registrationResponse,
   } = useRegistration();
 
   const password = watch("password");
@@ -35,7 +36,7 @@ const Registration = () => {
   const onSubmit: SubmitHandler<IRegistrationForm> = (data) => {
     const formatedData: IRegistrationForm = {
       ...data,
-      phone: formatPhoneNumber(data.phone),
+      // phone: formatPhoneNumber(data.phone),
     };
 
     console.log(formatedData);
@@ -75,7 +76,11 @@ const Registration = () => {
   }, [isRegistrationPending, isRegistrationError, isRegistrationSuccess]);
 
   return (
-    <Substrate className={styles.substrate}>
+    <Substrate
+      className={`${styles.substrate} ${
+        variant === "modal" ? styles.modalSubstrate : ""
+      }`}
+    >
       {isRegistrationSuccess ? (
         <EmailConfirmation />
       ) : (
@@ -85,10 +90,14 @@ const Registration = () => {
           onSubmit={handleSubmit(onSubmit, onFormError)}
         >
           <CustomTitle tag="h1" isCentered className={styles.title}>
-            Регистрация нового пользователя
+            Регистрация личного кабинета
           </CustomTitle>
 
-          <RegistrationFields control={control} password={password} />
+          <RegistrationFields
+            control={control}
+            password={password}
+            variant={variant}
+          />
 
           <Button className={styles.submit} type="submit">
             Регистрация

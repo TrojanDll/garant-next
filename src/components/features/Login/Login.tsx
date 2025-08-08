@@ -12,7 +12,6 @@ import Button from "@/components/ui/Button/Button";
 import Link from "next/link";
 import { PAGES } from "@/config/pages-url.config";
 import toast from "react-hot-toast";
-import { useNavigation } from "@/hooks/navigation/useNavigation";
 import { useLogin } from "@/hooks/auth/useLogin";
 import LoginFields from "@/components/entities/LoginFields/LoginFields";
 
@@ -39,7 +38,6 @@ const Login = () => {
       toast.dismiss();
     }
 
-    let timeoutId: NodeJS.Timeout;
     if (isLoginSuccess && isMounted) {
       toast.dismiss();
       toast.success("Успешный вход");

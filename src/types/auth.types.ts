@@ -3,10 +3,10 @@ import { IUser } from "./user.types";
 export interface IRegistrationForm {
   name: string;
   surname: string;
-  patronymic: string;
+  // patronymic: string;
   email: string;
-  phone: string;
-  date_of_birth: string;
+  // phone: string;
+  // date_of_birth: string;
   password: string;
   password_confirmation: string;
   checkbox: boolean;
