@@ -167,6 +167,29 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         required: true,
       },
     ],
+    insurant: [
+      {
+        type: "radio",
+        buttonGroupType: "small",
+        name: "insurant_type",
+        label: "insurant_type",
+        buttons: ["Физ. лицо", "Юр. лицо"],
+      },
+      {
+        type: "input",
+        name: "insurant_fio",
+        label: "ФИО",
+        placeholder: "ФИО Страхователя",
+        required: true,
+      },
+      {
+        type: "input",
+        name: "insurant_passport_number",
+        label: "Серия и номер паспорта",
+        placeholder: "Введите серию и номер",
+        required: true,
+      },
+    ],
     duration: [
       {
         type: "select",
