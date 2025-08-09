@@ -9,6 +9,7 @@ import styles from "./EmailConfirmation.module.scss";
 import { CustomOneTimePasswordField } from "@/components/ui/CustomOneTimePasswordField/CustomOneTimePasswordField";
 import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button/Button";
+import { Timer } from "@/components/ui/Timer/Timer";
 
 interface IProps {
   email: string;
@@ -16,6 +17,7 @@ interface IProps {
 
 const EmailConfirmation = ({ email }: IProps) => {
   const [confirmationCode, setConfirmationCode] = useState<string>("");
+  const [isNewCodeAvailable, setIsNewCodeAvailable] = useState<boolean>(false);
 
   useEffect(() => {
     console.log(confirmationCode);
@@ -46,6 +48,19 @@ const EmailConfirmation = ({ email }: IProps) => {
       />
 
       <Button className={styles.submitButton}>Далее</Button>
+
+      {isNewCodeAvailable ? (
+        <Button className={styles.getNewCodeButton} style="outlined">
+          Получить новый код
+        </Button>
+      ) : (
+        <Timer
+          duration={2}
+          className={styles.timer}
+          timerID="confirmationCode"
+          handleFinish={() => setIsNewCodeAvailable(true)}
+        />
+      )}
 
       <button
         className={styles.returnButton}
