@@ -51,6 +51,7 @@ const OsagoApply = () => {
     watch,
     trigger: formValidationTrigger,
     clearErrors,
+    unregister,
   } = useForm<IOsagoApplyForm>();
 
   const [isCarsBrandsLoaded, setIsCarsBrandsLoaded] = useState(false);
@@ -258,6 +259,12 @@ const OsagoApply = () => {
       isMounted = false;
     };
   }, [isPaymentCalculationPending, isPaymentCalculationError]);
+
+  useEffect(() => {
+    if (isOwner) {
+      unregister(["insurant_fio", "insurant_passport_number", "insurant_type"]);
+    }
+  }, [isOwner]);
 
   return (
     <section className={styles.root}>

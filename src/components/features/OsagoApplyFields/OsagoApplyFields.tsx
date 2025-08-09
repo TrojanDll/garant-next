@@ -65,23 +65,25 @@ const OsagoApplyFields = ({
         Страхователь — собственник ТС
       </div>
 
-      <div className={styles.section}>
-        <CustomTitle tag="h2" className={styles.sectionTitle}>
-          Страхователь
-        </CustomTitle>
-        <div className={styles.inputsWrapper}>
-          {config.insurant && (
-            <DynamicFormSection
-              key={2}
-              clearErrors={clearErrors}
-              fields={config.insurant}
-              control={control}
-              isTopItemSingle
-              personTypeID="insurant"
-            />
-          )}
+      {!isOwner && (
+        <div className={styles.section}>
+          <CustomTitle tag="h2" className={styles.sectionTitle}>
+            Страхователь
+          </CustomTitle>
+          <div className={styles.inputsWrapper}>
+            {config.insurant && (
+              <DynamicFormSection
+                key={2}
+                clearErrors={clearErrors}
+                fields={config.insurant}
+                control={control}
+                isTopItemSingle
+                personTypeID="insurant"
+              />
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       <div className={styles.section}>
         <CustomTitle tag="h2" className={styles.sectionTitle}>
