@@ -58,6 +58,7 @@ const OsagoApply = () => {
     useState<boolean>(false);
   const [isInitialLoaded, setIsInitialLoaded] = useState(false);
   const [isAuthVisible, setIsAuthVisible] = useState<boolean>(false);
+  const [isOwner, setIsOwner] = useState<boolean>(true);
 
   const currientCar = useCurrientCar((state) => state.car);
   const setIsAnotherCarMark = useOsagoApplyCarMark(
@@ -283,6 +284,8 @@ const OsagoApply = () => {
                 config={config}
                 control={control}
                 clearErrors={clearErrors}
+                isOwner={isOwner}
+                setIsOwner={setIsOwner}
               />
 
               {isCountButtonClicked &&

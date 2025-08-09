@@ -16,6 +16,18 @@
   flex-shrink: 0;
 }
 
+.ownerSwitcher {
+  display: flex;
+  align-items: center;
+  column-gap: 15px;
+  margin-top: 40px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 128%;
+  letter-spacing: 0.01em;
+  color: var(--dark-grey);
+}
 
 @media (max-width: 1149px) {
   .section {
