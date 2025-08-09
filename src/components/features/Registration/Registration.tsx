@@ -15,6 +15,8 @@ import RegistrationFields from "@/components/entities/RegistrationFields/Registr
 
 import styles from "./Registration.module.scss";
 import EmailConfirmation from "@/components/entities/EmailConfirmation/EmailConfirmation";
+import SvgSelector from "@/components/ui/SvgSelector/SvgSelector";
+import { ESvgName } from "@/constants/svg-ids.constants";
 
 interface IProps {
   variant?: "default" | "modal";
@@ -81,6 +83,8 @@ const Registration = ({ onCloseEvent, variant = "default" }: IProps) => {
         variant === "modal" ? styles.modalSubstrate : ""
       }`}
     >
+      {variant === "modal" && <SvgSelector id={ESvgName.CLOSE} />}
+
       {isRegistrationSuccess ? (
         <EmailConfirmation />
       ) : (

@@ -36,6 +36,8 @@ import useCurrientOsagoPolicyCalculation from "@/stores/Policy/currientOsagoPoli
 import useCurrientCarCategoryAndDuration from "@/stores/Policy/currientCarCategoryAndDuration.store";
 import { useGetCarBrandsV2 } from "@/hooks/cars/useGetCarBrandsV2";
 import { isAuthorized } from "@/helpers/auth/isAuthorized.helper";
+import useShadow from "@/stores/Shadow/shadow.store";
+import { ModalAuth } from "../ModalAuth/ModalAuth";
 
 const OsagoApply = () => {
   const { config, isLoading } = useOsagoFormConfig();
@@ -55,6 +57,7 @@ const OsagoApply = () => {
   const [isCountButtonClicked, setIsCountButtonClicked] =
     useState<boolean>(false);
   const [isInitialLoaded, setIsInitialLoaded] = useState(false);
+  const [isAuthVisible, setIsAuthVisible] = useState<boolean>(false);
 
   const currientCar = useCurrientCar((state) => state.car);
   const setIsAnotherCarMark = useOsagoApplyCarMark(
@@ -154,6 +157,7 @@ const OsagoApply = () => {
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
     if (!isAuthorized()) {
       toast.success("Войдите, чтобы продолжить");
+      setIsAuthVisible(true);
     } else {
       const formatedData = formatDataToCreateOsagoRequest(data);
       console.log(formatedData);
@@ -253,6 +257,8 @@ const OsagoApply = () => {
 
   return (
     <section className={styles.root}>
+      {isAuthVisible && <ModalAuth />}
+
       <ContentContainer>
         <CustomTitle tag="h1" isCentered>
           Оформить полис ОСАГО в Абхазии
