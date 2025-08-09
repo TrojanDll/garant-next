@@ -31,6 +31,10 @@ const EmailConfirmation = ({ email }: IProps) => {
     reloadPage();
   };
 
+  function handleNewCodeButton() {
+    setIsNewCodeAvailable(false);
+  }
+
   return (
     <>
       <CustomTitle tag="h2" isCentered className={styles.title}>
@@ -50,16 +54,23 @@ const EmailConfirmation = ({ email }: IProps) => {
       <Button className={styles.submitButton}>Далее</Button>
 
       {isNewCodeAvailable ? (
-        <Button className={styles.getNewCodeButton} style="outlined">
+        <Button
+          onClickEvent={handleNewCodeButton}
+          className={styles.getNewCodeButton}
+          style="outlined"
+        >
           Получить новый код
         </Button>
       ) : (
-        <Timer
-          duration={2}
-          className={styles.timer}
-          timerID="confirmationCode"
-          handleFinish={() => setIsNewCodeAvailable(true)}
-        />
+        <div className={styles.timerWrapper}>
+          Получить новый код через {" "}
+          <Timer
+            duration={60}
+            className={styles.timer}
+            timerID="confirmationCode"
+            handleFinish={() => setIsNewCodeAvailable(true)}
+          />
+        </div>
       )}
 
       <button

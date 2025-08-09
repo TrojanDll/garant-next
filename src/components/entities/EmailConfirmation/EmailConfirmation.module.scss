@@ -43,6 +43,22 @@
   margin-top: 30px;
 }
 
+.timerWrapper {
+  text-align: center;
+  margin-top: 25px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  text-align: center;
+  color: var(--dark-grey);
+}
+
+.timer {
+  margin-top: 5px;
+  display: block;
+}
+
 @media (max-width: 1149px) {
   .title {
     font-size: 20px !important;

@@ -54,8 +54,8 @@ export function Timer({
   const seconds = (timeLeft % 60).toString().padStart(2, "0");
 
   return (
-    <div className={`${className} ${styles.root}`}>
+    <span className={`${className} ${styles.root}`}>
       {minutes}:{seconds}
-    </div>
+    </span>
   );
 }
