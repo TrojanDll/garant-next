@@ -26,6 +26,18 @@
   margin-top: 40px;
 }
 
+.modalSubstrate {
+  padding: 0;
+  margin-top: 0;
+  box-shadow: none;
+
+  .submit {
+    padding: 15px 0;
+    font-size: 16px;
+    border-radius: 18px;
+  }
+}
+
 @media (max-width: 1149px) {
   .substrate {
     padding: 30px 20px 40px 20px;

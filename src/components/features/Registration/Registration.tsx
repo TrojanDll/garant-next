@@ -77,14 +77,14 @@ const Registration = ({ onCloseEvent, variant = "default" }: IProps) => {
     };
   }, [isRegistrationPending, isRegistrationError, isRegistrationSuccess]);
 
+  const Wrapper: React.ElementType = variant === "default" ? Substrate : "div";
+
   return (
-    <Substrate
+    <Wrapper
       className={`${styles.substrate} ${
         variant === "modal" ? styles.modalSubstrate : ""
       }`}
     >
-      {variant === "modal" && <SvgSelector id={ESvgName.CLOSE} />}
-
       {isRegistrationSuccess ? (
         <EmailConfirmation />
       ) : (
@@ -108,7 +108,7 @@ const Registration = ({ onCloseEvent, variant = "default" }: IProps) => {
           </Button>
         </form>
       )}
-    </Substrate>
+    </Wrapper>
   );
 };
 

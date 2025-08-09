@@ -24,16 +24,19 @@ export default function Modal({
           className={styles.overlay}
         />
         <Dialog.Content className={styles.content}>
-          <Dialog.Title />
           <Substrate className={styles.substrate}>
-            <button
-              className={styles.closeButton}
-              onClick={() => setIsOpen(false)}
-            >
-              <SvgSelector id={ESvgName.CLOSE} />
-            </button>
+            <div className={styles.inner}>
+              <Dialog.Title />
 
-            {children}
+              <button
+                className={styles.closeButton}
+                onClick={() => setIsOpen(false)}
+              >
+                <SvgSelector id={ESvgName.CLOSE} />
+              </button>
+
+              {children}
+            </div>
           </Substrate>
         </Dialog.Content>
       </Dialog.Portal>

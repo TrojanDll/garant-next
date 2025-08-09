@@ -3,6 +3,7 @@
 import Modal from "@/components/ui/Modal/Modal";
 import styles from "./ModalAuth.module.scss";
 import { useEffect, useState } from "react";
+import Registration from "@/components/features/Registration/Registration";
 
 interface IProps {
   className?: string;
@@ -26,7 +27,7 @@ export function ModalAuth({ className, handleCloseAuth }: IProps) {
         isOpen={isRegistrationModalOpen}
         setIsOpen={setIsRegistrationModalOpen}
       >
-        Hello
+        <Registration variant="modal" />
       </Modal>
     </div>
   );
