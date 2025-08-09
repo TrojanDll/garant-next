@@ -55,8 +55,6 @@ const Registration = ({ onCloseEvent, variant = "default" }: IProps) => {
 
     if (isRegistrationPending) {
       toast.loading("Загрузка");
-    } else {
-      toast.dismiss();
     }
 
     if (isRegistrationError && isMounted) {

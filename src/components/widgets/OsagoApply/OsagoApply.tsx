@@ -156,7 +156,10 @@ const OsagoApply = () => {
 
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
     if (!isAuthorized()) {
-      toast.success("Войдите, чтобы продолжить");
+      toast.success("Войдите, чтобы продолжить", {
+        duration: 4000,
+      });
+
       setIsAuthVisible(true);
     } else {
       const formatedData = formatDataToCreateOsagoRequest(data);
@@ -259,6 +262,7 @@ const OsagoApply = () => {
     <section className={styles.root}>
       {isAuthVisible && (
         <ModalAuth handleCloseAuth={() => setIsAuthVisible(false)} />
+        // <div></div>
       )}
 
       <ContentContainer>
