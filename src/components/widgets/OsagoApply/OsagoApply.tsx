@@ -257,7 +257,9 @@ const OsagoApply = () => {
 
   return (
     <section className={styles.root}>
-      {isAuthVisible && <ModalAuth />}
+      {isAuthVisible && (
+        <ModalAuth handleCloseAuth={() => setIsAuthVisible(false)} />
+      )}
 
       <ContentContainer>
         <CustomTitle tag="h1" isCentered>
