@@ -141,6 +141,13 @@ const OsagoApply = () => {
           found = await carsBrands.find(
             (item) => item.name === currientPolicy.brand
           );
+
+          if (currientPolicy.insurant_fio) {
+            setIsOwner(false);
+          } else {
+            setIsOwner(true);
+          }
+
           await setValue(
             "brand",
             Boolean(found) ? currientPolicy.brand : "Другое ТС"
@@ -262,6 +269,8 @@ const OsagoApply = () => {
 
   useEffect(() => {
     if (isOwner) {
+      setValue("insurant_fio", "");
+      setValue("insurant_passport_number", "");
       unregister(["insurant_fio", "insurant_passport_number", "insurant_type"]);
     }
   }, [isOwner]);

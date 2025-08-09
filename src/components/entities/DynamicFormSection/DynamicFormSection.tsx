@@ -47,7 +47,6 @@ const DynamicFormSection = ({
   const [personType, setPersonType] = useState<TPersonType>("individual");
 
   useEffect(() => {
-    console.log(personTypeStore);
     setPersonType(
       personTypeStore?.find((personType) => {
         if (personType.id === personTypeID) {
