@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
@@ -33,18 +33,29 @@ const Registration = ({ onCloseEvent, variant = "default" }: IProps) => {
     registrationErrors,
   } = useRegistration();
 
+  const [formatedRegistrationData, setFormatedRegistrationData] =
+    useState<IRegistrationForm>({
+      checkbox: true,
+      email: "ivankapetrov93@mail.ru",
+      name: "ivan",
+      password: "12345678",
+      password_confirmation: "12345678",
+      surname: "ivanov",
+    });
+
   const password = watch("password");
 
   const onSubmit: SubmitHandler<IRegistrationForm> = (data) => {
-    const formatedData: IRegistrationForm = {
-      ...data,
-      // phone: formatPhoneNumber(data.phone),
-    };
-
-    console.log(formatedData);
-
-    registration(formatedData);
+    setFormatedRegistrationData(data);
   };
+
+  useEffect(() => {
+    if (formatedRegistrationData) {
+      console.log(formatedRegistrationData);
+
+      registration(formatedRegistrationData);
+    }
+  }, [formatedRegistrationData]);
 
   function onFormError() {
     toast.error("Заполните все обязательные поля");
@@ -81,10 +92,10 @@ const Registration = ({ onCloseEvent, variant = "default" }: IProps) => {
     <Wrapper
       className={`${styles.substrate} ${
         variant === "modal" ? styles.modalSubstrate : ""
-      }`}
+      } ${isRegistrationSuccess ? styles.registrationSuccessSubstrate : ""}`}
     >
-      {isRegistrationSuccess ? (
-        <EmailConfirmation />
+      {true ? (
+        <EmailConfirmation email={formatedRegistrationData?.email || ""} />
       ) : (
         <form
           action=""

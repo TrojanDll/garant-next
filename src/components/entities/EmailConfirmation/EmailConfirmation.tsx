@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 
@@ -6,8 +6,21 @@ import { useNavigation } from "@/hooks/navigation/useNavigation";
 import useAuthType from "@/stores/Auth/authType.store";
 
 import styles from "./EmailConfirmation.module.scss";
+import { CustomOneTimePasswordField } from "@/components/ui/CustomOneTimePasswordField/CustomOneTimePasswordField";
+import { useEffect, useState } from "react";
+import Button from "@/components/ui/Button/Button";
 
-const EmailConfirmation = () => {
+interface IProps {
+  email: string;
+}
+
+const EmailConfirmation = ({ email }: IProps) => {
+  const [confirmationCode, setConfirmationCode] = useState<string>("");
+
+  useEffect(() => {
+    console.log(confirmationCode);
+  }, [confirmationCode]);
+
   const { reloadPage } = useNavigation();
   const setAuthType = useAuthType((state) => state.setAuthType);
 
@@ -15,18 +28,30 @@ const EmailConfirmation = () => {
     setAuthType("login");
     reloadPage();
   };
+
   return (
     <>
       <CustomTitle tag="h2" isCentered className={styles.title}>
-        Почти готово!
+        Введите код подтверждения
       </CustomTitle>
 
       <p className={styles.text}>
-        Мы отправили письмо с подтверждением на ваш Email. Перейдите по ссылке в письме, чтобы
-        завершить регистрацию.
+        Мы отправили его на почту <span className={styles.email}>{email}</span>
       </p>
 
-      <button className={styles.returnButton} type="button" onClick={handleReturnButton}>
+      <CustomOneTimePasswordField
+        value={confirmationCode}
+        setValue={setConfirmationCode}
+        className={styles.codeField}
+      />
+
+      <Button className={styles.submitButton}>Далее</Button>
+
+      <button
+        className={styles.returnButton}
+        type="button"
+        onClick={handleReturnButton}
+      >
         Вернуться ко входу
       </button>
     </>
