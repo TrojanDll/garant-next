@@ -13,7 +13,7 @@ interface IProps {
 export function Timer({
   className,
   duration,
-  timerID,
+  timerID = "1",
   handleFinish = () => {},
 }: IProps) {
   const [timeLeft, setTimeLeft] = useState(duration);
