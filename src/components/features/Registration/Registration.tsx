@@ -90,8 +90,8 @@ const Registration = ({
       if (variant === "default") {
         timeoutId = setTimeout(() => {
           console.log("navigateToHome");
-          navigateToHome();
-          reloadPage();
+          // navigateToHome();
+          // reloadPage();
         }, 1500);
       }
       // saveTokenToStorage(registrationResponse?.data.token || "");
