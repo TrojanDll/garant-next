@@ -17,9 +17,10 @@ import LoginFields from "@/components/entities/LoginFields/LoginFields";
 
 interface IProps {
   variant?: "default" | "modal";
+  handleReturnButton?: () => void;
 }
 
-const Login = ({ variant = "default" }: IProps) => {
+const Login = ({ variant = "default", handleReturnButton }: IProps) => {
   const { handleSubmit, control } = useForm<ILoginForm>();
   const { login, isLoginSuccess, isLoginError, isLoginPending, loginError } =
     useLogin();
@@ -87,6 +88,18 @@ const Login = ({ variant = "default" }: IProps) => {
           Войти
         </Button>
       </form>
+
+      {variant === "modal" && (
+        <div className={styles.changeAuthTypeWrapper}>
+          Ещё нет аккаунта?{" "}
+          <button
+            onClick={handleReturnButton}
+            className={styles.changeAuthTypeButton}
+          >
+            Зарегистрируйтесь
+          </button>
+        </div>
+      )}
     </Wrapper>
   );
 };

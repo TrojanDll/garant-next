@@ -20,10 +20,11 @@ import { ESvgName } from "@/constants/svg-ids.constants";
 
 interface IProps {
   variant?: "default" | "modal";
-  onCloseEvent?: () => void;
+  // onCloseEvent?: () => void;
+  handleReturnButton?: () => void;
 }
 
-const Registration = ({ onCloseEvent, variant = "default" }: IProps) => {
+const Registration = ({ handleReturnButton, variant = "default" }: IProps) => {
   const { handleSubmit, control, watch } = useForm<IRegistrationForm>();
   const {
     registration,
@@ -119,10 +120,17 @@ const Registration = ({ onCloseEvent, variant = "default" }: IProps) => {
         </form>
       )}
 
-      <div className={styles.changeAuthTypeWrapper}>
-        Уже зарегистрированы?{" "}
-        <button className={styles.changeAuthTypeButton}>Войдите</button>
-      </div>
+      {variant === "modal" && (
+        <div className={styles.changeAuthTypeWrapper}>
+          Уже зарегистрированы?{" "}
+          <button
+            onClick={handleReturnButton}
+            className={styles.changeAuthTypeButton}
+          >
+            Войдите
+          </button>
+        </div>
+      )}
     </Wrapper>
   );
 };
