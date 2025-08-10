@@ -13,6 +13,7 @@ import { Timer } from "@/components/ui/Timer/Timer";
 import { useGetNewVerificationCode } from "@/hooks/auth/useGetNewVerificationCode";
 import toast from "react-hot-toast";
 import { useVerifyEmail } from "@/hooks/auth/useVerifyEmail";
+import IconArrowLeft from "@/assets/icons/IconArrowLeft";
 
 interface IProps {
   email: string;
@@ -22,6 +23,12 @@ interface IProps {
 const EmailConfirmation = ({ email, isMustRedirect = false }: IProps) => {
   const [confirmationCode, setConfirmationCode] = useState<string>("");
   const [isNewCodeAvailable, setIsNewCodeAvailable] = useState<boolean>(false);
+  const [isErrorMessageVisible, setIsErrorMessageVisible] =
+    useState<boolean>(false);
+
+  useEffect(() => {
+    setIsErrorMessageVisible(false);
+  }, [confirmationCode]);
 
   const { navigateToHome } = useNavigation();
 
@@ -87,11 +94,7 @@ const EmailConfirmation = ({ email, isMustRedirect = false }: IProps) => {
         }, 2000);
       }
     } else if (isVerifyEmailError) {
-      if (verifyEmailData?.status === 410) {
-        toast.error("Код подтверждения устарел. Запросите новый код");
-      } else {
-        toast.error("Ошибка. Неверный код");
-      }
+      setIsErrorMessageVisible(true);
     }
 
     return () => {
@@ -113,7 +116,14 @@ const EmailConfirmation = ({ email, isMustRedirect = false }: IProps) => {
         value={confirmationCode}
         setValue={setConfirmationCode}
         className={styles.codeField}
+        isError={isErrorMessageVisible}
       />
+
+      {isErrorMessageVisible && (
+        <div className={styles.errorMessage}>
+          Неверный код, попробуйте снова
+        </div>
+      )}
 
       <Button
         onClickEvent={handleVerifyEmailButtonClick}
@@ -147,6 +157,7 @@ const EmailConfirmation = ({ email, isMustRedirect = false }: IProps) => {
         type="button"
         onClick={handleReturnButton}
       >
+        <IconArrowLeft className={styles.iconArrowLeft}/>
         Вернуться ко входу
       </button>
     </>
