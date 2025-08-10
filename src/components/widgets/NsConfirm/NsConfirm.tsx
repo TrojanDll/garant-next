@@ -29,7 +29,7 @@ const NsConfirm = () => {
     (state) => state.setCalculationData
   );
 
-  const { navigateToPolicies } = useNavigation();
+  const { reloadPage } = useNavigation();
 
   const router = useRouter();
 
@@ -101,6 +101,11 @@ const NsConfirm = () => {
   //     clearTimeout(timeoutId);
   //   };
   // }, [isPending, isSuccess, isError]);
+
+  useEffect(() => {
+    reloadPage();
+    console.log('reloaded')
+  }, []);
 
   return (
     <section>

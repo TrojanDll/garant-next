@@ -44,6 +44,8 @@ const OsagoConfirm = () => {
     }
   }
 
+  const { reloadPage } = useNavigation();
+
   const router = useRouter();
 
   useEffect(() => {
@@ -107,6 +109,11 @@ const OsagoConfirm = () => {
   //     clearTimeout(timeoutId);
   //   };
   // }, [isPending, isSuccess]);
+
+  useEffect(() => {
+    reloadPage();
+    console.log("reloaded");
+  }, []);
 
   return (
     <section>
