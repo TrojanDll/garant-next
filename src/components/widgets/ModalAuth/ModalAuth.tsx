@@ -35,11 +35,13 @@ export function ModalAuth({ className, handleCloseAuth }: IProps) {
           <Registration
             handleReturnButton={() => setAuthType("login")}
             variant="modal"
+            handleSuccessRegistration={handleCloseAuth}
           />
         ) : (
           <Login
             variant="modal"
             handleReturnButton={() => setAuthType("registration")}
+            handleSuccessLogin={handleCloseAuth}
           />
         )}
       </Modal>

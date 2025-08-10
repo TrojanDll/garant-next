@@ -17,14 +17,20 @@ import styles from "./Registration.module.scss";
 import EmailConfirmation from "@/components/entities/EmailConfirmation/EmailConfirmation";
 import SvgSelector from "@/components/ui/SvgSelector/SvgSelector";
 import { ESvgName } from "@/constants/svg-ids.constants";
+import { useNavigation } from "@/hooks/navigation/useNavigation";
 
 interface IProps {
   variant?: "default" | "modal";
   // onCloseEvent?: () => void;
   handleReturnButton?: () => void;
+  handleSuccessRegistration?: () => void;
 }
 
-const Registration = ({ handleReturnButton, variant = "default" }: IProps) => {
+const Registration = ({
+  handleReturnButton,
+  handleSuccessRegistration,
+  variant = "default",
+}: IProps) => {
   const { handleSubmit, control, watch } = useForm<IRegistrationForm>();
   const {
     registration,
@@ -39,6 +45,8 @@ const Registration = ({ handleReturnButton, variant = "default" }: IProps) => {
 
   const [formatedRegistrationData, setFormatedRegistrationData] =
     useState<IRegistrationForm>();
+
+  const { navigateToHome } = useNavigation();
 
   const password = watch("password");
 
@@ -84,6 +92,16 @@ const Registration = ({ handleReturnButton, variant = "default" }: IProps) => {
     };
   }, [isRegistrationPending, isRegistrationError, isRegistrationSuccess]);
 
+  function successRegistration() {
+    if (handleSuccessRegistration) {
+      handleSuccessRegistration();
+    } else {
+      setTimeout(() => {
+        navigateToHome();
+      }, 1500);
+    }
+  }
+
   const Wrapper: React.ElementType = variant === "default" ? Substrate : "div";
 
   return (
@@ -97,6 +115,7 @@ const Registration = ({ handleReturnButton, variant = "default" }: IProps) => {
           email={formatedRegistrationData?.email || ""}
           handleReturnButtonClick={() => setIsEmailConfirmationVisible(false)}
           isModal={variant === "modal"}
+          handleSuccessRegistration={successRegistration}
         />
       ) : (
         <form
@@ -120,7 +139,7 @@ const Registration = ({ handleReturnButton, variant = "default" }: IProps) => {
         </form>
       )}
 
-      {variant === "modal" && (
+      {variant === "modal" && !isEmailConfirmationVisible && (
         <div className={styles.changeAuthTypeWrapper}>
           Уже зарегистрированы?{" "}
           <button

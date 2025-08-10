@@ -32,7 +32,10 @@ export default function Modal({
                 className={styles.closeButton}
                 onClick={() => setIsOpen(false)}
               >
-                <SvgSelector id={ESvgName.CLOSE} />
+                <SvgSelector
+                  className={styles.closeButtonSvg}
+                  id={ESvgName.CLOSE}
+                />
               </button>
 
               {children}

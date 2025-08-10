@@ -18,12 +18,23 @@ import LoginFields from "@/components/entities/LoginFields/LoginFields";
 interface IProps {
   variant?: "default" | "modal";
   handleReturnButton?: () => void;
+  handleSuccessLogin?: () => void;
 }
 
-const Login = ({ variant = "default", handleReturnButton }: IProps) => {
+const Login = ({
+  variant = "default",
+  handleReturnButton,
+  handleSuccessLogin,
+}: IProps) => {
   const { handleSubmit, control } = useForm<ILoginForm>();
-  const { login, isLoginSuccess, isLoginError, isLoginPending, loginError } =
-    useLogin();
+  const {
+    login,
+    isLoginSuccess,
+    isLoginError,
+    isLoginPending,
+    loginError,
+    loginResponse,
+  } = useLogin();
 
   const onSubmit: SubmitHandler<ILoginForm> = (data) => {
     console.log(data);
@@ -31,6 +42,7 @@ const Login = ({ variant = "default", handleReturnButton }: IProps) => {
   };
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
     let isMounted = true;
 
     if (!isLoginPending) {
@@ -46,6 +58,12 @@ const Login = ({ variant = "default", handleReturnButton }: IProps) => {
     if (isLoginSuccess && isMounted) {
       toast.dismiss();
       toast.success("Успешный вход");
+
+      if (handleSuccessLogin) {
+        timeoutId = setTimeout(() => {
+          handleSuccessLogin();
+        }, 1500);
+      }
       // saveTokenToStorage(loginResponse?.data.token || "");
 
       // timeoutId = setTimeout(() => {
@@ -54,17 +72,21 @@ const Login = ({ variant = "default", handleReturnButton }: IProps) => {
       // }, 50);
     }
 
-    // return () => {
-    //   isMounted = false;
+    return () => {
+      isMounted = false;
 
-    //   clearTimeout(timeoutId);
-    // };
+      clearTimeout(timeoutId);
+    };
   }, [isLoginPending, isLoginError, isLoginSuccess]);
 
   const Wrapper: React.ElementType = variant === "default" ? Substrate : "div";
 
   return (
-    <Wrapper className={`${styles.substrate} ${styles.modalSubstrate}`}>
+    <Wrapper
+      className={`${styles.substrate} ${
+        variant === "modal" ? styles.modalSubstrate : ""
+      }`}
+    >
       <form action="" noValidate onSubmit={handleSubmit(onSubmit)}>
         <CustomTitle tag="h1" isCentered className={styles.title}>
           Вход в личный кабинет

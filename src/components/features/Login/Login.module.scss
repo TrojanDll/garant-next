@@ -80,6 +80,14 @@
 }
 
 @media (max-width: 1149px) {
+  .substrate {
+    padding: 20px;
+  }
+
+  .modalSubstrate {
+    padding: 0;
+  }
+
   .title {
     font-weight: 700 !important;
     font-size: 20px !important;

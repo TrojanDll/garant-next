@@ -20,6 +20,7 @@ interface IProps {
   isMustRedirect?: boolean;
   isModal?: boolean;
   handleReturnButtonClick?: () => void;
+  handleSuccessRegistration?: () => void;
 }
 
 const EmailConfirmation = ({
@@ -27,6 +28,7 @@ const EmailConfirmation = ({
   isMustRedirect = false,
   isModal = false,
   handleReturnButtonClick,
+  handleSuccessRegistration,
 }: IProps) => {
   const [confirmationCode, setConfirmationCode] = useState<string>("");
   const [isNewCodeAvailable, setIsNewCodeAvailable] = useState<boolean>(false);
@@ -90,6 +92,7 @@ const EmailConfirmation = ({
 
   useEffect(() => {
     let timoutId: NodeJS.Timeout;
+    let timoutIdRegistration: NodeJS.Timeout;
 
     if (isVerifyEmailPending) {
       toast.loading("Проверка кода");
@@ -102,6 +105,12 @@ const EmailConfirmation = ({
       if (isMustRedirect) {
         timoutId = setTimeout(() => {
           navigateToHome();
+        }, 2000);
+      }
+
+      if (handleSuccessRegistration) {
+        timoutId = setTimeout(() => {
+          handleSuccessRegistration();
         }, 2000);
       }
     } else if (isVerifyEmailError) {
@@ -155,7 +164,7 @@ const EmailConfirmation = ({
         <div className={styles.timerWrapper}>
           Получить новый код через{" "}
           <Timer
-            duration={60}
+            duration={2}
             className={styles.timer}
             timerID="confirmationCode"
             handleFinish={() => setIsNewCodeAvailable(true)}
