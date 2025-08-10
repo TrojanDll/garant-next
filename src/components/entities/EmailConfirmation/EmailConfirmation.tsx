@@ -47,6 +47,7 @@ const EmailConfirmation = ({
     isSuccess: isGetNewVerificationCodeSuccess,
     isError: isGetNewVerificationCodeError,
   } = useGetNewVerificationCode();
+  
   const {
     mutate: verifyEmail,
     isPending: isVerifyEmailPending,

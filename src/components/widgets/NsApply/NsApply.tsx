@@ -34,6 +34,7 @@ export const defaultInsuredValues: IInsuredCreationFilelds = {
 };
 
 const NsApply = () => {
+  const { reloadPage } = useNavigation();
   const formRef = useRef<HTMLFormElement>(null);
 
   const [isCalculatedBlockVisible, setIsCalculatedBlockVisible] =
@@ -170,6 +171,7 @@ const NsApply = () => {
   function handleSuccessAuth() {
     console.log("handleSuccessAuth");
     triggerSubmitForm();
+    reloadPage();
     setIsAuthVisible(false);
   }
 

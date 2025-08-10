@@ -41,6 +41,7 @@ import { ModalAuth } from "../ModalAuth/ModalAuth";
 
 const OsagoApply = () => {
   const formRef = useRef<HTMLFormElement>(null);
+  const { reloadPage } = useNavigation();
 
   const { config, isLoading } = useOsagoFormConfig();
   const { navigateToOsagoConfirm } = useNavigation();
@@ -286,6 +287,7 @@ const OsagoApply = () => {
   function handleSuccessAuth() {
     console.log("handleSuccessAuth");
     triggerSubmitForm();
+    reloadPage();
     setIsAuthVisible(false);
   }
 

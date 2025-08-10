@@ -16,6 +16,7 @@ import { useLogin } from "@/hooks/auth/useLogin";
 import LoginFields from "@/components/entities/LoginFields/LoginFields";
 import EmailConfirmation from "@/components/entities/EmailConfirmation/EmailConfirmation";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
+import { useGetNewVerificationCode } from "@/hooks/auth/useGetNewVerificationCode";
 
 interface IProps {
   variant?: "default" | "modal";
@@ -37,6 +38,13 @@ const Login = ({
     loginError,
     loginResponse,
   } = useLogin();
+
+  const {
+    mutate: getNewVerificationCode,
+    isPending: isGetNewVerificationCodePending,
+    isSuccess: isGetNewVerificationCodeSuccess,
+    isError: isGetNewVerificationCodeError,
+  } = useGetNewVerificationCode();
 
   const [loginData, setLoginData] = useState<ILoginForm>();
 
@@ -77,6 +85,10 @@ const Login = ({
       //   toast.dismiss();
       //   navigateToPolicies();
       // }, 50);
+    } else if (loginError === "unsubmited_email") {
+      getNewVerificationCode({
+        email: loginData?.email ? loginData.email : "",
+      });
     }
 
     return () => {
@@ -105,7 +117,10 @@ const Login = ({
       }`}
     >
       {loginError === "unsubmited_email" ? (
-        <EmailConfirmation handleSuccessAuth={successLogin} email={loginData?.email ? loginData.email : ""} />
+        <EmailConfirmation
+          handleSuccessAuth={successLogin}
+          email={loginData?.email ? loginData.email : ""}
+        />
       ) : (
         <>
           <form action="" noValidate onSubmit={handleSubmit(onSubmit)}>
