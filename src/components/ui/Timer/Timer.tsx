@@ -37,15 +37,19 @@ export function Timer({
 
       if (diff === 0) {
         localStorage.removeItem(TIMER_ID);
-        if (timerId) {
-          clearInterval(timerId);
-        }
+        clearIntervalFunc();
         handleFinish();
       }
     };
 
     tick();
     const timerId = setInterval(tick, 1000);
+
+    function clearIntervalFunc() {
+      if (timerId) {
+        clearInterval(timerId);
+      }
+    }
 
     return () => {
       if (timerId) {
