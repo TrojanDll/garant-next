@@ -1,11 +1,15 @@
 import { axiosClassic, axiosWithAuth } from "@/api/interceptors";
 
 import {
+  IGetNewVerificationCodeRequest,
+  IGetNewVerificationCodeResponse,
   ILoginForm,
   ILoginResponse,
   ILogoutResponse,
   IRegistrationFormApiData,
   IRegistrationResponse,
+  IVerifyEmailRequest,
+  IVerifyEmailResponse,
 } from "@/types/auth.types";
 import { removeFromStorage, saveTokenToStorage } from "./auth-token.service";
 
@@ -36,6 +40,28 @@ class AuthService {
     const response = await axiosWithAuth.get<ILogoutResponse>("/api/logout");
 
     if (response.data) removeFromStorage();
+
+    return response;
+  }
+
+  async getNewVerificationCode(data: IGetNewVerificationCodeRequest) {
+    const response = await axiosWithAuth.post<IGetNewVerificationCodeResponse>(
+      "/api/get-new-verification-code",
+      data
+    );
+
+    return response;
+  }
+
+  async verifyEmail(data: IVerifyEmailRequest) {
+    const response = await axiosWithAuth.post<IVerifyEmailResponse>(
+      "/api/verify-email",
+      data
+    );
+
+    if (response.data.token) {
+      saveTokenToStorage(response.data.token);
+    }
 
     return response;
   }

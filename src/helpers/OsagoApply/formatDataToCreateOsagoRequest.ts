@@ -20,5 +20,8 @@ export function formatDataToCreateOsagoRequest(
     start_date: data.date_of_start,
     transport_category: data.transport_category,
     vin: data.vin,
+    insurant_fio: data.insurant_fio,
+    insurant_passport_number: data.insurant_passport_number,
+    insurant_type: data.insurant_type,
   };
 }

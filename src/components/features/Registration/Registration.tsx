@@ -1,14 +1,12 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 import { useRegistration } from "@/hooks/auth/useRegistration";
 
 import { IRegistrationForm } from "@/types/auth.types";
-
-import { formatPhoneNumber } from "@/helpers/user/formatPhoneNumber.helper";
 
 import Substrate from "@/components/ui/Substrate/Substrate";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
@@ -17,9 +15,22 @@ import RegistrationFields from "@/components/entities/RegistrationFields/Registr
 
 import styles from "./Registration.module.scss";
 import EmailConfirmation from "@/components/entities/EmailConfirmation/EmailConfirmation";
-import { saveTokenToStorage } from "@/services/auth-token.service";
+import SvgSelector from "@/components/ui/SvgSelector/SvgSelector";
+import { ESvgName } from "@/constants/svg-ids.constants";
+import { useNavigation } from "@/hooks/navigation/useNavigation";
 
-const Registration = () => {
+interface IProps {
+  variant?: "default" | "modal";
+  // onCloseEvent?: () => void;
+  handleReturnButton?: () => void;
+  handleSuccessRegistration?: () => void;
+}
+
+const Registration = ({
+  handleReturnButton,
+  handleSuccessRegistration,
+  variant = "default",
+}: IProps) => {
   const { handleSubmit, control, watch } = useForm<IRegistrationForm>();
   const {
     registration,
@@ -27,21 +38,29 @@ const Registration = () => {
     isRegistrationError,
     isRegistrationSuccess,
     registrationErrors,
-    registrationResponse,
   } = useRegistration();
+
+  const [isEmailConfirmationVisible, setIsEmailConfirmationVisible] =
+    useState<boolean>(false);
+
+  const [formatedRegistrationData, setFormatedRegistrationData] =
+    useState<IRegistrationForm>();
+
+  const { navigateToHome } = useNavigation();
 
   const password = watch("password");
 
   const onSubmit: SubmitHandler<IRegistrationForm> = (data) => {
-    const formatedData: IRegistrationForm = {
-      ...data,
-      phone: formatPhoneNumber(data.phone),
-    };
-
-    console.log(formatedData);
-
-    registration(formatedData);
+    setFormatedRegistrationData(data);
   };
+
+  useEffect(() => {
+    if (formatedRegistrationData) {
+      console.log(formatedRegistrationData);
+
+      registration(formatedRegistrationData);
+    }
+  }, [formatedRegistrationData]);
 
   function onFormError() {
     toast.error("Заполните все обязательные поля");
@@ -52,8 +71,6 @@ const Registration = () => {
 
     if (isRegistrationPending) {
       toast.loading("Загрузка");
-    } else {
-      toast.dismiss();
     }
 
     if (isRegistrationError && isMounted) {
@@ -66,6 +83,7 @@ const Registration = () => {
     } else if (isRegistrationSuccess && isMounted) {
       toast.dismiss();
       toast.success("Регистрация прошла успешно");
+      setIsEmailConfirmationVisible(true);
       // saveTokenToStorage(registrationResponse?.data.token || "");
     }
 
@@ -74,10 +92,31 @@ const Registration = () => {
     };
   }, [isRegistrationPending, isRegistrationError, isRegistrationSuccess]);
 
+  function successRegistration() {
+    if (handleSuccessRegistration) {
+      handleSuccessRegistration();
+    } else {
+      setTimeout(() => {
+        navigateToHome();
+      }, 1000);
+    }
+  }
+
+  const Wrapper: React.ElementType = variant === "default" ? Substrate : "div";
+
   return (
-    <Substrate className={styles.substrate}>
-      {isRegistrationSuccess ? (
-        <EmailConfirmation />
+    <Wrapper
+      className={`${styles.substrate} ${
+        variant === "modal" ? styles.modalSubstrate : ""
+      } ${isRegistrationSuccess ? styles.registrationSuccessSubstrate : ""}`}
+    >
+      {isRegistrationSuccess && isEmailConfirmationVisible ? (
+        <EmailConfirmation
+          email={formatedRegistrationData?.email || ""}
+          handleReturnButtonClick={() => setIsEmailConfirmationVisible(false)}
+          isModal={variant === "modal"}
+          handleSuccessAuth={successRegistration}
+        />
       ) : (
         <form
           action=""
@@ -85,17 +124,33 @@ const Registration = () => {
           onSubmit={handleSubmit(onSubmit, onFormError)}
         >
           <CustomTitle tag="h1" isCentered className={styles.title}>
-            Регистрация нового пользователя
+            Регистрация личного кабинета
           </CustomTitle>
 
-          <RegistrationFields control={control} password={password} />
+          <RegistrationFields
+            control={control}
+            password={password}
+            variant={variant}
+          />
 
           <Button className={styles.submit} type="submit">
             Регистрация
           </Button>
         </form>
       )}
-    </Substrate>
+
+      {variant === "modal" && !isEmailConfirmationVisible && (
+        <div className={styles.changeAuthTypeWrapper}>
+          Уже зарегистрированы?{" "}
+          <button
+            onClick={handleReturnButton}
+            className={styles.changeAuthTypeButton}
+          >
+            Войдите
+          </button>
+        </div>
+      )}
+    </Wrapper>
   );
 };
 

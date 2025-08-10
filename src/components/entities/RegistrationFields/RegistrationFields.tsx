@@ -12,16 +12,21 @@ import { PAGES } from "@/config/pages-url.config";
 interface IProps {
   control?: Control<IRegistrationForm, any, IRegistrationForm> | undefined;
   password?: string;
+  variant?: "default" | "modal";
 }
 
-const RegistrationFields = ({ control, password }: IProps) => {
+const RegistrationFields = ({
+  control,
+  password,
+  variant = "default",
+}: IProps) => {
   return (
     <>
       {registrationFields.map((config) => {
         const isPasswordConfirm = config.name === "password_confirmation";
         const isPassword = config.name === "password";
         const isEmail = config.name === "email";
-        const isPhone = config.name === "phone";
+        // const isPhone = config.name === "phone";
 
         return (
           <Controller<IRegistrationForm, keyof IRegistrationForm>
@@ -31,7 +36,8 @@ const RegistrationFields = ({ control, password }: IProps) => {
             rules={{
               required: config.required ? "Обязательное поле" : false,
               ...(isPasswordConfirm && {
-                validate: (value) => value === password || "Пароли не совпадают",
+                validate: (value) =>
+                  value === password || "Пароли не совпадают",
               }),
               ...(isEmail && {
                 pattern: {
@@ -58,7 +64,9 @@ const RegistrationFields = ({ control, password }: IProps) => {
             }}
             render={({ field, fieldState }) => (
               <CustomInput
-                className={styles.input}
+                className={`${styles.input} ${
+                  variant === "modal" ? styles.modalInput : ""
+                }`}
                 name={field.name}
                 setValue={field.onChange}
                 value={field.value as string}
@@ -73,7 +81,11 @@ const RegistrationFields = ({ control, password }: IProps) => {
         );
       })}
 
-      <div className={styles.checkboxWrapper}>
+      <div
+        className={`${styles.checkboxWrapper} ${
+          variant === "modal" ? styles.checkboxWrapperModal : ""
+        }`}
+      >
         <Controller<IRegistrationForm, keyof IRegistrationForm>
           key={styles.checkboxWrapper}
           name="checkbox"

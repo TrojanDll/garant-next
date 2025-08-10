@@ -7,14 +7,23 @@ import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
 import { Control, UseFormClearErrors, UseFormTrigger } from "react-hook-form";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import DynamicFormSection from "@/components/entities/DynamicFormSection/DynamicFormSection";
+import { CustomSwitch } from "@/components/ui/CustomSwitch/CustomSwitch";
 
 interface IProps {
   config: ISplitFieldConfig;
   control: Control<IOsagoApplyForm, any, IOsagoApplyForm>;
   clearErrors?: UseFormClearErrors<IOsagoApplyForm>;
+  isOwner: boolean;
+  setIsOwner: (value: boolean) => void;
 }
 
-const OsagoApplyFields = ({ config, control, clearErrors }: IProps) => {
+const OsagoApplyFields = ({
+  config,
+  control,
+  clearErrors,
+  isOwner,
+  setIsOwner,
+}: IProps) => {
   return (
     <>
       <div className={styles.section}>
@@ -40,14 +49,41 @@ const OsagoApplyFields = ({ config, control, clearErrors }: IProps) => {
         <div className={styles.inputsWrapper}>
           {config.owner && (
             <DynamicFormSection
+              key={1}
               clearErrors={clearErrors}
               fields={config.owner}
               control={control}
               isTopItemSingle
+              personTypeID="owner"
             />
           )}
         </div>
       </div>
+
+      <div className={styles.ownerSwitcher}>
+        <CustomSwitch isChecked={isOwner} setIsChecked={setIsOwner} />
+        Страхователь — собственник ТС
+      </div>
+
+      {!isOwner && (
+        <div className={styles.section}>
+          <CustomTitle tag="h2" className={styles.sectionTitle}>
+            Страхователь
+          </CustomTitle>
+          <div className={styles.inputsWrapper}>
+            {config.insurant && (
+              <DynamicFormSection
+                key={2}
+                clearErrors={clearErrors}
+                fields={config.insurant}
+                control={control}
+                isTopItemSingle
+                personTypeID="insurant"
+              />
+            )}
+          </div>
+        </div>
+      )}
 
       <div className={styles.section}>
         <CustomTitle tag="h2" className={styles.sectionTitle}>

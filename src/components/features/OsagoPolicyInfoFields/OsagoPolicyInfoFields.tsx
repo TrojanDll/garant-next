@@ -57,7 +57,11 @@ const OsagoPolicyInfoFields = ({ data, className }: IProps) => {
               name="Номер регистрации ТС"
               value={data.registration_number}
             />
-            <CarInfoItem className={styles.contentItem} name="VIN" value={data.vin} />
+            <CarInfoItem
+              className={styles.contentItem}
+              name="VIN"
+              value={data.vin}
+            />
           </div>
 
           <CustomTitle tag="h2" className={styles.title}>
@@ -72,20 +76,52 @@ const OsagoPolicyInfoFields = ({ data, className }: IProps) => {
             />
             <CarInfoItem
               className={styles.contentItem}
-              name={data.owner === personTypes[1] ? "ИНН" : "Серия и номер паспорта"}
+              name={
+                data.owner === personTypes[1] ? "ИНН" : "Серия и номер паспорта"
+              }
               value={data.passport_number}
             />
           </div>
 
+          {data.insurant_fio && (
+            <>
+              <CustomTitle tag="h2" className={styles.title}>
+                Страхователь
+              </CustomTitle>
+
+              <div className={styles.content}>
+                <CarInfoItem
+                  className={styles.contentItem}
+                  name="Страхователь ТС"
+                  value={data.insurant_fio}
+                />
+                <CarInfoItem
+                  className={styles.contentItem}
+                  name={
+                    data.insurant_type === personTypes[1]
+                      ? "ИНН"
+                      : "Серия и номер паспорта"
+                  }
+                  value={data.insurant_passport_number}
+                />
+              </div>
+            </>
+          )}
+
           <div className={styles.content}>
             {data && (
               <>
-                <div className={`${styles.contentItem} ${styles.contentItemLarge}`}>
-                  <h3 className={styles.contentItemLargeTitle}>Срок действия</h3>
+                <div
+                  className={`${styles.contentItem} ${styles.contentItemLarge}`}
+                >
+                  <h3 className={styles.contentItemLargeTitle}>
+                    Срок действия
+                  </h3>
                   <div className={styles.contentItemLargeWrapper}>
                     {data && (
                       <span className={styles.contentItemTitle}>
-                        {getDaysBetweenDates(data.start_date, finishDate) + 1} суток
+                        {getDaysBetweenDates(data.start_date, finishDate) + 1}{" "}
+                        суток
                       </span>
                     )}
                     <span className={styles.contentItemValue}>

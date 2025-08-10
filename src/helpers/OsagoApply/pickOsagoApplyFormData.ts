@@ -47,5 +47,9 @@ export async function pickOsagoApplyFormDataFromPolicy(
     date_of_start: data.start_date,
     duration_of_stay: data.duration_of_stay,
     promocode: data.promo_code,
+    insurant_fio: data.insurant_fio,
+    insurant_passport_number: data.insurant_passport_number,
+    insurant_type:
+      data.insurant_type === "individual" ? "individual" : "legal_entity",
   };
 }

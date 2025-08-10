@@ -13,6 +13,10 @@ export interface ICar {
   passport_number: string;
   created_at: string;
   updated_at: string;
+
+  insurant_type?: string;
+  insurant_fio?: string;
+  insurant_passport_number?: string;
 }
 
 export interface IGetCurrientUserCarsReponse {

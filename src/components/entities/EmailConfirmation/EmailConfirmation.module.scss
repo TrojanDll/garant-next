@@ -10,13 +10,16 @@
   font-size: 20px;
   line-height: 125%;
   color: #000;
+  text-align: center;
 }
 
 .returnButton {
   margin: 0 auto;
   margin-top: 40px;
   width: fit-content;
-  display: block;
+  display: flex;
+  // align-items: center;
+  column-gap: 8px;
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 18px;
@@ -26,19 +29,84 @@
   color: var(--blue);
 }
 
+.email {
+  font-weight: 500;
+}
+
+.codeField {
+  margin-top: 30px;
+}
+
+.submitButton,
+.getNewCodeButton {
+  width: 100%;
+  max-width: 334px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.timerWrapper {
+  text-align: center;
+  margin-top: 25px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 129%;
+  text-align: center;
+  color: var(--dark-grey);
+}
+
+.timer {
+  margin-top: 5px;
+  display: block;
+}
+
+.errorMessage {
+  margin-top: 10px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 125%;
+  text-align: center;
+  color: var(--red2);
+}
+
 @media (max-width: 1149px) {
   .title {
-    font-size: 20px !important;
+    font-size: 16px !important;
     font-weight: 700 !important;
   }
 
   .text {
-    margin-top: 35px;
+    margin-top: 25px;
     font-size: 14px;
   }
 
+  .codeField {
+    margin-top: 25px;
+  }
+
+  .errorMessage {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+
+  .submitButton {
+    margin-top: 25px;
+    width: 100%;
+  }
+
+  .getNewCodeButton {
+    margin-top: 25px;
+    width: 100%;
+  }
+
   .returnButton {
-    margin-top: 35px;
+    margin-top: 25px;
     font-size: 14px;
+  }
+
+  .iconArrowLeft {
+    transform: translateY(-2px);
   }
 }

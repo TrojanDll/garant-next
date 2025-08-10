@@ -3,10 +3,10 @@ import { IUser } from "./user.types";
 export interface IRegistrationForm {
   name: string;
   surname: string;
-  patronymic: string;
+  // patronymic: string;
   email: string;
-  phone: string;
-  date_of_birth: string;
+  // phone: string;
+  // date_of_birth: string;
   password: string;
   password_confirmation: string;
   checkbox: boolean;
@@ -36,3 +36,27 @@ export interface ILogoutResponse {
 export type IRegistrationFormApiData = Omit<IRegistrationForm, "checkbox">;
 
 export type TAuthType = "login" | "registration";
+
+export interface IGetNewVerificationCodeRequest {
+  email: string;
+}
+
+export interface IGetNewVerificationCodeResponse {
+  success?: boolean;
+  status: string;
+}
+
+export interface IVerifyEmailRequest {
+  email: string;
+  code: string;
+}
+
+export interface IVerifyEmailResponse {
+  success?: boolean;
+  token?: string;
+  user?: IUser;
+  message: string;
+  errors?: {
+    email?: string[];
+  };
+}

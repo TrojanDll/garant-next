@@ -59,6 +59,10 @@ export interface ICreateOsagoPolicyRequest {
   duration_of_stay: string;
   start_date: string;
   promo_code: string;
+
+  insurant_type?: string;
+  insurant_fio?: string;
+  insurant_passport_number?: string;
 }
 
 export interface ICreateOsagoPolicyResponse {

@@ -42,7 +42,7 @@ export function useLogin() {
       if (axios.isAxiosError(error)) {
         const status = error.response?.status;
 
-        if (status === 402) {
+        if (status === 403) {
           setLoginError("unsubmited_email");
         } else {
           setLoginError("incorrect");
@@ -51,15 +51,15 @@ export function useLogin() {
     },
   });
 
-  useEffect(() => {
-    if (currientUserData) {
-      console.log(currientUserData);
-      setCurrientUser(currientUserData);
-      setTimeout(() => {
-        window.location.reload();
-      }, 100);
-    }
-  }, [isCurrientUserPending]);
+  // useEffect(() => {
+  //   if (currientUserData) {
+  //     console.log(currientUserData);
+  //     setCurrientUser(currientUserData);
+  //     setTimeout(() => {
+  //       window.location.reload();
+  //     }, 100);
+  //   }
+  // }, [isCurrientUserPending]);
 
   return {
     login,

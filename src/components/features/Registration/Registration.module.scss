@@ -6,6 +6,10 @@
   box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.13);
 }
 
+.modalSubstrate {
+  padding: 40px;
+}
+
 .title {
   font-weight: 500 !important;
   font-size: 26px !important;
@@ -20,6 +24,49 @@
 .submit {
   width: 100% !important;
   margin-top: 40px;
+}
+
+.modalSubstrate {
+  padding: 0;
+  margin-top: 0;
+  box-shadow: none;
+
+  .submit {
+    padding: 15px 0;
+    font-size: 16px;
+    border-radius: 18px;
+  }
+}
+
+.registrationSuccessSubstrate {
+  max-width: 505px;
+}
+
+.changeAuthTypeWrapper {
+  text-align: center;
+  margin-top: 30px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  text-align: center;
+  color: var(--grey-3);
+}
+
+.changeAuthTypeButton {
+  color: var(--blue);
+
+  position: relative;
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: var(--blue);
+    bottom: 2px;
+    left: 0;
+  }
 }
 
 @media (max-width: 1149px) {
@@ -37,5 +84,17 @@
   .submit {
     margin-top: 35px;
     width: 100% !important;
+  }
+
+  .modalSubstrate {
+    padding: 0;
+  }
+
+    .changeAuthTypeWrapper {
+    font-size: 14px;
+  }
+
+  .changeAuthTypeButton {
+    font-size: 14px;
   }
 }

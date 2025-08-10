@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import styles from "./OsagoApply.module.scss";
 
@@ -35,8 +35,13 @@ import OsagoApplyFields from "@/components/features/OsagoApplyFields/OsagoApplyF
 import useCurrientOsagoPolicyCalculation from "@/stores/Policy/currientOsagoPolicyCalculation";
 import useCurrientCarCategoryAndDuration from "@/stores/Policy/currientCarCategoryAndDuration.store";
 import { useGetCarBrandsV2 } from "@/hooks/cars/useGetCarBrandsV2";
+import { isAuthorized } from "@/helpers/auth/isAuthorized.helper";
+import useShadow from "@/stores/Shadow/shadow.store";
+import { ModalAuth } from "../ModalAuth/ModalAuth";
 
 const OsagoApply = () => {
+  const formRef = useRef<HTMLFormElement>(null);
+
   const { config, isLoading } = useOsagoFormConfig();
   const { navigateToOsagoConfirm } = useNavigation();
 
@@ -46,15 +51,17 @@ const OsagoApply = () => {
     reset,
     setValue,
     watch,
-    formState,
     trigger: formValidationTrigger,
     clearErrors,
+    unregister,
   } = useForm<IOsagoApplyForm>();
 
   const [isCarsBrandsLoaded, setIsCarsBrandsLoaded] = useState(false);
   const [isCountButtonClicked, setIsCountButtonClicked] =
     useState<boolean>(false);
   const [isInitialLoaded, setIsInitialLoaded] = useState(false);
+  const [isAuthVisible, setIsAuthVisible] = useState<boolean>(false);
+  const [isOwner, setIsOwner] = useState<boolean>(true);
 
   const currientCar = useCurrientCar((state) => state.car);
   const setIsAnotherCarMark = useOsagoApplyCarMark(
@@ -136,6 +143,13 @@ const OsagoApply = () => {
           found = await carsBrands.find(
             (item) => item.name === currientPolicy.brand
           );
+
+          if (currientPolicy.insurant_fio) {
+            setIsOwner(false);
+          } else {
+            setIsOwner(true);
+          }
+
           await setValue(
             "brand",
             Boolean(found) ? currientPolicy.brand : "Другое ТС"
@@ -152,13 +166,21 @@ const OsagoApply = () => {
   }, [currientCar, isCarsBrandsLoaded]);
 
   const onSubmit: SubmitHandler<IOsagoApplyForm> = (data) => {
-    const formatedData = formatDataToCreateOsagoRequest(data);
-    console.log(formatedData);
+    if (!isAuthorized()) {
+      toast.success("Войдите, чтобы продолжить", {
+        duration: 4000,
+      });
 
-    setPolicy(formatedData);
-    setPolicyCalculationData(paymentCalculationData);
+      setIsAuthVisible(true);
+    } else {
+      const formatedData = formatDataToCreateOsagoRequest(data);
+      console.log(formatedData);
 
-    navigateToOsagoConfirm();
+      setPolicy(formatedData);
+      setPolicyCalculationData(paymentCalculationData);
+
+      navigateToOsagoConfirm();
+    }
   };
 
   function onFormError() {
@@ -247,8 +269,36 @@ const OsagoApply = () => {
     };
   }, [isPaymentCalculationPending, isPaymentCalculationError]);
 
+  useEffect(() => {
+    if (isOwner) {
+      setValue("insurant_fio", "");
+      setValue("insurant_passport_number", "");
+      unregister(["insurant_fio", "insurant_passport_number", "insurant_type"]);
+    }
+  }, [isOwner]);
+
+  function triggerSubmitForm() {
+    formRef.current?.dispatchEvent(
+      new Event("submit", { bubbles: true, cancelable: true })
+    );
+  }
+
+  function handleSuccessAuth() {
+    console.log("handleSuccessAuth");
+    triggerSubmitForm();
+    setIsAuthVisible(false);
+  }
+
   return (
     <section className={styles.root}>
+      {isAuthVisible && (
+        <ModalAuth
+          handleSuccessAuth={handleSuccessAuth}
+          handleCloseAuth={() => handleSuccessAuth()}
+        />
+        // <div></div>
+      )}
+
       <ContentContainer>
         <CustomTitle tag="h1" isCentered>
           Оформить полис ОСАГО в Абхазии
@@ -259,6 +309,7 @@ const OsagoApply = () => {
         ) : (
           <Substrate withShadow="light" className={styles.substrate}>
             <form
+              ref={formRef}
               noValidate
               onSubmit={handleSubmit(onSubmit, onFormError)}
               action=""
@@ -267,6 +318,8 @@ const OsagoApply = () => {
                 config={config}
                 control={control}
                 clearErrors={clearErrors}
+                isOwner={isOwner}
+                setIsOwner={setIsOwner}
               />
 
               {isCountButtonClicked &&

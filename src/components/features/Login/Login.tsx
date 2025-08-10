@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./Login.module.scss";
 
@@ -12,13 +12,22 @@ import Button from "@/components/ui/Button/Button";
 import Link from "next/link";
 import { PAGES } from "@/config/pages-url.config";
 import toast from "react-hot-toast";
-import { useNavigation } from "@/hooks/navigation/useNavigation";
 import { useLogin } from "@/hooks/auth/useLogin";
 import LoginFields from "@/components/entities/LoginFields/LoginFields";
-import { useGetCurrientUserMutate } from "@/hooks/user/useGetCurrientUserMutate";
-import useCurrientUser from "@/stores/user/currientUser";
+import EmailConfirmation from "@/components/entities/EmailConfirmation/EmailConfirmation";
+import { useNavigation } from "@/hooks/navigation/useNavigation";
 
-const Login = () => {
+interface IProps {
+  variant?: "default" | "modal";
+  handleReturnButton?: () => void;
+  handleSuccessLogin?: () => void;
+}
+
+const Login = ({
+  variant = "default",
+  handleReturnButton,
+  handleSuccessLogin,
+}: IProps) => {
   const { handleSubmit, control } = useForm<ILoginForm>();
   const {
     login,
@@ -28,14 +37,19 @@ const Login = () => {
     loginError,
     loginResponse,
   } = useLogin();
-  const { navigateToPolicies } = useNavigation();
+
+  const [loginData, setLoginData] = useState<ILoginForm>();
+
+  const { navigateToHome } = useNavigation();
 
   const onSubmit: SubmitHandler<ILoginForm> = (data) => {
     console.log(data);
+    setLoginData(data);
     login(data);
   };
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
     let isMounted = true;
 
     if (!isLoginPending) {
@@ -48,10 +62,15 @@ const Login = () => {
       toast.dismiss();
     }
 
-    let timeoutId: NodeJS.Timeout;
     if (isLoginSuccess && isMounted) {
       toast.dismiss();
       toast.success("Успешный вход");
+
+      if (handleSuccessLogin) {
+        timeoutId = setTimeout(() => {
+          handleSuccessLogin();
+        }, 1500);
+      }
       // saveTokenToStorage(loginResponse?.data.token || "");
 
       // timeoutId = setTimeout(() => {
@@ -60,39 +79,71 @@ const Login = () => {
       // }, 50);
     }
 
-    // return () => {
-    //   isMounted = false;
+    return () => {
+      isMounted = false;
 
-    //   clearTimeout(timeoutId);
-    // };
+      clearTimeout(timeoutId);
+    };
   }, [isLoginPending, isLoginError, isLoginSuccess]);
 
+  function successLogin() {
+    if (handleSuccessLogin) {
+      handleSuccessLogin();
+    } else {
+      setTimeout(() => {
+        navigateToHome();
+      }, 1000);
+    }
+  }
+
+  const Wrapper: React.ElementType = variant === "default" ? Substrate : "div";
+
   return (
-    <Substrate className={styles.substrate}>
-      <form action="" noValidate onSubmit={handleSubmit(onSubmit)}>
-        <CustomTitle tag="h1" isCentered className={styles.title}>
-          Вход в личный кабинет
-        </CustomTitle>
+    <Wrapper
+      className={`${styles.substrate} ${
+        variant === "modal" ? styles.modalSubstrate : ""
+      }`}
+    >
+      {loginError === "unsubmited_email" ? (
+        <EmailConfirmation handleSuccessAuth={successLogin} email={loginData?.email ? loginData.email : ""} />
+      ) : (
+        <>
+          <form action="" noValidate onSubmit={handleSubmit(onSubmit)}>
+            <CustomTitle tag="h1" isCentered className={styles.title}>
+              Вход в личный кабинет
+            </CustomTitle>
 
-        {isLoginError && (
-          <div className={styles.errorMessage}>
-            {loginError === "unsubmited_email"
-              ? "Email не подтвержден"
-              : "Неверный Email или пароль"}
-          </div>
-        )}
+            {isLoginError && (
+              <div className={styles.errorMessage}>
+                "Неверный Email или пароль"
+              </div>
+            )}
 
-        <LoginFields control={control} />
+            <LoginFields control={control} />
 
-        <Link href={PAGES.RECOVERY} className={styles.recovery}>
-          Забыли пароль?
-        </Link>
+            <Link href={PAGES.RECOVERY} className={styles.recovery}>
+              Забыли пароль?
+            </Link>
 
-        <Button className={styles.submit} type="submit">
-          Войти
-        </Button>
-      </form>
-    </Substrate>
+            <Button className={styles.submit} type="submit">
+              Войти
+            </Button>
+          </form>
+
+          {variant === "modal" && (
+            <div className={styles.changeAuthTypeWrapper}>
+              Ещё нет аккаунта?{" "}
+              <button
+                onClick={handleReturnButton}
+                className={styles.changeAuthTypeButton}
+              >
+                Зарегистрируйтесь
+              </button>
+            </div>
+          )}
+        </>
+      )}
+    </Wrapper>
   );
 };
 

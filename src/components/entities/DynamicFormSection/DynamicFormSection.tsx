@@ -1,4 +1,11 @@
-import { Controller, Control, UseFormTrigger, UseFormClearErrors } from "react-hook-form";
+"use client";
+
+import {
+  Controller,
+  Control,
+  UseFormTrigger,
+  UseFormClearErrors,
+} from "react-hook-form";
 import InputsSelector from "@/components/ui/InputsSelector/InputsSelector";
 import { IFieldConfig } from "@/types/IFieldConfig";
 import { IOsagoApplyForm } from "@/types/OsagoApplyForm/IOsagoApplyForm";
@@ -11,6 +18,7 @@ import styles from "./DynamicFormSection.module.scss";
 import useCarBrand from "@/stores/Cars/carBrand.store";
 import { TPersonType } from "@/types/user.types";
 import useCurrientCarCategoryAndDuration from "@/stores/Policy/currientCarCategoryAndDuration.store";
+import { useEffect, useState } from "react";
 
 interface Props {
   fields: IFieldConfig<IOsagoApplyForm>[];
@@ -20,6 +28,7 @@ interface Props {
   owner?: TPersonType;
   formValidationTrigger?: UseFormTrigger<IOsagoApplyForm>;
   clearErrors?: UseFormClearErrors<IOsagoApplyForm>;
+  personTypeID?: string;
 }
 
 const DynamicFormSection = ({
@@ -28,10 +37,24 @@ const DynamicFormSection = ({
   className,
   isTopItemSingle = false,
   owner,
+  personTypeID,
   clearErrors,
 }: Props) => {
-  const isAnotherCarVisible = useOsagoApplyCarMark((state) => state.isAnotherCarMark);
-  const personType = usePersonType((state) => state.personType);
+  const isAnotherCarVisible = useOsagoApplyCarMark(
+    (state) => state.isAnotherCarMark
+  );
+  const personTypeStore = usePersonType((state) => state.personType);
+  const [personType, setPersonType] = useState<TPersonType>("individual");
+
+  useEffect(() => {
+    setPersonType(
+      personTypeStore?.find((personType) => {
+        if (personType.id === personTypeID) {
+          return true;
+        }
+      })?.value || personTypeStore[0].value
+    );
+  }, [personTypeStore]);
 
   const setCarCategoryOsago = useCurrientCarCategoryAndDuration(
     (state) => state.setCarCategory
@@ -42,7 +65,9 @@ const DynamicFormSection = ({
   const carCategoryOsago = useCurrientCarCategoryAndDuration(
     (state) => state.carCategory
   );
-  const durationOsago = useCurrientCarCategoryAndDuration((state) => state.duration);
+  const durationOsago = useCurrientCarCategoryAndDuration(
+    (state) => state.duration
+  );
 
   const fieldText = (
     field: IFieldConfig<IOsagoApplyForm>
@@ -53,7 +78,21 @@ const DynamicFormSection = ({
     if (field.name === "fio" && personType === "legal_entity") {
       label = "Полное наименование";
       placeholder = "Введите полное наименование";
-    } else if (field.name === "passport_number" && personType === "legal_entity") {
+    } else if (
+      field.name === "passport_number" &&
+      personType === "legal_entity"
+    ) {
+      label = "ИНН";
+      placeholder = "Введите ИНН";
+    }
+
+    if (field.name === "insurant_fio" && personType === "legal_entity") {
+      label = "Полное наименование";
+      placeholder = "Введите полное наименование";
+    } else if (
+      field.name === "insurant_passport_number" &&
+      personType === "legal_entity"
+    ) {
       label = "ИНН";
       placeholder = "Введите ИНН";
     }
@@ -147,8 +186,10 @@ const DynamicFormSection = ({
 
       if (!isContains) {
         newOptions?.push({
-          label: "Автотранспортные средства , исползуемые в качестве такси и по найму",
-          value: "Автотранспортные средства , исползуемые в качестве такси и по найму",
+          label:
+            "Автотранспортные средства , исползуемые в качестве такси и по найму",
+          value:
+            "Автотранспортные средства , исползуемые в качестве такси и по найму",
         });
       }
     }
@@ -160,9 +201,9 @@ const DynamicFormSection = ({
       {fields.map((config, i) => (
         <div
           key={config.name}
-          className={`${isTopItemSingle && i === 0 ? styles.singleInStroke : ""} ${
-            styles.inputWrapper
-          }  ${
+          className={`${
+            isTopItemSingle && i === 0 ? styles.singleInStroke : ""
+          } ${styles.inputWrapper}  ${
             config.name !== "vehicle_refined_make"
               ? styles.visible
               : isAnotherCarVisible
@@ -185,7 +226,7 @@ const DynamicFormSection = ({
             render={({ field, fieldState }) => (
               <InputsSelector
                 owner={owner}
-                value={field.value}
+                value={field.value ? field.value : ""}
                 setValue={(value) => {
                   if (clearErrors) {
                     clearErrors(config.name);
@@ -205,7 +246,9 @@ const DynamicFormSection = ({
                 className={`${styles.input} ${className}  `}
                 {...config}
                 type={
-                  config.name === "model" && isAnotherCarVisible ? "input" : config.type
+                  config.name === "model" && isAnotherCarVisible
+                    ? "input"
+                    : config.type
                 }
                 label={fieldText(config).label}
                 placeholder={fieldText(config).placeholder}
@@ -216,6 +259,7 @@ const DynamicFormSection = ({
                     ? handleTransportCategoryOptions(config.options)
                     : config.options
                 }
+                personTypeID={personTypeID}
               />
             )}
           />

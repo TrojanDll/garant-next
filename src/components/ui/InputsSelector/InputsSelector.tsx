@@ -31,6 +31,7 @@ interface IProps {
   popularBrands?: IOptions[];
   owner?: TPersonType;
   startDate?: Date;
+  personTypeID?: string;
 }
 
 const InputsSelector = ({
@@ -54,11 +55,34 @@ const InputsSelector = ({
   tooltipText,
   owner = "individual",
   startDate,
+  personTypeID,
 }: IProps) => {
+  const personType = usePersonType((state) => state.personType);
   const setPersonType = usePersonType((state) => state.setPersonType);
 
   const handleButtonGroupChange = (value: TButtonGroupRequest) => {
-    setPersonType(personTypes[value.index]);
+    if (personType.find((personType) => personType.id === personTypeID)) {
+      setPersonType(
+        personType.map((personType) => {
+          if (personType.id === personTypeID) {
+            return {
+              id: personTypeID || "",
+              value: personTypes[value.index],
+            };
+          } else {
+            return personType;
+          }
+        })
+      );
+    } else {
+      setPersonType([
+        ...personType,
+        {
+          id: personTypeID || "",
+          value: personTypes[value.index],
+        },
+      ]);
+    }
 
     setValue(value.value);
   };
@@ -73,7 +97,9 @@ const InputsSelector = ({
           name={name}
           popularBrands={name === "brand" ? popularBrands : undefined}
           allOptions={name === "brand" ? options : undefined}
-          options={name === "brand" ? ([] as IOptions[]) : (options as IOptions[])}
+          options={
+            name === "brand" ? ([] as IOptions[]) : (options as IOptions[])
+          }
           label={label}
           placeholder={placeholder}
           required={required}
@@ -104,7 +130,9 @@ const InputsSelector = ({
           name={name}
           items={buttons as string[]}
           key={name}
-          onButtonClick={(value: TButtonGroupRequest) => handleButtonGroupChange(value)}
+          onButtonClick={(value: TButtonGroupRequest) =>
+            handleButtonGroupChange(value)
+          }
         />
       ) : (
         ""
