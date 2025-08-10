@@ -19,6 +19,8 @@ export function Timer({
   const [timeLeft, setTimeLeft] = useState(duration);
   const TIMER_ID = `timerEnd-${timerID}`;
 
+  if (!TIMER_ID) return;
+
   useEffect(() => {
     const savedEndTime = localStorage.getItem(TIMER_ID);
 
@@ -43,17 +45,17 @@ export function Timer({
     };
 
     tick();
-    const timerId = setInterval(tick, 1000);
+    const timerIdInterval = setInterval(tick, 1000);
 
     function clearIntervalFunc() {
-      if (timerId) {
-        clearInterval(timerId);
+      if (timerIdInterval) {
+        clearInterval(timerIdInterval);
       }
     }
 
     return () => {
-      if (timerId) {
-        clearInterval(timerId);
+      if (timerIdInterval) {
+        clearInterval(timerIdInterval);
       }
     };
   }, [duration]);
