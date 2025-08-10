@@ -46,7 +46,7 @@ const Registration = ({
   const [formatedRegistrationData, setFormatedRegistrationData] =
     useState<IRegistrationForm>();
 
-  const { navigateToHome } = useNavigation();
+  const { navigateToHome, reloadPage } = useNavigation();
 
   const password = watch("password");
 
@@ -67,6 +67,8 @@ const Registration = ({
   }
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     let isMounted = true;
 
     if (isRegistrationPending) {
@@ -84,6 +86,14 @@ const Registration = ({
       toast.dismiss();
       toast.success("Регистрация прошла успешно");
       setIsEmailConfirmationVisible(true);
+
+      if (variant === "default") {
+        timeoutId = setTimeout(() => {
+          console.log("navigateToHome");
+          navigateToHome();
+          reloadPage();
+        }, 1500);
+      }
       // saveTokenToStorage(registrationResponse?.data.token || "");
     }
 
@@ -98,6 +108,7 @@ const Registration = ({
     } else {
       setTimeout(() => {
         navigateToHome();
+        reloadPage();
       }, 1000);
     }
   }

@@ -48,7 +48,7 @@ const Login = ({
 
   const [loginData, setLoginData] = useState<ILoginForm>();
 
-  const { navigateToHome } = useNavigation();
+  const { navigateToHome, reloadPage } = useNavigation();
 
   const onSubmit: SubmitHandler<ILoginForm> = (data) => {
     console.log(data);
@@ -79,6 +79,14 @@ const Login = ({
           handleSuccessLogin();
         }, 1500);
       }
+
+      if (variant === "default") {
+        timeoutId = setTimeout(() => {
+          console.log("navigateToHome");
+          navigateToHome();
+          reloadPage();
+        }, 1500);
+      }
       // saveTokenToStorage(loginResponse?.data.token || "");
 
       // timeoutId = setTimeout(() => {
@@ -104,6 +112,7 @@ const Login = ({
     } else {
       setTimeout(() => {
         navigateToHome();
+        reloadPage();
       }, 1000);
     }
   }
