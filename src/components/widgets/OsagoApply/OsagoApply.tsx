@@ -296,7 +296,7 @@ const OsagoApply = () => {
       {isAuthVisible && (
         <ModalAuth
           handleSuccessAuth={handleSuccessAuth}
-          handleCloseAuth={() => handleSuccessAuth()}
+          handleCloseAuth={() => setIsAuthVisible(false)}
         />
         // <div></div>
       )}

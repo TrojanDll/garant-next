@@ -37,7 +37,9 @@ export function Timer({
 
       if (diff === 0) {
         localStorage.removeItem(TIMER_ID);
-        clearInterval(timerId);
+        if (timerId) {
+          clearInterval(timerId);
+        }
         handleFinish();
       }
     };
