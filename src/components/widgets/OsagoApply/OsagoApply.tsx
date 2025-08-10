@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import styles from "./OsagoApply.module.scss";
 
@@ -40,6 +40,8 @@ import useShadow from "@/stores/Shadow/shadow.store";
 import { ModalAuth } from "../ModalAuth/ModalAuth";
 
 const OsagoApply = () => {
+  const formRef = useRef<HTMLFormElement>(null);
+
   const { config, isLoading } = useOsagoFormConfig();
   const { navigateToOsagoConfirm } = useNavigation();
 
@@ -275,10 +277,25 @@ const OsagoApply = () => {
     }
   }, [isOwner]);
 
+  function triggerSubmitForm() {
+    formRef.current?.dispatchEvent(
+      new Event("submit", { bubbles: true, cancelable: true })
+    );
+  }
+
+  function handleSuccessAuth() {
+    console.log("handleSuccessAuth");
+    triggerSubmitForm();
+    setIsAuthVisible(false);
+  }
+
   return (
     <section className={styles.root}>
       {isAuthVisible && (
-        <ModalAuth handleCloseAuth={() => setIsAuthVisible(false)} />
+        <ModalAuth
+          handleSuccessAuth={handleSuccessAuth}
+          handleCloseAuth={() => handleSuccessAuth()}
+        />
         // <div></div>
       )}
 
@@ -292,6 +309,7 @@ const OsagoApply = () => {
         ) : (
           <Substrate withShadow="light" className={styles.substrate}>
             <form
+              ref={formRef}
               noValidate
               onSubmit={handleSubmit(onSubmit, onFormError)}
               action=""

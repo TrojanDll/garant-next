@@ -9,9 +9,14 @@ import Login from "@/components/features/Login/Login";
 interface IProps {
   className?: string;
   handleCloseAuth: () => void;
+  handleSuccessAuth: () => void;
 }
 
-export function ModalAuth({ className, handleCloseAuth }: IProps) {
+export function ModalAuth({
+  className,
+  handleCloseAuth,
+  handleSuccessAuth,
+}: IProps) {
   const [authType, setAuthType] = useState<"login" | "registration">(
     "registration"
   );
@@ -25,6 +30,14 @@ export function ModalAuth({ className, handleCloseAuth }: IProps) {
     }
   }, [isRegistrationModalOpen, isCodeModalOpen]);
 
+  function handleSuccessRegistration() {
+    handleSuccessAuth();
+  }
+
+  function handleSuccessLogin() {
+    handleSuccessAuth();
+  }
+
   return (
     <div className={`${className} ${styles.root}`}>
       <Modal
@@ -35,13 +48,13 @@ export function ModalAuth({ className, handleCloseAuth }: IProps) {
           <Registration
             handleReturnButton={() => setAuthType("login")}
             variant="modal"
-            handleSuccessRegistration={handleCloseAuth}
+            handleSuccessRegistration={handleSuccessRegistration}
           />
         ) : (
           <Login
             variant="modal"
             handleReturnButton={() => setAuthType("registration")}
-            handleSuccessLogin={handleCloseAuth}
+            handleSuccessLogin={handleSuccessLogin}
           />
         )}
       </Modal>

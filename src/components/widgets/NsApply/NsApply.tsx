@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import styles from "./NsApply.module.scss";
 
@@ -34,6 +34,8 @@ export const defaultInsuredValues: IInsuredCreationFilelds = {
 };
 
 const NsApply = () => {
+  const formRef = useRef<HTMLFormElement>(null);
+
   const [isCalculatedBlockVisible, setIsCalculatedBlockVisible] =
     useState<boolean>(false);
 
@@ -159,10 +161,25 @@ const NsApply = () => {
     };
   }, [isCalculateNsPending, isCalculateNsError, isPromocodeError]);
 
+  function triggerSubmitForm() {
+    formRef.current?.dispatchEvent(
+      new Event("submit", { bubbles: true, cancelable: true })
+    );
+  }
+
+  function handleSuccessAuth() {
+    console.log("handleSuccessAuth");
+    triggerSubmitForm();
+    setIsAuthVisible(false);
+  }
+
   return (
     <section className={styles.root}>
       {isAuthVisible && (
-        <ModalAuth handleCloseAuth={() => setIsAuthVisible(false)} />
+        <ModalAuth
+          handleSuccessAuth={handleSuccessAuth}
+          handleCloseAuth={() => setIsAuthVisible(false)}
+        />
       )}
 
       <ContentContainer>
@@ -171,6 +188,7 @@ const NsApply = () => {
         </CustomTitle>
 
         <form
+          ref={formRef}
           action=""
           noValidate
           onSubmit={handleSubmit(onSubmit, onFormError)}
