@@ -57,6 +57,7 @@ export function Timer({
       if (timerIdInterval) {
         clearInterval(timerIdInterval);
       }
+      localStorage.removeItem(TIMER_ID);
     };
   }, [duration]);
 
