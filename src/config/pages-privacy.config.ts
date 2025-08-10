@@ -9,6 +9,7 @@ export const publicPages: string[] = [
   PAGES.SUPPORT,
   PAGES.HOME,
   PAGES.NS,
+  PAGES.NS_APPLY,
   PAGES.OSAGO,
   PAGES.OSAGO_APPLY,
   PAGES.POLICY,
@@ -25,6 +26,5 @@ export const privatePages: string[] = [
   PAGES.EDIT_PERSONAL_DATA,
   PAGES.MY_POLICIES,
   PAGES.OSAGO_CONFIRM,
-  PAGES.NS_APPLY,
   PAGES.NS_CONFIRM,
 ];

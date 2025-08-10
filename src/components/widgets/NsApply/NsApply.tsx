@@ -23,6 +23,8 @@ import usePromocodeEvent from "@/stores/Promocode/promocodeEvent.store";
 import { useNavigation } from "@/hooks/navigation/useNavigation";
 import useCurrientNsPolicy from "@/stores/Policy/currientNsPolicy";
 import toast from "react-hot-toast";
+import { isAuthorized } from "@/helpers/auth/isAuthorized.helper";
+import { ModalAuth } from "../ModalAuth/ModalAuth";
 
 export const defaultInsuredValues: IInsuredCreationFilelds = {
   date_of_birth: "",
@@ -51,6 +53,8 @@ const NsApply = () => {
   const setCurrientNsPolicyCalculation = useCurrientNsPolicy(
     (state) => state.setCalculationData
   );
+
+  const [isAuthVisible, setIsAuthVisible] = useState<boolean>(false);
 
   const { navigateToNsConfirm } = useNavigation();
 
@@ -111,12 +115,20 @@ const NsApply = () => {
   }, [JSON.stringify(fieldsToRecolculateWatch)]);
 
   function onSubmit(data: ICreateNsPolicyRequest): void {
-    console.log("form data:", data);
+    if (!isAuthorized()) {
+      toast.success("Войдите, чтобы продолжить", {
+        duration: 4000,
+      });
 
-    setCurrientNsPolicy(data);
-    setCurrientNsPolicyCalculation(calculateNsData);
+      setIsAuthVisible(true);
+    } else {
+      console.log("form data:", data);
 
-    navigateToNsConfirm();
+      setCurrientNsPolicy(data);
+      setCurrientNsPolicyCalculation(calculateNsData);
+
+      navigateToNsConfirm();
+    }
   }
 
   function onFormError() {
@@ -149,12 +161,20 @@ const NsApply = () => {
 
   return (
     <section className={styles.root}>
+      {isAuthVisible && (
+        <ModalAuth handleCloseAuth={() => setIsAuthVisible(false)} />
+      )}
+
       <ContentContainer>
         <CustomTitle tag="h1" isCentered>
           Оформить полис от несчастного случая в Абхазии
         </CustomTitle>
 
-        <form action="" noValidate onSubmit={handleSubmit(onSubmit, onFormError)}>
+        <form
+          action=""
+          noValidate
+          onSubmit={handleSubmit(onSubmit, onFormError)}
+        >
           <Substrate withShadow="light" className={styles.substrate}>
             <NsApplyInsuredList
               control={control}
@@ -165,10 +185,15 @@ const NsApply = () => {
             />
 
             <div className={styles.staticFieldsWrapper}>
-              <NsApplyStaticFields clearErrors={clearErrors} control={control} />
+              <NsApplyStaticFields
+                clearErrors={clearErrors}
+                control={control}
+              />
             </div>
 
-            {calculateNsData && isCalculateNsSuccess && isCalculatedBlockVisible ? (
+            {calculateNsData &&
+            isCalculateNsSuccess &&
+            isCalculatedBlockVisible ? (
               <CountedPrice
                 className={styles.countedPrice}
                 finalCost={calculateNsData.to_be_paid}
