@@ -10,30 +10,94 @@ import { CustomOneTimePasswordField } from "@/components/ui/CustomOneTimePasswor
 import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button/Button";
 import { Timer } from "@/components/ui/Timer/Timer";
+import { useGetNewVerificationCode } from "@/hooks/auth/useGetNewVerificationCode";
+import toast from "react-hot-toast";
+import { useVerifyEmail } from "@/hooks/auth/useVerifyEmail";
 
 interface IProps {
   email: string;
+  isMustRedirect?: boolean;
 }
 
-const EmailConfirmation = ({ email }: IProps) => {
+const EmailConfirmation = ({ email, isMustRedirect = false }: IProps) => {
   const [confirmationCode, setConfirmationCode] = useState<string>("");
   const [isNewCodeAvailable, setIsNewCodeAvailable] = useState<boolean>(false);
 
-  useEffect(() => {
-    console.log(confirmationCode);
-  }, [confirmationCode]);
+  const { navigateToHome } = useNavigation();
+
+  const {
+    mutate: getNewVerificationCode,
+    isPending: isGetNewVerificationCodePending,
+    isSuccess: isGetNewVerificationCodeSuccess,
+    isError: isGetNewVerificationCodeError,
+  } = useGetNewVerificationCode();
+  const {
+    mutate: verifyEmail,
+    isPending: isVerifyEmailPending,
+    isSuccess: isVerifyEmailSuccess,
+    isError: isVerifyEmailError,
+    data: verifyEmailData,
+  } = useVerifyEmail();
 
   const { reloadPage } = useNavigation();
   const setAuthType = useAuthType((state) => state.setAuthType);
 
-  const handleReturnButton = () => {
+  function handleReturnButton() {
     setAuthType("login");
     reloadPage();
-  };
+  }
 
   function handleNewCodeButton() {
     setIsNewCodeAvailable(false);
+    getNewVerificationCode({ email: email });
   }
+
+  useEffect(() => {
+    if (isGetNewVerificationCodePending) {
+      toast.loading("Отправка кода");
+    } else {
+      toast.dismiss();
+    }
+
+    if (isGetNewVerificationCodeSuccess) {
+      toast.success("Новый код отправлен!");
+    } else if (isGetNewVerificationCodeError) {
+      toast.error("Ошибка отправки кода");
+    }
+  }, [isGetNewVerificationCodePending]);
+
+  function handleVerifyEmailButtonClick() {
+    verifyEmail({ email: email, code: confirmationCode });
+  }
+
+  useEffect(() => {
+    let timoutId: NodeJS.Timeout;
+
+    if (isVerifyEmailPending) {
+      toast.loading("Проверка кода");
+    } else {
+      toast.dismiss();
+    }
+
+    if (isVerifyEmailSuccess) {
+      toast.success("Код подтвержден!");
+      if (isMustRedirect) {
+        timoutId = setTimeout(() => {
+          navigateToHome();
+        }, 2000);
+      }
+    } else if (isVerifyEmailError) {
+      if (verifyEmailData?.status === 410) {
+        toast.error("Код подтверждения устарел. Запросите новый код");
+      } else {
+        toast.error("Ошибка. Неверный код");
+      }
+    }
+
+    return () => {
+      clearTimeout(timoutId);
+    };
+  }, [isVerifyEmailPending]);
 
   return (
     <>
@@ -51,7 +115,12 @@ const EmailConfirmation = ({ email }: IProps) => {
         className={styles.codeField}
       />
 
-      <Button className={styles.submitButton}>Далее</Button>
+      <Button
+        onClickEvent={handleVerifyEmailButtonClick}
+        className={styles.submitButton}
+      >
+        Далее
+      </Button>
 
       {isNewCodeAvailable ? (
         <Button
@@ -63,7 +132,7 @@ const EmailConfirmation = ({ email }: IProps) => {
         </Button>
       ) : (
         <div className={styles.timerWrapper}>
-          Получить новый код через {" "}
+          Получить новый код через{" "}
           <Timer
             duration={60}
             className={styles.timer}

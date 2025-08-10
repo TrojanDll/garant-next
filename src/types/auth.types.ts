@@ -42,7 +42,7 @@ export interface IGetNewVerificationCodeRequest {
 }
 
 export interface IGetNewVerificationCodeResponse {
-  success: boolean;
+  success?: boolean;
   status: string;
 }
 
@@ -52,6 +52,9 @@ export interface IVerifyEmailRequest {
 }
 
 export interface IVerifyEmailResponse {
+  success?: boolean;
+  token?: string;
+  user?: IUser;
   message: string;
   errors?: {
     email?: string[];
