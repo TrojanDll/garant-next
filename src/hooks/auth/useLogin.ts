@@ -42,7 +42,7 @@ export function useLogin() {
       if (axios.isAxiosError(error)) {
         const status = error.response?.status;
 
-        if (status === 402) {
+        if (status === 403) {
           setLoginError("unsubmited_email");
         } else {
           setLoginError("incorrect");

@@ -98,7 +98,7 @@ const Registration = ({
     } else {
       setTimeout(() => {
         navigateToHome();
-      }, 1500);
+      }, 1000);
     }
   }
 
@@ -115,7 +115,7 @@ const Registration = ({
           email={formatedRegistrationData?.email || ""}
           handleReturnButtonClick={() => setIsEmailConfirmationVisible(false)}
           isModal={variant === "modal"}
-          handleSuccessRegistration={successRegistration}
+          handleSuccessAuth={successRegistration}
         />
       ) : (
         <form

@@ -20,7 +20,7 @@ interface IProps {
   isMustRedirect?: boolean;
   isModal?: boolean;
   handleReturnButtonClick?: () => void;
-  handleSuccessRegistration?: () => void;
+  handleSuccessAuth?: () => void;
 }
 
 const EmailConfirmation = ({
@@ -28,7 +28,7 @@ const EmailConfirmation = ({
   isMustRedirect = false,
   isModal = false,
   handleReturnButtonClick,
-  handleSuccessRegistration,
+  handleSuccessAuth,
 }: IProps) => {
   const [confirmationCode, setConfirmationCode] = useState<string>("");
   const [isNewCodeAvailable, setIsNewCodeAvailable] = useState<boolean>(false);
@@ -108,9 +108,9 @@ const EmailConfirmation = ({
         }, 2000);
       }
 
-      if (handleSuccessRegistration) {
+      if (handleSuccessAuth) {
         timoutId = setTimeout(() => {
-          handleSuccessRegistration();
+          handleSuccessAuth();
         }, 2000);
       }
     } else if (isVerifyEmailError) {

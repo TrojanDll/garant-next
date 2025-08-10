@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./Login.module.scss";
 
@@ -14,6 +14,8 @@ import { PAGES } from "@/config/pages-url.config";
 import toast from "react-hot-toast";
 import { useLogin } from "@/hooks/auth/useLogin";
 import LoginFields from "@/components/entities/LoginFields/LoginFields";
+import EmailConfirmation from "@/components/entities/EmailConfirmation/EmailConfirmation";
+import { useNavigation } from "@/hooks/navigation/useNavigation";
 
 interface IProps {
   variant?: "default" | "modal";
@@ -36,8 +38,13 @@ const Login = ({
     loginResponse,
   } = useLogin();
 
+  const [loginData, setLoginData] = useState<ILoginForm>();
+
+  const { navigateToHome } = useNavigation();
+
   const onSubmit: SubmitHandler<ILoginForm> = (data) => {
     console.log(data);
+    setLoginData(data);
     login(data);
   };
 
@@ -79,6 +86,16 @@ const Login = ({
     };
   }, [isLoginPending, isLoginError, isLoginSuccess]);
 
+  function successLogin() {
+    if (handleSuccessLogin) {
+      handleSuccessLogin();
+    } else {
+      setTimeout(() => {
+        navigateToHome();
+      }, 1000);
+    }
+  }
+
   const Wrapper: React.ElementType = variant === "default" ? Substrate : "div";
 
   return (
@@ -87,40 +104,44 @@ const Login = ({
         variant === "modal" ? styles.modalSubstrate : ""
       }`}
     >
-      <form action="" noValidate onSubmit={handleSubmit(onSubmit)}>
-        <CustomTitle tag="h1" isCentered className={styles.title}>
-          Вход в личный кабинет
-        </CustomTitle>
+      {loginError === "unsubmited_email" ? (
+        <EmailConfirmation handleSuccessAuth={successLogin} email={loginData?.email ? loginData.email : ""} />
+      ) : (
+        <>
+          <form action="" noValidate onSubmit={handleSubmit(onSubmit)}>
+            <CustomTitle tag="h1" isCentered className={styles.title}>
+              Вход в личный кабинет
+            </CustomTitle>
 
-        {isLoginError && (
-          <div className={styles.errorMessage}>
-            {loginError === "unsubmited_email"
-              ? "Email не подтвержден"
-              : "Неверный Email или пароль"}
-          </div>
-        )}
+            {isLoginError && (
+              <div className={styles.errorMessage}>
+                "Неверный Email или пароль"
+              </div>
+            )}
 
-        <LoginFields control={control} />
+            <LoginFields control={control} />
 
-        <Link href={PAGES.RECOVERY} className={styles.recovery}>
-          Забыли пароль?
-        </Link>
+            <Link href={PAGES.RECOVERY} className={styles.recovery}>
+              Забыли пароль?
+            </Link>
 
-        <Button className={styles.submit} type="submit">
-          Войти
-        </Button>
-      </form>
+            <Button className={styles.submit} type="submit">
+              Войти
+            </Button>
+          </form>
 
-      {variant === "modal" && (
-        <div className={styles.changeAuthTypeWrapper}>
-          Ещё нет аккаунта?{" "}
-          <button
-            onClick={handleReturnButton}
-            className={styles.changeAuthTypeButton}
-          >
-            Зарегистрируйтесь
-          </button>
-        </div>
+          {variant === "modal" && (
+            <div className={styles.changeAuthTypeWrapper}>
+              Ещё нет аккаунта?{" "}
+              <button
+                onClick={handleReturnButton}
+                className={styles.changeAuthTypeButton}
+              >
+                Зарегистрируйтесь
+              </button>
+            </div>
+          )}
+        </>
       )}
     </Wrapper>
   );
