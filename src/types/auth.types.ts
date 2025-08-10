@@ -36,3 +36,24 @@ export interface ILogoutResponse {
 export type IRegistrationFormApiData = Omit<IRegistrationForm, "checkbox">;
 
 export type TAuthType = "login" | "registration";
+
+export interface IGetNewVerificationCodeRequest {
+  email: string;
+}
+
+export interface IGetNewVerificationCodeResponse {
+  success: boolean;
+  status: string;
+}
+
+export interface IVerifyEmailRequest {
+  email: string;
+  code: string;
+}
+
+export interface IVerifyEmailResponse {
+  message: string;
+  errors?: {
+    email?: string[];
+  };
+}
