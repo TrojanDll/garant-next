@@ -42,6 +42,33 @@
   max-width: 505px;
 }
 
+.changeAuthTypeWrapper {
+  text-align: center;
+  margin-top: 30px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  text-align: center;
+  color: var(--grey-3);
+}
+
+.changeAuthTypeButton {
+  color: var(--blue);
+
+  position: relative;
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: var(--blue);
+    bottom: 2px;
+    left: 0;
+  }
+}
+
 @media (max-width: 1149px) {
   .substrate {
     padding: 30px 20px 40px 20px;
@@ -57,5 +84,9 @@
   .submit {
     margin-top: 35px;
     width: 100% !important;
+  }
+
+  .modalSubstrate {
+    padding: 0;
   }
 }

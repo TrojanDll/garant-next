@@ -18,9 +18,16 @@ import IconArrowLeft from "@/assets/icons/IconArrowLeft";
 interface IProps {
   email: string;
   isMustRedirect?: boolean;
+  isModal?: boolean;
+  handleReturnButtonClick?: () => void;
 }
 
-const EmailConfirmation = ({ email, isMustRedirect = false }: IProps) => {
+const EmailConfirmation = ({
+  email,
+  isMustRedirect = false,
+  isModal = false,
+  handleReturnButtonClick,
+}: IProps) => {
   const [confirmationCode, setConfirmationCode] = useState<string>("");
   const [isNewCodeAvailable, setIsNewCodeAvailable] = useState<boolean>(false);
   const [isErrorMessageVisible, setIsErrorMessageVisible] =
@@ -50,8 +57,12 @@ const EmailConfirmation = ({ email, isMustRedirect = false }: IProps) => {
   const setAuthType = useAuthType((state) => state.setAuthType);
 
   function handleReturnButton() {
-    setAuthType("login");
-    reloadPage();
+    if (handleReturnButtonClick) {
+      handleReturnButtonClick();
+    } else {
+      setAuthType("login");
+      reloadPage();
+    }
   }
 
   function handleNewCodeButton() {
@@ -157,8 +168,8 @@ const EmailConfirmation = ({ email, isMustRedirect = false }: IProps) => {
         type="button"
         onClick={handleReturnButton}
       >
-        <IconArrowLeft className={styles.iconArrowLeft}/>
-        Вернуться ко входу
+        <IconArrowLeft className={styles.iconArrowLeft} />
+        {isModal ? <>Вернуться к регистрации</> : <>Вернуться ко входу</>}
       </button>
     </>
   );

@@ -15,7 +15,11 @@ import toast from "react-hot-toast";
 import { useLogin } from "@/hooks/auth/useLogin";
 import LoginFields from "@/components/entities/LoginFields/LoginFields";
 
-const Login = () => {
+interface IProps {
+  variant?: "default" | "modal";
+}
+
+const Login = ({ variant = "default" }: IProps) => {
   const { handleSubmit, control } = useForm<ILoginForm>();
   const { login, isLoginSuccess, isLoginError, isLoginPending, loginError } =
     useLogin();
@@ -56,8 +60,10 @@ const Login = () => {
     // };
   }, [isLoginPending, isLoginError, isLoginSuccess]);
 
+  const Wrapper: React.ElementType = variant === "default" ? Substrate : "div";
+
   return (
-    <Substrate className={styles.substrate}>
+    <Wrapper className={`${styles.substrate} ${styles.modalSubstrate}`}>
       <form action="" noValidate onSubmit={handleSubmit(onSubmit)}>
         <CustomTitle tag="h1" isCentered className={styles.title}>
           Вход в личный кабинет
@@ -81,7 +87,7 @@ const Login = () => {
           Войти
         </Button>
       </form>
-    </Substrate>
+    </Wrapper>
   );
 };
 

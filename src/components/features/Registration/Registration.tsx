@@ -33,15 +33,11 @@ const Registration = ({ onCloseEvent, variant = "default" }: IProps) => {
     registrationErrors,
   } = useRegistration();
 
+  const [isEmailConfirmationVisible, setIsEmailConfirmationVisible] =
+    useState<boolean>(false);
+
   const [formatedRegistrationData, setFormatedRegistrationData] =
-    useState<IRegistrationForm>({
-      checkbox: true,
-      email: "ivankapetrov93@mail.ru",
-      name: "ivan",
-      password: "12345678",
-      password_confirmation: "12345678",
-      surname: "ivanov",
-    });
+    useState<IRegistrationForm>();
 
   const password = watch("password");
 
@@ -78,6 +74,7 @@ const Registration = ({ onCloseEvent, variant = "default" }: IProps) => {
     } else if (isRegistrationSuccess && isMounted) {
       toast.dismiss();
       toast.success("Регистрация прошла успешно");
+      setIsEmailConfirmationVisible(true);
       // saveTokenToStorage(registrationResponse?.data.token || "");
     }
 
@@ -94,8 +91,12 @@ const Registration = ({ onCloseEvent, variant = "default" }: IProps) => {
         variant === "modal" ? styles.modalSubstrate : ""
       } ${isRegistrationSuccess ? styles.registrationSuccessSubstrate : ""}`}
     >
-      {true ? (
-        <EmailConfirmation email={formatedRegistrationData?.email || ""} />
+      {isRegistrationSuccess && isEmailConfirmationVisible ? (
+        <EmailConfirmation
+          email={formatedRegistrationData?.email || ""}
+          handleReturnButtonClick={() => setIsEmailConfirmationVisible(false)}
+          isModal={variant === "modal"}
+        />
       ) : (
         <form
           action=""
@@ -117,6 +118,11 @@ const Registration = ({ onCloseEvent, variant = "default" }: IProps) => {
           </Button>
         </form>
       )}
+
+      <div className={styles.changeAuthTypeWrapper}>
+        Уже зарегистрированы?{" "}
+        <button className={styles.changeAuthTypeButton}>Войдите</button>
+      </div>
     </Wrapper>
   );
 };

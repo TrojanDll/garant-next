@@ -64,3 +64,16 @@
     transform: translate(-50%, -50%) scale(1);
   }
 }
+
+@media (max-width: 1149px) {
+  .substrate {
+    padding: 20px;
+  }
+
+  .closeButton {
+    width: 18px;
+    height: 18px;
+    top: 20px;
+    right: 20px;
+  }
+}

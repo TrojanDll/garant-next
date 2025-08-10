@@ -4,6 +4,7 @@ import Modal from "@/components/ui/Modal/Modal";
 import styles from "./ModalAuth.module.scss";
 import { useEffect, useState } from "react";
 import Registration from "@/components/features/Registration/Registration";
+import Login from "@/components/features/Login/Login";
 
 interface IProps {
   className?: string;
@@ -11,6 +12,9 @@ interface IProps {
 }
 
 export function ModalAuth({ className, handleCloseAuth }: IProps) {
+  const [authType, setAuthType] = useState<"login" | "registration">(
+    "registration"
+  );
   const [isRegistrationModalOpen, setIsRegistrationModalOpen] =
     useState<boolean>(true);
   const [isCodeModalOpen, setIsCodeModalOpen] = useState<boolean>(false);
@@ -27,7 +31,11 @@ export function ModalAuth({ className, handleCloseAuth }: IProps) {
         isOpen={isRegistrationModalOpen}
         setIsOpen={setIsRegistrationModalOpen}
       >
-        <Registration variant="modal" />
+        {authType === "registration" ? (
+          <Registration variant="modal" />
+        ) : (
+          <Login variant="modal" />
+        )}
       </Modal>
     </div>
   );
