@@ -45,7 +45,11 @@ export function Timer({
     tick();
     const timerId = setInterval(tick, 1000);
 
-    return () => clearInterval(timerId);
+    return () => {
+      if (timerId) {
+        clearInterval(timerId);
+      }
+    };
   }, [duration]);
 
   const minutes = Math.floor(timeLeft / 60)
