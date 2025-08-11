@@ -177,12 +177,12 @@ const NsApply = () => {
 
   return (
     <section className={styles.root}>
-      {isAuthVisible && (
-        <ModalAuth
-          handleSuccessAuth={handleSuccessAuth}
-          handleCloseAuth={() => setIsAuthVisible(false)}
-        />
-      )}
+      <ModalAuth
+        handleSuccessAuth={handleSuccessAuth}
+        handleCloseAuth={() => setIsAuthVisible(false)}
+        isOpen={isAuthVisible}
+        setIsOpen={setIsAuthVisible}
+      />
 
       <ContentContainer>
         <CustomTitle tag="h1" isCentered>
