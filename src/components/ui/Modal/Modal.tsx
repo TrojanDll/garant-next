@@ -17,10 +17,10 @@ export default function Modal({
   children,
 }: PropsWithChildren<IProps>) {
   return (
-    <Dialog.Root open={isOpen} defaultOpen>
+    <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
       <Dialog.Portal>
         <Dialog.Overlay
-          onClick={() => setIsOpen(false)}
+          // onClick={() => setIsOpen(false)}
           className={styles.overlay}
         />
         <Dialog.Content className={styles.content}>

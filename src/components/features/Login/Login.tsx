@@ -22,14 +22,20 @@ interface IProps {
   variant?: "default" | "modal";
   handleReturnButton?: () => void;
   handleSuccessLogin?: () => void;
+  handleInputChange?: (data: ILoginForm) => void;
+  defaultData?: Partial<ILoginForm>;
 }
 
 const Login = ({
   variant = "default",
   handleReturnButton,
   handleSuccessLogin,
+  defaultData,
+  handleInputChange,
 }: IProps) => {
-  const { handleSubmit, control } = useForm<ILoginForm>();
+  const { handleSubmit, control, watch } = useForm<ILoginForm>({
+    defaultValues: defaultData,
+  });
   const {
     login,
     isLoginSuccess,
@@ -55,6 +61,17 @@ const Login = ({
     setLoginData(data);
     login(data);
   };
+
+  const allFieldsWatch = watch(["email", "password"]);
+
+  useEffect(() => {
+    if (handleInputChange) {
+      handleInputChange({
+        email: allFieldsWatch[0],
+        password: allFieldsWatch[1],
+      });
+    }
+  }, [allFieldsWatch]);
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;

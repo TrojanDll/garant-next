@@ -24,14 +24,20 @@ interface IProps {
   // onCloseEvent?: () => void;
   handleReturnButton?: () => void;
   handleSuccessRegistration?: () => void;
+  handleInputChange?: (data: IRegistrationForm) => void;
+  defaultData?: Partial<IRegistrationForm>;
 }
 
 const Registration = ({
   handleReturnButton,
   handleSuccessRegistration,
   variant = "default",
+  handleInputChange,
+  defaultData
 }: IProps) => {
-  const { handleSubmit, control, watch } = useForm<IRegistrationForm>();
+  const { handleSubmit, control, watch, reset } = useForm<IRegistrationForm>({
+    defaultValues: defaultData,
+  });
   const {
     registration,
     isRegistrationPending,
@@ -48,7 +54,34 @@ const Registration = ({
 
   const { navigateToHome, reloadPage } = useNavigation();
 
+  // useEffect(() => {
+  //   if (defaultData) {
+  //     reset(defaultData);
+  //   }
+  // }, []);
+
   const password = watch("password");
+  const allFieldsWatch = watch([
+    "checkbox",
+    "email",
+    "name",
+    "password",
+    "password_confirmation",
+    "surname",
+  ]);
+
+  useEffect(() => {
+    if (handleInputChange) {
+      handleInputChange({
+        checkbox: allFieldsWatch[0],
+        email: allFieldsWatch[1],
+        name: allFieldsWatch[2],
+        password: allFieldsWatch[3],
+        password_confirmation: allFieldsWatch[4],
+        surname: allFieldsWatch[5],
+      });
+    }
+  }, [allFieldsWatch]);
 
   const onSubmit: SubmitHandler<IRegistrationForm> = (data) => {
     setFormatedRegistrationData(data);
