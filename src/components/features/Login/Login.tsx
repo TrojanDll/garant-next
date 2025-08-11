@@ -24,6 +24,8 @@ interface IProps {
   handleSuccessLogin?: () => void;
   handleInputChange?: (data: ILoginForm) => void;
   defaultData?: Partial<ILoginForm>;
+  setIsEmailConfirmationActive?: (value: boolean) => void;
+  isEmailConfirmationActive?: boolean;
 }
 
 const Login = ({
@@ -32,6 +34,8 @@ const Login = ({
   handleSuccessLogin,
   defaultData,
   handleInputChange,
+  isEmailConfirmationActive,
+  setIsEmailConfirmationActive,
 }: IProps) => {
   const { handleSubmit, control, watch } = useForm<ILoginForm>({
     defaultValues: defaultData,
@@ -114,6 +118,9 @@ const Login = ({
       getNewVerificationCode({
         email: loginData?.email ? loginData.email : "",
       });
+      if (setIsEmailConfirmationActive) {
+        setIsEmailConfirmationActive(true);
+      }
     }
 
     return () => {
@@ -126,6 +133,9 @@ const Login = ({
   function successLogin() {
     if (handleSuccessLogin) {
       handleSuccessLogin();
+      if (setIsEmailConfirmationActive) {
+        setIsEmailConfirmationActive(false);
+      }
     } else {
       setTimeout(() => {
         navigateToHome();
@@ -133,6 +143,9 @@ const Login = ({
       }, 1000);
     }
   }
+
+  console.log("isEmailConfirmationActive");
+  console.log(isEmailConfirmationActive);
 
   const Wrapper: React.ElementType = variant === "default" ? Substrate : "div";
 
@@ -142,7 +155,7 @@ const Login = ({
         variant === "modal" ? styles.modalSubstrate : ""
       }`}
     >
-      {loginError === "unsubmited_email" ? (
+      {loginError === "unsubmited_email" || isEmailConfirmationActive ? (
         <EmailConfirmation
           handleSuccessAuth={successLogin}
           email={loginData?.email ? loginData.email : ""}

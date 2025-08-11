@@ -26,6 +26,8 @@ interface IProps {
   handleSuccessRegistration?: () => void;
   handleInputChange?: (data: IRegistrationForm) => void;
   defaultData?: Partial<IRegistrationForm>;
+  setIsEmailConfirmationActive?: (value: boolean) => void;
+  isEmailConfirmationActive?: boolean;
 }
 
 const Registration = ({
@@ -33,7 +35,9 @@ const Registration = ({
   handleSuccessRegistration,
   variant = "default",
   handleInputChange,
-  defaultData
+  defaultData,
+  isEmailConfirmationActive = false,
+  setIsEmailConfirmationActive,
 }: IProps) => {
   const { handleSubmit, control, watch, reset } = useForm<IRegistrationForm>({
     defaultValues: defaultData,
@@ -119,6 +123,9 @@ const Registration = ({
       toast.dismiss();
       toast.success("Регистрация прошла успешно");
       setIsEmailConfirmationVisible(true);
+      if (setIsEmailConfirmationActive) {
+        setIsEmailConfirmationActive(true);
+      }
 
       if (variant === "default") {
         timeoutId = setTimeout(() => {
@@ -148,16 +155,24 @@ const Registration = ({
 
   const Wrapper: React.ElementType = variant === "default" ? Substrate : "div";
 
+  function handleReturnButtonClick() {
+    setIsEmailConfirmationVisible(false);
+    if (setIsEmailConfirmationActive) {
+      setIsEmailConfirmationActive(false);
+    }
+  }
+
   return (
     <Wrapper
       className={`${styles.substrate} ${
         variant === "modal" ? styles.modalSubstrate : ""
       } ${isRegistrationSuccess ? styles.registrationSuccessSubstrate : ""}`}
     >
-      {isRegistrationSuccess && isEmailConfirmationVisible ? (
+      {(isRegistrationSuccess && isEmailConfirmationVisible) ||
+      isEmailConfirmationActive ? (
         <EmailConfirmation
-          email={formatedRegistrationData?.email || ""}
-          handleReturnButtonClick={() => setIsEmailConfirmationVisible(false)}
+          email={formatedRegistrationData?.email || defaultData?.email || ""}
+          handleReturnButtonClick={handleReturnButtonClick}
           isModal={variant === "modal"}
           handleSuccessAuth={successRegistration}
         />

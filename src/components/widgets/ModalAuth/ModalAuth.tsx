@@ -28,8 +28,11 @@ export function ModalAuth({
   const [registrationFields, setRegistrationFields] = useState<
     IRegistrationForm | undefined
   >();
-
   const [loginFields, setLoginFields] = useState<ILoginForm | undefined>();
+  const [isEmailConfirmationActive, setIsEmailConfirmationActive] =
+    useState<boolean>(false);
+  const [isLoginEmailConfirmationActive, setIsLoginEmailConfirmationActive] =
+    useState<boolean>(false);
 
   function handleSuccessRegistration() {
     handleSuccessAuth();
@@ -61,6 +64,8 @@ export function ModalAuth({
             handleSuccessRegistration={handleSuccessRegistration}
             handleInputChange={handleRegistrationFieldsChange}
             defaultData={registrationFields}
+            isEmailConfirmationActive={isEmailConfirmationActive}
+            setIsEmailConfirmationActive={setIsEmailConfirmationActive}
           />
         ) : (
           <Login
@@ -69,6 +74,8 @@ export function ModalAuth({
             handleSuccessLogin={handleSuccessLogin}
             handleInputChange={handleLoginFieldsChange}
             defaultData={loginFields}
+            isEmailConfirmationActive={isLoginEmailConfirmationActive}
+            setIsEmailConfirmationActive={setIsLoginEmailConfirmationActive}
           />
         )}
       </Modal>
