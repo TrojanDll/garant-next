@@ -144,9 +144,6 @@ const Login = ({
     }
   }
 
-  console.log("isEmailConfirmationActive");
-  console.log(isEmailConfirmationActive);
-
   const Wrapper: React.ElementType = variant === "default" ? Substrate : "div";
 
   return (
@@ -158,7 +155,7 @@ const Login = ({
       {loginError === "unsubmited_email" || isEmailConfirmationActive ? (
         <EmailConfirmation
           handleSuccessAuth={successLogin}
-          email={loginData?.email ? loginData.email : ""}
+          email={loginData?.email || defaultData?.email || ""}
         />
       ) : (
         <>
