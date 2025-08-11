@@ -60,7 +60,7 @@ const OsagoApplyFields = ({
         </div>
       </div>
 
-      {/* <div className={styles.ownerSwitcher}>
+      <div className={styles.ownerSwitcher}>
         <CustomSwitch isChecked={isOwner} setIsChecked={setIsOwner} />
         Страхователь — собственник ТС
       </div>
@@ -83,7 +83,7 @@ const OsagoApplyFields = ({
             )}
           </div>
         </div>
-      )} */}
+      )}
 
       <div className={styles.section}>
         <CustomTitle tag="h2" className={styles.sectionTitle}>

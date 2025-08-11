@@ -83,30 +83,32 @@ const OsagoPolicyInfoFields = ({ data, className }: IProps) => {
             />
           </div>
 
-          {data.insurant_fio && (
-            <>
-              <CustomTitle tag="h2" className={styles.title}>
-                Страхователь
-              </CustomTitle>
+          {data.insurant_fio &&
+            (data.insurant_fio !== data.fio ||
+              data.insurant_passport_number !== data.passport_number) && (
+              <>
+                <CustomTitle tag="h2" className={styles.title}>
+                  Страхователь
+                </CustomTitle>
 
-              <div className={styles.content}>
-                <CarInfoItem
-                  className={styles.contentItem}
-                  name="Страхователь ТС"
-                  value={data.insurant_fio}
-                />
-                <CarInfoItem
-                  className={styles.contentItem}
-                  name={
-                    data.insurant_type === personTypes[1]
-                      ? "ИНН"
-                      : "Серия и номер паспорта"
-                  }
-                  value={data.insurant_passport_number}
-                />
-              </div>
-            </>
-          )}
+                <div className={styles.content}>
+                  <CarInfoItem
+                    className={styles.contentItem}
+                    name="Страхователь ТС"
+                    value={data.insurant_fio}
+                  />
+                  <CarInfoItem
+                    className={styles.contentItem}
+                    name={
+                      data.insurant_type === personTypes[1]
+                        ? "ИНН"
+                        : "Серия и номер паспорта"
+                    }
+                    value={data.insurant_passport_number}
+                  />
+                </div>
+              </>
+            )}
 
           <div className={styles.content}>
             {data && (

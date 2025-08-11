@@ -145,7 +145,12 @@ const OsagoApply = () => {
             (item) => item.name === currientPolicy.brand
           );
 
-          if (currientPolicy.insurant_fio) {
+          if (
+            currientPolicy.insurant_fio &&
+            (currientPolicy.insurant_fio !== currientPolicy.fio ||
+              currientPolicy.insurant_passport_number !==
+                currientPolicy.passport_number)
+          ) {
             setIsOwner(false);
           } else {
             setIsOwner(true);
