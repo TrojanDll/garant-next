@@ -177,37 +177,39 @@ const Registration = ({
           handleSuccessAuth={successRegistration}
         />
       ) : (
-        <form
-          action=""
-          noValidate
-          onSubmit={handleSubmit(onSubmit, onFormError)}
-        >
-          <CustomTitle tag="h1" isCentered className={styles.title}>
-            Регистрация личного кабинета
-          </CustomTitle>
-
-          <RegistrationFields
-            control={control}
-            password={password}
-            variant={variant}
-          />
-
-          <Button className={styles.submit} type="submit">
-            Регистрация
-          </Button>
-        </form>
-      )}
-
-      {variant === "modal" && !isEmailConfirmationVisible && (
-        <div className={styles.changeAuthTypeWrapper}>
-          Уже зарегистрированы?{" "}
-          <button
-            onClick={handleReturnButton}
-            className={styles.changeAuthTypeButton}
+        <>
+          <form
+            action=""
+            noValidate
+            onSubmit={handleSubmit(onSubmit, onFormError)}
           >
-            Войдите
-          </button>
-        </div>
+            <CustomTitle tag="h1" isCentered className={styles.title}>
+              Регистрация личного кабинета
+            </CustomTitle>
+
+            <RegistrationFields
+              control={control}
+              password={password}
+              variant={variant}
+            />
+
+            <Button className={styles.submit} type="submit">
+              Регистрация
+            </Button>
+          </form>
+
+          {variant === "modal" && !isEmailConfirmationVisible && (
+            <div className={styles.changeAuthTypeWrapper}>
+              Уже зарегистрированы?{" "}
+              <button
+                onClick={handleReturnButton}
+                className={styles.changeAuthTypeButton}
+              >
+                Войдите
+              </button>
+            </div>
+          )}
+        </>
       )}
     </Wrapper>
   );
