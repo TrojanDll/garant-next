@@ -4,7 +4,8 @@ import { convertPersonType } from "../convertPersonType";
 import { selectCarModel } from "../selectCarModel";
 
 export function formatDataToCreateOsagoRequest(
-  data: IOsagoApplyForm
+  data: IOsagoApplyForm,
+  isOwner: boolean
 ): ICreateOsagoPolicyRequest {
   return {
     brand: selectCarModel(data.brand, data.vehicle_refined_make),
@@ -20,10 +21,10 @@ export function formatDataToCreateOsagoRequest(
     start_date: data.date_of_start,
     transport_category: data.transport_category,
     vin: data.vin,
-    insurant_fio: data.insurant_fio?.length ? data.insurant_fio : data.fio,
-    insurant_passport_number: data.insurant_passport_number?.length
-      ? data.insurant_passport_number
-      : data.passport_number,
+    insurant_fio: isOwner ? data.fio : data.insurant_fio,
+    insurant_passport_number: isOwner
+      ? data.passport_number
+      : data.insurant_passport_number,
     insurant_type:
       data.insurant_type === "individual" ? "individual" : "legal_entity",
   };

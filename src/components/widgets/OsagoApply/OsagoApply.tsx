@@ -179,7 +179,7 @@ const OsagoApply = () => {
 
       setIsAuthVisible(true);
     } else {
-      const formatedData = formatDataToCreateOsagoRequest(data);
+      const formatedData = formatDataToCreateOsagoRequest(data, isOwner);
       console.log(formatedData);
 
       setPolicy(formatedData);
