@@ -37,6 +37,9 @@ const Login = ({
   isEmailConfirmationActive,
   setIsEmailConfirmationActive,
 }: IProps) => {
+  const [isEmailConfirmationVisible, setIsEmailConfirmationVisible] =
+    useState<boolean>(false);
+
   const { handleSubmit, control, watch } = useForm<ILoginForm>({
     defaultValues: defaultData,
   });
@@ -115,6 +118,7 @@ const Login = ({
       //   navigateToPolicies();
       // }, 50);
     } else if (loginError === "unsubmited_email") {
+      setIsEmailConfirmationVisible(true);
       getNewVerificationCode({
         email: loginData?.email ? loginData.email : "",
       });
@@ -146,16 +150,22 @@ const Login = ({
 
   const Wrapper: React.ElementType = variant === "default" ? Substrate : "div";
 
+  function handleReturnButtonClick() {
+    setIsEmailConfirmationVisible(false);
+  }
+
   return (
     <Wrapper
       className={`${styles.substrate} ${
         variant === "modal" ? styles.modalSubstrate : ""
       }`}
     >
-      {loginError === "unsubmited_email" || isEmailConfirmationActive ? (
+      {(loginError === "unsubmited_email" || isEmailConfirmationActive) &&
+      isEmailConfirmationVisible ? (
         <EmailConfirmation
           handleSuccessAuth={successLogin}
           email={loginData?.email || defaultData?.email || ""}
+          handleReturnButtonClick={handleReturnButtonClick}
         />
       ) : (
         <>
@@ -164,9 +174,9 @@ const Login = ({
               Вход в личный кабинет
             </CustomTitle>
 
-            {isLoginError && (
+            {loginError !== "unsubmited_email" && isLoginError && (
               <div className={styles.errorMessage}>
-                "Неверный Email или пароль"
+                Неверный Email или пароль
               </div>
             )}
 

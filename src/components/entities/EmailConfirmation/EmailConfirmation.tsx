@@ -174,7 +174,7 @@ const EmailConfirmation = ({
             <div className={styles.timerWrapper}>
               Получить новый код через{" "}
               <Timer
-                duration={2}
+                duration={60}
                 className={styles.timer}
                 timerID="confirmationCode"
                 handleFinish={() => setIsNewCodeAvailable(true)}
