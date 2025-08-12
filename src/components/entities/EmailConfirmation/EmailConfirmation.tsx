@@ -65,7 +65,7 @@ const EmailConfirmation = ({
   // let verifyEmailStatus = 429;
 
   useEffect(() => {
-    if (verifyEmailStatus === 429) {
+    if (verifyEmailStatus === 410) {
       setIsEnterNewCodeAvailable(false);
     }
   }, [verifyEmailStatus]);
