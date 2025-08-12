@@ -35,6 +35,8 @@ const EmailConfirmation = ({
   const [isNewCodeBanned, setIsNewCodeBanned] = useState<boolean>(false);
   const [isErrorMessageVisible, setIsErrorMessageVisible] =
     useState<boolean>(false);
+  const [isEnterNewCodeAvailable, setIsEnterNewCodeAvailable] =
+    useState<boolean>(true);
 
   useEffect(() => {
     setIsErrorMessageVisible(false);
@@ -50,13 +52,23 @@ const EmailConfirmation = ({
     status: newVerificationCodeStatus,
     data,
   } = useGetNewVerificationCode();
+
   const {
     mutate: verifyEmail,
     isPending: isVerifyEmailPending,
     isSuccess: isVerifyEmailSuccess,
     isError: isVerifyEmailError,
     data: verifyEmailData,
+    // status: verifyEmailStatus,
   } = useVerifyEmail();
+
+  let verifyEmailStatus = 429;
+
+  useEffect(() => {
+    if (verifyEmailStatus === 429) {
+      setIsEnterNewCodeAvailable(false);
+    }
+  }, [verifyEmailStatus]);
 
   const { reloadPage } = useNavigation();
   const setAuthType = useAuthType((state) => state.setAuthType);
@@ -73,6 +85,7 @@ const EmailConfirmation = ({
   function handleNewCodeButton() {
     setIsNewCodeAvailable(false);
     getNewVerificationCode({ email: email });
+    setIsEnterNewCodeAvailable(true);
   }
 
   useEffect(() => {
@@ -133,32 +146,47 @@ const EmailConfirmation = ({
   return (
     <>
       <CustomTitle tag="h2" isCentered className={styles.title}>
-        Введите код подтверждения
+        {!isEnterNewCodeAvailable ? (
+          <>Лимит попыток превышен</>
+        ) : (
+          <>Введите код подтверждения</>
+        )}
       </CustomTitle>
 
       <p className={styles.text}>
-        Мы отправили его на почту <span className={styles.email}>{email}</span>
+        {!isEnterNewCodeAvailable ? (
+          <>Запросите новый код, чтобы продолжить</>
+        ) : (
+          <>
+            Мы отправили его на почту{" "}
+            <span className={styles.email}>{email}</span>
+          </>
+        )}
       </p>
 
-      <CustomOneTimePasswordField
-        value={confirmationCode}
-        setValue={setConfirmationCode}
-        className={styles.codeField}
-        isError={isErrorMessageVisible}
-      />
+      {isEnterNewCodeAvailable && (
+        <>
+          <CustomOneTimePasswordField
+            value={confirmationCode}
+            setValue={setConfirmationCode}
+            className={styles.codeField}
+            isError={isErrorMessageVisible}
+          />
 
-      {isErrorMessageVisible && (
-        <div className={styles.errorMessage}>
-          Неверный код, попробуйте снова
-        </div>
+          {isErrorMessageVisible && (
+            <div className={styles.errorMessage}>
+              Неверный код, попробуйте снова
+            </div>
+          )}
+
+          <Button
+            onClickEvent={handleVerifyEmailButtonClick}
+            className={styles.submitButton}
+          >
+            Далее
+          </Button>
+        </>
       )}
-
-      <Button
-        onClickEvent={handleVerifyEmailButtonClick}
-        className={styles.submitButton}
-      >
-        Далее
-      </Button>
 
       {!isNewCodeBanned && (
         <>

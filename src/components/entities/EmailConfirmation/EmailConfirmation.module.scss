@@ -50,7 +50,7 @@
   margin-top: 25px;
   font-family: var(--font-family);
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 129%;
   text-align: center;
   color: var(--dark-grey);
@@ -108,5 +108,9 @@
 
   .iconArrowLeft {
     transform: translateY(-2px);
+  }
+
+  .timerWrapper {
+    font-size: 14px;
   }
 }
