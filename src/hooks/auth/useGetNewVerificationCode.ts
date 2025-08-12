@@ -1,12 +1,16 @@
 import { authService } from "@/services/auth.service";
 import { IGetNewVerificationCodeRequest } from "@/types/auth.types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export function useGetNewVerificationCode() {
   const queryClient = useQueryClient();
 
-  const { mutate, isPending, data, isSuccess, isError } = useMutation({
+  const { mutate, isPending, data, isSuccess, isError, error } = useMutation<
+    any,
+    AxiosError,
+    IGetNewVerificationCodeRequest
+  >({
     mutationKey: ["getNewVerificationCode"],
     mutationFn: (data: IGetNewVerificationCodeRequest) =>
       authService.getNewVerificationCode(data),
@@ -28,5 +32,6 @@ export function useGetNewVerificationCode() {
     data,
     isSuccess,
     isError,
+    status: data?.status || error?.status,
   };
 }

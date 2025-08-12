@@ -32,6 +32,7 @@ const EmailConfirmation = ({
 }: IProps) => {
   const [confirmationCode, setConfirmationCode] = useState<string>("");
   const [isNewCodeAvailable, setIsNewCodeAvailable] = useState<boolean>(false);
+  const [isNewCodeBanned, setIsNewCodeBanned] = useState<boolean>(false);
   const [isErrorMessageVisible, setIsErrorMessageVisible] =
     useState<boolean>(false);
 
@@ -46,8 +47,9 @@ const EmailConfirmation = ({
     isPending: isGetNewVerificationCodePending,
     isSuccess: isGetNewVerificationCodeSuccess,
     isError: isGetNewVerificationCodeError,
+    status: newVerificationCodeStatus,
+    data,
   } = useGetNewVerificationCode();
-  
   const {
     mutate: verifyEmail,
     isPending: isVerifyEmailPending,
@@ -83,7 +85,12 @@ const EmailConfirmation = ({
     if (isGetNewVerificationCodeSuccess) {
       toast.success("Новый код отправлен!");
     } else if (isGetNewVerificationCodeError) {
-      toast.error("Ошибка отправки кода");
+      if (newVerificationCodeStatus === 429) {
+        toast.error("Слишком много запросов. Попробуйте позже");
+        setIsNewCodeBanned(true);
+      } else {
+        toast.error("Ошибка отправки кода");
+      }
     }
   }, [isGetNewVerificationCodePending]);
 
@@ -153,24 +160,28 @@ const EmailConfirmation = ({
         Далее
       </Button>
 
-      {isNewCodeAvailable ? (
-        <Button
-          onClickEvent={handleNewCodeButton}
-          className={styles.getNewCodeButton}
-          style="outlined"
-        >
-          Получить новый код
-        </Button>
-      ) : (
-        <div className={styles.timerWrapper}>
-          Получить новый код через{" "}
-          <Timer
-            duration={60}
-            className={styles.timer}
-            timerID="confirmationCode"
-            handleFinish={() => setIsNewCodeAvailable(true)}
-          />
-        </div>
+      {!isNewCodeBanned && (
+        <>
+          {isNewCodeAvailable ? (
+            <Button
+              onClickEvent={handleNewCodeButton}
+              className={styles.getNewCodeButton}
+              style="outlined"
+            >
+              Получить новый код
+            </Button>
+          ) : (
+            <div className={styles.timerWrapper}>
+              Получить новый код через{" "}
+              <Timer
+                duration={2}
+                className={styles.timer}
+                timerID="confirmationCode"
+                handleFinish={() => setIsNewCodeAvailable(true)}
+              />
+            </div>
+          )}
+        </>
       )}
 
       <button
