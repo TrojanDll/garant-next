@@ -166,7 +166,7 @@ const Registration = ({
     <Wrapper
       className={`${styles.substrate} ${
         variant === "modal" ? styles.modalSubstrate : ""
-      } ${isRegistrationSuccess ? styles.registrationSuccessSubstrate : ""}`}
+      } `}
     >
       {(isRegistrationSuccess && isEmailConfirmationVisible) ||
       isEmailConfirmationActive ? (
