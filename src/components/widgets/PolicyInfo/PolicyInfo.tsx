@@ -159,6 +159,9 @@ const PolicyInfo = ({ className }: IProps) => {
         start_date: data?.start_date,
         transport_category: data?.transport_category,
         vin: data?.vin,
+        insurant_fio: data.insurant_fio,
+        insurant_passport_number: data.insurant_passport_number,
+        insurant_type: data.insurant_type,
       });
     }
 

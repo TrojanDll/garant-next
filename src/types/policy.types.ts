@@ -43,6 +43,9 @@ export interface IOsagoPolicy {
   payment: {
     payment_url: string;
   };
+  insurant_type: string;
+  insurant_fio: string;
+  insurant_passport_number: string;
 }
 
 export interface ICreateOsagoPolicyRequest {
