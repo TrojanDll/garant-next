@@ -25,7 +25,6 @@ export function formatDataToCreateOsagoRequest(
     insurant_passport_number: isOwner
       ? data.passport_number
       : data.insurant_passport_number,
-    insurant_type:
-      data.insurant_type === "individual" ? "individual" : "legal_entity",
+    insurant_type: convertPersonType(data.insurant_type),
   };
 }

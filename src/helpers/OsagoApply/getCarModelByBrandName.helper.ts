@@ -14,7 +14,5 @@ export function getCarModelsByBrandName(
     return false;
   })?.models;
 
-  console.log("models");
-  console.log(models);
   return models ? models : null;
 }
