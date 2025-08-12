@@ -59,10 +59,10 @@ const EmailConfirmation = ({
     isSuccess: isVerifyEmailSuccess,
     isError: isVerifyEmailError,
     data: verifyEmailData,
-    // status: verifyEmailStatus,
+    status: verifyEmailStatus,
   } = useVerifyEmail();
 
-  let verifyEmailStatus = 429;
+  // let verifyEmailStatus = 429;
 
   useEffect(() => {
     if (verifyEmailStatus === 429) {
