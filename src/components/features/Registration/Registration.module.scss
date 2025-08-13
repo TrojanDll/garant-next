@@ -86,13 +86,18 @@
   .submit {
     margin-top: 35px;
     width: 100% !important;
+    font-size: 14px;
   }
 
   .modalSubstrate {
     padding: 0;
+
+    .submit {
+      font-size: 14px;
+    }
   }
 
-    .changeAuthTypeWrapper {
+  .changeAuthTypeWrapper {
     font-size: 14px;
   }
 
