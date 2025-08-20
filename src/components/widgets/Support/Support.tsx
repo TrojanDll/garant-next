@@ -18,7 +18,11 @@ const Support = () => {
 
           <Text className={styles.text}>
             Остались вопросы? Свяжитесь с нами! Позвоните нам или{" "}
-            <a href="https://wa.me/79407411000" className={styles.whatsappLink}>
+            <a
+              href="https://wa.me/79407411000"
+              rel="nofollow"
+              className={styles.whatsappLink}
+            >
               напишите в <span className={styles.textBold}>WhatsApp</span>
             </a>{" "}
             по номеру:

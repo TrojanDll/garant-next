@@ -10,6 +10,7 @@ interface IProps {
   isCentered?: boolean;
   download?: any;
   target?: React.HTMLAttributeAnchorTarget;
+  rel?: string;
 }
 
 const CustomLink = ({
@@ -21,6 +22,7 @@ const CustomLink = ({
   isCentered = false,
   download,
   target,
+  rel,
 }: PropsWithChildren<IProps>) => {
   return (
     <Link
@@ -31,6 +33,7 @@ const CustomLink = ({
       href={href}
       download={download}
       target={target}
+      rel={rel}
     >
       {children}
     </Link>

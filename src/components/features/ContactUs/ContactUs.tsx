@@ -17,12 +17,14 @@ interface IContactCardInfo {
   variant?: "default" | "blue" | "red";
   href: string;
   className?: string;
+  rel?: string;
 }
 
 const contactsCardsInfo: IContactCardInfo[] = [
   {
     title: "WhatsApp",
     href: "https://wa.me/79407411000",
+    rel: "nofollow",
     icon: whatsappSvg,
     text: "+7 940 741 10 00",
     variant: "blue",
@@ -30,6 +32,7 @@ const contactsCardsInfo: IContactCardInfo[] = [
   {
     title: "Страховой случай",
     href: "tel:79407704863",
+    rel: "nofollow",
     icon: lightningSvg,
     text: "+7 940 770 48 63",
     variant: "red",
@@ -37,12 +40,14 @@ const contactsCardsInfo: IContactCardInfo[] = [
   {
     title: "Telegram",
     href: "https://t.me/garantabh",
+    rel: "nofollow",
     icon: telegramSvg,
     text: "@garantabh",
   },
   {
     title: "Email",
     href: "mailto:info@garant-abh.com",
+    rel: "nofollow",
     icon: emailSvg,
     text: "info@garant-abh.com",
   },
@@ -68,6 +73,7 @@ const ContactUs = ({ className }: IProps) => {
           variant={info.variant}
           title={info.title}
           href={info.href}
+          rel={info.rel}
           className={styles.infoCard}
         />
       ))}

@@ -12,6 +12,7 @@ interface IProps {
   text?: string;
   variant?: "default" | "blue" | "red";
   href: string;
+  rel?: string;
 }
 
 const ContactCard = ({
@@ -21,15 +22,23 @@ const ContactCard = ({
   title,
   variant = "default",
   href,
+  rel,
 }: IProps) => {
   return (
-    <a href={href} className={styles.link}>
-      <Substrate bordered className={`${styles.root} ${className} ${styles[variant]}`}>
+    <a href={href} className={styles.link} rel={rel}>
+      <Substrate
+        bordered
+        className={`${styles.root} ${className} ${styles[variant]}`}
+      >
         <p className={styles.title}>{title}</p>
 
         <div className={styles.contentWrapper}>
           <Image alt="" src={icon} className={styles.icon} />
-          <p className={`${styles.text} ${title === "Email" ? styles.emailText : ""}`}>
+          <p
+            className={`${styles.text} ${
+              title === "Email" ? styles.emailText : ""
+            }`}
+          >
             {text}
           </p>
         </div>

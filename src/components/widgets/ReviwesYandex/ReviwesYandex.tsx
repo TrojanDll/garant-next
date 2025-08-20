@@ -26,6 +26,7 @@ const ReviwesYandex = () => {
           <a
             href="https://yandex.ru/maps/org/usadba_izmaylovo/153937465584/"
             target="_blank"
+            rel="nofollow noopener"
           >
             Усадьба Измайлово на карте Москвы — Яндекс.Карты
           </a>
