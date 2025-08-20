@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "update-sitemap": "node src/scripts/update-sitemap.js",
     "start": "next start",
     "lint": "next lint",
     "build:inspect": "cross-env NODE_OPTIONS=--inspect next start",
