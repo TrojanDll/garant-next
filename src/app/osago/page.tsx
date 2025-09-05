@@ -2,6 +2,7 @@ import { IAudienceInfoItem } from "@/components/entities/AudienceInfoItem/audien
 import AudienceInfoBlock from "@/components/widgets/AudienceInfoBlock/AudienceInfoBlock";
 import DiscountBanner from "@/components/widgets/DiscountBanner/DiscountBanner";
 import FAQ from "@/components/widgets/FAQ/FAQ";
+import { InsuranceBannerOsago } from "@/components/widgets/InsuranceBannerOsago/InsuranceBannerOsago";
 import PolicyPromo from "@/components/widgets/PolicyPromo/PolicyPromo";
 import ReviwesYandex from "@/components/widgets/ReviwesYandex/ReviwesYandex";
 import type { Metadata } from "next";
@@ -31,7 +32,8 @@ const audienceItems: IAudienceInfoItem[] = [
 
 export const metadata: Metadata = {
   title: "ОСАГО в Абхазии – страховка онлайн для граждан РФ",
-  description: "Оформить страховку для поездки в Абхазию. Получите полис Гарант-Страхования на вашу почту. Рассчитать цену со скидкой 10%."
+  description:
+    "Оформить страховку для поездки в Абхазию. Получите полис Гарант-Страхования на вашу почту. Рассчитать цену со скидкой 10%.",
 };
 
 export default function OsagoPage() {
@@ -43,6 +45,7 @@ export default function OsagoPage() {
         title="Почему нужно оформить ОСАГО?"
         audienceItems={audienceItems}
       />
+      <InsuranceBannerOsago />
       <ReviwesYandex />
       <FAQ isIsolated />
     </div>
