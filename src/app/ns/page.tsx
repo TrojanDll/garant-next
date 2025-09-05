@@ -2,6 +2,7 @@ import { IAudienceInfoItem } from "@/components/entities/AudienceInfoItem/audien
 import AudienceInfoBlock from "@/components/widgets/AudienceInfoBlock/AudienceInfoBlock";
 import DiscountBanner from "@/components/widgets/DiscountBanner/DiscountBanner";
 import FAQ from "@/components/widgets/FAQ/FAQ";
+import { InsuranceBannerNs } from "@/components/widgets/InsuranceBannerNs/InsuranceBannerNs";
 import PolicyPromo from "@/components/widgets/PolicyPromo/PolicyPromo";
 import ReviwesYandex from "@/components/widgets/ReviwesYandex/ReviwesYandex";
 import type { Metadata } from "next";
@@ -41,6 +42,7 @@ export default function NsPage() {
         title="Кому может пригодиться полис?"
         audienceItems={audienceItems}
       />
+      <InsuranceBannerNs />
       <ReviwesYandex />
       <FAQ isIsolated />
     </div>

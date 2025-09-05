@@ -1,0 +1,51 @@
+.root {
+  margin-top: 100px;
+}
+
+.substrate {
+  padding: 40px;
+}
+
+.paragraph {
+  margin-top: 26px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 125%;
+}
+
+.link {
+  color: var(--blue);
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 125%;
+}
+
+.subtitle {
+  margin-top: 26px;
+}
+
+.ul {
+  list-style-type: disc;
+}
+
+.li {
+  margin-left: 24px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 125%;
+}
+
+@media (max-width: 1149px) {
+  .root {
+    margin-top: 50px;
+  }
+
+  .paragraph,
+  .link,
+  .li {
+    font-size: 0.875rem;
+  }
+}
