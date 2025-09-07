@@ -10,22 +10,22 @@ const DiscountBanner = () => {
         <div className={styles.bgWrapper}>
           <Image
             className={styles.bgImage}
-            src="/img/discount-banner-bg.png"
+            src="/img/autumn-discount-banner-bg.png"
             alt=""
-            width={1407}
-            height={1127}
+            width={1400}
+            height={1000}
           />
 
           <div className={styles.substrate}>
             <div className={styles.textWrapper}>
               <p className={styles.title}>скидка на осаго</p>
               <p className={styles.subTitle}>
-                по промокоду <span className={styles.promocode}>ГАГРА10</span>
+                по промокоду <span className={styles.promocode}>ОСЕНЬ10</span>
               </p>
             </div>
 
             <div className={styles.textWrapper}>
-              <p className={styles.descr}>при оформлении до 5 сентября</p>
+              <p className={styles.descr}>при оформлении до 30 сентября</p>
             </div>
           </div>
         </div>
