@@ -114,7 +114,7 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
     console.log("carCategoryWatch");
     if (
       watchedFields?.car_category?.value ===
-        "Автотранспортные средства , исползуемые в качестве такси и по найму" &&
+        "Автотранспортные средства, используемые в качестве такси и по найму" &&
       !isFilteredOsagoDurationChanged
     ) {
       console.log("seccess");
