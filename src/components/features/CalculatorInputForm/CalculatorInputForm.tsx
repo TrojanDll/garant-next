@@ -135,7 +135,7 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
       });
     } else if (
       watchedFields?.car_category?.value !==
-        "Автотранспортные средства , исползуемые в качестве такси и по найму" &&
+        "Автотранспортные средства, используемые в качестве такси и по найму" &&
       !isFilteredOsagoDurationChanged &&
       isTaxiSelected
     ) {
@@ -174,7 +174,7 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
           const result = prev.filter(
             (item) =>
               item.label !==
-              "Автотранспортные средства , исползуемые в качестве такси и по найму"
+              "Автотранспортные средства, используемые в качестве такси и по найму"
           );
           return result;
         }
@@ -184,7 +184,7 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
       setIsMinimalDaysSelected(true);
     } else if (
       watchedFields?.car_category?.value !==
-        "Автотранспортные средства , исползуемые в качестве такси и по найму" &&
+        "Автотранспортные средства, используемые в качестве такси и по найму" &&
       isMinimalDaysSelected
     ) {
       console.log("taxiActive");
@@ -196,7 +196,7 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
           prevCopy.forEach((item) => {
             if (
               item.label ===
-              "Автотранспортные средства , исползуемые в качестве такси и по найму"
+              "Автотранспортные средства, используемые в качестве такси и по найму"
             ) {
               isValueContains = true;
             }
@@ -205,9 +205,9 @@ const CalculatorInputForm = ({ config, variant }: IProps) => {
           if (!isValueContains) {
             prevCopy.push({
               label:
-                "Автотранспортные средства , исползуемые в качестве такси и по найму",
+                "Автотранспортные средства, используемые в качестве такси и по найму",
               value:
-                "Автотранспортные средства , исползуемые в качестве такси и по найму",
+                "Автотранспортные средства, используемые в качестве такси и по найму",
             });
           }
           return prevCopy;
