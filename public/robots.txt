@@ -1,3 +1,14 @@
 User-Agent: *
 
+Disallow: /*?*
+
+Sitemap: https://garant-abh.com/sitemap.xml
+
+
+User-Agent: Yandex
+
+Clean-param: type&id&MNT_TRANSACTION_ID&MNT_ID&MNT_OPERATION_ID&MNT_OPERAT&MNT_OPERA&_ym_debug&MNT_OPER
+Clean-param: hl&email&verified&message&token
+
+
 Sitemap: https://garant-abh.com/sitemap.xml

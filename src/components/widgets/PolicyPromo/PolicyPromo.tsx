@@ -19,6 +19,11 @@ const titles = {
   ns: "Страхование от несчастного случая в Абхазии",
 };
 
+const descriptions = {
+  osago: "Страхование автомобиля в Абхазии для иностранных граждан. Оформите онлайн без ождиания в очередях",
+  ns: "Страхование для туристов в Абхазии — купите полис онлайн и путешествуйте спокойно",
+};
+
 const PolicyPromo = ({ variant }: IProps) => {
   return (
     <section>
@@ -30,9 +35,7 @@ const PolicyPromo = ({ variant }: IProps) => {
             )}
 
             <CustomTitle className={styles.title}>{titles[variant]}</CustomTitle>
-            <Text className={styles.descr}>
-              Оформите онлайн за пару минут и не тратьте время в очередях
-            </Text>
+            <Text className={styles.descr}>{descriptions[variant]}</Text>
 
             {variant === "osago" ? (
               <Button isLink href={PAGES.OSAGO_APPLY} className={styles.applyButton}>
