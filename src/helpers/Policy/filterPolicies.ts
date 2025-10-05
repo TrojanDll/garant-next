@@ -25,8 +25,8 @@ export function filterPolicies(
   if (!policyType || policyType === EPolicyTypes.NS) {
     filtered.NS = allPolicies.NS.filter((policy) => {
       if (
-        matchesStatus(policy.status, activityStatus) &&
-        getPaymentStatus(policy.status) !== EPolicyStatus.ARCHIVE
+        matchesStatus(policy.payment_status, activityStatus) &&
+        getPaymentStatus(policy.payment_status) !== EPolicyStatus.ARCHIVE
       ) {
         return true;
       }

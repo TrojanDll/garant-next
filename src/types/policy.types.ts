@@ -145,7 +145,7 @@ export interface INsPolicy {
   finish_date: string;
   amount_to_be_paid: string;
   NS_number: string;
-  status: string;
+  payment_status: string;
   created_at: string;
   updated_at: string;
   promocode: string;

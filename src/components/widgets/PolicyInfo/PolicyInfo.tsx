@@ -166,7 +166,7 @@ const PolicyInfo = ({ className }: IProps) => {
     }
 
     if (isNsSuccess && nsPolicyFetchedData) {
-      setPolicyStatus(getPaymentStatus(nsPolicyFetchedData.status));
+      setPolicyStatus(getPaymentStatus(nsPolicyFetchedData.payment_status));
     }
   }, [isPending, isNsPending]);
 

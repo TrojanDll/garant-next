@@ -11,11 +11,17 @@ interface IParams {
   policyOsagoData: IOsagoPolicy | undefined;
 }
 
-export function getUniversalPolicyData(policies: IParams): IPolicyUniversalData {
+export function getUniversalPolicyData(
+  policies: IParams
+): IPolicyUniversalData {
   const policyNsData = policies.policyNsData;
   const policyOsagoData = policies.policyOsagoData;
   return {
-    id: policyNsData ? policyNsData.id : policyOsagoData ? policyOsagoData.id : 1,
+    id: policyNsData
+      ? policyNsData.id
+      : policyOsagoData
+      ? policyOsagoData.id
+      : 1,
     title: policyNsData
       ? policyNsData.get_peoples[0]?.fio
       : policyOsagoData
@@ -37,7 +43,7 @@ export function getUniversalPolicyData(policies: IParams): IPolicyUniversalData 
       ? policyOsagoData.finish_date
       : "",
     payment_status: policyNsData
-      ? getPaymentStatus(policyNsData.status)
+      ? getPaymentStatus(policyNsData.payment_status)
       : policyOsagoData
       ? getPaymentStatus(policyOsagoData.payment_status)
       : EPolicyStatus.AWAITING_PAYMENT,
