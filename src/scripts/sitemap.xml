@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+  <loc>https://garant-abh.com/</loc>
+  <lastmod>2025-10-07T16:22:45.163Z</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>1.0</priority>
+</url>
+<url>
+  <loc>https://garant-abh.com/osago</loc>
+  <lastmod>2025-10-07T16:22:45.163Z</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.9</priority>
+</url>
+<url>
+  <loc>https://garant-abh.com/ns</loc>
+  <lastmod>2025-10-07T16:22:45.163Z</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.9</priority>
+</url>
+<url>
+  <loc>https://garant-abh.com/contacts</loc>
+  <lastmod>2025-10-07T16:22:45.163Z</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.9</priority>
+</url>
+<url>
+  <loc>https://garant-abh.com/support</loc>
+  <lastmod>2025-10-07T16:22:45.163Z</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.9</priority>
+</url>
+<url>
+  <loc>https://garant-abh.com/auth</loc>
+  <lastmod>2025-10-07T16:22:45.163Z</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.9</priority>
+</url>
+<url>
+  <loc>https://garant-abh.com/documents</loc>
+  <lastmod>2025-10-07T16:22:45.163Z</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.9</priority>
+</url>
+<url>
+  <loc>https://garant-abh.com/about</loc>
+  <lastmod>2025-10-07T16:22:45.163Z</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.9</priority>
+</url>
+<url>
+  <loc>https://garant-abh.com/legal</loc>
+  <lastmod>2025-10-07T16:22:45.163Z</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.9</priority>
+</url>
+<url>
+  <loc>https://garant-abh.com/policy</loc>
+  <lastmod>2025-10-07T16:22:45.163Z</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.9</priority>
+</url>
+<url>
+  <loc>https://garant-abh.com/osago/apply</loc>
+  <lastmod>2025-10-07T16:22:45.163Z</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.9</priority>
+</url>
+<url>
+  <loc>https://garant-abh.com/ns/apply</loc>
+  <lastmod>2025-10-07T16:22:45.163Z</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.9</priority>
+</url>
+</urlset>
