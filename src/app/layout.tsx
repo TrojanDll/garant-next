@@ -14,6 +14,8 @@ import { Providers } from "./providers";
 import Shadow from "@/components/ui/Shadow/Shadow";
 import YandexMetrika from "@/utils/YandexMetrika";
 import TrackPageView from "@/utils/TrackPageView";
+import GoogleAnalytics from "@/utils/GoogleAnalytics";
+import TrackGAView from "@/utils/TrackGAView";
 
 export const metadata: Metadata = {
   title: {
@@ -71,6 +73,8 @@ export default function RootLayout({
 
         <YandexMetrika ymid={103203587} />
         <TrackPageView ymId={103203587} />
+        <GoogleAnalytics gaId="G-J81PQX1RCJ" />
+        <TrackGAView gaId="G-J81PQX1RCJ" />
       </body>
     </html>
   );
