@@ -23,7 +23,8 @@ export const metadata: Metadata = {
     // template: `%s | ${SITE_NAME}`,
     absolute: "Страховка в Абхазии – ОСАГО и автострахование онлайн",
   },
-  description: "Оформить ОСАГО в Абхазии онлайн за пару минут. Страхование авто в Абхазии для граждан РФ в 2025.",
+  description:
+    "Оформить ОСАГО в Абхазии онлайн за пару минут. Страхование авто в Абхазии для граждан РФ в 2025.",
 };
 
 export default function RootLayout({
@@ -61,6 +62,12 @@ export default function RootLayout({
           href="/favicon/android-chrome-512x512.png"
         />
         <link rel="manifest" href="/favicon/site.webmanifest" />
+
+        <meta property="og:site_name" content="Гарант-Страхование"></meta>
+        <meta
+          property="og:description"
+          content="Страхование в Абхазии онлайн. Быстро, надёжно, официально."
+        ></meta>
       </Head>
       <body>
         <Providers>
@@ -75,6 +82,24 @@ export default function RootLayout({
         <TrackPageView ymId={103203587} />
         <GoogleAnalytics gaId="G-J81PQX1RCJ" />
         <TrackGAView gaId="G-J81PQX1RCJ" />
+
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="5ec4de52-61e0-446a-beba-15042b428ad4"
+        ></script>
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Гарант-Страхование",
+              url: "https://garant-abh.com",
+            }),
+          }}
+        />
       </body>
     </html>
   );
