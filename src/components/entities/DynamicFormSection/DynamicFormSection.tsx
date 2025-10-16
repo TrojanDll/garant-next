@@ -243,7 +243,7 @@ const DynamicFormSection = ({
                   field.onChange(value);
                 }}
                 errorMessage={fieldState.error?.message}
-                className={`${styles.input} ${className}  `}
+                className={`${styles.input} ${className}`}
                 {...config}
                 type={
                   config.name === "model" && isAnotherCarVisible

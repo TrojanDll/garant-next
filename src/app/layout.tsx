@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 
 import { Toaster } from "react-hot-toast";
 
-import { SITE_NAME } from "@/constants/seo.constants";
-
 import Header from "@/components/widgets/Header/Header";
 import Footer from "@/components/widgets/Footer/Footer";
 

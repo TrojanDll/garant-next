@@ -65,6 +65,7 @@ const CustomSelect = ({
   const [isJustSelected, setIsJustSelected] = useState(false);
   const [carModelOptions, setCarModelOptions] = useState<IOptions[]>([]);
   const [carModelData, setCarModelData] = useState<ICarModelV2[] | null>(null);
+  const [yearOptions, setYearOptions] = useState<IOptions[]>([]);
 
   // const {
   //   getCarModelByBrandName,
@@ -76,6 +77,8 @@ const CustomSelect = ({
 
   const isModelSelect =
     options.map((item) => item.value).indexOf("thumbnail") !== -1;
+
+  const isYearSelect = options.map((item) => item.value).indexOf("2025") !== -1;
 
   const carBrand = useCarBrand((state) => state.carBrand);
   const setCarBrand = useCarBrand((state) => state.setCarBrand);
@@ -119,6 +122,15 @@ const CustomSelect = ({
       }
     }
   };
+
+  useEffect(() => {
+    if (isYearSelect) {
+      const filteredYears = options.filter((option) =>
+        option.label.includes(inputValue)
+      );
+      setYearOptions(filteredYears);
+    }
+  }, [inputValue]);
 
   useEffect(() => {
     if (isModelSelect && carBrand?.length !== 0) {
@@ -282,6 +294,8 @@ const CustomSelect = ({
             ? carModelOptions
             : name === "brand"
             ? filteredOptions
+            : name === "year"
+            ? yearOptions
             : options
         }
       />

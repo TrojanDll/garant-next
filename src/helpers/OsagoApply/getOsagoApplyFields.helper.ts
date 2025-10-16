@@ -120,6 +120,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         placeholder: "Год выпуска ТС",
         required: true,
         options: generateYearOptions(1980),
+        isSearchable: true,
       },
       {
         type: "input",
