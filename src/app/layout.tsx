@@ -23,6 +23,10 @@ export const metadata: Metadata = {
   },
   description:
     "Оформить ОСАГО в Абхазии онлайн за пару минут. Страхование авто в Абхазии для граждан РФ в 2025.",
+  openGraph: {
+    siteName: "Гарант-Страхование",
+    description: "Страхование в Абхазии онлайн. Быстро, надёжно, официально."
+  }
 };
 
 export default function RootLayout({
@@ -61,11 +65,11 @@ export default function RootLayout({
         />
         <link rel="manifest" href="/favicon/site.webmanifest" />
 
-        <meta property="og:site_name" content="Гарант-Страхование"></meta>
-        <meta
+        {/* <meta property="og:site_name" content="Гарант-Страхование"></meta> */}
+        {/* <meta
           property="og:description"
           content="Страхование в Абхазии онлайн. Быстро, надёжно, официально."
-        ></meta>
+        ></meta> */}
       </Head>
       <body>
         <Providers>
