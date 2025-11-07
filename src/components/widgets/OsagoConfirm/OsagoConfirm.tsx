@@ -20,6 +20,8 @@ import useCurrientCar from "@/stores/Cars/currientCar";
 import { useRouter } from "next/navigation";
 
 const OsagoConfirm = () => {
+  const [isSubmited, setIsSubmited] = useState(false);
+
   const policy = useCurrientOsagoPolicy((state) => state.policy);
   const policyCalculation = useCurrientOsagoPolicyCalculation(
     (state) => state.calculationData
@@ -36,11 +38,15 @@ const OsagoConfirm = () => {
     useCreateOsagoPolicy();
 
   function handleCreateOsagoClick() {
-    console.log("handleCreateOsagoClick");
+    if (!isSubmited) {
+      setIsSubmited(true);
 
-    console.log(policy);
-    if (policy) {
-      mutate(policy);
+      console.log("handleCreateOsagoClick");
+
+      console.log(policy);
+      if (policy) {
+        mutate(policy);
+      }
     }
   }
 
@@ -76,6 +82,7 @@ const OsagoConfirm = () => {
       setPolicyCalculation(undefined);
       setPolicy(undefined);
       setCurrientCar(undefined);
+      setIsSubmited(false);
     }
   }, [isPending]);
 
