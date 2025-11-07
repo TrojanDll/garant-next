@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./NsConfirm.module.scss";
 
@@ -20,6 +20,8 @@ import { formatDataToCreateNsPolicy } from "@/helpers/NsApply/formatDataToCreate
 import { useRouter } from "next/navigation";
 
 const NsConfirm = () => {
+  const [isSubmited, setIsSubmited] = useState(false);
+
   const currientNsPolicy = useCurrientNsPolicy((state) => state.policy);
   const currientNsPolicyCalculation = useCurrientNsPolicy(
     (state) => state.calculationData
@@ -36,7 +38,8 @@ const NsConfirm = () => {
   const { data, isError, isPending, isSuccess, mutate } = useCreateNsPolicy();
 
   function handleCreateNsClick() {
-    if (currientNsPolicy) {
+    if (currientNsPolicy && !isSubmited) {
+      setIsSubmited(true);
       const formatedData: ICreateNsPolicyRequest =
         formatDataToCreateNsPolicy(currientNsPolicy);
 
@@ -71,6 +74,7 @@ const NsConfirm = () => {
     if (data) {
       setCurrientNsPolicyCalculation(undefined);
       setCurrientNsPolicy(undefined);
+      setIsSubmited(false);
     }
   }, [isPending]);
 
