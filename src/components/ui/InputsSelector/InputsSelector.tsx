@@ -32,6 +32,7 @@ interface IProps {
   owner?: TPersonType;
   startDate?: Date;
   personTypeID?: string;
+  limitYears?: boolean;
 }
 
 const InputsSelector = ({
@@ -56,6 +57,7 @@ const InputsSelector = ({
   owner = "individual",
   startDate,
   personTypeID,
+  limitYears = false,
 }: IProps) => {
   const personType = usePersonType((state) => state.personType);
   const setPersonType = usePersonType((state) => state.setPersonType);
@@ -122,6 +124,7 @@ const InputsSelector = ({
           className={className}
           inputType={inputType}
           startDate={startDate}
+          limitYears={limitYears}
         />
       ) : type === "radio" ? (
         <ButtonGroup

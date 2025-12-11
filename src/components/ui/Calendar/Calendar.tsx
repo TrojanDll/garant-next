@@ -15,9 +15,14 @@ interface IProps {
   onClose?: () => void;
   startDate?: Date;
   className?: string;
+  limitYears?: boolean;
 }
 
-const Calendar = ({ value, setValue, className, onClose, startDate }: IProps) => {
+const Calendar = ({ value, setValue, className, onClose, startDate, limitYears = false }: IProps) => {
+  const MonthCaptionWithLimitYears = (props: any) => (
+    <CalendarSelect {...props} limitYears={limitYears} />
+  );
+
   return (
     <div className={className}>
       <DayPicker
@@ -31,7 +36,7 @@ const Calendar = ({ value, setValue, className, onClose, startDate }: IProps) =>
         onSelect={setValue}
         components={{
           Chevron: CustomChevron,
-          MonthCaption: CalendarSelect,
+          MonthCaption: MonthCaptionWithLimitYears,
         }}
         classNames={{
           root: `${styles.dayPickerRoot} rdp-root`,

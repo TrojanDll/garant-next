@@ -230,6 +230,7 @@ export default async function getOsagoApplyFields(): Promise<ISplitFieldConfig> 
         inputType: "date",
         required: true,
         startDate: new Date(),
+        limitYears: true,
       },
     ],
     promocode: [

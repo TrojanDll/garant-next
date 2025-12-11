@@ -31,6 +31,7 @@ interface IProps {
   isError?: boolean;
   inputType?: TInputType;
   startDate?: Date;
+  limitYears?: boolean;
 }
 
 const CustomInput = ({
@@ -46,6 +47,7 @@ const CustomInput = ({
   inputType = "text",
   displayErrorMessage = false,
   startDate,
+  limitYears = false,
 }: IProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [selected, setSelected] = useState<Date>();
@@ -207,6 +209,7 @@ const CustomInput = ({
             setValue={handleDateChange}
             onClose={() => setIsCalendarOpened(false)}
             startDate={startDate}
+            limitYears={limitYears}
           />
         </>
       )}

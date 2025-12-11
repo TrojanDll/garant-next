@@ -28,4 +28,5 @@ export interface IFieldConfig<T> {
   tooltipText?: string;
   popularBrands?: IOptions[];
   startDate?: Date;
+  limitYears?: boolean;
 }

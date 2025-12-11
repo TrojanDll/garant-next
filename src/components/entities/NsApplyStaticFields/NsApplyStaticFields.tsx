@@ -86,6 +86,7 @@ const NsApplyStaticFields = ({ control, clearErrors }: IProps) => {
               placeholder="Выберите дату"
               inputType="date"
               startDate={new Date()}
+              limitYears={true}
             />
           )}
         />

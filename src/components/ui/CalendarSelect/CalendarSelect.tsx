@@ -15,9 +15,10 @@ import styles from "./CalendarSelect.module.scss";
 interface IProps {
   calendarMonth: CalendarMonth;
   displayIndex: number;
+  limitYears?: boolean;
 }
 
-const CalendarSelect = ({ calendarMonth, displayIndex }: IProps) => {
+const CalendarSelect = ({ calendarMonth, displayIndex, limitYears = false }: IProps) => {
   const { goToMonth, months } = useDayPicker();
   const [isMonthSelectOpened, setIsMonthSelectOpened] = useState(false);
   const [isMonthJustSelected, setIsMonthJustSelected] = useState(false);
@@ -34,10 +35,12 @@ const CalendarSelect = ({ calendarMonth, displayIndex }: IProps) => {
   }));
 
   const currentYear = getYear(new Date());
-  const years = Array.from(
-    { length: currentYear - 1900 + 1 },
-    (_, i) => 1900 + i
-  ).reverse();
+  const years = limitYears
+    ? [currentYear, currentYear + 1]
+    : Array.from(
+        { length: currentYear - 1900 + 1 },
+        (_, i) => 1900 + i
+      ).reverse();
   const yearsList: ICalendarSelectOptions[] = years.map((year) => {
     const option: ICalendarSelectOptions = {
       value: year,
