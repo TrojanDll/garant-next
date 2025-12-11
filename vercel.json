@@ -1,14 +1,8 @@
 {
   "redirects": [
     {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "garant-next.vercel.app"
-        }
-      ],
-      "destination": "https://garant-abh.com/:path*",
+      "source": "/:path(.*)",
+      "destination": "https://garant-abh.com/:path",
       "permanent": true
     }
   ]
