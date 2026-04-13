@@ -20,16 +20,16 @@ const DiscountBanner = () => {
             <div className={styles.textWrapper}>
               <p className={styles.title}>скидка на осаго</p>
               <p className={styles.subTitle}>
-                по промокоду <span className={styles.promocode}>МАРТ10</span>
+                по промокоду <span className={styles.promocode}>ВЕСНА5</span>
               </p>
             </div>
 
             <div className={styles.textWrapper}>
-              <p className={styles.descr}>при оформлении до 31 марта</p>
+              <p className={styles.descr}>при оформлении до 30 апреля</p>
             </div>
           </div>
         </div>
-        <div className={styles.discountValue}>-10%</div>
+        <div className={styles.discountValue}>-5%</div>
       </section>
     </ContentContainer>
   );
