@@ -30,6 +30,8 @@ class PAGESCLASS {
 
   MY_POLICIES = `${this.DASHBOARD}/my-policies`;
   EDIT_PERSONAL_DATA = `${this.DASHBOARD}/edit-personal-data`;
+
+  BLOG = `${this.root}blog`;
 }
 
 export const PAGES = new PAGESCLASS();

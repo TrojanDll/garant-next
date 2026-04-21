@@ -27,18 +27,13 @@ const Header = () => {
 
               <ul className={styles.links}>
                 <li>
-                  <CustomLink href={PAGES.HOME} className={styles.link}>
-                    Калькулятор стоимости
-                  </CustomLink>
-                </li>
-                <li>
                   <CustomLink href={PAGES.OSAGO} className={styles.link}>
-                    ОСАГО
+                    Автострахование
                   </CustomLink>
                 </li>
                 <li>
                   <CustomLink href={PAGES.NS} className={styles.link}>
-                    НС
+                    Здоровье
                   </CustomLink>
                 </li>
               </ul>
@@ -46,6 +41,11 @@ const Header = () => {
 
             <div className={styles.headerRight}>
               <ul className={styles.links}>
+                <li>
+                  <CustomLink href={PAGES.BLOG} className={styles.link}>
+                    Блог
+                  </CustomLink>
+                </li>
                 <li>
                   <CustomLink href={PAGES.CONTACTS} className={styles.link}>
                     Контакты

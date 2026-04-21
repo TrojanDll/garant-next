@@ -45,11 +45,15 @@ const DropdownHeader = () => {
     },
     {
       href: PAGES.OSAGO,
-      text: "ОСАГО",
+      text: "Автострахование",
     },
     {
       href: PAGES.NS,
-      text: "НС",
+      text: "Здоровье",
+    },
+    {
+      href: PAGES.BLOG,
+      text: "Блог",
     },
     {
       href: PAGES.SUPPORT,
