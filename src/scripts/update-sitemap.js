@@ -9,23 +9,14 @@ const templateSitemapPath = path.join(__dirname, "sitemap.xml"); // шаблон
 
 let sitemap = "";
 
-// Проверяем, существует ли файл в public
-if (!fs.existsSync(publicSitemapPath)) {
-  console.log("⚠ sitemap.xml в public не найден, используем шаблон...");
-
-  if (!fs.existsSync(templateSitemapPath)) {
-    console.error("❌ Шаблон sitemap.xml рядом со скриптом не найден!");
-    process.exit(1);
-  }
-
-  // Копируем шаблон
-  sitemap = fs.readFileSync(templateSitemapPath, "utf8");
-  fs.mkdirSync(path.dirname(publicSitemapPath), { recursive: true });
-  fs.writeFileSync(publicSitemapPath, sitemap, "utf8");
-  console.log(`✅ sitemap.xml создан в public из шаблона`);
-} else {
-  sitemap = fs.readFileSync(publicSitemapPath, "utf8");
+if (!fs.existsSync(templateSitemapPath)) {
+  console.error("❌ Шаблон sitemap.xml не найден!");
+  process.exit(1);
 }
+
+// Всегда берём актуальный шаблон
+sitemap = fs.readFileSync(templateSitemapPath, "utf8");
+fs.mkdirSync(path.dirname(publicSitemapPath), { recursive: true });
 
 // Обновляем все <lastmod>
 sitemap = sitemap.replace(
