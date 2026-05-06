@@ -1,9 +1,29 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./ReviwesYandex.module.scss";
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
 
 const ReviwesYandex = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <ContentContainer>
       <section className={styles.root}>
@@ -11,18 +31,20 @@ const ReviwesYandex = () => {
           Отзывы о нас
         </CustomTitle>
 
-        <div className={styles.reviewsWrapper}>
-          <iframe
-            className={styles.iframe}
-            style={{
-              width: "100%",
-              height: "100%",
-              border: "1px solid #e6e6e6",
-              borderRadius: "8px",
-              boxSizing: "border-box",
-            }}
-            src="https://yandex.ru/maps-reviews-widget/153937465584?comments"
-          ></iframe>
+        <div className={styles.reviewsWrapper} ref={ref}>
+          {isVisible && (
+            <iframe
+              className={styles.iframe}
+              style={{
+                width: "100%",
+                height: "100%",
+                border: "1px solid #e6e6e6",
+                borderRadius: "8px",
+                boxSizing: "border-box",
+              }}
+              src="https://yandex.ru/maps-reviews-widget/153937465584?comments"
+            />
+          )}
           <a
             href="https://yandex.ru/maps/org/usadba_izmaylovo/153937465584/"
             target="_blank"
