@@ -15,6 +15,7 @@ const DiscountBanner = () => {
             width={1400}
             height={1000}
             priority
+            fetchPriority="high"
           />
 
           <div className={styles.substrate}>
