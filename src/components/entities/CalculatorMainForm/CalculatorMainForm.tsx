@@ -44,6 +44,7 @@ const CalculatorMainForm = ({ variant }: ICalculatorMainFormProps) => {
             height={3001}
             priority
             fetchPriority="high"
+            sizes="(max-width: 1149px) 100vw, 770px"
           />
         ) : (
           <Image
@@ -54,6 +55,7 @@ const CalculatorMainForm = ({ variant }: ICalculatorMainFormProps) => {
             height={3289}
             priority
             fetchPriority="high"
+            sizes="(max-width: 1149px) 100vw, 770px"
           />
         )}
       </div>
