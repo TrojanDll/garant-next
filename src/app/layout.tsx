@@ -7,7 +7,6 @@ import Footer from "@/components/widgets/Footer/Footer";
 
 import "./globals.scss";
 
-import Head from "next/head";
 import { Providers } from "./providers";
 import Shadow from "@/components/ui/Shadow/Shadow";
 import YandexMetrika from "@/utils/YandexMetrika";
@@ -17,8 +16,6 @@ import TrackGAView from "@/utils/TrackGAView";
 
 export const metadata: Metadata = {
   title: {
-    // default: SITE_NAME,
-    // template: `%s | ${SITE_NAME}`,
     absolute: "Страховка в Абхазии – ОСАГО и автострахование онлайн",
   },
   description:
@@ -26,7 +23,17 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: "Гарант-Страхование",
     description: "Страхование в Абхазии онлайн. Быстро, надёжно, официально."
-  }
+  },
+  icons: {
+    icon: [
+      { url: "/favicon/favicon.ico" },
+      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/favicon/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/favicon/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -36,41 +43,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <Head>
-        <link rel="icon" href="/favicon/favicon.ico" />
-        <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon/favicon-16x16.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="192x192"
-          href="/favicon/android-chrome-192x192.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="512x512"
-          href="/favicon/android-chrome-512x512.png"
-        />
+      <head>
         <link rel="manifest" href="/favicon/site.webmanifest" />
-
-        {/* <meta property="og:site_name" content="Гарант-Страхование"></meta> */}
-        {/* <meta
-          property="og:description"
-          content="Страхование в Абхазии онлайн. Быстро, надёжно, официально."
-        ></meta> */}
-      </Head>
+        <link
+          rel="preload"
+          href="/fonts/Geometria-Regular.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/Geometria-Bold.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body>
         <Providers>
           <Header />
