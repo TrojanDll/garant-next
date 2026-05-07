@@ -1,10 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-const Select = dynamic(() => import("react-select"), {
-  ssr: false,
-});
+import Select from "react-select";
 
 import Tooltip from "../Tooltip/Tooltip";
 
@@ -257,6 +254,7 @@ const CustomSelect = ({
               }
             : null
         }
+        instanceId={name}
         filterOption={() => true}
         name={name}
         inputValue={inputValue}
