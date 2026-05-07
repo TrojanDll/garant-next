@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 export default function NsPage() {
   return (
     <div>
-      <DiscountBanner />
+      {/* <DiscountBanner /> */}
       <PolicyPromo variant="ns" />
       <AudienceInfoBlock
         title="Кому может пригодиться полис?"

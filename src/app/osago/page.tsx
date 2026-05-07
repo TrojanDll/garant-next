@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 export default function OsagoPage() {
   return (
     <div>
-      <DiscountBanner />
+      {/* <DiscountBanner /> */}
       <PolicyPromo variant="osago" />
       <AudienceInfoBlock
         title="Почему нужно оформить ОСАГО?"

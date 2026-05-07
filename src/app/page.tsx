@@ -8,7 +8,7 @@ import ReviwesYandex from "@/components/widgets/ReviwesYandex/ReviwesYandex";
 export default function Home() {
   return (
     <div>
-      <DiscountBanner />
+      {/* <DiscountBanner /> */}
       <CalculatorPromo />
       <Advantages />
       <InsuranceBannerMain />
