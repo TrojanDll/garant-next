@@ -11,7 +11,7 @@ export function formatNewCarDataToRequest(data: IOsagoApplyForm): INewCarForm {
     owner: convertPersonType(data.owner) as string,
     passport_number: data.passport_number,
     registration_number: data.registration_number,
-    registration_plate: data.registration_number,
+    registration_plate: data.registration_plate,
     transport_category: data.transport_category,
     vin: data.vin,
     year: data.year,
