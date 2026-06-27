@@ -21,12 +21,18 @@ const titles = {
   ns: "Полис от несчастного случая в Абхазии",
 };
 
+const subtitles = {
+  osago: "Обязательное страхование автомобиля для въезда в Абхазию",
+  ns: "Обязательное страхование жизни и здоровья иностранных граждан в Абхазии",
+};
+
 const CalculatorMainForm = ({ variant }: ICalculatorMainFormProps) => {
 
   return (
     <Substrate withShadow="light" className={styles.root}>
       <div className={styles.formWrapper}>
-        <CustomTitle className={styles.title}>{titles[variant]}</CustomTitle>
+        <CustomTitle tag="h2" className={styles.title}>{titles[variant]}</CustomTitle>
+        <p className={styles.subtitle}>{subtitles[variant]}</p>
         {variant === "osago" ? (
           <CalculatorInputForm variant="osago" config={{ fields: selectsOsagoProps }} />
         ) : (

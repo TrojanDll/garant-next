@@ -21,7 +21,7 @@ const NsApplyStaticFields = ({ control, clearErrors }: IProps) => {
 
   return (
     <div className={styles.root}>
-      <CustomTitle>Срок пребывания</CustomTitle>
+      <CustomTitle tag="h2">Срок пребывания</CustomTitle>
       <div className={styles.fieldsRow}>
         {durationOfStayVariants ? (
           <Controller

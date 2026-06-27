@@ -4,9 +4,11 @@ import type { Metadata } from "next";
 
 import styles from "./layout.module.scss";
 import BottomNavigationPanel from "@/components/widgets/BottomNavigationPanel/BottomNavigationPanel";
+import { NO_INDEX_PAGE } from "@/constants/seo.constants";
 
 export const metadata: Metadata = {
   description: "Garant личный кабинет",
+  ...NO_INDEX_PAGE,
 };
 
 export default function DashboardLayout({

@@ -5,6 +5,8 @@ import FAQ from "@/components/widgets/FAQ/FAQ";
 import { InsuranceBannerOsago } from "@/components/widgets/InsuranceBannerOsago/InsuranceBannerOsago";
 import PolicyPromo from "@/components/widgets/PolicyPromo/PolicyPromo";
 import ReviwesYandex from "@/components/widgets/ReviwesYandex/ReviwesYandex";
+import Breadcrumbs from "@/components/ui/Breadcrumbs/Breadcrumbs";
+import { PAGES } from "@/config/pages-url.config";
 import type { Metadata } from "next";
 
 const audienceItems: IAudienceInfoItem[] = [
@@ -39,6 +41,12 @@ export const metadata: Metadata = {
 export default function OsagoPage() {
   return (
     <div>
+      <Breadcrumbs
+        items={[
+          { name: "Главная", href: PAGES.HOME },
+          { name: "ОСАГО", href: PAGES.OSAGO },
+        ]}
+      />
       {/* <DiscountBanner /> */}
       <PolicyPromo variant="osago" />
       <AudienceInfoBlock

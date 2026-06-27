@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     absolute: "Страховка в Абхазии – ОСАГО и автострахование онлайн",
   },
   description:
-    "Оформить ОСАГО в Абхазии онлайн за пару минут. Страхование авто в Абхазии для граждан РФ в 2025.",
+    "Предлагаем оформить обязательную и необязательную страховку в Абхазии. Гарантируем подлинность выдаваемого документа. Полис установленного образца. Работаем с юридическими и физическими лицами. Располагаем доступными ценами. Предлагаем программу лояльности для постоянных клиентов, сезонные скидки на услуги.",
   openGraph: {
     siteName: "Гарант-Страхование",
     description: "Страхование в Абхазии онлайн. Быстро, надёжно, официально."
@@ -99,6 +99,75 @@ export default function RootLayout({
               "@type": "WebSite",
               name: "Гарант-Страхование",
               url: "https://garant-abh.com",
+            }),
+          }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "InsuranceAgency",
+              name: "Гарант-Страхование",
+              legalName:
+                "ЗАО «Страховая компания «Гарант-Страхование»",
+              url: "https://garant-abh.com",
+              logo: "https://garant-abh.com/favicon/android-chrome-512x512.png",
+              image:
+                "https://garant-abh.com/favicon/android-chrome-512x512.png",
+              email: "info@garant-abh.com",
+              telephone: "+79407411000",
+              address: {
+                "@type": "PostalAddress",
+                addressCountry: "Абхазия",
+                addressLocality: "Сухум",
+                streetAddress: "ул. Чочуа, 2",
+              },
+              areaServed: "Республика Абхазия",
+              sameAs: ["https://t.me/garantabh", "https://wa.me/79407411000"],
+            }),
+          }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              itemListElement: [
+                {
+                  "@type": "SiteNavigationElement",
+                  position: 1,
+                  name: "Автострахование",
+                  url: "https://garant-abh.com/osago",
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  position: 2,
+                  name: "Здоровье",
+                  url: "https://garant-abh.com/ns",
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  position: 3,
+                  name: "Блог",
+                  url: "https://garant-abh.com/blog",
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  position: 4,
+                  name: "Контакты",
+                  url: "https://garant-abh.com/contacts",
+                },
+                {
+                  "@type": "SiteNavigationElement",
+                  position: 5,
+                  name: "Помощь",
+                  url: "https://garant-abh.com/support",
+                },
+              ],
             }),
           }}
         />

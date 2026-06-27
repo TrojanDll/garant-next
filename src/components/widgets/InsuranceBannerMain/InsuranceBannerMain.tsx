@@ -14,9 +14,17 @@ export function InsuranceBannerMain({ className }: IProps) {
     <section className={`${className} ${styles.root}`}>
       <ContentContainer>
         <Substrate withShadow="light" className={styles.substrate}>
-          <CustomTitle tag="h2" className={styles.title}>
-            Страховка автомобиля в Абхазии
+          <CustomTitle className={styles.title}>
+            Страховка в Абхазии
           </CustomTitle>
+
+          <p className={styles.paragraph}>
+            ЗАО «СК «Гарант-Страхование» оформляет страховые полисы для
+            иностранных физических и юридических лиц, въезжающих в Республику
+            Абхазия: ОСАГО для автомобилей и обязательное страхование от
+            несчастных случаев для иностранных граждан, прибывающих на территорию
+            РА.
+          </p>
 
           <p className={styles.paragraph}>
             Планируете поездку в Абхазию на автомобиле? Российская страховка на

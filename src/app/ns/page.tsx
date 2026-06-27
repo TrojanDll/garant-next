@@ -5,6 +5,8 @@ import FAQ from "@/components/widgets/FAQ/FAQ";
 import { InsuranceBannerNs } from "@/components/widgets/InsuranceBannerNs/InsuranceBannerNs";
 import PolicyPromo from "@/components/widgets/PolicyPromo/PolicyPromo";
 import ReviwesYandex from "@/components/widgets/ReviwesYandex/ReviwesYandex";
+import Breadcrumbs from "@/components/ui/Breadcrumbs/Breadcrumbs";
+import { PAGES } from "@/config/pages-url.config";
 import type { Metadata } from "next";
 
 const audienceItems: IAudienceInfoItem[] = [
@@ -31,11 +33,19 @@ const audienceItems: IAudienceInfoItem[] = [
 
 export const metadata: Metadata = {
   title: "Страховка от несчастного случая в Абхазии",
+  description:
+    "Оформляемая нашей компанией страховка от несчастных случаев в Абхазии предлагает защиту путешественников от травм различного происхождения, переломов, вывихов, ожогов, обморожений, отравлений, включая затраты на неотложную помощь. Отдельно тарифицируется страховой полис на транспортировку больного, репатриацию тела, поисковые операции в горах или на море.",
 };
 
 export default function NsPage() {
   return (
     <div>
+      <Breadcrumbs
+        items={[
+          { name: "Главная", href: PAGES.HOME },
+          { name: "От несчастного случая", href: PAGES.NS },
+        ]}
+      />
       {/* <DiscountBanner /> */}
       <PolicyPromo variant="ns" />
       <AudienceInfoBlock

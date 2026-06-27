@@ -1,11 +1,26 @@
 import OsagoApply from "@/components/widgets/OsagoApply/OsagoApply";
+import Breadcrumbs from "@/components/ui/Breadcrumbs/Breadcrumbs";
+import { PAGES } from "@/config/pages-url.config";
 import type { Metadata } from "next";
 
 import "react-day-picker/style.css";
 
 export const metadata: Metadata = {
-  title: "Оформить ОСАГО",
+  title: "Оформить ОСАГО в Абхазии онлайн",
+  description:
+    "Оформите полис ОСАГО в Абхазии онлайн. Удобная подача заявки, быстрое оформление и доступ к страховому полису через сервис компании.",
 };
 export default function OsagoApplyPage() {
-  return <OsagoApply />;
+  return (
+    <>
+      <Breadcrumbs
+        items={[
+          { name: "Главная", href: PAGES.HOME },
+          { name: "ОСАГО", href: PAGES.OSAGO },
+          { name: "Оформление", href: PAGES.OSAGO_APPLY },
+        ]}
+      />
+      <OsagoApply />
+    </>
+  );
 }
