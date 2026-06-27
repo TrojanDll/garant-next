@@ -2,6 +2,24 @@
   margin-top: 50px;
 }
 
+.subtitle {
+  max-width: 600px;
+  margin: 14px auto 0;
+  text-align: center;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+  color: var(--grey-3);
+}
+
+@media (max-width: 1149px) {
+  .subtitle {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+}
+
 .substrate {
   margin-top: 50px;
   padding: 50px;

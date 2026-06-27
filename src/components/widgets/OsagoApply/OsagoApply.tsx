@@ -311,6 +311,11 @@ const OsagoApply = () => {
         <CustomTitle tag="h1" isCentered>
           Оформить полис ОСАГО в Абхазии
         </CustomTitle>
+        <p className={styles.subtitle}>
+          Заполните данные автомобиля и срок пребывания, чтобы оформить
+          обязательный полис ОСАГО для въезда в Абхазию онлайн. Готовый документ
+          придёт на вашу почту.
+        </p>
 
         {isLoading ? (
           <Loader className={styles.loader} />
