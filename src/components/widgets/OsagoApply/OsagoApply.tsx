@@ -4,6 +4,9 @@ import React, { useEffect, useRef, useState } from "react";
 
 import styles from "./OsagoApply.module.scss";
 
+import SvgSelector from "@/components/ui/SvgSelector/SvgSelector";
+import { ESvgName } from "@/constants/svg-ids.constants";
+
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
@@ -312,9 +315,12 @@ const OsagoApply = () => {
           Оформить полис ОСАГО в Абхазии
         </CustomTitle>
         <p className={styles.subtitle}>
-          Заполните данные автомобиля и срок пребывания, чтобы оформить
-          обязательный полис ОСАГО для въезда в Абхазию онлайн. Готовый документ
-          придёт на вашу почту.
+          <SvgSelector className={styles.subtitleIcon} id={ESvgName.TOOLTIP} />
+          <span>
+            Заполните данные автомобиля и срок пребывания, чтобы оформить
+            обязательный полис ОСАГО для въезда в Абхазию онлайн. Готовый
+            документ придёт на вашу почту.
+          </span>
         </p>
 
         {isLoading ? (

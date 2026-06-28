@@ -4,6 +4,9 @@ import React, { useEffect, useRef, useState } from "react";
 
 import styles from "./NsApply.module.scss";
 
+import SvgSelector from "@/components/ui/SvgSelector/SvgSelector";
+import { ESvgName } from "@/constants/svg-ids.constants";
+
 import CustomTitle from "@/components/ui/CustomTitle/CustomTitle";
 import ContentContainer from "@/components/ui/ContentContainer/ContentContainer";
 import Substrate from "@/components/ui/Substrate/Substrate";
@@ -189,9 +192,12 @@ const NsApply = () => {
           Оформить полис от несчастного случая в Абхазии
         </CustomTitle>
         <p className={styles.subtitle}>
-          Заполните данные застрахованных и срок пребывания, чтобы оформить
-          обязательную страховку от несчастного случая для въезда в Абхазию
-          онлайн. Готовый документ придёт на вашу почту.
+          <SvgSelector className={styles.subtitleIcon} id={ESvgName.TOOLTIP} />
+          <span>
+            Заполните данные застрахованных и срок пребывания, чтобы оформить
+            обязательную страховку от несчастного случая для въезда в Абхазию
+            онлайн. Готовый документ придёт на вашу почту.
+          </span>
         </p>
 
         <form

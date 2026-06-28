@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "pnpm run update-sitemap && next build",
-    "update-sitemap": "node src/scripts/update-sitemap.js",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "build:inspect": "cross-env NODE_OPTIONS=--inspect next start",

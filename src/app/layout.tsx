@@ -16,10 +16,14 @@ import GoogleAnalytics from "@/utils/GoogleAnalytics";
 import TrackGAView from "@/utils/TrackGAView";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://garant-abh.com"),
+  alternates: {
+    canonical: "./",
+  },
   title: {
     // default: SITE_NAME,
     // template: `%s | ${SITE_NAME}`,
-    absolute: "Страховка в Абхазии – ОСАГО и автострахование онлайн",
+    absolute: "Страховка в Абхазии – ОСАГО онлайн | Гарант-Страхование",
   },
   description:
     "Предлагаем оформить обязательную и необязательную страховку в Абхазии. Гарантируем подлинность выдаваемого документа. Полис установленного образца. Работаем с юридическими и физическими лицами. Располагаем доступными ценами. Предлагаем программу лояльности для постоянных клиентов, сезонные скидки на услуги.",
@@ -98,6 +102,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "Гарант-Страхование",
+              alternateName: "Гарант Страхование",
               url: "https://garant-abh.com",
             }),
           }}

@@ -31,7 +31,7 @@ const CalculatorMainForm = ({ variant }: ICalculatorMainFormProps) => {
   return (
     <Substrate withShadow="light" className={styles.root}>
       <div className={styles.formWrapper}>
-        <CustomTitle tag="h2" className={styles.title}>{titles[variant]}</CustomTitle>
+        <CustomTitle tag="h2" isLarge className={styles.title}>{titles[variant]}</CustomTitle>
         <p className={styles.subtitle}>{subtitles[variant]}</p>
         {variant === "osago" ? (
           <CalculatorInputForm variant="osago" config={{ fields: selectsOsagoProps }} />
