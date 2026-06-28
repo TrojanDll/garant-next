@@ -127,7 +127,7 @@ export default function RootLayout({
                 "@type": "PostalAddress",
                 addressCountry: "Абхазия",
                 addressLocality: "Сухум",
-                streetAddress: "ул. Чочуа, 2",
+                streetAddress: "проспект Аиааира, 15",
               },
               areaServed: "Республика Абхазия",
               sameAs: ["https://t.me/garantabh", "https://wa.me/79407411000"],

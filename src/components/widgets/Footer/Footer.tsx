@@ -79,7 +79,7 @@ const Footer = () => {
           </Link>
         </p>
 
-        <p className={styles.address}>Республика Абхазия, г. Сухум, ул. Чочуа, 2</p>
+        <p className={styles.address}>Республика Абхазия, г. Сухум, проспект Аиааира, 15</p>
 
         <p className={styles.copyright}>
           © ЗАО «Страховая компания «Гарант-Страхование», 2025

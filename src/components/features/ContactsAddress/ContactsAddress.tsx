@@ -35,7 +35,7 @@ const ContactsAddress = ({ className }: IProps) => {
             fill="#1C1C1F"
           />
         </svg>
-        Республика Абхазия, г. Сухум, ул. Чочуа, д. 2
+        Республика Абхазия, г. Сухум, проспект Аиааира, д. 15
       </div>
 
       <div className={styles.addressItem}>
@@ -62,7 +62,7 @@ const ContactsAddress = ({ className }: IProps) => {
 
       <iframe
         className={styles.map}
-        src="https://yandex.ru/map-widget/v1/?um=constructor%3Aa14e664812cbb4d243c451e453f607ac8dd49a0450f496b4a2e6b2e0c5a46458&amp;source=constructor"
+        src="https://yandex.ru/map-widget/v1/?um=constructor%3Aa91bee52b8c548fcb56404b99229004ef12784fb9d064726c0c8bc6080d66a0b&source=constructor"
         width="100%"
         height="400"
       ></iframe>
